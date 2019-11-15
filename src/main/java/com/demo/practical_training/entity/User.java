@@ -3,16 +3,17 @@ package com.demo.practical_training.entity;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
-@Entity
-@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"USERNAME","USERPHONE"})})
 /**
  * 用户
  */
+@Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = "USERNAME"))
 public class User {
     /**
      * 用户ID
      */
     @Id
+    @Column(columnDefinition = "CHAR(33)")
     private String userID;
     /**
      * 用户头像路径

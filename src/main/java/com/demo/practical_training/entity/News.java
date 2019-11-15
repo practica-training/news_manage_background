@@ -14,7 +14,12 @@ public class News {
      * 新闻ID
      */
     @Id
+    @Column(columnDefinition = "CHAR(33)")
     private String newsID;
+    /**
+     * 新闻封面路径
+     */
+    private String newsAvatar;
     /**
      * 新闻标题
      */
@@ -58,8 +63,9 @@ public class News {
     public News() {
     }
 
-    public News(String newsID, String title, String content, Timestamp createTime, Timestamp publishTime, Long readNumber, Long likeNumber, Integer newsState, Integer newsWeights, String failureReason) {
+    public News(String newsID, String newsAvatar,String title, String content, Timestamp createTime, Timestamp publishTime, Long readNumber, Long likeNumber, Integer newsState, Integer newsWeights, String failureReason) {
         this.newsID = newsID;
+        this.newsAvatar = newsAvatar;
         this.title = title;
         this.content = content;
         this.createTime = createTime;
@@ -77,6 +83,14 @@ public class News {
 
     public void setNewsID(String newsID) {
         this.newsID = newsID;
+    }
+
+    public String getNewsAvatar() {
+        return newsAvatar;
+    }
+
+    public void setNewsAvatar(String newsAvatar) {
+        this.newsAvatar = newsAvatar;
     }
 
     public String getTitle() {

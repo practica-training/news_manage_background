@@ -1,9 +1,12 @@
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://cdb-q5u06yqp.gz.tencentcdb.com:10080/practical_training?serverTimezone=UTC
-    username: newsmanage
-    password: newsmanage123456
+#    url: jdbc:mysql://cdb-q5u06yqp.gz.tencentcdb.com:10080/practical_training?serverTimezone=UTC
+#    username: newsmanage
+#    password: newsmanage123456
+    url: jdbc:mysql://localhost:3306/practical_training?serverTimezone=UTC
+    username: root
+    password: 123456
+
   jpa:
     show-sql: true
     hibernate:
