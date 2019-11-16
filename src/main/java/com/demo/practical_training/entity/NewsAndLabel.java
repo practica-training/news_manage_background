@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 /**
  * 新闻对应标签
+ * 弃用
  */
 //@Entity
 @IdClass(NewsAndLabelID.class)
