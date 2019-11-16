@@ -1,14 +1,15 @@
 package com.demo.practical_training.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import lombok.Data;
+
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
  * 消息
  */
 @Entity
+@Data
 public class Message {
     /**
      * 消息ID
@@ -22,7 +23,9 @@ public class Message {
     /**
      * 去处ID（某个用户）
      */
-    private String toID;
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "toID")
+    private User user;
     /**
      * 消息内容
      */

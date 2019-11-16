@@ -1,5 +1,7 @@
 package com.demo.practical_training.entity;
 
+import lombok.Data;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,6 +11,7 @@ import java.sql.Timestamp;
  * 超级管理员管理普通管理员的日志
  */
 @Entity
+@Data
 public class AdminManagementLog {
     /**
      * 日志ID
@@ -31,45 +34,5 @@ public class AdminManagementLog {
     @Column(columnDefinition="TIMESTAMP")
     private Timestamp processingTime;
 
-    public AdminManagementLog() {
-    }
 
-    public AdminManagementLog(String logID, String adminID, String operationalContent, Timestamp processingTime) {
-        this.logID = logID;
-        this.adminID = adminID;
-        this.operationalContent = operationalContent;
-        this.processingTime = processingTime;
-    }
-
-    public String getLogID() {
-        return logID;
-    }
-
-    public void setLogID(String logID) {
-        this.logID = logID;
-    }
-
-    public String getAdminID() {
-        return adminID;
-    }
-
-    public void setAdminID(String adminID) {
-        this.adminID = adminID;
-    }
-
-    public String getOperationalContent() {
-        return operationalContent;
-    }
-
-    public void setOperationalContent(String operationalContent) {
-        this.operationalContent = operationalContent;
-    }
-
-    public Timestamp getProcessingTime() {
-        return processingTime;
-    }
-
-    public void setProcessingTime(Timestamp processingTime) {
-        this.processingTime = processingTime;
-    }
 }

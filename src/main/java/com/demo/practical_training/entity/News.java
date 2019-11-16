@@ -1,14 +1,16 @@
 package com.demo.practical_training.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import lombok.Data;
+
+import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  * 新闻
  */
 @Entity
+@Data
 public class News {
     /**
      * 新闻ID
@@ -16,6 +18,12 @@ public class News {
     @Id
     @Column(columnDefinition = "CHAR(33)")
     private String newsID;
+    @ManyToMany
+    @JoinTable(name = "newsAndLabel"
+            ,joinColumns = @JoinColumn(name = "newsID",referencedColumnName = "newsID"),
+            inverseJoinColumns = @JoinColumn(name = "newLabelID",referencedColumnName = "newLabelID")
+            )
+    private List<NewsLabel> newsLabelList;
     /**
      * 新闻封面路径
      */
@@ -59,109 +67,11 @@ public class News {
      * 失败原因（如果审核失败则会有）
      */
     private String failureReason;
+    @ManyToMany
+    @JoinTable(name = "newsAndType"
+            ,joinColumns = @JoinColumn(name = "newsID",referencedColumnName = "newsID"),
+            inverseJoinColumns = @JoinColumn(name = "newsTypeID",referencedColumnName = "newsTypeID")
+    )
+    private List<NewsType> newsTypeList;
 
-    public News() {
-    }
-
-    public News(String newsID, String newsAvatar,String title, String content, Timestamp createTime, Timestamp publishTime, Long readNumber, Long likeNumber, Integer newsState, Integer newsWeights, String failureReason) {
-        this.newsID = newsID;
-        this.newsAvatar = newsAvatar;
-        this.title = title;
-        this.content = content;
-        this.createTime = createTime;
-        this.publishTime = publishTime;
-        this.readNumber = readNumber;
-        this.likeNumber = likeNumber;
-        this.newsState = newsState;
-        this.newsWeights = newsWeights;
-        this.failureReason = failureReason;
-    }
-
-    public String getNewsID() {
-        return newsID;
-    }
-
-    public void setNewsID(String newsID) {
-        this.newsID = newsID;
-    }
-
-    public String getNewsAvatar() {
-        return newsAvatar;
-    }
-
-    public void setNewsAvatar(String newsAvatar) {
-        this.newsAvatar = newsAvatar;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public Timestamp getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Timestamp createTime) {
-        this.createTime = createTime;
-    }
-
-    public Timestamp getPublishTime() {
-        return publishTime;
-    }
-
-    public void setPublishTime(Timestamp publishTime) {
-        this.publishTime = publishTime;
-    }
-
-    public Long getReadNumber() {
-        return readNumber;
-    }
-
-    public void setReadNumber(Long readNumber) {
-        this.readNumber = readNumber;
-    }
-
-    public Long getLikeNumber() {
-        return likeNumber;
-    }
-
-    public void setLikeNumber(Long likeNumber) {
-        this.likeNumber = likeNumber;
-    }
-
-    public Integer getNewsState() {
-        return newsState;
-    }
-
-    public void setNewsState(Integer newsState) {
-        this.newsState = newsState;
-    }
-
-    public Integer getNewsWeights() {
-        return newsWeights;
-    }
-
-    public void setNewsWeights(Integer newsWeights) {
-        this.newsWeights = newsWeights;
-    }
-
-    public String getFailureReason() {
-        return failureReason;
-    }
-
-    public void setFailureReason(String failureReason) {
-        this.failureReason = failureReason;
-    }
 }

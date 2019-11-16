@@ -1,14 +1,19 @@
 package com.demo.practical_training.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  * 用户
  */
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "USERNAME"))
-public class User {
+@Data
+public class User implements Serializable {
     /**
      * 用户ID
      */
@@ -22,6 +27,7 @@ public class User {
     /**
      * 用户名(可改，但是唯一)
      */
+    @Column(unique = true)
     private String userName;
     /**
      * 用户密码
@@ -52,100 +58,14 @@ public class User {
      * 违规次数
      */
     private Integer violationNumber;
+    @ManyToMany
+    @JoinTable(name = "userAndLabel",
+        joinColumns = @JoinColumn(name = "userID",referencedColumnName = "userID"),
+            inverseJoinColumns = @JoinColumn(name = "newLabelID",referencedColumnName = "newLabelID")
+    )
 
-    public User() {
-    }
-
-    public User(String userID, String userAvatar, String userName, String userPassword, Integer userSex, String userPhone, Timestamp registrationTime, Integer userState, Integer isCertified, Integer violationNumber) {
-        this.userID = userID;
-        this.userAvatar = userAvatar;
-        this.userName = userName;
-        this.userPassword = userPassword;
-        this.userSex = userSex;
-        this.userPhone = userPhone;
-        this.registrationTime = registrationTime;
-        this.userState = userState;
-        this.isCertified = isCertified;
-        this.violationNumber = violationNumber;
-    }
-
-    public String getUserID() {
-        return userID;
-    }
-
-    public void setUserID(String userID) {
-        this.userID = userID;
-    }
-
-    public String getUserAvatar() {
-        return userAvatar;
-    }
-
-    public void setUserAvatar(String userAvatar) {
-        this.userAvatar = userAvatar;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getUserPassword() {
-        return userPassword;
-    }
-
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
-    }
-
-    public Integer getUserSex() {
-        return userSex;
-    }
-
-    public void setUserSex(Integer userSex) {
-        this.userSex = userSex;
-    }
-
-    public String getUserPhone() {
-        return userPhone;
-    }
-
-    public void setUserPhone(String userPhone) {
-        this.userPhone = userPhone;
-    }
-
-    public Timestamp getRegistrationTime() {
-        return registrationTime;
-    }
-
-    public void setRegistrationTime(Timestamp registrationTime) {
-        this.registrationTime = registrationTime;
-    }
-
-    public Integer getUserState() {
-        return userState;
-    }
-
-    public void setUserState(Integer userState) {
-        this.userState = userState;
-    }
-
-    public Integer getIsCertified() {
-        return isCertified;
-    }
-
-    public void setIsCertified(Integer isCertified) {
-        this.isCertified = isCertified;
-    }
-
-    public Integer getViolationNumber() {
-        return violationNumber;
-    }
-
-    public void setViolationNumber(Integer violationNumber) {
-        this.violationNumber = violationNumber;
-    }
+    private List<NewsLabel> newsLabelList;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "newsAndUser")
+    private List<News> newsList;
 }

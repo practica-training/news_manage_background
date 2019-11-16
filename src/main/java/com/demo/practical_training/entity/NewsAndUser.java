@@ -6,7 +6,8 @@ import javax.persistence.Id;
 /**
  * 新闻与用户对应表
  */
-@Entity
+//@Entity
+    @Deprecated
 public class NewsAndUser {
     /**
      * 新闻ID

@@ -2,48 +2,30 @@ package com.demo.practical_training.entity;
 
 import com.demo.practical_training.entity.joint_primary_key.NewsAndLabelID;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
+import javax.persistence.*;
 
 /**
  * 新闻对应标签
  */
-@Entity
+//@Entity
 @IdClass(NewsAndLabelID.class)
+@Deprecated
 public class NewsAndLabel {
     /**
      * 新闻ID
+     *    懒加载，级联刷新操作
+     *    不可为空，可更新，插入
      */
-    @Id
-    private String newsID;
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "newsID")
+    private News news;
     /**
      * 标签ID
      */
-    @Id
-    private String labelID;
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "labelID")
+    private NewsLabel newsLabel;
 
-    public NewsAndLabel() {
-    }
 
-    public NewsAndLabel(String newsID, String labelID) {
-        this.newsID = newsID;
-        this.labelID = labelID;
-    }
 
-    public String getNewsID() {
-        return newsID;
-    }
-
-    public void setNewsID(String newsID) {
-        this.newsID = newsID;
-    }
-
-    public String getLabelID() {
-        return labelID;
-    }
-
-    public void setLabelID(String labelID) {
-        this.labelID = labelID;
-    }
 }

@@ -3,11 +3,12 @@ spring:
 #    url: jdbc:mysql://cdb-q5u06yqp.gz.tencentcdb.com:10080/practical_training?serverTimezone=UTC
 #    username: newsmanage
 #    password: newsmanage123456
-    url: jdbc:mysql://localhost:3306/practical_training?serverTimezone=UTC
-    username: root
+    url: jdbc:mysql://zzhong.wang:3306/newsmanage?serverTimezone=UTC
+    username: panda
     password: 123456
 
   jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create

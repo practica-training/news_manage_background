@@ -1,14 +1,15 @@
 package com.demo.practical_training.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import lombok.Data;
+
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
  * 新闻举报
  */
 @Entity
+@Data
 public class NewsReport {
     /**
      * 举报ID
@@ -16,13 +17,21 @@ public class NewsReport {
     @Id
     private String reportID;
     /**
-     * 举报者ID
+     * 举报者
+     * 懒加载，级联刷新操作
+     * 不可为空，不可更新，插入
      */
-    private String userID;
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "userID",updatable = false,nullable = false,insertable = false)
+    private User user;
     /**
      * 被举报的新闻ID
+     *      懒加载，级联刷新操作
+     *      不可为空，不可更新，插入
      */
-    private String newsID;
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "newsID",updatable = false,nullable = false,insertable = false)
+    private News news;
     /**
      * 举报原因
      */
@@ -41,72 +50,4 @@ public class NewsReport {
      */
     private Integer isIllegal;
 
-    public NewsReport() {
-    }
-
-    public NewsReport(String reportID, String userID, String newsID, String reportReason, Timestamp reportTime, Integer reviewState, Integer isIllegal) {
-        this.reportID = reportID;
-        this.userID = userID;
-        this.newsID = newsID;
-        this.reportReason = reportReason;
-        this.reportTime = reportTime;
-        this.reviewState = reviewState;
-        this.isIllegal = isIllegal;
-    }
-
-    public String getReportID() {
-        return reportID;
-    }
-
-    public void setReportID(String reportID) {
-        this.reportID = reportID;
-    }
-
-    public String getUserID() {
-        return userID;
-    }
-
-    public void setUserID(String userID) {
-        this.userID = userID;
-    }
-
-    public String getNewsID() {
-        return newsID;
-    }
-
-    public void setNewsID(String newsID) {
-        this.newsID = newsID;
-    }
-
-    public String getReportReason() {
-        return reportReason;
-    }
-
-    public void setReportReason(String reportReason) {
-        this.reportReason = reportReason;
-    }
-
-    public Timestamp getReportTime() {
-        return reportTime;
-    }
-
-    public void setReportTime(Timestamp reportTime) {
-        this.reportTime = reportTime;
-    }
-
-    public Integer getReviewState() {
-        return reviewState;
-    }
-
-    public void setReviewState(Integer reviewState) {
-        this.reviewState = reviewState;
-    }
-
-    public Integer getIsIllegal() {
-        return isIllegal;
-    }
-
-    public void setIsIllegal(Integer isIllegal) {
-        this.isIllegal = isIllegal;
-    }
 }

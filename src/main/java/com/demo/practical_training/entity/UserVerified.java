@@ -1,20 +1,25 @@
 package com.demo.practical_training.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import lombok.Data;
+
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
  * 实名认证表
  */
 @Entity
+@Data
 public class UserVerified {
     /**
      * 用户ID
      */
     @Id
-    private String userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
+    @OneToOne
+    @JoinColumn(name = "userID")
+    private User user;
     /**
      * 身份证号码
      */
@@ -41,72 +46,4 @@ public class UserVerified {
     @Column(columnDefinition = "TIMESTAMP")
     private Timestamp verifiedTime;
 
-    public UserVerified() {
-    }
-
-    public UserVerified(String userId, String idCard, String realName, String photo, Integer reviewState, String failureReason, Timestamp verifiedTime) {
-        this.userId = userId;
-        this.idCard = idCard;
-        this.realName = realName;
-        this.photo = photo;
-        this.reviewState = reviewState;
-        this.failureReason = failureReason;
-        this.verifiedTime = verifiedTime;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getIdCard() {
-        return idCard;
-    }
-
-    public void setIdCard(String idCard) {
-        this.idCard = idCard;
-    }
-
-    public String getRealName() {
-        return realName;
-    }
-
-    public void setRealName(String realName) {
-        this.realName = realName;
-    }
-
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
-
-    public Integer getReviewState() {
-        return reviewState;
-    }
-
-    public void setReviewState(Integer reviewState) {
-        this.reviewState = reviewState;
-    }
-
-    public String getFailureReason() {
-        return failureReason;
-    }
-
-    public void setFailureReason(String failureReason) {
-        this.failureReason = failureReason;
-    }
-
-    public Timestamp getVerifiedTime() {
-        return verifiedTime;
-    }
-
-    public void setVerifiedTime(Timestamp verifiedTime) {
-        this.verifiedTime = verifiedTime;
-    }
 }
