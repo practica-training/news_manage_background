@@ -1,0 +1,34 @@
+{
+  "interface": "newsManage/userApplyToNewsMaker",
+  "note": "审核用户申请成为新闻发布者",
+  "get": [
+    {
+      "code": 200,
+      "message": "成功获得用户申请成为新闻发布者的列表",
+      "data": [{
+        "applyId": "申请id",
+        "userId": "用户id",
+        "userName": "用户姓名",
+        "context":"申请原因"
+      }]
+    },
+    {
+      "code": 500,
+      "message": "权限不足",
+      "data": {}
+    }
+  ],
+  "put": [
+    {
+      "code": 200,
+      "message": "修改成功",
+      "data": {
+      }
+    },
+    {
+      "code": 500,
+      "message": "权限不足",
+      "data": {}
+    }
+  ]
+}

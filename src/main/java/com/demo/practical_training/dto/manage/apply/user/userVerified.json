@@ -1,0 +1,35 @@
+{
+  "interface": "newsManage/userVerified",
+  "note": "审核用户实名认证",
+  "get": [
+    {
+      "code": 200,
+      "message": "成功获得用户的实名认证的列表",
+      "data": [{
+        "userId": "用户id",
+        "userIdNumber":"用户身份证号码",
+        "userIdCardUrl": "用户身份证照片地址",
+        "userName": "用户姓名"
+      }]
+    },
+    {
+      "code": 500,
+      "message": "权限不足",
+      "data": {}
+    }
+  ],
+  "put": [
+    {
+      "code": 200,
+      "message": "修改成功",
+      "data": {
+
+      }
+    },
+    {
+      "code": 500,
+      "message": "权限不足",
+      "data": {}
+    }
+  ]
+}

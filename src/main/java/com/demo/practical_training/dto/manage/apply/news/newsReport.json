@@ -1,0 +1,39 @@
+{
+  "interface": "newsManage/newsReport",
+  "note": "审核用户举报的新闻",
+  "get": [
+    {
+      "code": 200,
+      "message": "成功获得用户的举报的列表",
+      "data": [{
+        "reportId": "举报id",
+        "newsId": "举报的新闻id",
+        "newsTitle": "新闻标题",
+        "newsTitleImgUrl": "新闻标题图片地址",
+        "newsDetail": "新闻内容"
+      }]
+    },
+    {
+      "code": 500,
+      "message": "权限不足",
+      "data": {}
+    }
+  ],
+  "put": [
+    {
+      "code": 200,
+      "message": "修改成功",
+      "data": {
+        "newsId": "新闻id",
+        "newsTitle": "新闻标题",
+        "newsTitleImgUrl": "新闻标题图片地址",
+        "newsDetail": "新闻内容"
+      }
+    },
+    {
+      "code": 500,
+      "message": "权限不足",
+      "data": {}
+    }
+  ]
+}

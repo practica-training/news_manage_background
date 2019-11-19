@@ -1,0 +1,34 @@
+{
+  "interface": "newsManage/userReport",
+  "note": "审核用户举报的用户",
+  "get": [
+    {
+      "code": 200,
+      "message": "成功获得用户的举报的用户列表",
+      "data": [{
+        "reportId": "举报id",
+        "userId": "用户id",
+        "reportedId": "被举报者id",
+        "context":"举报的内容"
+      }]
+    },
+    {
+      "code": 500,
+      "message": "权限不足",
+      "data": {}
+    }
+  ],
+  "put": [
+    {
+      "code": 200,
+      "message": "修改成功",
+      "data": {
+      }
+    },
+    {
+      "code": 500,
+      "message": "权限不足",
+      "data": {}
+    }
+  ]
+}

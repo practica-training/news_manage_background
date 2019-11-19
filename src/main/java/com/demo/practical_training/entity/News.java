@@ -8,6 +8,8 @@ import java.util.List;
 
 /**
  * 新闻
+ * 不知道为什么mysql5.7不能同时存在两个timestamp
+ * 所以将createTime改为time类型
  */
 @Entity
 @Data
@@ -40,7 +42,7 @@ public class News {
     /**
      * 新闻创建时间
      */
-    @Column(columnDefinition = "TIMESTAMP")
+    @Column(columnDefinition = "TIME")
     private Timestamp createTime;
     /**
      * 新闻发布时间

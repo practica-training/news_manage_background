@@ -2,9 +2,7 @@ package com.demo.practical_training.entity;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 /**
@@ -22,8 +20,9 @@ public class AdminManagementLog {
     /**
      * 被超级管理员管理的管理员ID
      */
-    @Column(columnDefinition = "CHAR(33)")
-    private String adminID;
+    @OneToOne
+    @JoinColumn(name = "adminID")
+    private Admin admin;
     /**
      * 处理内容，超级管理员对这个管理员做了什么
      */
