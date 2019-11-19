@@ -3,19 +3,25 @@ package com.demo.practical_training.manage.service.impl;
 import com.demo.practical_training.common.response.CommonCode;
 import com.demo.practical_training.common.response.QueryResponseResult;
 import com.demo.practical_training.common.response.QueryResult;
+import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.common.web.STablePageRequest;
 import com.demo.practical_training.entity.News;
 import com.demo.practical_training.manage.dao.NewsRepository;
 import com.demo.practical_training.manage.service.NewsService;
 import com.demo.practical_training.model.request.QueryNewsRequest;
+import com.demo.practical_training.model.response.NewsResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
+import org.springframework.transaction.annotation.Transactional;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Optional;
 
 @Service
+@Transactional()
 public class NewsServiceImpl implements NewsService {
     @Autowired
     NewsRepository newsRepository;
@@ -27,6 +33,7 @@ public class NewsServiceImpl implements NewsService {
      * @return
      */
     @Override
+    @Transactional(readOnly=true)
     public QueryResponseResult findList(STablePageRequest pageRequest, QueryNewsRequest queryNewsRequest) {
         //条件匹配器         
         ExampleMatcher exampleMatcher = ExampleMatcher.matching();
@@ -35,11 +42,11 @@ public class NewsServiceImpl implements NewsService {
         //创建条件值对象
         News news = new News();
         //判断新闻标题是否为空
-        if (StringUtils.isEmpty(queryNewsRequest.getNewsTitle())) {
+        if (StringUtils.isNotEmpty(queryNewsRequest.getNewsTitle())) {
             news.setNewsTitle(queryNewsRequest.getNewsTitle());
         }
         //判断新闻id是否为空
-        if (StringUtils.isEmpty(queryNewsRequest.getNewsId())) {
+        if (StringUtils.isNotEmpty(queryNewsRequest.getNewsId())) {
             news.setNewsID(queryNewsRequest.getNewsId());
         }
         //创建条件实例对象
@@ -54,5 +61,80 @@ public class NewsServiceImpl implements NewsService {
         newsQueryResult.setTotal(all.getTotalElements());
         //返回结果
         return new QueryResponseResult(CommonCode.SUCCESS, newsQueryResult);
+    }
+
+    /**
+     * 新增新闻
+     * @param news
+     * @return
+     */
+    @Override
+    public NewsResult add(News news) {
+        News news1 = newsRepository.save(news);
+        return new NewsResult(CommonCode.SUCCESS,news1);
+    }
+
+    /**
+     * 根据id修改新闻
+     * @param id
+     * @param news
+     * @return
+     */
+    @Override
+    public NewsResult updateById(String id, News news) {
+        //根据Id查询新闻
+        News news1 = this.findById(id);
+        //若存在，则调用set方法更新数据，并保存
+        if(news1!=null){
+            news1.setReadNumber(news.getReadNumber());
+            news1.setReadNumber(news.getReadNumber());
+            news1.setNewsState(news.getNewsState());
+            news1.setLikeNumber(news.getLikeNumber());
+            news1.setCreateTime(news.getCreateTime());
+            news1.setContent(news.getContent());
+            news1.setNewsTitle(news.getNewsTitle());
+            news1.setPublishTime(news.getPublishTime());
+            news1.setFailureReason(news.getFailureReason());
+            news1.setNewsAvatar(news.getNewsAvatar());
+            News news2 = newsRepository.save(news1);
+            if(news2!=null){
+                return new NewsResult(CommonCode.SUCCESS,news2);
+            }
+
+        }
+        //若不存在，则返回失败
+        return new NewsResult(CommonCode.FAIL,null);
+    }
+
+    /**
+     * 根据id删除新闻
+     * @param id
+     * @return
+     */
+    @Override
+    public ResponseResult deleteById(String id) {
+        //根据Id查询新闻
+        News news1 = this.findById(id);
+        if(news1!=null){
+            //若存在，删除新闻
+            newsRepository.deleteById(id);
+            return new ResponseResult(CommonCode.SUCCESS);
+        }
+        //若不存在，则返回fail
+        return new ResponseResult(CommonCode.FAIL);
+    }
+
+    /**
+     * 根据id查询新闻
+     * @param id
+     * @return
+     */
+    @Override
+    public News findById(String id) {
+        Optional<News> optional = newsRepository.findById(id);
+        if(optional.isPresent()){
+            return optional.get();
+        }
+        return null;
     }
 }

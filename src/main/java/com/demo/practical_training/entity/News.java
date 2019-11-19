@@ -1,6 +1,7 @@
 package com.demo.practical_training.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -18,7 +19,9 @@ public class News {
      * 新闻ID
      */
     @Id
-    @Column(columnDefinition = "CHAR(33)")
+    @GeneratedValue(generator="system_uuid")
+    @GenericGenerator(name="system_uuid",strategy="uuid")
+    @Column(name = "newsid", unique = true, nullable = false, length = 20)
     private String newsID;
     @ManyToMany
     @JoinTable(name = "newsAndLabel"

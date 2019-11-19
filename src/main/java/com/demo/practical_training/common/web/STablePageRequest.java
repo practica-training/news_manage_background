@@ -15,7 +15,7 @@ public class STablePageRequest {
     private int 	pageNo 	= 1;
     private int 	pageSize	= 10;
     //排序条件
-    private String  sortField	= "id";
+    private String  sortField	= "newsID";
     private String  sortNews	= "descend";
 
     //接收前段的分页条件的 setter函数
