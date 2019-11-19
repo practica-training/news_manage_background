@@ -1,6 +1,7 @@
 package com.demo.practical_training.entity;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,6 +14,7 @@ import java.util.List;
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "USERNAME"))
 @Data
+@ToString
 public class User implements Serializable {
     /**
      * 用户ID

@@ -4,7 +4,7 @@
   "get": [
     {
       "code": 200,
-      "message": "成功获得用户闻列表",
+      "message": "成功获得用户新闻列表",
       "data": [
         {
           "userId": "用户id",

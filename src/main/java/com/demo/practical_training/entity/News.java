@@ -33,7 +33,7 @@ public class News {
     /**
      * 新闻标题
      */
-    private String title;
+    private String newsTitle;
     /**
      * 新闻内容
      */
