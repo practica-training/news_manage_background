@@ -1,16 +1,18 @@
 {
-  "interface": "manage/userReport",
-  "note": "审核用户举报的用户",
+  "interface": "manage/news",
+  "note": "管理新闻",
   "get": [
     {
       "code": 200,
-      "message": "成功获得用户的举报的用户列表",
-      "data": [{
-        "reportId": "举报id",
-        "userId": "用户id",
-        "reportedId": "被举报者id",
-        "context":"举报的内容"
-      }]
+      "message": "成功获得新闻列表",
+      "data": [
+        {
+          "newsId": "新闻id",
+          "newsTitle": "新闻标题",
+          "newsTitleImgUrl": "新闻标题图片地址",
+          "newsDetail": "新闻内容"
+        }
+      ]
     },
     {
       "code": 500,

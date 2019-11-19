@@ -1,5 +1,5 @@
 {
-  "interface": "newsManage/userVerified",
+  "interface": "manage/userVerified",
   "note": "审核用户实名认证",
   "get": [
     {

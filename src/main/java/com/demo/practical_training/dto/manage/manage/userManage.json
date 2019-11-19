@@ -1,16 +1,17 @@
 {
-  "interface": "manage/userReport",
-  "note": "审核用户举报的用户",
+  "interface": "manage/user",
+  "note": "管理新闻",
   "get": [
     {
       "code": 200,
-      "message": "成功获得用户的举报的用户列表",
-      "data": [{
-        "reportId": "举报id",
-        "userId": "用户id",
-        "reportedId": "被举报者id",
-        "context":"举报的内容"
-      }]
+      "message": "成功获得用户闻列表",
+      "data": [
+        {
+          "userId": "用户id",
+          "userName": "用户姓名",
+          "logoUrl":"头像地址"
+        }
+      ]
     },
     {
       "code": 500,

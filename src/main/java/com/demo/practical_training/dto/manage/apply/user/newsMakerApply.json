@@ -1,5 +1,5 @@
 {
-  "interface": "newsManage/userApplyToNewsMaker",
+  "interface": "manage/userApplyToNewsMaker",
   "note": "审核用户申请成为新闻发布者",
   "get": [
     {

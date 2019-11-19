@@ -1,5 +1,5 @@
 {
-  "interface": "newsManage/newsApply",
+  "interface": "manage/newsApply",
   "note": "审核新闻发布申请",
   "get": [
     {

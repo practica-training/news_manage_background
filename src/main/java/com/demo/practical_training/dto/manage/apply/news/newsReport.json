@@ -1,5 +1,5 @@
 {
-  "interface": "newsManage/newsReport",
+  "interface": "manage/newsReport",
   "note": "审核用户举报的新闻",
   "get": [
     {
