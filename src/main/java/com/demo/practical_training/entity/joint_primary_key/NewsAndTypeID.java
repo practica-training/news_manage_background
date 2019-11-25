@@ -5,6 +5,7 @@ import java.io.Serializable;
 /**
  * 新闻和类型对应的复合主键
  */
+@Deprecated
 public class NewsAndTypeID implements Serializable {
     private String newsID;
     private String typeID;

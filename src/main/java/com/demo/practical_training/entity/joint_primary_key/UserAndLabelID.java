@@ -5,6 +5,7 @@ import java.io.Serializable;
 /**
  * 新闻标签和用户对应表的复合主键
  */
+@Deprecated
 public class UserAndLabelID implements Serializable {
     private String userID;
     private String labelID;

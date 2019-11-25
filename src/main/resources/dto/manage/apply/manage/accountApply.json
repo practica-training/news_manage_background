@@ -1,0 +1,35 @@
+{
+  "interface": "manage/accountApply",
+  "note": "审核管理员的账号申请",
+  "get": [
+    {
+      "code": 200,
+      "message": "成功获得管理员申请的列表",
+      "data": [{
+        "newsId": "管理员id",
+        "newsTitle": "新闻标题",
+        "newsTitleImgUrl": "新闻标题图片地址",
+        "newsDetail": "新闻内容"
+      }]
+    },
+    {
+      "code": 500,
+      "message": "权限不足",
+      "data": {}
+    }
+  ],
+  "put": [
+    {
+      "code": 200,
+      "message": "修改成功",
+      "data": {
+
+      }
+    },
+    {
+      "code": 500,
+      "message": "权限不足",
+      "data": {}
+    }
+  ]
+}

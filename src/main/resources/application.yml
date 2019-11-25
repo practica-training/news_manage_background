@@ -3,7 +3,7 @@ spring:
 #    url: jdbc:mysql://cdb-q5u06yqp.gz.tencentcdb.com:10080/practical_training?serverTimezone=UTC
 #    username: newsmanage
 #    password: newsmanage123456
-    url: jdbc:mysql://zzhong.wang:3306/newsmanage?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://zzhong.wang:3306/newsmanage?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-88&useSSL=false
     username: panda
     password: 123456
 

@@ -1,9 +1,10 @@
 package com.demo.practical_training.entity;
 
+import com.demo.practical_training.common.myEnum.Power;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -26,7 +27,7 @@ public class Admin {
      */
     private String adminPassword;
     /**
-     * 管理员权限,0可以管理全部,1仅可以管理用户,2仅可以管理新闻
+     * 管理员权限等级
      */
-    private Integer adminPermission;
+    private Integer power;
 }
