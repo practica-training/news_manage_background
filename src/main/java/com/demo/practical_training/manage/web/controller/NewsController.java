@@ -25,7 +25,7 @@ public class NewsController {
      * @param queryNewsRequest
      * @return
      */
-    @GetMapping("/list")
+    @GetMapping
     public QueryResponseResult findList(STablePageRequest pageRequest, QueryNewsRequest queryNewsRequest){
         return newsService.findList(pageRequest,queryNewsRequest);
     }
@@ -35,7 +35,7 @@ public class NewsController {
      * @param news
      * @return
      */
-    @PostMapping("/add")
+    @PostMapping
     public NewsResult add(@RequestBody News news){
         return newsService.add(news);
     }
@@ -46,7 +46,7 @@ public class NewsController {
      * @param news
      * @return
      */
-    @PutMapping("/update/{id}")
+    @PutMapping("/id/{id}")
     public NewsResult update(@PathVariable("id") String id,@RequestBody News news){
         return newsService.updateById(id,news);
     }
@@ -56,7 +56,7 @@ public class NewsController {
      * @param id
      * @return
      */
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/id/{id}")
     public ResponseResult delete(@PathVariable("id") String id){
         return newsService.deleteById(id);
     }
@@ -66,7 +66,7 @@ public class NewsController {
      * @param id
      * @return
      */
-    @GetMapping("/findOne/{id}")
+    @GetMapping("/id/{id}")
     public News findOne(@PathVariable("id") String id){
         return newsService.findById(id);
     }
