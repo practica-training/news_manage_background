@@ -12,3 +12,15 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+  logging:
+    path: "./logs"
+    file:
+      max-history: 30
+      max-size: 10MB
+    level:
+      root: info
+      com.demo.practical_training.exception: debug
+      #异常的日志等级设定为最高
+    pattern:
+      file: "%d{yyyy/MM/dd-HH:mm} [%thread] %-5level %logger- %msg%n"
+      console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n"
