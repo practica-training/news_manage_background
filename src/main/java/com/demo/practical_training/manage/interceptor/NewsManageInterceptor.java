@@ -1,5 +1,9 @@
 package com.demo.practical_training.manage.interceptor;
 
+import com.demo.practical_training.common.Const;
+import com.demo.practical_training.entity.Admin;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -12,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Component
 public class NewsManageInterceptor implements HandlerInterceptor {
+    private static final Logger LOGGER = LoggerFactory.getLogger(NewsManageInterceptor.class);
     /**
      * 预处理回调方法，实现处理器的预处理
      * 返回值：true表示继续流程；false表示流程中断，不会继续调用其他的拦截器或处理器
@@ -19,7 +24,8 @@ public class NewsManageInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
-        System.out.println("开始拦截.........");
+        String requestURI = request.getRequestURI();
+        Admin admin = (Admin) request.getSession().getAttribute(Const.USERINSESSION);
         //业务代码
         return false;
     }

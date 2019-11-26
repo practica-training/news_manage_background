@@ -3,7 +3,7 @@ spring:
 #    url: jdbc:mysql://cdb-q5u06yqp.gz.tencentcdb.com:10080/practical_training?serverTimezone=UTC
 #    username: newsmanage
 #    password: newsmanage123456
-    url: jdbc:mysql://zzhong.wang:3306/newsmanage?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-88&useSSL=false
+    url: jdbc:mysql://zzhong.wang:3306/newsmanage?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: panda
     password: 123456
 
@@ -13,10 +13,8 @@ spring:
     hibernate:
       ddl-auto: update
   logging:
-    path: "./logs"
-    file:
-      max-history: 30
-      max-size: 10MB
+#    path: ./logs
+    file: "src//main//resources//logger//myLog.log"
     level:
       root: info
       com.demo.practical_training.exception: debug

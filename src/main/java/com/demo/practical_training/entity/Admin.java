@@ -27,7 +27,8 @@ public class Admin {
      */
     private String adminPassword;
     /**
-     * 管理员权限等级
+     * 管理员权限等级,默认是0
      */
+    @Column(columnDefinition = "0")
     private Integer power;
 }
