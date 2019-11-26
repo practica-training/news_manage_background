@@ -5,13 +5,13 @@ import lombok.Data;
 import lombok.ToString;
 
 /**
- * 封装新闻条件查询对象
+ * 封装管理员条件查询对象
  */
 @Data
 @ToString
-public class QueryNewsRequest extends RequestData {
-    //新闻id
-    private String newsId;
-    //新闻标题
-    private String newsTitle;
+public class QueryAdminRequest extends RequestData {
+    //管理员id
+    private String adminID;
+    //管理员名
+    private String adminName;
 }

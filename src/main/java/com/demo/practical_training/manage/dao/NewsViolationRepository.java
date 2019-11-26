@@ -1,15 +1,13 @@
 package com.demo.practical_training.manage.dao;
 
-import com.demo.practical_training.entity.Admin;
+import com.demo.practical_training.entity.NewsViolation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * 管理员持久层
+ * 新闻违规表持久层
  */
 @Repository
-public interface AdminRepository extends
-        JpaRepository<Admin, String>//分页和排序
-{
-
+public interface NewsViolationRepository extends
+        JpaRepository<NewsViolation, String> {
 }
