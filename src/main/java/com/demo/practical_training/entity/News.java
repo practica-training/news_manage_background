@@ -61,7 +61,7 @@ public class News {
      */
     private Long likeNumber;
     /**
-     * 新闻状态 0草稿 1审核中 2审核失败 3等待发布 4已发布 -1已删除 -2违规删除
+     * 新闻状态 0草稿 1审核中 2审核失败 3等待发布 4已发布 -1已删除 -2违规
      */
     private Integer newsState;
     /**

@@ -44,7 +44,7 @@ public class AdminTest {
      */
     @Test
     public void testReviewNews(){
-        NewsReport report = newsReportService.findById("4028ab0d6ea6f703016ea6f7351a0000");
+        NewsReport report = newsReportService.findById("4028ab0d6ea7109d016ea710d7090000");
         ResponseResult responseResult = adminService.reviewNews(report.getReportID());
         System.out.println(responseResult);
     }

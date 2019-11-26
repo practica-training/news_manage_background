@@ -6,4 +6,5 @@ package com.demo.practical_training.common;
 public class Const {
     public static final int MANAGENEWSLEVEL = 2;
     public static final String USERINSESSION = "USERINSESSION";
+    public static final int NEWSDISABLECODE = -2;
 }

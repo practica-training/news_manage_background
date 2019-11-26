@@ -1,5 +1,6 @@
 package com.demo.practical_training.manage.service.impl;
 
+import com.demo.practical_training.common.Const;
 import com.demo.practical_training.common.response.CommonCode;
 import com.demo.practical_training.common.response.QueryResponseResult;
 import com.demo.practical_training.common.response.QueryResult;
@@ -166,8 +167,7 @@ public class AdminServiceImpl implements AdminService {
             newsViolation.setViolationReason(newsReport.getReportReason());
             Date date = new Date();
             newsViolation.setReviewTime(new Timestamp(date.getTime()));
-//            newsReport.getNews().setNewsState();
-
+            newsReport.getNews().setNewsState(Const.NEWSDISABLECODE);
             newsViolationService.add(newsViolation);
             return new ResponseResult(AdminCode.ADMIN_ALLOW_NEWS);
 

@@ -31,13 +31,13 @@ public class NewsReportTest {
     @Test
     public void testAdd(){
         NewsReport newsReport = new NewsReport();
-        News news = newsService.findById("4028ab0d6e82c2fa016e82c325bb0000");
+        News news = newsService.findById("4028ab0d6e82c2fa016e82c327270001");
         User user = userService.findById("4028ab0d6ea6e6fa016ea6e731690000");
         newsReport.setIsIllegal(1);
         newsReport.setReviewState(1);
         newsReport.setNews(news);
         newsReport.setUser(user);
-        newsReport.setReportReason("色情新闻");
+        newsReport.setReportReason("暴力新闻");
         Date date = new Date();
         newsReport.setReportTime(new Timestamp(date.getTime()));
         newsReportService.add(newsReport);
