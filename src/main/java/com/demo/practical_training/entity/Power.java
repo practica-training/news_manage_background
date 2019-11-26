@@ -9,6 +9,7 @@ import javax.persistence.Entity;
  *      审核新闻举报 0
  *      审核用户实名认证 0
  *
+ *
  *      审核用户举报 1
  *      管理用户（封号） 1
  *
@@ -20,6 +21,7 @@ import javax.persistence.Entity;
  *
  *      审核管理员账号申请 4
  *      管理所有管理员的权限 4
+ *      日志查看功能 4
  *
  * 管理员分为5个等级
  *

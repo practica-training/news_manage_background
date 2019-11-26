@@ -13,10 +13,8 @@ spring:
     hibernate:
       ddl-auto: update
   logging:
-    path: "./logs"
-    file:
-      max-history: 30
-      max-size: 10MB
+#    path: ./logs
+    file: "src//main//resources//logger//myLog.log"
     level:
       root: info
       com.demo.practical_training.exception: debug
