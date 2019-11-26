@@ -1,4 +1,4 @@
-package com.demo.practical_training.manage.dao;
+package com.demo.practical_training.dao;
 
 import com.demo.practical_training.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;

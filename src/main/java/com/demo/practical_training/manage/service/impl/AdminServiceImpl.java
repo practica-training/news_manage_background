@@ -8,7 +8,7 @@ import com.demo.practical_training.common.web.STablePageRequest;
 import com.demo.practical_training.entity.Admin;
 import com.demo.practical_training.entity.NewsReport;
 import com.demo.practical_training.entity.NewsViolation;
-import com.demo.practical_training.manage.dao.AdminRepository;
+import com.demo.practical_training.dao.AdminRepository;
 import com.demo.practical_training.manage.service.AdminService;
 import com.demo.practical_training.manage.service.NewsReportService;
 import com.demo.practical_training.manage.service.NewsViolationService;
@@ -154,7 +154,7 @@ public class AdminServiceImpl implements AdminService {
      * @return
      */
     @Override
-    public ResponseResult ReviewNews(String id) {
+    public ResponseResult reviewNews(String id) {
         //1.根据id查询新闻举报
         NewsReport newsReport = newsReportService.findById(id);
         //2.审核状态 0等待审核 1审核完成  是否违规 0没有违规 1违规
@@ -166,6 +166,8 @@ public class AdminServiceImpl implements AdminService {
             newsViolation.setViolationReason(newsReport.getReportReason());
             Date date = new Date();
             newsViolation.setReviewTime(new Timestamp(date.getTime()));
+//            newsReport.getNews().setNewsState();
+
             newsViolationService.add(newsViolation);
             return new ResponseResult(AdminCode.ADMIN_ALLOW_NEWS);
 

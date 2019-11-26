@@ -1,7 +1,7 @@
 package com.demo.practical_training.manage;
 
 import com.demo.practical_training.entity.User;
-import com.demo.practical_training.manage.dao.UserRepository;
+import com.demo.practical_training.dao.UserRepository;
 import com.demo.practical_training.manage.service.UserService;
 import com.demo.practical_training.utils.GenerateUtil;
 import org.junit.Test;
@@ -29,7 +29,7 @@ public class UserTest {
      */
     @Test
     public void testAdd(){
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 15; i++) {
             User user = new User();
             //设置用户名
             user.setUserName(GenerateUtil.getName());

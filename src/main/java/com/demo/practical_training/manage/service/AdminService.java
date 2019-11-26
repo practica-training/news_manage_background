@@ -22,5 +22,5 @@ public interface AdminService {
     //根据id查询管理员
     public Admin findById(String id);
     //审核新闻举报
-    public ResponseResult ReviewNews(String id);
+    public ResponseResult reviewNews(String id);
 }
