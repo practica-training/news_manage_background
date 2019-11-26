@@ -7,6 +7,9 @@ import com.demo.practical_training.entity.News;
 import com.demo.practical_training.model.request.QueryNewsRequest;
 import com.demo.practical_training.model.response.NewsResult;
 
+/**
+ * 新闻业务层
+ */
 public interface NewsService {
     //页面分页与查询
     public QueryResponseResult findList(STablePageRequest pageRequest, QueryNewsRequest queryNewsRequest);

@@ -4,6 +4,9 @@ import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.common.response.ResultCode;
 import com.demo.practical_training.entity.News;
 
+/**
+ * 新闻数据模型
+ */
 public class NewsResult extends ResponseResult {
     News news;
 

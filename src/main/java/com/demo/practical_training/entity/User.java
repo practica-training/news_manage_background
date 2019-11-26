@@ -2,6 +2,7 @@ package com.demo.practical_training.entity;
 
 import lombok.Data;
 import lombok.ToString;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -17,10 +18,12 @@ import java.util.List;
 @ToString
 public class User implements Serializable {
     /**
-     * 用户ID
+     * 用户ID,用hibernate的uuid主键生成器
      */
     @Id
-    @Column(columnDefinition = "CHAR(33)")
+    @GeneratedValue(generator="system_uuid")
+    @GenericGenerator(name="system_uuid",strategy="uuid")
+    @Column(name = "userid", unique = true, nullable = false, length = 20)
     private String userID;
     /**
      * 用户头像路径

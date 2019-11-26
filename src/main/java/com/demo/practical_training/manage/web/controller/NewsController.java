@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
- *新闻管理
+ *新闻控制层
  */
 @RestController
 @RequestMapping("/manage/news")
