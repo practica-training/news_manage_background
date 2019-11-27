@@ -14,4 +14,5 @@ public class QueryAdminRequest extends RequestData {
     private String adminID;
     //管理员名
     private String adminName;
+
 }

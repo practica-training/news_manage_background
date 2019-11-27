@@ -23,4 +23,37 @@ public class Const {
     //是否实名认证 1是 0否
     public static final int USER_NOT_VERIFIED = 0;
     public static final int USER_VERIFIED = 1;
+    /**
+     * 管理员权限
+     * 1.超级管理员具有全部权限
+     * 2.权限分为
+     *      用户与新闻举报
+     *      审核新闻举报 0
+     *      审核用户举报 0
+     *
+     *      用户新闻申请
+     *      审核用户实名认证 1
+     *      审核新闻发布 1
+     *
+     *      用户新闻管理
+     *      管理用户（封号） 2
+     *      管理新闻 （对新闻进行下架）2
+     *
+     *      新闻发布者管理
+     *      审核用户申请为新闻发布者 3
+     *      管理员新闻发布者(将新闻发布者进行降级） 3
+     *
+     *      超级管理员
+     *      管理管理员 4
+     *      日志查看功能 4
+     *
+     * 管理员分为5个等级
+     *
+     */
+//    public static final int ADMIN_0 = 0;
+//    public static final int ADMIN_1 = 1;
+//    public static final int ADMIN_2 = 2;
+//    public static final int ADMIN_3 = 3;
+//    public static final int ADMIN_4 = 4;
+//    public static final int ADMIN = -1;
 }

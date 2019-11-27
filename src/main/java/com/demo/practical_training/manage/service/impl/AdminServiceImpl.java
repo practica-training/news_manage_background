@@ -280,4 +280,52 @@ public class AdminServiceImpl implements AdminService {
         return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_USER);
     }
 
+    /**
+     * 审核用户申请为新闻发布者
+     * @param id
+     * @param user
+     * @return
+     */
+    @Override
+    public ResponseResult reviewUserBecomePublish(String id, User user) {
+        //1.调用User更新方法
+        userService.updateById(id, user);
+        if(user.getUserState()==Const.USER_NEWS_PUBLISHER){
+            return new ResponseResult(AdminCode.ADMIN_ALLOW_USERPUBLISH);
+        }
+        return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_USERPUBLISH);
+    }
+
+    /**
+     * 审核用户申请为新闻发布者
+     * @param id
+     * @param user
+     * @return
+     */
+    @Override
+    public ResponseResult reviewUserBecomeUser(String id, User user) {
+        //1.调用User更新方法
+        userService.updateById(id, user);
+        if(user.getUserState()==Const.USER_NORMAL_USER){
+            return new ResponseResult(AdminCode.ADMIN_ALLOW_BECOMEUSER);
+        }
+        return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_BECOMEUSER);
+    }
+
+    /**
+     * 管理管理员
+     * @param id
+     * @param admin
+     * @return
+     */
+    @Override
+    public ResponseResult ManagementAdmin(String id,  Admin admin) {
+        //1.调用admin更新方法
+        AdminResult adminResult = this.updateById(id, admin);
+        if(adminResult!=null){
+            return new ResponseResult(CommonCode.SUCCESS);
+        }
+        return new ResponseResult(CommonCode.FAIL);
+    }
+
 }

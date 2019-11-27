@@ -138,4 +138,37 @@ public class AdminController {
     public ResponseResult reviewUserVerified(@PathVariable("id") String id,@RequestBody User user){
         return adminService.reviewUserVerified(id,user);
     }
+
+    /**
+     *审核用户申请为新闻发布者
+     * @param id
+     * @param user
+     * @return
+     */
+    @PutMapping("/reviewUserBecomePublish/{id}")
+    public ResponseResult reviewUserBecomePublish(@PathVariable("id") String id,@RequestBody User user){
+        return adminService.reviewUserBecomePublish(id,user);
+    }
+
+    /**
+     *管理员新闻发布者(将新闻发布者进行降级）
+     * @param id
+     * @param user
+     * @return
+     */
+    @PutMapping("/reviewUserBecomeUser/{id}")
+    public ResponseResult reviewUserBecomeUser(@PathVariable("id") String id,@RequestBody User user){
+        return adminService.reviewUserBecomeUser(id,user);
+    }
+
+    /**
+     *管理管理员
+     * @param id
+     * @param admin
+     * @return
+     */
+    @PutMapping("/ManagementAdmin/{id}")
+    public ResponseResult ManagementAdmin(@PathVariable("id") String id,@RequestBody Admin admin){
+        return adminService.ManagementAdmin(id,admin);
+    }
 }
