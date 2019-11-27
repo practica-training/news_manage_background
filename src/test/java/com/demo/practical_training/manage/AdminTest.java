@@ -1,7 +1,10 @@
 package com.demo.practical_training.manage;
 
+import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.entity.Admin;
+import com.demo.practical_training.entity.NewsReport;
 import com.demo.practical_training.manage.service.AdminService;
+import com.demo.practical_training.manage.service.NewsReportService;
 import com.demo.practical_training.utils.GenerateUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,6 +17,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class AdminTest {
     @Autowired
     AdminService adminService;
+    @Autowired
+    NewsReportService newsReportService;
 
     /**
      * 测试新增管理员
@@ -32,5 +37,15 @@ public class AdminTest {
             admin.setPower(4);
             adminService.add(admin);
         }
+    }
+
+    /**
+     * 测试审核新闻举报
+     */
+    @Test
+    public void testReviewNews(){
+        NewsReport report = newsReportService.findById("4028ab0d6ea7109d016ea710d7090000");
+        ResponseResult responseResult = adminService.reviewNews(report.getReportID());
+        System.out.println(responseResult);
     }
 }

@@ -1,6 +1,7 @@
 package com.demo.practical_training.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -15,6 +16,9 @@ public class NewsReport {
      * 举报ID
      */
     @Id
+    @GeneratedValue(generator="system_uuid")
+    @GenericGenerator(name="system_uuid",strategy="uuid")
+    @Column(name = "reportid", unique = true, nullable = false, length = 20)
     private String reportID;
     /**
      * 举报者
@@ -22,15 +26,15 @@ public class NewsReport {
      * 不可为空，不可更新，插入
      */
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "userID",updatable = false,nullable = false,insertable = false)
+    @JoinColumn(name = "userid")
     private User user;
     /**
      * 被举报的新闻ID
      *      懒加载，级联刷新操作
      *      不可为空，不可更新，插入
      */
-    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "newsID",updatable = false,nullable = false,insertable = false)
+    @OneToOne(fetch = FetchType.LAZY,cascade = {CascadeType.MERGE})
+    @JoinColumn(name = "newsid")
     private News news;
     /**
      * 举报原因

@@ -29,7 +29,7 @@ public class UserTest {
      */
     @Test
     public void testAdd(){
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 15; i++) {
             User user = new User();
             //设置用户名
             user.setUserName(GenerateUtil.getName());
