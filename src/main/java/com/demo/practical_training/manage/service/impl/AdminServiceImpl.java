@@ -6,13 +6,9 @@ import com.demo.practical_training.common.response.QueryResponseResult;
 import com.demo.practical_training.common.response.QueryResult;
 import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.common.web.STablePageRequest;
-import com.demo.practical_training.entity.Admin;
-import com.demo.practical_training.entity.NewsReport;
-import com.demo.practical_training.entity.NewsViolation;
 import com.demo.practical_training.dao.AdminRepository;
-import com.demo.practical_training.manage.service.AdminService;
-import com.demo.practical_training.manage.service.NewsReportService;
-import com.demo.practical_training.manage.service.NewsViolationService;
+import com.demo.practical_training.entity.*;
+import com.demo.practical_training.manage.service.*;
 import com.demo.practical_training.model.request.QueryAdminRequest;
 import com.demo.practical_training.model.response.AdminCode;
 import com.demo.practical_training.model.response.AdminResult;
@@ -37,6 +33,14 @@ public class AdminServiceImpl implements AdminService {
     NewsReportService newsReportService;
     @Autowired
     NewsViolationService newsViolationService;
+    @Autowired
+    NewsService newsService;
+    @Autowired
+    UserReportService userReportService;
+    @Autowired
+    UserViolationService userViolationService;
+    @Autowired
+    UserService userService;
     /**
      * 分页和排序加动态查询管理员页面
      *
@@ -159,7 +163,7 @@ public class AdminServiceImpl implements AdminService {
         //1.根据id查询新闻举报
         NewsReport newsReport = newsReportService.findById(id);
         //2.审核状态 0等待审核 1审核完成  是否违规 0没有违规 1违规
-        if(newsReport.getReviewState() == 1 && newsReport.getIsIllegal()==1){
+        if(newsReport.getReviewState() == Const.NEWS_UNDER_REVIEW && newsReport.getIsIllegal()==1){
             //2.1提示用户举报成功，已加入违规新闻
             //新建违规新闻
             NewsViolation newsViolation = new NewsViolation();
@@ -167,11 +171,10 @@ public class AdminServiceImpl implements AdminService {
             newsViolation.setViolationReason(newsReport.getReportReason());
             Date date = new Date();
             newsViolation.setReviewTime(new Timestamp(date.getTime()));
-            newsReport.getNews().setNewsState(Const.NEWSDISABLECODE);
+            newsReport.getNews().setNewsState(Const.NEWS_DISABLE);
             newsViolationService.add(newsViolation);
             return new ResponseResult(AdminCode.ADMIN_ALLOW_NEWS);
-
-        }else if(newsReport.getReviewState() == 0){
+        }else if(newsReport.getReviewState() == Const.NEWS_DRAFT){
             //2.2提示等待审核
             return new ResponseResult(AdminCode.ADMIN_WAIT_NEWS);
         }else{
@@ -179,4 +182,102 @@ public class AdminServiceImpl implements AdminService {
             return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_NEWS);
         }
     }
+
+    /**
+     * 审核新闻发布
+     * @param id
+     * @param news
+     * @return
+     */
+    @Override
+    public ResponseResult reviewNewsPublish(String id, News news) {
+        //1.调用News更新方法
+        newsService.updateById(id, news);
+        if(news.getNewsState()==Const.NEWS_AUDIT_FAILURE){
+            return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_NEWSPUBLISH);
+        }else if(news.getNewsState()==Const.NEWS_PUBLISH){
+            return new ResponseResult(AdminCode.ADMIN_ALLOW_NEWSPUBLISH);
+        }
+        return new ResponseResult(AdminCode.ADMIN_NEWSPUBLISH_WAIT);
+    }
+
+    /**
+     * 对新闻下架处理
+     * @param id
+     * @param news
+     * @return
+     */
+    @Override
+    public ResponseResult reviewNewsOff(String id, News news) {
+        //1.调用News更新方法
+        newsService.updateById(id, news);
+        if(news.getNewsState()==Const.NEWS_OFF){
+            return new ResponseResult(AdminCode.ADMIN_ALLOW_NEWSEXISTENCE);
+        }
+        return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_NEWEXISTENCE);
+    }
+
+    /**
+     * 审核用户举报
+     * @param id
+     * @return
+     */
+    @Override
+    public ResponseResult reviewUser(String id) {
+        //1.根据id查询用户举报
+        UserReport userReport = userReportService.findById(id);
+        //2.审核状态 0等待审核 1审核完成
+        if(userReport.getReviewState() == Const.USER_NORMAL_USER && userReport.getIsIllegal()==1){
+            //2.1提示用户举报成功，已加入违规用户
+            //新建违规用户
+            UserViolation UserViolation = new UserViolation();
+            UserViolation.setUser(userReport.getUser());
+            UserViolation.setReason(userReport.getReportReason());
+            Date date = new Date();
+            UserViolation.setEndTime(new Timestamp(date.getTime()));
+            userReport.getUser().setUserState(Const.USER_NORMAL_USER);
+            userViolationService.add(UserViolation);
+            return new ResponseResult(AdminCode.ADMIN_ALLOW_REVIEW);
+
+        }else if(userReport.getReviewState() == Const.USER_LOGGED_OUT){
+            //2.2提示等待审核
+            return new ResponseResult(AdminCode.ADMIN_WAIT_NEWS);
+        }else{
+            //2.3否则，提示用户举报失败
+            return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_REVIEW);
+        }
+    }
+
+    /**
+     * 对用户封号处理
+     * @param id
+     * @param user
+     * @return
+     */
+    @Override
+    public ResponseResult reviewUserOff(String id, User user) {
+        //1.调用User更新方法
+        userService.updateById(id, user);
+        if(user.getUserState()== Const.NEWS_OFF){
+            return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_USEREXISTENCE);
+        }
+        return new ResponseResult(AdminCode.ADMIN_ALLOW_USEREXISTENCE);
+    }
+
+    /**
+     * 对用户实名认证处理
+     * @param id
+     * @param user
+     * @return
+     */
+    @Override
+    public ResponseResult reviewUserVerified(String id, User user) {
+        //1.调用User更新方法
+        userService.updateById(id, user);
+        if(user.getIsCertified()==Const.USER_VERIFIED){
+            return new ResponseResult(AdminCode.ADMIN_ALLOW_USER);
+        }
+        return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_USER);
+    }
+
 }

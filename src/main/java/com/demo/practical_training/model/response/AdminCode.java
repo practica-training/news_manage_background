@@ -19,6 +19,7 @@ public enum AdminCode implements ResultCode {
     ADMIN_NOT_ALLOW_USEREXISTENCE(true,24004,"封号成功！"),
     ADMIN_ALLOW_NEWSPUBLISH(true,24005,"新闻发布成功！"),
     ADMIN_NOT_ALLOW_NEWSPUBLISH(false,24004,"新闻发布失败！"),
+    ADMIN_NEWSPUBLISH_WAIT(false,24004,"新闻发布等待审核！"),
     ADMIN_ALLOW_NEWSEXISTENCE(true,24005,"新闻下架成功！"),
     ADMIN_NOT_ALLOW_NEWEXISTENCE(false,24004,"新闻下架失败！");
 

@@ -1,5 +1,7 @@
 package com.demo.practical_training.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -7,6 +9,7 @@ import java.sql.Timestamp;
  * 用户举报
  */
 @Entity
+@Data
 public class UserReport {
     /**
      * 举报ID

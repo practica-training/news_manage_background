@@ -4,6 +4,8 @@ import com.demo.practical_training.common.response.QueryResponseResult;
 import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.common.web.STablePageRequest;
 import com.demo.practical_training.entity.Admin;
+import com.demo.practical_training.entity.News;
+import com.demo.practical_training.entity.User;
 import com.demo.practical_training.manage.service.AdminService;
 import com.demo.practical_training.model.request.QueryAdminRequest;
 import com.demo.practical_training.model.response.AdminResult;
@@ -69,5 +71,71 @@ public class AdminController {
     @GetMapping("/id/{id}")
     public Admin findOne(@PathVariable("id") String id){
         return adminService.findById(id);
+    }
+
+    /**
+     * 审核新闻发布
+     * @param id
+     * @param news
+     * @return
+     */
+    @PutMapping("/reviewNewsPublish/{id}")
+    public ResponseResult reviewNewsPublish(@PathVariable("id") String id,@RequestBody News news){
+        return adminService.reviewNewsPublish(id,news);
+    }
+
+    /**
+     *对新闻下架处理
+     * @param id
+     * @param news
+     * @return
+     */
+    @PutMapping("/reviewNewsOff/{id}")
+    public ResponseResult reviewNewsOff(@PathVariable("id") String id,@RequestBody News news){
+        return adminService.reviewNewsOff(id,news);
+    }
+
+    /*
+     *审核新闻举报
+     * @param id
+     * @param news
+     * @return
+     */
+    @PutMapping("/reviewNews/{id}")
+    public ResponseResult reviewNews(@PathVariable("id") String id){
+        return adminService.reviewNews(id);
+    }
+
+    /*
+     *审核用户举报
+     * @param id
+     * @param news
+     * @return
+     */
+    @PutMapping("/reviewUser/{id}")
+    public ResponseResult reviewUser(@PathVariable("id") String id){
+        return adminService.reviewNews(id);
+    }
+
+    /**
+     *对用户封号处理
+     * @param id
+     * @param user
+     * @return
+     */
+    @PutMapping("/reviewNewsOff/{id}")
+    public ResponseResult reviewUserOff(@PathVariable("id") String id,@RequestBody User user){
+        return adminService.reviewUserOff(id,user);
+    }
+
+    /**
+     *对用户实名认证处理
+     * @param id
+     * @param user
+     * @return
+     */
+    @PutMapping("/reviewNewsOff/{id}")
+    public ResponseResult reviewUserVerified(@PathVariable("id") String id,@RequestBody User user){
+        return adminService.reviewUserVerified(id,user);
     }
 }
