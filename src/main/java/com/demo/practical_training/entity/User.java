@@ -52,7 +52,7 @@ public class User implements Serializable {
     @Column(columnDefinition = "TIMESTAMP")
     private Timestamp registrationTime;
     /**
-     * 用户状态 1正常 0已注销 -1违规禁言 -2违规封号
+     * 用户状态 1正常用户 2新闻发布者 0已注销 -1违规禁言 -2违规封号
      */
     private Integer userState;
     /**
