@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * 管理用户权限验证
+ * 管理用户权限验证拦截器
  */
 @Component
 public class NewsManageInterceptor implements HandlerInterceptor {
@@ -26,6 +26,9 @@ public class NewsManageInterceptor implements HandlerInterceptor {
             throws Exception {
         String requestURI = request.getRequestURI();
         Admin admin = (Admin) request.getSession().getAttribute(Const.USERINSESSION);
+        if (admin.getPower()> Const.MANAGENEWSLEVEL) {
+            return true;
+        }
         //业务代码
         return false;
     }
