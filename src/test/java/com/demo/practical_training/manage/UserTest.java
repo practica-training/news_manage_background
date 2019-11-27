@@ -1,7 +1,7 @@
 package com.demo.practical_training.manage;
 
 import com.demo.practical_training.entity.User;
-import com.demo.practical_training.manage.dao.UserRepository;
+import com.demo.practical_training.dao.UserRepository;
 import com.demo.practical_training.manage.service.UserService;
 import com.demo.practical_training.utils.GenerateUtil;
 import org.junit.Test;

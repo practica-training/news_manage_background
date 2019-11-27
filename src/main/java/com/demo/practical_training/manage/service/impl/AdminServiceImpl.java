@@ -8,7 +8,7 @@ import com.demo.practical_training.common.web.STablePageRequest;
 import com.demo.practical_training.entity.Admin;
 import com.demo.practical_training.entity.NewsReport;
 import com.demo.practical_training.entity.NewsViolation;
-import com.demo.practical_training.manage.dao.AdminRepository;
+import com.demo.practical_training.dao.AdminRepository;
 import com.demo.practical_training.manage.service.AdminService;
 import com.demo.practical_training.manage.service.NewsReportService;
 import com.demo.practical_training.manage.service.NewsViolationService;

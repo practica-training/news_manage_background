@@ -7,10 +7,9 @@ import javax.persistence.Entity;
  * 1.超级管理员具有全部权限
  * 2.权限分为
  *      审核新闻举报 0
- *      审核用户实名认证 0
+ *      审核用户举报 0
  *
- *
- *      审核用户举报 1
+ *      审核用户实名认证 1
  *      管理用户（封号） 1
  *
  *      审核新闻发布 2
@@ -27,6 +26,7 @@ import javax.persistence.Entity;
  *
  */
 //@Entity
+    @Deprecated
 public class Power {
 
 }

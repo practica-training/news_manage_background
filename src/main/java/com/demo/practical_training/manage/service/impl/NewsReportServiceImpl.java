@@ -6,7 +6,7 @@ import com.demo.practical_training.common.response.QueryResult;
 import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.common.web.STablePageRequest;
 import com.demo.practical_training.entity.NewsReport;
-import com.demo.practical_training.manage.dao.NewsReportRepository;
+import com.demo.practical_training.dao.NewsReportRepository;
 import com.demo.practical_training.manage.service.NewsReportService;
 import com.demo.practical_training.model.request.QueryNewsReportRequest;
 import com.demo.practical_training.model.response.NewsReportResult;

@@ -4,7 +4,7 @@ import com.demo.practical_training.common.response.QueryResponseResult;
 import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.common.web.STablePageRequest;
 import com.demo.practical_training.entity.News;
-import com.demo.practical_training.manage.dao.NewsRepository;
+import com.demo.practical_training.dao.NewsRepository;
 import com.demo.practical_training.manage.service.NewsService;
 import com.demo.practical_training.model.request.QueryNewsRequest;
 import org.junit.Test;
