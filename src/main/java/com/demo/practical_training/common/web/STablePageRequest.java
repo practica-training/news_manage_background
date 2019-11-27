@@ -1,5 +1,6 @@
 package com.demo.practical_training.common.web;
 
+import lombok.Data;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -9,20 +10,18 @@ import org.apache.commons.lang3.StringUtils;
 /*自定义的分页条件接收对象：
 **提供根据前端的分页条件封装spring data jpa的分页对象Pageable。
 **/
+@Data
 public class STablePageRequest {
 
     //分页条件
     private int 	pageNo 	= 1;
     private int 	pageSize	= 10;
     //排序条件
-    private String  sortField	= "newsID";
-    private String  sortNews	= "descend";
+    private String  sortField	= null;
+    private String  sortNews	= null;
 
     //接收前段的分页条件的 setter函数
-    public void setPageNo(int pageNo) {this.pageNo = pageNo;}
-    public void setPageSize(int pageSize) {this.pageSize = pageSize;}
-    public void setSortField(String sortField) {this.sortField = sortField;}
-    public void setSortOrder(String sortOrder) {this.sortNews = sortOrder;}
+   
 
     //3.
     public Pageable getPageable()
@@ -31,7 +30,7 @@ public class STablePageRequest {
         Pageable pageable = null;
 
         //如果排序条件不为null 或 ""
-        if(StringUtils.isNotBlank(sortField)|| StringUtils.isNotBlank(sortNews))
+        if(StringUtils.isNotBlank(sortField) | StringUtils.isNotBlank(sortNews))
         {
             //new 一个默认 降序 排序对象Sort
             Sort pageSort = new Sort(Direction.DESC,sortField);

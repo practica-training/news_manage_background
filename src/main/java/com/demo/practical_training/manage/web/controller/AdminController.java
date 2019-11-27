@@ -123,7 +123,7 @@ public class AdminController {
      * @param user
      * @return
      */
-    @PutMapping("/reviewNewsOff/{id}")
+    @PutMapping("/reviewUserOff/{id}")
     public ResponseResult reviewUserOff(@PathVariable("id") String id,@RequestBody User user){
         return adminService.reviewUserOff(id,user);
     }
@@ -134,7 +134,7 @@ public class AdminController {
      * @param user
      * @return
      */
-    @PutMapping("/reviewNewsOff/{id}")
+    @PutMapping("/reviewUserVerified/{id}")
     public ResponseResult reviewUserVerified(@PathVariable("id") String id,@RequestBody User user){
         return adminService.reviewUserVerified(id,user);
     }

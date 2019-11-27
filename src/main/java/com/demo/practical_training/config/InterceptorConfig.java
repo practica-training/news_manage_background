@@ -17,7 +17,7 @@ public class InterceptorConfig extends WebMvcConfigurationSupport {
 
     @Override
     protected void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(newsManageInterceptor).addPathPatterns("/manage/news/**");
+//        registry.addInterceptor(newsManageInterceptor).addPathPatterns("/manage/news/**");
         super.addInterceptors(registry);
     }
 

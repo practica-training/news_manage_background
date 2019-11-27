@@ -1,24 +1,32 @@
+server:
+  #端口号
+  port: 8888
 spring:
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
   datasource:
-#    url: jdbc:mysql://cdb-q5u06yqp.gz.tencentcdb.com:10080/practical_training?serverTimezone=UTC
-#    username: newsmanage
-#    password: newsmanage123456
+    #    url: jdbc:mysql://cdb-q5u06yqp.gz.tencentcdb.com:10080/practical_training?serverTimezone=UTC
+    #    username: newsmanage
+    #    password: newsmanage123456
     url: jdbc:mysql://zzhong.wang:3306/newsmanage?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: panda
     password: 123456
+
 
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     show-sql: true
     hibernate:
       ddl-auto: update
-  logging:
-#    path: ./logs
-    file: "src//main//resources//logger//myLog.log"
-    level:
-      root: info
-      com.demo.practical_training.exception: debug
-      #异常的日志等级设定为最高
-    pattern:
-      file: "%d{yyyy/MM/dd-HH:mm} [%thread] %-5level %logger- %msg%n"
-      console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n"
+      enable_lazy_load_no_trans: true
+logging:
+  #    path: ./logs
+  file: "src//main//resources//logger//myLog.log"
+  level:
+    root: info
+    com.demo.practical_training.exception: debug
+    #异常的日志等级设定为最高
+  pattern:
+    file: "%d{yyyy/MM/dd-HH:mm} [%thread] %-5level %logger- %msg%n"
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n"

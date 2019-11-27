@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
  * 新闻举报控制层
  */
 @RestController
-@RequestMapping("/manage/NewsReport")
+@RequestMapping("/manage/newsReport")
 public class NewsReportController {
     @Autowired
     NewsReportService NewsReportService;
