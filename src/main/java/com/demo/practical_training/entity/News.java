@@ -45,7 +45,7 @@ public class News {
     /**
      * 新闻创建时间
      */
-    @Column(columnDefinition = "TIME")
+    @Column(columnDefinition = "DATE")
     private Timestamp createTime;
     /**
      * 新闻发布时间
