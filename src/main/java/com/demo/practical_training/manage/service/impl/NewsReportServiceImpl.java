@@ -61,10 +61,10 @@ public class NewsReportServiceImpl implements NewsReportService {
         /**
          * 解决懒加载
          */
-        for (NewsReport newsReport : all) {
-            newsReport.getUser().getId();
-            newsReport.getNews().getId();
-        }
+//        for (NewsReport newsReport : all) {
+////            newsReport.getUser().getId();
+////            newsReport.getNews().getId();
+////        }
         //分别给QueryResult<T> 对象中的list集合total赋值
         NewsReportQueryResult.setList(all.getContent());
         NewsReportQueryResult.setTotal(all.getTotalElements());

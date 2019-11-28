@@ -9,12 +9,12 @@ import com.demo.practical_training.manage.service.NewsReportService;
 import com.demo.practical_training.manage.service.NewsService;
 import com.demo.practical_training.manage.service.UserService;
 import com.demo.practical_training.model.request.QueryNewsReportRequest;
-import com.demo.practical_training.model.request.QueryNewsRequest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -33,15 +33,16 @@ public class NewsReportTest {
      * 测试新增新闻举报
      */
     @Test
+    @Transactional
     public void testAdd(){
         NewsReport newsReport = new NewsReport();
-        News news = newsService.findById("4028ab0d6e82c2fa016e82c327270001");
-        User user = userService.findById("4028ab0d6ea6e6fa016ea6e731690000");
+        News news = newsService.findById("8abef8d06eafcd8b016eafcdc3c10001");
+        User user = userService.findById("4028ab0d6eafe408016eafe43e4c0001");
         newsReport.setIsIllegal(1);
         newsReport.setReviewState(1);
         newsReport.setNews(news);
         newsReport.setUser(user);
-        newsReport.setReportReason("暴力新闻");
+        newsReport.setReportReason("色情新闻");
         Date date = new Date();
         newsReport.setReportTime(new Timestamp(date.getTime()));
         newsReportService.add(newsReport);
@@ -51,6 +52,7 @@ public class NewsReportTest {
     * 测试分页排序条件查询
      */
     @Test
+    @Transactional
     public void testFindList(){
         STablePageRequest sTablePageRequest = new STablePageRequest();
         QueryNewsReportRequest queryNewsRequest = new QueryNewsReportRequest();

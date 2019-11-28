@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
@@ -61,6 +62,7 @@ public class NewsTest {
      * 测试分页排序条件查询
      */
     @Test
+    @Transactional
     public void testFindList(){
         STablePageRequest sTablePageRequest = new STablePageRequest();
         QueryNewsRequest queryNewsRequest = new QueryNewsRequest();

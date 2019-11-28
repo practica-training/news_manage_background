@@ -20,6 +20,7 @@ spring:
     hibernate:
       ddl-auto: update
       enable_lazy_load_no_trans: true
+    open-in-view: true
 logging:
   #    path: ./logs
   file: "src//main//resources//logger//myLog.log"

@@ -5,19 +5,18 @@ import com.demo.practical_training.common.response.QueryResponseResult;
 import com.demo.practical_training.common.response.QueryResult;
 import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.common.web.STablePageRequest;
-import com.demo.practical_training.entity.News;
 import com.demo.practical_training.dao.NewsRepository;
-import com.demo.practical_training.entity.NewsReport;
+import com.demo.practical_training.entity.News;
 import com.demo.practical_training.manage.service.NewsService;
 import com.demo.practical_training.model.request.QueryNewsRequest;
 import com.demo.practical_training.model.response.NewsResult;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.Optional;
 
@@ -56,13 +55,13 @@ public class NewsServiceImpl implements NewsService {
 
         //根据分页对象和条件实例对象查询数据
         Page<News> all = newsRepository.findAll(example, pageRequest.getPageable());
-        /**
-         * 解决懒加载
-         */
-        for (News news1 : all) {
-            news1.getNewsLabelList().size();
-            news1.getNewsTypeList().size();
-        }
+//        /**
+//         * 解决懒加载
+//         */
+//        for (News news1 : all) {
+//            news1.getNewsLabelList().size();
+//            news1.getNewsTypeList().size();
+//        }
         //新建QueryResult<T> 对象
         QueryResult<News> newsQueryResult = new QueryResult<>();
         //分别给QueryResult<T> 对象中的list集合total赋值
