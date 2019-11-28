@@ -27,7 +27,7 @@ public class News {
     @JoinTable(name = "newsAndLabel"
             ,joinColumns = @JoinColumn(name = "newsID",referencedColumnName = "newsID"),
             inverseJoinColumns = @JoinColumn(name = "newLabelID",referencedColumnName = "newLabelID")
-            )
+    )
     private List<NewsLabel> newsLabelList;
     /**
      * 新闻封面路径
