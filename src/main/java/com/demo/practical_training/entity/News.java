@@ -1,5 +1,6 @@
 package com.demo.practical_training.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -23,10 +24,12 @@ public class News {
     @GenericGenerator(name="system_uuid",strategy="uuid")
     @Column(name = "newsid", unique = true, nullable = false, length = 20)
     private String newsID;
+
+    @JsonIgnore
     @ManyToMany
-    @JoinTable(name = "newsAndLabel"
-            ,joinColumns = @JoinColumn(name = "newsID",referencedColumnName = "newsID"),
-            inverseJoinColumns = @JoinColumn(name = "newLabelID",referencedColumnName = "newLabelID")
+    @JoinTable(name = "userAndLabel"
+            ,joinColumns = @JoinColumn(name = "newsid",referencedColumnName = "newsid"),
+            inverseJoinColumns = @JoinColumn(name = "newLabelid",referencedColumnName = "newLabelid")
     )
     private List<NewsLabel> newsLabelList;
     /**
@@ -72,10 +75,12 @@ public class News {
      * 失败原因（如果审核失败则会有）
      */
     private String failureReason;
+
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "newsAndType"
-            ,joinColumns = @JoinColumn(name = "newsID",referencedColumnName = "newsID"),
-            inverseJoinColumns = @JoinColumn(name = "newsTypeID",referencedColumnName = "newsTypeID")
+            ,joinColumns = @JoinColumn(name = "newsid",referencedColumnName = "newsid"),
+            inverseJoinColumns = @JoinColumn(name = "newTypeid",referencedColumnName = "newTypeid")
     )
     private List<NewsType> newsTypeList;
 

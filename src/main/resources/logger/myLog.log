@@ -2440,3 +2440,818 @@ com.fasterxml.jackson.databind.exc.InvalidDefinitionException: No serializer fou
 2019/11/27-21:14 [http-nio-8888-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet- FrameworkServlet 'dispatcherServlet': initialization started
 2019/11/27-21:14 [http-nio-8888-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet- FrameworkServlet 'dispatcherServlet': initialization completed in 66 ms
 2019/11/27-21:14 [http-nio-8888-exec-1] INFO  org.hibernate.hql.internal.QueryTranslatorFactoryInitiator- HHH000397: Using ASTQueryTranslatorFactory
+2019/11/28-08:37 [main] INFO  com.demo.practical_training.manage.NewsTest- Starting NewsTest on LAPTOP-1PCFIL5N with PID 34572 (started by 王至仲 in D:\ideaProject\news_manage_background)
+2019/11/28-08:37 [main] INFO  com.demo.practical_training.manage.NewsTest- No active profile set, falling back to default profiles: default
+2019/11/28-08:37 [main] INFO  org.springframework.web.context.support.GenericWebApplicationContext- Refreshing org.springframework.web.context.support.GenericWebApplicationContext@64ec96c6: startup date [Thu Nov 28 08:37:51 CST 2019]; root of context hierarchy
+2019/11/28-08:37 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$28fb2878] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019/11/28-08:37 [main] INFO  com.zaxxer.hikari.HikariDataSource- HikariPool-1 - Starting...
+2019/11/28-08:37 [main] INFO  com.zaxxer.hikari.HikariDataSource- HikariPool-1 - Start completed.
+2019/11/28-08:37 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean- Building JPA container EntityManagerFactory for persistence unit 'default'
+2019/11/28-08:37 [main] INFO  org.hibernate.jpa.internal.util.LogHelper- HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019/11/28-08:37 [main] INFO  org.hibernate.Version- HHH000412: Hibernate Core {5.2.16.Final}
+2019/11/28-08:37 [main] INFO  org.hibernate.cfg.Environment- HHH000206: hibernate.properties not found
+2019/11/28-08:37 [main] INFO  org.hibernate.annotations.common.Version- HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2019/11/28-08:37 [main] INFO  org.hibernate.dialect.Dialect- HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2019/11/28-08:37 [main] WARN  org.hibernate.id.UUIDHexGenerator- HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2019/11/28-08:38 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean- Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/admin],methods=[POST]}" onto public com.demo.practical_training.model.response.AdminResult com.demo.practical_training.manage.web.controller.AdminController.add(com.demo.practical_training.entity.Admin)
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/admin/id/{id}],methods=[PUT]}" onto public com.demo.practical_training.model.response.AdminResult com.demo.practical_training.manage.web.controller.AdminController.update(java.lang.String,com.demo.practical_training.entity.Admin)
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/admin/id/{id}],methods=[DELETE]}" onto public com.demo.practical_training.common.response.ResponseResult com.demo.practical_training.manage.web.controller.AdminController.delete(java.lang.String)
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/admin],methods=[GET]}" onto public com.demo.practical_training.common.response.QueryResponseResult com.demo.practical_training.manage.web.controller.AdminController.findList(com.demo.practical_training.common.web.STablePageRequest,com.demo.practical_training.model.request.QueryAdminRequest)
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/admin/id/{id}],methods=[GET]}" onto public com.demo.practical_training.entity.Admin com.demo.practical_training.manage.web.controller.AdminController.findOne(java.lang.String)
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/admin/ManagementAdmin/{id}],methods=[PUT]}" onto public com.demo.practical_training.common.response.ResponseResult com.demo.practical_training.manage.web.controller.AdminController.ManagementAdmin(java.lang.String,com.demo.practical_training.entity.Admin)
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/admin/reviewUser/{id}],methods=[PUT]}" onto public com.demo.practical_training.common.response.ResponseResult com.demo.practical_training.manage.web.controller.AdminController.reviewUser(java.lang.String)
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/admin/reviewUserOff/{id}],methods=[PUT]}" onto public com.demo.practical_training.common.response.ResponseResult com.demo.practical_training.manage.web.controller.AdminController.reviewUserOff(java.lang.String,com.demo.practical_training.entity.User)
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/admin/reviewNewsOff/{id}],methods=[PUT]}" onto public com.demo.practical_training.common.response.ResponseResult com.demo.practical_training.manage.web.controller.AdminController.reviewNewsOff(java.lang.String,com.demo.practical_training.entity.News)
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/admin/reviewNews/{id}],methods=[PUT]}" onto public com.demo.practical_training.common.response.ResponseResult com.demo.practical_training.manage.web.controller.AdminController.reviewNews(java.lang.String)
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/admin/reviewUserVerified/{id}],methods=[PUT]}" onto public com.demo.practical_training.common.response.ResponseResult com.demo.practical_training.manage.web.controller.AdminController.reviewUserVerified(java.lang.String,com.demo.practical_training.entity.User)
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/admin/reviewNewsPublish/{id}],methods=[PUT]}" onto public com.demo.practical_training.common.response.ResponseResult com.demo.practical_training.manage.web.controller.AdminController.reviewNewsPublish(java.lang.String,com.demo.practical_training.entity.News)
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/admin/reviewUserBecomeUser/{id}],methods=[PUT]}" onto public com.demo.practical_training.common.response.ResponseResult com.demo.practical_training.manage.web.controller.AdminController.reviewUserBecomeUser(java.lang.String,com.demo.practical_training.entity.User)
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/admin/reviewUserBecomePublish/{id}],methods=[PUT]}" onto public com.demo.practical_training.common.response.ResponseResult com.demo.practical_training.manage.web.controller.AdminController.reviewUserBecomePublish(java.lang.String,com.demo.practical_training.entity.User)
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/NewsViolation],methods=[POST]}" onto public com.demo.practical_training.model.response.NewsViolationResult com.demo.practical_training.manage.web.controller.NesViolationController.add(com.demo.practical_training.entity.NewsViolation)
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/NewsViolation/id/{id}],methods=[PUT]}" onto public com.demo.practical_training.model.response.NewsViolationResult com.demo.practical_training.manage.web.controller.NesViolationController.update(java.lang.String,com.demo.practical_training.entity.NewsViolation)
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/NewsViolation/id/{id}],methods=[DELETE]}" onto public com.demo.practical_training.common.response.ResponseResult com.demo.practical_training.manage.web.controller.NesViolationController.delete(java.lang.String)
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/NewsViolation],methods=[GET]}" onto public com.demo.practical_training.common.response.QueryResponseResult com.demo.practical_training.manage.web.controller.NesViolationController.findList(com.demo.practical_training.common.web.STablePageRequest,com.demo.practical_training.model.request.QueryNewsViolationRequest)
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/NewsViolation/id/{id}],methods=[GET]}" onto public com.demo.practical_training.entity.NewsViolation com.demo.practical_training.manage.web.controller.NesViolationController.findOne(java.lang.String)
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/news],methods=[POST]}" onto public com.demo.practical_training.model.response.NewsResult com.demo.practical_training.manage.web.controller.NewsController.add(com.demo.practical_training.entity.News)
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/news/id/{id}],methods=[PUT]}" onto public com.demo.practical_training.model.response.NewsResult com.demo.practical_training.manage.web.controller.NewsController.update(java.lang.String,com.demo.practical_training.entity.News)
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/news/id/{id}],methods=[DELETE]}" onto public com.demo.practical_training.common.response.ResponseResult com.demo.practical_training.manage.web.controller.NewsController.delete(java.lang.String)
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/news],methods=[GET]}" onto public com.demo.practical_training.common.response.QueryResponseResult com.demo.practical_training.manage.web.controller.NewsController.findList(com.demo.practical_training.common.web.STablePageRequest,com.demo.practical_training.model.request.QueryNewsRequest)
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/news/id/{id}],methods=[GET]}" onto public com.demo.practical_training.entity.News com.demo.practical_training.manage.web.controller.NewsController.findOne(java.lang.String)
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/newsReport],methods=[POST]}" onto public com.demo.practical_training.model.response.NewsReportResult com.demo.practical_training.manage.web.controller.NewsReportController.add(com.demo.practical_training.entity.NewsReport)
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/newsReport/id/{id}],methods=[PUT]}" onto public com.demo.practical_training.model.response.NewsReportResult com.demo.practical_training.manage.web.controller.NewsReportController.update(java.lang.String,com.demo.practical_training.entity.NewsReport)
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/newsReport/id/{id}],methods=[DELETE]}" onto public com.demo.practical_training.common.response.ResponseResult com.demo.practical_training.manage.web.controller.NewsReportController.delete(java.lang.String)
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/newsReport],methods=[GET]}" onto public com.demo.practical_training.common.response.QueryResponseResult com.demo.practical_training.manage.web.controller.NewsReportController.findList(com.demo.practical_training.common.web.STablePageRequest,com.demo.practical_training.model.request.QueryNewsReportRequest)
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/newsReport/id/{id}],methods=[GET]}" onto public com.demo.practical_training.entity.NewsReport com.demo.practical_training.manage.web.controller.NewsReportController.findOne(java.lang.String)
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/user],methods=[POST]}" onto public com.demo.practical_training.model.response.UserResult com.demo.practical_training.manage.web.controller.UserController.add(com.demo.practical_training.entity.User)
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/user/id/{id}],methods=[PUT]}" onto public com.demo.practical_training.model.response.UserResult com.demo.practical_training.manage.web.controller.UserController.update(java.lang.String,com.demo.practical_training.entity.User)
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/user/id/{id}],methods=[DELETE]}" onto public com.demo.practical_training.common.response.ResponseResult com.demo.practical_training.manage.web.controller.UserController.delete(java.lang.String)
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/user],methods=[GET]}" onto public com.demo.practical_training.common.response.QueryResponseResult com.demo.practical_training.manage.web.controller.UserController.findList(com.demo.practical_training.common.web.STablePageRequest,com.demo.practical_training.model.request.QueryUserRequest)
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/user/id/{id}],methods=[GET]}" onto public com.demo.practical_training.entity.User com.demo.practical_training.manage.web.controller.UserController.findOne(java.lang.String)
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter- Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@64ec96c6: startup date [Thu Nov 28 08:37:51 CST 2019]; root of context hierarchy
+2019/11/28-08:38 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver- Detected @ExceptionHandler methods in exceptionCatch
+2019/11/28-08:38 [main] WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration- spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019/11/28-08:38 [main] INFO  com.demo.practical_training.manage.NewsTest- Started NewsTest in 19.548 seconds (JVM running for 23.109)
+2019/11/28-08:38 [main] INFO  org.hibernate.hql.internal.QueryTranslatorFactoryInitiator- HHH000397: Using ASTQueryTranslatorFactory
+2019/11/28-08:38 [Thread-3] INFO  org.springframework.web.context.support.GenericWebApplicationContext- Closing org.springframework.web.context.support.GenericWebApplicationContext@64ec96c6: startup date [Thu Nov 28 08:37:51 CST 2019]; root of context hierarchy
+2019/11/28-08:38 [Thread-3] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean- Closing JPA EntityManagerFactory for persistence unit 'default'
+2019/11/28-08:38 [Thread-3] INFO  com.zaxxer.hikari.HikariDataSource- HikariPool-1 - Shutdown initiated...
+2019/11/28-08:38 [Thread-3] INFO  com.zaxxer.hikari.HikariDataSource- HikariPool-1 - Shutdown completed.
+2019/11/28-08:49 [main] INFO  com.demo.practical_training.manage.NewsTest- Starting NewsTest on LAPTOP-1PCFIL5N with PID 34540 (started by 王至仲 in D:\ideaProject\news_manage_background)
+2019/11/28-08:49 [main] INFO  com.demo.practical_training.manage.NewsTest- No active profile set, falling back to default profiles: default
+2019/11/28-08:49 [main] INFO  org.springframework.web.context.support.GenericWebApplicationContext- Refreshing org.springframework.web.context.support.GenericWebApplicationContext@2462cb01: startup date [Thu Nov 28 08:49:45 CST 2019]; root of context hierarchy
+2019/11/28-08:49 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$92c7d6c7] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019/11/28-08:49 [main] INFO  com.zaxxer.hikari.HikariDataSource- HikariPool-1 - Starting...
+2019/11/28-08:49 [main] INFO  com.zaxxer.hikari.HikariDataSource- HikariPool-1 - Start completed.
+2019/11/28-08:49 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean- Building JPA container EntityManagerFactory for persistence unit 'default'
+2019/11/28-08:49 [main] INFO  org.hibernate.jpa.internal.util.LogHelper- HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019/11/28-08:49 [main] INFO  org.hibernate.Version- HHH000412: Hibernate Core {5.2.16.Final}
+2019/11/28-08:49 [main] INFO  org.hibernate.cfg.Environment- HHH000206: hibernate.properties not found
+2019/11/28-08:49 [main] INFO  org.hibernate.annotations.common.Version- HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2019/11/28-08:49 [main] INFO  org.hibernate.dialect.Dialect- HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2019/11/28-08:49 [main] WARN  org.springframework.web.context.support.GenericWebApplicationContext- Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is org.hibernate.cfg.RecoverableException: Unable to find column with logical name: newLabelID in org.hibernate.mapping.Table(news_label) and its related supertables and secondary tables
+2019/11/28-08:49 [main] INFO  com.zaxxer.hikari.HikariDataSource- HikariPool-1 - Shutdown initiated...
+2019/11/28-08:49 [main] INFO  com.zaxxer.hikari.HikariDataSource- HikariPool-1 - Shutdown completed.
+2019/11/28-08:49 [main] INFO  org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener- 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2019/11/28-08:49 [main] ERROR org.springframework.boot.SpringApplication- Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is org.hibernate.cfg.RecoverableException: Unable to find column with logical name: newLabelID in org.hibernate.mapping.Table(news_label) and its related supertables and secondary tables
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1702)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:579)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:501)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:228)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:759)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:395)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:327)
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:138)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108)
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190)
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47)
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242)
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70)
+Caused by: org.hibernate.cfg.RecoverableException: Unable to find column with logical name: newLabelID in org.hibernate.mapping.Table(news_label) and its related supertables and secondary tables
+	at org.hibernate.cfg.Ejb3JoinColumn.checkReferencedColumnsType(Ejb3JoinColumn.java:837)
+	at org.hibernate.cfg.BinderHelper.createSyntheticPropertyReference(BinderHelper.java:244)
+	at org.hibernate.cfg.annotations.CollectionBinder.bindManytoManyInverseFk(CollectionBinder.java:1697)
+	at org.hibernate.cfg.annotations.CollectionBinder.bindManyToManySecondPass(CollectionBinder.java:1577)
+	at org.hibernate.cfg.annotations.CollectionBinder.bindStarToManySecondPass(CollectionBinder.java:810)
+	at org.hibernate.cfg.annotations.CollectionBinder$1.secondPass(CollectionBinder.java:735)
+	at org.hibernate.cfg.CollectionSecondPass.doSecondPass(CollectionSecondPass.java:54)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.processSecondPasses(InFlightMetadataCollectorImpl.java:1635)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.processSecondPasses(InFlightMetadataCollectorImpl.java:1603)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:278)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:861)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:888)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:57)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1761)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1698)
+	... 39 common frames omitted
+Caused by: org.hibernate.MappingException: Unable to find column with logical name: newLabelID in org.hibernate.mapping.Table(news_label) and its related supertables and secondary tables
+	at org.hibernate.cfg.Ejb3JoinColumn.checkReferencedColumnsType(Ejb3JoinColumn.java:832)
+	... 57 common frames omitted
+2019/11/28-08:49 [main] ERROR org.springframework.test.context.TestContextManager- Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@689604d9] to prepare test instance [com.demo.practical_training.manage.NewsTest@63cd2cd2]
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:125)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108)
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190)
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47)
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242)
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is org.hibernate.cfg.RecoverableException: Unable to find column with logical name: newLabelID in org.hibernate.mapping.Table(news_label) and its related supertables and secondary tables
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1702)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:579)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:501)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:228)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:759)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:395)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:327)
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:138)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117)
+	... 24 common frames omitted
+Caused by: org.hibernate.cfg.RecoverableException: Unable to find column with logical name: newLabelID in org.hibernate.mapping.Table(news_label) and its related supertables and secondary tables
+	at org.hibernate.cfg.Ejb3JoinColumn.checkReferencedColumnsType(Ejb3JoinColumn.java:837)
+	at org.hibernate.cfg.BinderHelper.createSyntheticPropertyReference(BinderHelper.java:244)
+	at org.hibernate.cfg.annotations.CollectionBinder.bindManytoManyInverseFk(CollectionBinder.java:1697)
+	at org.hibernate.cfg.annotations.CollectionBinder.bindManyToManySecondPass(CollectionBinder.java:1577)
+	at org.hibernate.cfg.annotations.CollectionBinder.bindStarToManySecondPass(CollectionBinder.java:810)
+	at org.hibernate.cfg.annotations.CollectionBinder$1.secondPass(CollectionBinder.java:735)
+	at org.hibernate.cfg.CollectionSecondPass.doSecondPass(CollectionSecondPass.java:54)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.processSecondPasses(InFlightMetadataCollectorImpl.java:1635)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.processSecondPasses(InFlightMetadataCollectorImpl.java:1603)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:278)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:861)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:888)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:57)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1761)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1698)
+	... 39 common frames omitted
+Caused by: org.hibernate.MappingException: Unable to find column with logical name: newLabelID in org.hibernate.mapping.Table(news_label) and its related supertables and secondary tables
+	at org.hibernate.cfg.Ejb3JoinColumn.checkReferencedColumnsType(Ejb3JoinColumn.java:832)
+	... 57 common frames omitted
+2019/11/28-08:52 [main] INFO  com.demo.practical_training.manage.NewsTest- Starting NewsTest on LAPTOP-1PCFIL5N with PID 16896 (started by 王至仲 in D:\ideaProject\news_manage_background)
+2019/11/28-08:52 [main] INFO  com.demo.practical_training.manage.NewsTest- No active profile set, falling back to default profiles: default
+2019/11/28-08:52 [main] INFO  org.springframework.web.context.support.GenericWebApplicationContext- Refreshing org.springframework.web.context.support.GenericWebApplicationContext@19b843ba: startup date [Thu Nov 28 08:52:08 CST 2019]; root of context hierarchy
+2019/11/28-08:52 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$d9b57744] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019/11/28-08:52 [main] INFO  com.zaxxer.hikari.HikariDataSource- HikariPool-1 - Starting...
+2019/11/28-08:52 [main] INFO  com.zaxxer.hikari.HikariDataSource- HikariPool-1 - Start completed.
+2019/11/28-08:52 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean- Building JPA container EntityManagerFactory for persistence unit 'default'
+2019/11/28-08:52 [main] INFO  org.hibernate.jpa.internal.util.LogHelper- HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019/11/28-08:52 [main] INFO  org.hibernate.Version- HHH000412: Hibernate Core {5.2.16.Final}
+2019/11/28-08:52 [main] INFO  org.hibernate.cfg.Environment- HHH000206: hibernate.properties not found
+2019/11/28-08:52 [main] INFO  org.hibernate.annotations.common.Version- HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2019/11/28-08:52 [main] INFO  org.hibernate.dialect.Dialect- HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2019/11/28-08:52 [main] WARN  org.springframework.web.context.support.GenericWebApplicationContext- Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is org.hibernate.cfg.RecoverableException: Unable to find column with logical name: newLabelID in org.hibernate.mapping.Table(news_label) and its related supertables and secondary tables
+2019/11/28-08:52 [main] INFO  com.zaxxer.hikari.HikariDataSource- HikariPool-1 - Shutdown initiated...
+2019/11/28-08:52 [main] INFO  com.zaxxer.hikari.HikariDataSource- HikariPool-1 - Shutdown completed.
+2019/11/28-08:52 [main] INFO  org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener- 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2019/11/28-08:52 [main] ERROR org.springframework.boot.SpringApplication- Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is org.hibernate.cfg.RecoverableException: Unable to find column with logical name: newLabelID in org.hibernate.mapping.Table(news_label) and its related supertables and secondary tables
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1702)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:579)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:501)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:228)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:759)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:395)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:327)
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:138)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108)
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190)
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47)
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242)
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70)
+Caused by: org.hibernate.cfg.RecoverableException: Unable to find column with logical name: newLabelID in org.hibernate.mapping.Table(news_label) and its related supertables and secondary tables
+	at org.hibernate.cfg.Ejb3JoinColumn.checkReferencedColumnsType(Ejb3JoinColumn.java:837)
+	at org.hibernate.cfg.BinderHelper.createSyntheticPropertyReference(BinderHelper.java:244)
+	at org.hibernate.cfg.annotations.CollectionBinder.bindManytoManyInverseFk(CollectionBinder.java:1697)
+	at org.hibernate.cfg.annotations.CollectionBinder.bindManyToManySecondPass(CollectionBinder.java:1577)
+	at org.hibernate.cfg.annotations.CollectionBinder.bindStarToManySecondPass(CollectionBinder.java:810)
+	at org.hibernate.cfg.annotations.CollectionBinder$1.secondPass(CollectionBinder.java:735)
+	at org.hibernate.cfg.CollectionSecondPass.doSecondPass(CollectionSecondPass.java:54)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.processSecondPasses(InFlightMetadataCollectorImpl.java:1635)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.processSecondPasses(InFlightMetadataCollectorImpl.java:1603)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:278)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:861)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:888)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:57)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1761)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1698)
+	... 39 common frames omitted
+Caused by: org.hibernate.MappingException: Unable to find column with logical name: newLabelID in org.hibernate.mapping.Table(news_label) and its related supertables and secondary tables
+	at org.hibernate.cfg.Ejb3JoinColumn.checkReferencedColumnsType(Ejb3JoinColumn.java:832)
+	... 57 common frames omitted
+2019/11/28-08:52 [main] ERROR org.springframework.test.context.TestContextManager- Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@689604d9] to prepare test instance [com.demo.practical_training.manage.NewsTest@557a84fe]
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:125)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108)
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190)
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47)
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242)
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is org.hibernate.cfg.RecoverableException: Unable to find column with logical name: newLabelID in org.hibernate.mapping.Table(news_label) and its related supertables and secondary tables
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1702)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:579)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:501)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:228)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:759)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:395)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:327)
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:138)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117)
+	... 24 common frames omitted
+Caused by: org.hibernate.cfg.RecoverableException: Unable to find column with logical name: newLabelID in org.hibernate.mapping.Table(news_label) and its related supertables and secondary tables
+	at org.hibernate.cfg.Ejb3JoinColumn.checkReferencedColumnsType(Ejb3JoinColumn.java:837)
+	at org.hibernate.cfg.BinderHelper.createSyntheticPropertyReference(BinderHelper.java:244)
+	at org.hibernate.cfg.annotations.CollectionBinder.bindManytoManyInverseFk(CollectionBinder.java:1697)
+	at org.hibernate.cfg.annotations.CollectionBinder.bindManyToManySecondPass(CollectionBinder.java:1577)
+	at org.hibernate.cfg.annotations.CollectionBinder.bindStarToManySecondPass(CollectionBinder.java:810)
+	at org.hibernate.cfg.annotations.CollectionBinder$1.secondPass(CollectionBinder.java:735)
+	at org.hibernate.cfg.CollectionSecondPass.doSecondPass(CollectionSecondPass.java:54)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.processSecondPasses(InFlightMetadataCollectorImpl.java:1635)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.processSecondPasses(InFlightMetadataCollectorImpl.java:1603)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:278)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:861)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:888)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:57)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1761)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1698)
+	... 39 common frames omitted
+Caused by: org.hibernate.MappingException: Unable to find column with logical name: newLabelID in org.hibernate.mapping.Table(news_label) and its related supertables and secondary tables
+	at org.hibernate.cfg.Ejb3JoinColumn.checkReferencedColumnsType(Ejb3JoinColumn.java:832)
+	... 57 common frames omitted
+2019/11/28-08:53 [main] INFO  com.demo.practical_training.manage.NewsTest- Starting NewsTest on LAPTOP-1PCFIL5N with PID 20676 (started by 王至仲 in D:\ideaProject\news_manage_background)
+2019/11/28-08:53 [main] INFO  com.demo.practical_training.manage.NewsTest- No active profile set, falling back to default profiles: default
+2019/11/28-08:53 [main] INFO  org.springframework.web.context.support.GenericWebApplicationContext- Refreshing org.springframework.web.context.support.GenericWebApplicationContext@c667f46: startup date [Thu Nov 28 08:53:55 CST 2019]; root of context hierarchy
+2019/11/28-08:53 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$59d21e49] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019/11/28-08:53 [main] INFO  com.zaxxer.hikari.HikariDataSource- HikariPool-1 - Starting...
+2019/11/28-08:54 [main] INFO  com.zaxxer.hikari.HikariDataSource- HikariPool-1 - Start completed.
+2019/11/28-08:54 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean- Building JPA container EntityManagerFactory for persistence unit 'default'
+2019/11/28-08:54 [main] INFO  org.hibernate.jpa.internal.util.LogHelper- HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019/11/28-08:54 [main] INFO  org.hibernate.Version- HHH000412: Hibernate Core {5.2.16.Final}
+2019/11/28-08:54 [main] INFO  org.hibernate.cfg.Environment- HHH000206: hibernate.properties not found
+2019/11/28-08:54 [main] INFO  org.hibernate.annotations.common.Version- HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2019/11/28-08:54 [main] INFO  org.hibernate.dialect.Dialect- HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2019/11/28-08:54 [main] WARN  org.springframework.web.context.support.GenericWebApplicationContext- Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is org.hibernate.cfg.RecoverableException: Unable to find column with logical name: newstypeid in org.hibernate.mapping.Table(news_type) and its related supertables and secondary tables
+2019/11/28-08:54 [main] INFO  com.zaxxer.hikari.HikariDataSource- HikariPool-1 - Shutdown initiated...
+2019/11/28-08:54 [main] INFO  com.zaxxer.hikari.HikariDataSource- HikariPool-1 - Shutdown completed.
+2019/11/28-08:54 [main] INFO  org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener- 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2019/11/28-08:54 [main] ERROR org.springframework.boot.SpringApplication- Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is org.hibernate.cfg.RecoverableException: Unable to find column with logical name: newstypeid in org.hibernate.mapping.Table(news_type) and its related supertables and secondary tables
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1702)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:579)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:501)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:228)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:759)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:395)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:327)
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:138)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108)
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190)
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47)
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242)
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70)
+Caused by: org.hibernate.cfg.RecoverableException: Unable to find column with logical name: newstypeid in org.hibernate.mapping.Table(news_type) and its related supertables and secondary tables
+	at org.hibernate.cfg.Ejb3JoinColumn.checkReferencedColumnsType(Ejb3JoinColumn.java:837)
+	at org.hibernate.cfg.BinderHelper.createSyntheticPropertyReference(BinderHelper.java:244)
+	at org.hibernate.cfg.annotations.CollectionBinder.bindManytoManyInverseFk(CollectionBinder.java:1697)
+	at org.hibernate.cfg.annotations.CollectionBinder.bindManyToManySecondPass(CollectionBinder.java:1577)
+	at org.hibernate.cfg.annotations.CollectionBinder.bindStarToManySecondPass(CollectionBinder.java:810)
+	at org.hibernate.cfg.annotations.CollectionBinder$1.secondPass(CollectionBinder.java:735)
+	at org.hibernate.cfg.CollectionSecondPass.doSecondPass(CollectionSecondPass.java:54)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.processSecondPasses(InFlightMetadataCollectorImpl.java:1635)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.processSecondPasses(InFlightMetadataCollectorImpl.java:1603)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:278)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:861)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:888)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:57)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1761)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1698)
+	... 39 common frames omitted
+Caused by: org.hibernate.MappingException: Unable to find column with logical name: newstypeid in org.hibernate.mapping.Table(news_type) and its related supertables and secondary tables
+	at org.hibernate.cfg.Ejb3JoinColumn.checkReferencedColumnsType(Ejb3JoinColumn.java:832)
+	... 57 common frames omitted
+2019/11/28-08:54 [main] ERROR org.springframework.test.context.TestContextManager- Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@689604d9] to prepare test instance [com.demo.practical_training.manage.NewsTest@4098dd77]
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:125)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108)
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190)
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47)
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242)
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is org.hibernate.cfg.RecoverableException: Unable to find column with logical name: newstypeid in org.hibernate.mapping.Table(news_type) and its related supertables and secondary tables
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1702)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:579)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:501)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:228)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:759)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:395)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:327)
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:138)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117)
+	... 24 common frames omitted
+Caused by: org.hibernate.cfg.RecoverableException: Unable to find column with logical name: newstypeid in org.hibernate.mapping.Table(news_type) and its related supertables and secondary tables
+	at org.hibernate.cfg.Ejb3JoinColumn.checkReferencedColumnsType(Ejb3JoinColumn.java:837)
+	at org.hibernate.cfg.BinderHelper.createSyntheticPropertyReference(BinderHelper.java:244)
+	at org.hibernate.cfg.annotations.CollectionBinder.bindManytoManyInverseFk(CollectionBinder.java:1697)
+	at org.hibernate.cfg.annotations.CollectionBinder.bindManyToManySecondPass(CollectionBinder.java:1577)
+	at org.hibernate.cfg.annotations.CollectionBinder.bindStarToManySecondPass(CollectionBinder.java:810)
+	at org.hibernate.cfg.annotations.CollectionBinder$1.secondPass(CollectionBinder.java:735)
+	at org.hibernate.cfg.CollectionSecondPass.doSecondPass(CollectionSecondPass.java:54)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.processSecondPasses(InFlightMetadataCollectorImpl.java:1635)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.processSecondPasses(InFlightMetadataCollectorImpl.java:1603)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:278)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:861)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:888)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:57)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1761)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1698)
+	... 39 common frames omitted
+Caused by: org.hibernate.MappingException: Unable to find column with logical name: newstypeid in org.hibernate.mapping.Table(news_type) and its related supertables and secondary tables
+	at org.hibernate.cfg.Ejb3JoinColumn.checkReferencedColumnsType(Ejb3JoinColumn.java:832)
+	... 57 common frames omitted
+2019/11/28-08:54 [main] INFO  com.demo.practical_training.manage.NewsTest- Starting NewsTest on LAPTOP-1PCFIL5N with PID 22464 (started by 王至仲 in D:\ideaProject\news_manage_background)
+2019/11/28-08:54 [main] INFO  com.demo.practical_training.manage.NewsTest- No active profile set, falling back to default profiles: default
+2019/11/28-08:54 [main] INFO  org.springframework.web.context.support.GenericWebApplicationContext- Refreshing org.springframework.web.context.support.GenericWebApplicationContext@389b0789: startup date [Thu Nov 28 08:54:33 CST 2019]; root of context hierarchy
+2019/11/28-08:54 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$8a72ac2f] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019/11/28-08:54 [main] INFO  com.zaxxer.hikari.HikariDataSource- HikariPool-1 - Starting...
+2019/11/28-08:54 [main] INFO  com.zaxxer.hikari.HikariDataSource- HikariPool-1 - Start completed.
+2019/11/28-08:54 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean- Building JPA container EntityManagerFactory for persistence unit 'default'
+2019/11/28-08:54 [main] INFO  org.hibernate.jpa.internal.util.LogHelper- HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019/11/28-08:54 [main] INFO  org.hibernate.Version- HHH000412: Hibernate Core {5.2.16.Final}
+2019/11/28-08:54 [main] INFO  org.hibernate.cfg.Environment- HHH000206: hibernate.properties not found
+2019/11/28-08:54 [main] INFO  org.hibernate.annotations.common.Version- HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2019/11/28-08:54 [main] INFO  org.hibernate.dialect.Dialect- HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2019/11/28-08:54 [main] WARN  org.springframework.web.context.support.GenericWebApplicationContext- Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is org.hibernate.cfg.RecoverableException: Unable to find column with logical name: newstypeid in org.hibernate.mapping.Table(news_type) and its related supertables and secondary tables
+2019/11/28-08:54 [main] INFO  com.zaxxer.hikari.HikariDataSource- HikariPool-1 - Shutdown initiated...
+2019/11/28-08:54 [main] INFO  com.zaxxer.hikari.HikariDataSource- HikariPool-1 - Shutdown completed.
+2019/11/28-08:54 [main] INFO  org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener- 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2019/11/28-08:54 [main] ERROR org.springframework.boot.SpringApplication- Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is org.hibernate.cfg.RecoverableException: Unable to find column with logical name: newstypeid in org.hibernate.mapping.Table(news_type) and its related supertables and secondary tables
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1702)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:579)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:501)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:228)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:759)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:395)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:327)
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:138)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108)
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190)
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47)
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242)
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70)
+Caused by: org.hibernate.cfg.RecoverableException: Unable to find column with logical name: newstypeid in org.hibernate.mapping.Table(news_type) and its related supertables and secondary tables
+	at org.hibernate.cfg.Ejb3JoinColumn.checkReferencedColumnsType(Ejb3JoinColumn.java:837)
+	at org.hibernate.cfg.BinderHelper.createSyntheticPropertyReference(BinderHelper.java:244)
+	at org.hibernate.cfg.annotations.CollectionBinder.bindManytoManyInverseFk(CollectionBinder.java:1697)
+	at org.hibernate.cfg.annotations.CollectionBinder.bindManyToManySecondPass(CollectionBinder.java:1577)
+	at org.hibernate.cfg.annotations.CollectionBinder.bindStarToManySecondPass(CollectionBinder.java:810)
+	at org.hibernate.cfg.annotations.CollectionBinder$1.secondPass(CollectionBinder.java:735)
+	at org.hibernate.cfg.CollectionSecondPass.doSecondPass(CollectionSecondPass.java:54)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.processSecondPasses(InFlightMetadataCollectorImpl.java:1635)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.processSecondPasses(InFlightMetadataCollectorImpl.java:1603)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:278)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:861)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:888)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:57)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1761)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1698)
+	... 39 common frames omitted
+Caused by: org.hibernate.MappingException: Unable to find column with logical name: newstypeid in org.hibernate.mapping.Table(news_type) and its related supertables and secondary tables
+	at org.hibernate.cfg.Ejb3JoinColumn.checkReferencedColumnsType(Ejb3JoinColumn.java:832)
+	... 57 common frames omitted
+2019/11/28-08:54 [main] ERROR org.springframework.test.context.TestContextManager- Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@689604d9] to prepare test instance [com.demo.practical_training.manage.NewsTest@67de7a99]
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:125)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108)
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190)
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47)
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242)
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is org.hibernate.cfg.RecoverableException: Unable to find column with logical name: newstypeid in org.hibernate.mapping.Table(news_type) and its related supertables and secondary tables
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1702)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:579)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:501)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:228)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:759)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:395)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:327)
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:138)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117)
+	... 24 common frames omitted
+Caused by: org.hibernate.cfg.RecoverableException: Unable to find column with logical name: newstypeid in org.hibernate.mapping.Table(news_type) and its related supertables and secondary tables
+	at org.hibernate.cfg.Ejb3JoinColumn.checkReferencedColumnsType(Ejb3JoinColumn.java:837)
+	at org.hibernate.cfg.BinderHelper.createSyntheticPropertyReference(BinderHelper.java:244)
+	at org.hibernate.cfg.annotations.CollectionBinder.bindManytoManyInverseFk(CollectionBinder.java:1697)
+	at org.hibernate.cfg.annotations.CollectionBinder.bindManyToManySecondPass(CollectionBinder.java:1577)
+	at org.hibernate.cfg.annotations.CollectionBinder.bindStarToManySecondPass(CollectionBinder.java:810)
+	at org.hibernate.cfg.annotations.CollectionBinder$1.secondPass(CollectionBinder.java:735)
+	at org.hibernate.cfg.CollectionSecondPass.doSecondPass(CollectionSecondPass.java:54)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.processSecondPasses(InFlightMetadataCollectorImpl.java:1635)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.processSecondPasses(InFlightMetadataCollectorImpl.java:1603)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:278)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:861)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:888)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:57)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1761)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1698)
+	... 39 common frames omitted
+Caused by: org.hibernate.MappingException: Unable to find column with logical name: newstypeid in org.hibernate.mapping.Table(news_type) and its related supertables and secondary tables
+	at org.hibernate.cfg.Ejb3JoinColumn.checkReferencedColumnsType(Ejb3JoinColumn.java:832)
+	... 57 common frames omitted
+2019/11/28-08:56 [main] INFO  com.demo.practical_training.manage.NewsTest- Starting NewsTest on LAPTOP-1PCFIL5N with PID 33764 (started by 王至仲 in D:\ideaProject\news_manage_background)
+2019/11/28-08:56 [main] INFO  com.demo.practical_training.manage.NewsTest- No active profile set, falling back to default profiles: default
+2019/11/28-08:56 [main] INFO  org.springframework.web.context.support.GenericWebApplicationContext- Refreshing org.springframework.web.context.support.GenericWebApplicationContext@c667f46: startup date [Thu Nov 28 08:56:29 CST 2019]; root of context hierarchy
+2019/11/28-08:56 [main] INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$7cdead49] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019/11/28-08:56 [main] INFO  com.zaxxer.hikari.HikariDataSource- HikariPool-1 - Starting...
+2019/11/28-08:56 [main] INFO  com.zaxxer.hikari.HikariDataSource- HikariPool-1 - Start completed.
+2019/11/28-08:56 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean- Building JPA container EntityManagerFactory for persistence unit 'default'
+2019/11/28-08:56 [main] INFO  org.hibernate.jpa.internal.util.LogHelper- HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019/11/28-08:56 [main] INFO  org.hibernate.Version- HHH000412: Hibernate Core {5.2.16.Final}
+2019/11/28-08:56 [main] INFO  org.hibernate.cfg.Environment- HHH000206: hibernate.properties not found
+2019/11/28-08:56 [main] INFO  org.hibernate.annotations.common.Version- HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2019/11/28-08:56 [main] INFO  org.hibernate.dialect.Dialect- HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2019/11/28-08:56 [main] WARN  org.hibernate.id.UUIDHexGenerator- HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2019/11/28-08:56 [main] WARN  org.hibernate.tool.schema.internal.ExceptionHandlerLoggedImpl- GenerationTarget encountered exception accepting command : Error executing DDL via JDBC Statement
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL via JDBC Statement
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:67)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlString(AbstractSchemaMigrator.java:559)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlStrings(AbstractSchemaMigrator.java:504)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applyForeignKeys(AbstractSchemaMigrator.java:433)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.performMigration(AbstractSchemaMigrator.java:249)
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:114)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:183)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:72)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:312)
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:460)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:892)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:57)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1761)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1698)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:579)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:501)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:228)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:759)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:395)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:327)
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:138)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108)
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190)
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47)
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242)
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70)
+Caused by: java.sql.SQLException: Cannot add foreign key constraint
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:965)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3976)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3912)
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2530)
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2683)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2482)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2440)
+	at com.mysql.jdbc.StatementImpl.executeInternal(StatementImpl.java:845)
+	at com.mysql.jdbc.StatementImpl.execute(StatementImpl.java:745)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:95)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+	... 56 common frames omitted
+2019/11/28-08:56 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean- Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/admin],methods=[POST]}" onto public com.demo.practical_training.model.response.AdminResult com.demo.practical_training.manage.web.controller.AdminController.add(com.demo.practical_training.entity.Admin)
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/admin/id/{id}],methods=[PUT]}" onto public com.demo.practical_training.model.response.AdminResult com.demo.practical_training.manage.web.controller.AdminController.update(java.lang.String,com.demo.practical_training.entity.Admin)
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/admin/id/{id}],methods=[DELETE]}" onto public com.demo.practical_training.common.response.ResponseResult com.demo.practical_training.manage.web.controller.AdminController.delete(java.lang.String)
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/admin],methods=[GET]}" onto public com.demo.practical_training.common.response.QueryResponseResult com.demo.practical_training.manage.web.controller.AdminController.findList(com.demo.practical_training.common.web.STablePageRequest,com.demo.practical_training.model.request.QueryAdminRequest)
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/admin/id/{id}],methods=[GET]}" onto public com.demo.practical_training.entity.Admin com.demo.practical_training.manage.web.controller.AdminController.findOne(java.lang.String)
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/admin/reviewNews/{id}],methods=[PUT]}" onto public com.demo.practical_training.common.response.ResponseResult com.demo.practical_training.manage.web.controller.AdminController.reviewNews(java.lang.String)
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/admin/ManagementAdmin/{id}],methods=[PUT]}" onto public com.demo.practical_training.common.response.ResponseResult com.demo.practical_training.manage.web.controller.AdminController.ManagementAdmin(java.lang.String,com.demo.practical_training.entity.Admin)
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/admin/reviewUser/{id}],methods=[PUT]}" onto public com.demo.practical_training.common.response.ResponseResult com.demo.practical_training.manage.web.controller.AdminController.reviewUser(java.lang.String)
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/admin/reviewUserOff/{id}],methods=[PUT]}" onto public com.demo.practical_training.common.response.ResponseResult com.demo.practical_training.manage.web.controller.AdminController.reviewUserOff(java.lang.String,com.demo.practical_training.entity.User)
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/admin/reviewNewsOff/{id}],methods=[PUT]}" onto public com.demo.practical_training.common.response.ResponseResult com.demo.practical_training.manage.web.controller.AdminController.reviewNewsOff(java.lang.String,com.demo.practical_training.entity.News)
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/admin/reviewNewsPublish/{id}],methods=[PUT]}" onto public com.demo.practical_training.common.response.ResponseResult com.demo.practical_training.manage.web.controller.AdminController.reviewNewsPublish(java.lang.String,com.demo.practical_training.entity.News)
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/admin/reviewUserVerified/{id}],methods=[PUT]}" onto public com.demo.practical_training.common.response.ResponseResult com.demo.practical_training.manage.web.controller.AdminController.reviewUserVerified(java.lang.String,com.demo.practical_training.entity.User)
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/admin/reviewUserBecomePublish/{id}],methods=[PUT]}" onto public com.demo.practical_training.common.response.ResponseResult com.demo.practical_training.manage.web.controller.AdminController.reviewUserBecomePublish(java.lang.String,com.demo.practical_training.entity.User)
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/admin/reviewUserBecomeUser/{id}],methods=[PUT]}" onto public com.demo.practical_training.common.response.ResponseResult com.demo.practical_training.manage.web.controller.AdminController.reviewUserBecomeUser(java.lang.String,com.demo.practical_training.entity.User)
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/NewsViolation],methods=[POST]}" onto public com.demo.practical_training.model.response.NewsViolationResult com.demo.practical_training.manage.web.controller.NesViolationController.add(com.demo.practical_training.entity.NewsViolation)
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/NewsViolation/id/{id}],methods=[PUT]}" onto public com.demo.practical_training.model.response.NewsViolationResult com.demo.practical_training.manage.web.controller.NesViolationController.update(java.lang.String,com.demo.practical_training.entity.NewsViolation)
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/NewsViolation/id/{id}],methods=[DELETE]}" onto public com.demo.practical_training.common.response.ResponseResult com.demo.practical_training.manage.web.controller.NesViolationController.delete(java.lang.String)
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/NewsViolation],methods=[GET]}" onto public com.demo.practical_training.common.response.QueryResponseResult com.demo.practical_training.manage.web.controller.NesViolationController.findList(com.demo.practical_training.common.web.STablePageRequest,com.demo.practical_training.model.request.QueryNewsViolationRequest)
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/NewsViolation/id/{id}],methods=[GET]}" onto public com.demo.practical_training.entity.NewsViolation com.demo.practical_training.manage.web.controller.NesViolationController.findOne(java.lang.String)
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/news],methods=[POST]}" onto public com.demo.practical_training.model.response.NewsResult com.demo.practical_training.manage.web.controller.NewsController.add(com.demo.practical_training.entity.News)
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/news/id/{id}],methods=[PUT]}" onto public com.demo.practical_training.model.response.NewsResult com.demo.practical_training.manage.web.controller.NewsController.update(java.lang.String,com.demo.practical_training.entity.News)
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/news/id/{id}],methods=[DELETE]}" onto public com.demo.practical_training.common.response.ResponseResult com.demo.practical_training.manage.web.controller.NewsController.delete(java.lang.String)
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/news],methods=[GET]}" onto public com.demo.practical_training.common.response.QueryResponseResult com.demo.practical_training.manage.web.controller.NewsController.findList(com.demo.practical_training.common.web.STablePageRequest,com.demo.practical_training.model.request.QueryNewsRequest)
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/news/id/{id}],methods=[GET]}" onto public com.demo.practical_training.entity.News com.demo.practical_training.manage.web.controller.NewsController.findOne(java.lang.String)
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/newsReport],methods=[POST]}" onto public com.demo.practical_training.model.response.NewsReportResult com.demo.practical_training.manage.web.controller.NewsReportController.add(com.demo.practical_training.entity.NewsReport)
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/newsReport/id/{id}],methods=[PUT]}" onto public com.demo.practical_training.model.response.NewsReportResult com.demo.practical_training.manage.web.controller.NewsReportController.update(java.lang.String,com.demo.practical_training.entity.NewsReport)
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/newsReport/id/{id}],methods=[DELETE]}" onto public com.demo.practical_training.common.response.ResponseResult com.demo.practical_training.manage.web.controller.NewsReportController.delete(java.lang.String)
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/newsReport],methods=[GET]}" onto public com.demo.practical_training.common.response.QueryResponseResult com.demo.practical_training.manage.web.controller.NewsReportController.findList(com.demo.practical_training.common.web.STablePageRequest,com.demo.practical_training.model.request.QueryNewsReportRequest)
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/newsReport/id/{id}],methods=[GET]}" onto public com.demo.practical_training.entity.NewsReport com.demo.practical_training.manage.web.controller.NewsReportController.findOne(java.lang.String)
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/user],methods=[POST]}" onto public com.demo.practical_training.model.response.UserResult com.demo.practical_training.manage.web.controller.UserController.add(com.demo.practical_training.entity.User)
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/user/id/{id}],methods=[PUT]}" onto public com.demo.practical_training.model.response.UserResult com.demo.practical_training.manage.web.controller.UserController.update(java.lang.String,com.demo.practical_training.entity.User)
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/user/id/{id}],methods=[DELETE]}" onto public com.demo.practical_training.common.response.ResponseResult com.demo.practical_training.manage.web.controller.UserController.delete(java.lang.String)
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/user],methods=[GET]}" onto public com.demo.practical_training.common.response.QueryResponseResult com.demo.practical_training.manage.web.controller.UserController.findList(com.demo.practical_training.common.web.STablePageRequest,com.demo.practical_training.model.request.QueryUserRequest)
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/manage/user/id/{id}],methods=[GET]}" onto public com.demo.practical_training.entity.User com.demo.practical_training.manage.web.controller.UserController.findOne(java.lang.String)
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping- Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter- Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@c667f46: startup date [Thu Nov 28 08:56:29 CST 2019]; root of context hierarchy
+2019/11/28-08:56 [main] INFO  org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver- Detected @ExceptionHandler methods in exceptionCatch
+2019/11/28-08:56 [main] WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration- spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019/11/28-08:56 [main] INFO  com.demo.practical_training.manage.NewsTest- Started NewsTest in 19.537 seconds (JVM running for 21.154)
+2019/11/28-08:56 [main] INFO  org.hibernate.hql.internal.QueryTranslatorFactoryInitiator- HHH000397: Using ASTQueryTranslatorFactory
+2019/11/28-08:56 [Thread-3] INFO  org.springframework.web.context.support.GenericWebApplicationContext- Closing org.springframework.web.context.support.GenericWebApplicationContext@c667f46: startup date [Thu Nov 28 08:56:29 CST 2019]; root of context hierarchy
+2019/11/28-08:56 [Thread-3] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean- Closing JPA EntityManagerFactory for persistence unit 'default'
+2019/11/28-08:56 [Thread-3] INFO  com.zaxxer.hikari.HikariDataSource- HikariPool-1 - Shutdown initiated...
+2019/11/28-08:56 [Thread-3] INFO  com.zaxxer.hikari.HikariDataSource- HikariPool-1 - Shutdown completed.

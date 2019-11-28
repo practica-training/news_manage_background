@@ -1,13 +1,17 @@
 package com.demo.practical_training.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
 public class UserApplyToNewsMaker {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long applyID;
+    @GeneratedValue(generator="system_uuid")
+    @GenericGenerator(name="system_uuid",strategy="uuid")
+    @Column(name = "applyid", unique = true, nullable = false, length = 20)
+    private String applyID;
     @OneToOne
     @JoinColumn(name = "userID")
     private User user;
