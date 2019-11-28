@@ -1,7 +1,6 @@
 package com.demo.practical_training.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -13,7 +12,6 @@ import java.sql.Timestamp;
  */
 @Entity
 @Data
-@JsonIgnoreProperties(value={"hibernateLazyInitializer","handler","fieldHandler"})
 public class NewsReport {
     /**
      * 举报ID

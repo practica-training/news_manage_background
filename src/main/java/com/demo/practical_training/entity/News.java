@@ -1,5 +1,6 @@
 package com.demo.practical_training.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -27,6 +28,7 @@ public class News {
      * 新闻和标签双向多对多
      * 为将来通过标签查找新闻所用
      */
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "newsAndLabel"
             ,joinColumns = @JoinColumn(name = "newsID",referencedColumnName = "newsID"),
@@ -79,6 +81,7 @@ public class News {
     /**
      * 新闻的类型，双向多对多
      */
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "newsAndType"
             ,joinColumns = @JoinColumn(name = "newsID",referencedColumnName = "newsID"),

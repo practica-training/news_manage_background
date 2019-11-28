@@ -1,6 +1,7 @@
 package com.demo.practical_training.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -15,8 +16,10 @@ public class UserVerified {
      * 用户ID
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    @GeneratedValue(generator="system_uuid")
+    @GenericGenerator(name="system_uuid",strategy="uuid")
+    @Column(name = "id", unique = true, nullable = false, length = 20)
+    String id;
     @OneToOne
     @JoinColumn(name = "userID")
     private User user;

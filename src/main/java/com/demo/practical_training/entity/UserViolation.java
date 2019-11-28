@@ -1,6 +1,7 @@
 package com.demo.practical_training.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -15,6 +16,9 @@ public class UserViolation {
      * 违规ID
      */
     @Id
+    @GeneratedValue(generator="system_uuid")
+    @GenericGenerator(name="system_uuid",strategy="uuid")
+    @Column(name = "violationid", unique = true, nullable = false, length = 20)
     private String violationID;
     /**
      * 违规的用户ID
