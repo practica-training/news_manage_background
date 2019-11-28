@@ -10,8 +10,6 @@ import lombok.ToString;
 @Data
 @ToString
 public class QueryUserRequest extends RequestData {
-    //用户id
-    private String userID;
     //用户名
     private String userName;
 }

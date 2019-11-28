@@ -10,6 +10,4 @@ import lombok.ToString;
 @Data
 @ToString
 public class QueryNewsReportRequest extends RequestData {
-    //新闻举报id
-    private String reportID;
 }

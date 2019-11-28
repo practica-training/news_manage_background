@@ -1,12 +1,16 @@
 package com.demo.practical_training.entity;
 
 import com.demo.practical_training.common.entity.BaseEntity;
-import org.hibernate.annotations.GenericGenerator;
+import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import java.sql.Timestamp;
 
 @Entity
+@Data
 public class UserApplyToNewsMaker extends BaseEntity {
 
     @OneToOne

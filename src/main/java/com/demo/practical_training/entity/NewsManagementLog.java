@@ -1,24 +1,20 @@
 package com.demo.practical_training.entity;
 
 import com.demo.practical_training.common.entity.BaseEntity;
-import org.hibernate.annotations.GenericGenerator;
+import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import java.sql.Timestamp;
 
 @Entity
 /**
  * 管理员的新闻管理日志
  */
+@Data
 public class NewsManagementLog extends BaseEntity {
-    /**
-     * 日志ID
-     */
-    @Id
-    @GeneratedValue(generator="system_uuid")
-    @GenericGenerator(name="system_uuid",strategy="uuid")
-    @Column(name = "logid", unique = true, nullable = false, length = 20)
-    private String logID;
     /**
      * 管理员ID
      */

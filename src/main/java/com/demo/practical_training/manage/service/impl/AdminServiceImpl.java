@@ -41,6 +41,12 @@ public class AdminServiceImpl implements AdminService {
     UserViolationService userViolationService;
     @Autowired
     UserService userService;
+    @Autowired
+    AdminManagementLogService adminManagementLogService;
+    @Autowired
+    NewsManagementLogService newsManagementLogService;
+    @Autowired
+    UserManagementLogService userManagementLogService;
     /**
      * 分页和排序加动态查询管理员页面
      *
@@ -62,8 +68,8 @@ public class AdminServiceImpl implements AdminService {
             Admin.setAdminName(queryAdminRequest.getAdminName());
         }
         //判断管理员id是否为空
-        if (StringUtils.isNotEmpty(queryAdminRequest.getAdminID())) {
-            Admin.setId(queryAdminRequest.getAdminID());
+        if (StringUtils.isNotEmpty(queryAdminRequest.getId())) {
+            Admin.setId(queryAdminRequest.getId());
         }
         //创建条件实例对象
         Example<Admin> example = Example.of(Admin, exampleMatcher);
@@ -306,7 +312,11 @@ public class AdminServiceImpl implements AdminService {
     public ResponseResult reviewUserBecomeUser(String id, User user) {
         //1.调用User更新方法
         userService.updateById(id, user);
+//        //新建日志对象
+//        UserManagementLog userManagementLog = new UserManagementLog();
         if(user.getUserState()==Const.USER_NORMAL_USER){
+            //记录日志
+
             return new ResponseResult(AdminCode.ADMIN_ALLOW_BECOMEUSER);
         }
         return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_BECOMEUSER);
@@ -322,9 +332,25 @@ public class AdminServiceImpl implements AdminService {
     public ResponseResult ManagementAdmin(String id,  Admin admin) {
         //1.调用admin更新方法
         AdminResult adminResult = this.updateById(id, admin);
+        //新建超级管理员管理普通管理员的日志对象
+        AdminManagementLog adminManagementLog = new AdminManagementLog();
         if(adminResult!=null){
+            //记录日志
+            adminManagementLog.setAdmin(admin);
+            adminManagementLog.setOperationalContent(CommonCode.SUCCESS.message());
+            Date date = new Date();
+            adminManagementLog.setProcessingTime(new Timestamp(date.getTime()));
+            adminManagementLogService.add(adminManagementLog);
+            //返回结果
             return new ResponseResult(CommonCode.SUCCESS);
         }
+        //记录日志
+        adminManagementLog.setAdmin(admin);
+        adminManagementLog.setOperationalContent(CommonCode.FAIL.message());
+        Date date = new Date();
+        adminManagementLog.setProcessingTime(new Timestamp(date.getTime()));
+        adminManagementLogService.add(adminManagementLog);
+        //返回结果
         return new ResponseResult(CommonCode.FAIL);
     }
 

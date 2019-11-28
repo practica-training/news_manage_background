@@ -42,8 +42,8 @@ public class UserServiceImpl implements UserService {
         //创建条件值对象
         User User = new User();
         //判断用户名是否为空
-        if (StringUtils.isNotEmpty(queryUserRequest.getUserID())) {
-            User.setId(queryUserRequest.getUserID());
+        if (StringUtils.isNotEmpty(queryUserRequest.getId())) {
+            User.setId(queryUserRequest.getId());
         }
         //判断用户id是否为空
         if (StringUtils.isNotEmpty(queryUserRequest.getUserName())) {

@@ -47,8 +47,8 @@ public class NewsServiceImpl implements NewsService {
             news.setNewsTitle(queryNewsRequest.getNewsTitle());
         }
         //判断新闻id是否为空
-        if (StringUtils.isNotEmpty(queryNewsRequest.getNewsId())) {
-            news.setId(queryNewsRequest.getNewsId());
+        if (StringUtils.isNotEmpty(queryNewsRequest.getId())) {
+            news.setId(queryNewsRequest.getId());
         }
         //创建条件实例对象
         Example<News> example = Example.of(news, exampleMatcher);

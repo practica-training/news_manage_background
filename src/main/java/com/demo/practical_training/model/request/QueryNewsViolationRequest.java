@@ -10,6 +10,5 @@ import lombok.ToString;
 @Data
 @ToString
 public class QueryNewsViolationRequest extends RequestData {
-    //新闻违规id
-    private String violationID;
+
 }

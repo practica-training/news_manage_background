@@ -46,8 +46,8 @@ public class NewsReportServiceImpl implements NewsReportService {
 //            NewsReport.setNewsReportName(queryNewsReportRequest.getNewsReportName());
 //        }
         //判断新闻举报id是否为空
-        if (StringUtils.isNotEmpty(queryNewsReportRequest.getReportID())) {
-            NewsReport.setId(queryNewsReportRequest.getReportID());
+        if (StringUtils.isNotEmpty(queryNewsReportRequest.getId())) {
+            NewsReport.setId(queryNewsReportRequest.getId());
         }
         //创建条件实例对象
         Example<NewsReport> example = Example.of(NewsReport, exampleMatcher);

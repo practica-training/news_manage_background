@@ -5,11 +5,9 @@ import lombok.Data;
 import lombok.ToString;
 
 /**
- * 封装新闻条件查询对象
+ * 管理员的新闻管理日志条件查询对象
  */
 @Data
 @ToString
-public class QueryNewsRequest extends RequestData {
-    //新闻标题
-    private String newsTitle;
+public class QueryNewsManagementLogRequest extends RequestData {
 }

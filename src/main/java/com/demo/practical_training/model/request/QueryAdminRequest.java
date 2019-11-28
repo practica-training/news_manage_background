@@ -10,8 +10,6 @@ import lombok.ToString;
 @Data
 @ToString
 public class QueryAdminRequest extends RequestData {
-    //管理员id
-    private String adminID;
     //管理员名
     private String adminName;
 
