@@ -51,11 +51,18 @@ public class NewsReportServiceImpl implements NewsReportService {
         }
         //创建条件实例对象
         Example<NewsReport> example = Example.of(NewsReport, exampleMatcher);
+        System.out.println(example);
+        System.out.println(pageRequest);
 
         //根据分页对象和条件实例对象查询数据
         Page<NewsReport> all = NewsReportRepository.findAll(example, pageRequest.getPageable());
         //新建QueryResult<T> 对象
         QueryResult<NewsReport> NewsReportQueryResult = new QueryResult<>();
+        for (NewsReport newsReport : all) {
+            System.out.println(newsReport);
+            newsReport.getUser();
+            newsReport.getNews();
+        }
         //分别给QueryResult<T> 对象中的list集合total赋值
         NewsReportQueryResult.setList(all.getContent());
         NewsReportQueryResult.setTotal(all.getTotalElements());

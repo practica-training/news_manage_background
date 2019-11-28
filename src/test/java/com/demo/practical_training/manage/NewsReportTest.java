@@ -1,11 +1,15 @@
 package com.demo.practical_training.manage;
 
+import com.demo.practical_training.common.response.QueryResponseResult;
+import com.demo.practical_training.common.web.STablePageRequest;
 import com.demo.practical_training.entity.News;
 import com.demo.practical_training.entity.NewsReport;
 import com.demo.practical_training.entity.User;
 import com.demo.practical_training.manage.service.NewsReportService;
 import com.demo.practical_training.manage.service.NewsService;
 import com.demo.practical_training.manage.service.UserService;
+import com.demo.practical_training.model.request.QueryNewsReportRequest;
+import com.demo.practical_training.model.request.QueryNewsRequest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +52,10 @@ public class NewsReportTest {
      */
     @Test
     public void testFindList(){
-
+        STablePageRequest sTablePageRequest = new STablePageRequest();
+        QueryNewsReportRequest queryNewsRequest = new QueryNewsReportRequest();
+        QueryResponseResult list = newsReportService.findList(sTablePageRequest, queryNewsRequest);
+        System.out.println(list);
     }
 
     /**

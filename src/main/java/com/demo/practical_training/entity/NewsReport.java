@@ -1,6 +1,5 @@
 package com.demo.practical_training.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -26,7 +25,6 @@ public class NewsReport {
      * 懒加载，级联刷新操作
      * 不可为空，不可更新，插入
      */
-    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.REFRESH)
     @JoinColumn(name = "userid")
     private User user;
@@ -35,7 +33,6 @@ public class NewsReport {
      *      懒加载，级联刷新操作
      *      不可为空，不可更新，插入
      */
-    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY,cascade = {CascadeType.MERGE})
     @JoinColumn(name = "newsid")
     private News news;
