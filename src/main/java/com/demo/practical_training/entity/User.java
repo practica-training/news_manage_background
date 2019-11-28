@@ -63,14 +63,20 @@ public class User implements Serializable {
      * 违规次数
      */
     private Integer violationNumber;
+    /**
+     * 用户和新闻标签，双向多对多
+     * 为将来做个人推荐使用
+     */
     @ManyToMany
     @JoinTable(name = "userAndLabel",
         joinColumns = @JoinColumn(name = "userID",referencedColumnName = "userID"),
             inverseJoinColumns = @JoinColumn(name = "newLabelID",referencedColumnName = "newLabelID")
     )
-
     private List<NewsLabel> newsLabelList;
+    /**
+     * 新闻发布者所写过的新闻，单向
+     */
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "newsAndUser")
+    @JoinColumn(name = "userid")
     private List<News> newsList;
 }

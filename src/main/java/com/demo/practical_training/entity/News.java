@@ -23,6 +23,10 @@ public class News {
     @GenericGenerator(name="system_uuid",strategy="uuid")
     @Column(name = "newsid", unique = true, nullable = false, length = 20)
     private String newsID;
+    /**
+     * 新闻和标签双向多对多
+     * 为将来通过标签查找新闻所用
+     */
     @ManyToMany
     @JoinTable(name = "newsAndLabel"
             ,joinColumns = @JoinColumn(name = "newsID",referencedColumnName = "newsID"),
@@ -72,6 +76,9 @@ public class News {
      * 失败原因（如果审核失败则会有）
      */
     private String failureReason;
+    /**
+     * 新闻的类型，双向多对多
+     */
     @ManyToMany
     @JoinTable(name = "newsAndType"
             ,joinColumns = @JoinColumn(name = "newsID",referencedColumnName = "newsID"),
