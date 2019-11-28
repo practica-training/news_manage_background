@@ -1,6 +1,8 @@
 package com.demo.practical_training.entity;
 
+import com.demo.practical_training.common.entity.BaseEntity;
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -10,12 +12,8 @@ import java.sql.Timestamp;
  */
 @Entity
 @Data
-public class Message {
-    /**
-     * 消息ID
-     */
-    @Id
-    private String messageID;
+public class Message extends BaseEntity {
+
     /**
      * 来源ID
      */

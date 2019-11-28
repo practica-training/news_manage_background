@@ -1,5 +1,6 @@
 package com.demo.practical_training.entity;
 
+import com.demo.practical_training.common.entity.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
@@ -13,15 +14,8 @@ import java.util.List;
 @Entity
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"NAME"})})
 @Data
-public class NewsLabel {
-    /**
-     * 标签ID
-     */
-    @Id
-    @GeneratedValue(generator="system_uuid")
-    @GenericGenerator(name="system_uuid",strategy="uuid")
-    @Column(name = "newLabelid", unique = true, nullable = false, length = 20)
-    private String newLabelID;
+public class NewsLabel extends BaseEntity {
+
     /**
      * 标签名
      */

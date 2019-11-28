@@ -63,7 +63,7 @@ public class AdminServiceImpl implements AdminService {
         }
         //判断管理员id是否为空
         if (StringUtils.isNotEmpty(queryAdminRequest.getAdminID())) {
-            Admin.setAdminID(queryAdminRequest.getAdminID());
+            Admin.setId(queryAdminRequest.getAdminID());
         }
         //创建条件实例对象
         Example<Admin> example = Example.of(Admin, exampleMatcher);

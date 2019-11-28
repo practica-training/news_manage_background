@@ -50,7 +50,7 @@ public class UserViolationServiceImpl implements UserViolationService {
 //        }
         //判断用户违规id是否为空
         if (StringUtils.isNotEmpty(queryUserViolationRequest.getViolationID())) {
-            UserViolation.setViolationID(queryUserViolationRequest.getViolationID());
+            UserViolation.setId(queryUserViolationRequest.getViolationID());
         }
         //创建条件实例对象
         Example<UserViolation> example = Example.of(UserViolation, exampleMatcher);

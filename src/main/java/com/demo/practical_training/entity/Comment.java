@@ -1,6 +1,8 @@
 package com.demo.practical_training.entity;
 
+import com.demo.practical_training.common.entity.BaseEntity;
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -10,12 +12,8 @@ import java.sql.Timestamp;
  */
 @Entity
 @Data
-public class Comment {
-    /**
-     * 评论ID
-     */
-    @Id
-    private String commentID;
+public class Comment extends BaseEntity {
+
     /**
      * 新闻ID
      */

@@ -1,5 +1,6 @@
 package com.demo.practical_training.entity;
 
+import com.demo.practical_training.common.entity.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
@@ -15,26 +16,9 @@ import java.util.List;
  */
 @Entity
 @Data
-public class News {
-    /**
-     * 新闻ID
-     */
-    @Id
-    @GeneratedValue(generator="system_uuid")
-    @GenericGenerator(name="system_uuid",strategy="uuid")
-    @Column(name = "newsid", unique = true, nullable = false, length = 20)
-    private String newsID;
-    /**
-     * 新闻和标签双向多对多
-     * 为将来通过标签查找新闻所用
-     */
-    @JsonIgnore
-    @ManyToMany
-    @JoinTable(name = "newsAndLabel"
-            ,joinColumns = @JoinColumn(name = "newsID",referencedColumnName = "newsID"),
-            inverseJoinColumns = @JoinColumn(name = "newLabelID",referencedColumnName = "newLabelID")
-            )
-    private List<NewsLabel> newsLabelList;
+public class News extends BaseEntity {
+
+
     /**
      * 新闻封面路径
      */
@@ -84,9 +68,20 @@ public class News {
     @JsonIgnore
     @ManyToMany
     @JoinTable(name = "newsAndType"
-            ,joinColumns = @JoinColumn(name = "newsID",referencedColumnName = "newsID"),
-            inverseJoinColumns = @JoinColumn(name = "newsTypeID",referencedColumnName = "newsTypeID")
+            ,joinColumns = @JoinColumn(name = "newsid",referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "news_typeid",referencedColumnName = "id")
     )
     private List<NewsType> newsTypeList;
+    /**
+     * 新闻和标签双向多对多
+     * 为将来通过标签查找新闻所用
+     */
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(name = "newsAndLabel"
+            ,joinColumns = @JoinColumn(name = "newsid",referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "news_labelid",referencedColumnName = "id")
+    )
+    private List<NewsLabel> newsLabelList;
 
 }

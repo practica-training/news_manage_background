@@ -1,5 +1,6 @@
 package com.demo.practical_training.entity;
 
+import com.demo.practical_training.common.entity.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
@@ -12,15 +13,8 @@ import java.sql.Timestamp;
  */
 @Entity
 @Data
-public class NewsReport {
-    /**
-     * 举报ID
-     */
-    @Id
-    @GeneratedValue(generator="system_uuid")
-    @GenericGenerator(name="system_uuid",strategy="uuid")
-    @Column(name = "reportid", unique = true, nullable = false, length = 20)
-    private String reportID;
+public class NewsReport extends BaseEntity {
+
     /**
      * 举报者
      * 懒加载，级联刷新操作

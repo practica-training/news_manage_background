@@ -1,6 +1,8 @@
 package com.demo.practical_training.entity;
 
+import com.demo.practical_training.common.entity.BaseEntity;
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -10,17 +12,13 @@ import java.sql.Timestamp;
  */
 @Entity
 @Data
-public class UserManagementLog {
-    /**
-     * 日志ID
-     */
-    @Id
-    private String logID;
+public class UserManagementLog extends BaseEntity {
+
     /**
      * 管理ID
      */
-    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.REFRESH)
     @JoinColumn(name = "adminID")
+    @OneToOne
     private Admin admin;
     /**
      * 用户ID

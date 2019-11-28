@@ -1,5 +1,6 @@
 package com.demo.practical_training.entity;
 
+import com.demo.practical_training.common.entity.BaseEntity;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -7,18 +8,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 @Entity
 @Data
-public class Admin {
-    /**
-     * 管理员ID
-     */
-    @Id
-    @GeneratedValue(generator="system_uuid")
-    @GenericGenerator(name="system_uuid",strategy="uuid")
-    @Column(name = "adminid", unique = true, nullable = false, length = 20)
-    private String adminID;
+public class Admin extends BaseEntity {
+
     /**
      * 管理员头像路径
      */
@@ -34,6 +29,6 @@ public class Admin {
     /**
      * 管理员权限等级,默认是0 有六个权限 0 1 2 3 4 -1
      */
-    @Column(columnDefinition = "0")
+    @Column(columnDefinition = "tinyint default 0")
     private Integer power;
 }

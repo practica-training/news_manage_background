@@ -47,7 +47,7 @@ public class UserReportServiceImpl implements UserReportService {
 //        }
         //判断用户举报id是否为空
         if (StringUtils.isNotEmpty(queryUserReportRequest.getReportID())) {
-            UserReport.setReportID(queryUserReportRequest.getReportID());
+            UserReport.setId(queryUserReportRequest.getReportID());
         }
         //创建条件实例对象
         Example<UserReport> example = Example.of(UserReport, exampleMatcher);

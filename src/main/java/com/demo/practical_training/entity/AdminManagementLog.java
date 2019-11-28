@@ -1,6 +1,8 @@
 package com.demo.practical_training.entity;
 
+import com.demo.practical_training.common.entity.BaseEntity;
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -10,18 +12,13 @@ import java.sql.Timestamp;
  */
 @Entity
 @Data
-public class AdminManagementLog {
-    /**
-     * 日志ID
-     */
-    @Id
-    @Column(columnDefinition = "CHAR(33)")
-    private String logID;
+public class AdminManagementLog extends BaseEntity {
+
     /**
      * 被超级管理员管理的管理员ID
      */
     @OneToOne
-    @JoinColumn(name = "adminID")
+    @JoinColumn(name = "adminid",unique = true, nullable = false)
     private Admin admin;
     /**
      * 处理内容，超级管理员对这个管理员做了什么

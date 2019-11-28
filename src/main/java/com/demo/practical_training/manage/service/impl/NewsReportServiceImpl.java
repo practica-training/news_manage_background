@@ -47,7 +47,7 @@ public class NewsReportServiceImpl implements NewsReportService {
 //        }
         //判断新闻举报id是否为空
         if (StringUtils.isNotEmpty(queryNewsReportRequest.getReportID())) {
-            NewsReport.setReportID(queryNewsReportRequest.getReportID());
+            NewsReport.setId(queryNewsReportRequest.getReportID());
         }
         //创建条件实例对象
         Example<NewsReport> example = Example.of(NewsReport, exampleMatcher);
@@ -58,10 +58,12 @@ public class NewsReportServiceImpl implements NewsReportService {
         Page<NewsReport> all = NewsReportRepository.findAll(example, pageRequest.getPageable());
         //新建QueryResult<T> 对象
         QueryResult<NewsReport> NewsReportQueryResult = new QueryResult<>();
+        /**
+         * 解决懒加载
+         */
         for (NewsReport newsReport : all) {
-//            System.out.println(newsReport);
-            newsReport.getUser();
-            newsReport.getNews();
+            newsReport.getUser().getId();
+            newsReport.getNews().getId();
         }
         //分别给QueryResult<T> 对象中的list集合total赋值
         NewsReportQueryResult.setList(all.getContent());

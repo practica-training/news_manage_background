@@ -53,7 +53,7 @@ public class NewsViolationServiceImpl implements NewsViolationService {
 //        }
         //判断新闻违规id是否为空
         if (StringUtils.isNotEmpty(queryNewsViolationRequest.getViolationID())) {
-            NewsViolation.setViolationID(queryNewsViolationRequest.getViolationID());
+            NewsViolation.setId(queryNewsViolationRequest.getViolationID());
         }
         //创建条件实例对象
         Example<NewsViolation> example = Example.of(NewsViolation, exampleMatcher);

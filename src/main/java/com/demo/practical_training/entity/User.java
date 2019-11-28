@@ -1,5 +1,6 @@
 package com.demo.practical_training.entity;
 
+import com.demo.practical_training.common.entity.BaseEntity;
 import lombok.Data;
 import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
@@ -16,15 +17,8 @@ import java.util.List;
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "USERNAME"))
 @Data
 @ToString
-public class User implements Serializable {
-    /**
-     * 用户ID,用hibernate的uuid主键生成器
-     */
-    @Id
-    @GeneratedValue(generator="system_uuid")
-    @GenericGenerator(name="system_uuid",strategy="uuid")
-    @Column(name = "userid", unique = true, nullable = false, length = 20)
-    private String userID;
+public class User extends BaseEntity {
+
     /**
      * 用户头像路径
      */
@@ -69,8 +63,8 @@ public class User implements Serializable {
      */
     @ManyToMany
     @JoinTable(name = "userAndLabel",
-        joinColumns = @JoinColumn(name = "userID",referencedColumnName = "userID"),
-            inverseJoinColumns = @JoinColumn(name = "newLabelID",referencedColumnName = "newLabelID")
+        joinColumns = @JoinColumn(name = "userID",referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "news_labelid",referencedColumnName = "id")
     )
     private List<NewsLabel> newsLabelList;
     /**

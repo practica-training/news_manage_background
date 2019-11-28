@@ -7,6 +7,7 @@ import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.common.web.STablePageRequest;
 import com.demo.practical_training.entity.News;
 import com.demo.practical_training.dao.NewsRepository;
+import com.demo.practical_training.entity.NewsReport;
 import com.demo.practical_training.manage.service.NewsService;
 import com.demo.practical_training.model.request.QueryNewsRequest;
 import com.demo.practical_training.model.response.NewsResult;
@@ -25,6 +26,7 @@ import java.util.Optional;
 public class NewsServiceImpl implements NewsService {
     @Autowired
     NewsRepository newsRepository;
+
     /**
      * 分页和排序加动态查询新闻页面
      *
@@ -33,7 +35,7 @@ public class NewsServiceImpl implements NewsService {
      * @return
      */
     @Override
-    @Transactional(readOnly=true)
+    @Transactional(readOnly = true)
     public QueryResponseResult findList(STablePageRequest pageRequest, QueryNewsRequest queryNewsRequest) {
         //条件匹配器         
         ExampleMatcher exampleMatcher = ExampleMatcher.matching();
@@ -47,13 +49,20 @@ public class NewsServiceImpl implements NewsService {
         }
         //判断新闻id是否为空
         if (StringUtils.isNotEmpty(queryNewsRequest.getNewsId())) {
-            news.setNewsID(queryNewsRequest.getNewsId());
+            news.setId(queryNewsRequest.getNewsId());
         }
         //创建条件实例对象
         Example<News> example = Example.of(news, exampleMatcher);
 
         //根据分页对象和条件实例对象查询数据
         Page<News> all = newsRepository.findAll(example, pageRequest.getPageable());
+        /**
+         * 解决懒加载
+         */
+        for (News news1 : all) {
+            news1.getNewsLabelList().size();
+            news1.getNewsTypeList().size();
+        }
         //新建QueryResult<T> 对象
         QueryResult<News> newsQueryResult = new QueryResult<>();
         //分别给QueryResult<T> 对象中的list集合total赋值
@@ -65,17 +74,19 @@ public class NewsServiceImpl implements NewsService {
 
     /**
      * 新增新闻
+     *
      * @param news
      * @return
      */
     @Override
     public NewsResult add(News news) {
         News news1 = newsRepository.save(news);
-        return new NewsResult(CommonCode.SUCCESS,news1);
+        return new NewsResult(CommonCode.SUCCESS, news1);
     }
 
     /**
      * 根据id修改新闻
+     *
      * @param id
      * @param news
      * @return
@@ -85,7 +96,7 @@ public class NewsServiceImpl implements NewsService {
         //根据Id查询新闻
         News news1 = this.findById(id);
         //若存在，则调用set方法更新数据，并保存
-        if(news1!=null){
+        if (news1 != null) {
             //设置阅读数
             news1.setReadNumber(news.getReadNumber());
             //设置新闻状态 0草稿 1审核中 2审核失败 3等待发布 4已发布 -1已删除 -2违规删除
@@ -107,17 +118,18 @@ public class NewsServiceImpl implements NewsService {
             //设置新闻权重 0普通新闻 1轮播图新闻
             news1.setNewsWeights(news.getNewsWeights());
             News news2 = newsRepository.save(news1);
-            if(news2!=null){
-                return new NewsResult(CommonCode.SUCCESS,news2);
+            if (news2 != null) {
+                return new NewsResult(CommonCode.SUCCESS, news2);
             }
 
         }
         //若不存在，则返回失败
-        return new NewsResult(CommonCode.FAIL,null);
+        return new NewsResult(CommonCode.FAIL, null);
     }
 
     /**
      * 根据id删除新闻
+     *
      * @param id
      * @return
      */
@@ -125,7 +137,7 @@ public class NewsServiceImpl implements NewsService {
     public ResponseResult deleteById(String id) {
         //根据Id查询新闻
         News news1 = this.findById(id);
-        if(news1!=null){
+        if (news1 != null) {
             //若存在，删除新闻
             newsRepository.deleteById(id);
             return new ResponseResult(CommonCode.SUCCESS);
@@ -136,13 +148,14 @@ public class NewsServiceImpl implements NewsService {
 
     /**
      * 根据id查询新闻
+     *
      * @param id
      * @return
      */
     @Override
     public News findById(String id) {
         Optional<News> optional = newsRepository.findById(id);
-        if(optional.isPresent()){
+        if (optional.isPresent()) {
             return optional.get();
         }
         return null;

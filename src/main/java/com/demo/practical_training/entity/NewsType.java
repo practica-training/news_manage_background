@@ -1,5 +1,6 @@
 package com.demo.practical_training.entity;
 
+import com.demo.practical_training.common.entity.BaseEntity;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -13,15 +14,8 @@ import javax.persistence.Id;
  */
 @Entity
 @Data
-public class NewsType {
-    /**
-     * 类别ID
-     */
-    @Id
-    @GeneratedValue(generator="system_uuid")
-    @GenericGenerator(name="system_uuid",strategy="uuid")
-    @Column(name = "newTypeid", unique = true, nullable = false, length = 20)
-    private String newsTypeID;
+public class NewsType extends BaseEntity {
+
     /**
      * 名称
      */

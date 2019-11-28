@@ -64,7 +64,7 @@ public class NewsTest {
     public void testFindList(){
         STablePageRequest sTablePageRequest = new STablePageRequest();
         QueryNewsRequest queryNewsRequest = new QueryNewsRequest();
-        queryNewsRequest.setNewsTitle("英雄");
+        queryNewsRequest.setNewsTitle("王者荣耀");
         QueryResponseResult list = newsService.findList(sTablePageRequest, queryNewsRequest);
         System.out.println(list);
     }

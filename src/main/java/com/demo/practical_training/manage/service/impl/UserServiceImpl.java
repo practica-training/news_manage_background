@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
         User User = new User();
         //判断用户名是否为空
         if (StringUtils.isNotEmpty(queryUserRequest.getUserID())) {
-            User.setUserID(queryUserRequest.getUserID());
+            User.setId(queryUserRequest.getUserID());
         }
         //判断用户id是否为空
         if (StringUtils.isNotEmpty(queryUserRequest.getUserName())) {

@@ -1,5 +1,6 @@
 package com.demo.practical_training.entity;
 
+import com.demo.practical_training.common.entity.BaseEntity;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -11,15 +12,8 @@ import java.sql.Timestamp;
  */
 @Entity
 @Data
-public class NewsViolation {
-    /**
-     * 违规ID
-     */
-    @Id
-    @GeneratedValue(generator="system_uuid")
-    @GenericGenerator(name="system_uuid",strategy="uuid")
-    @Column(name = "violationid")
-    private String violationID;
+public class NewsViolation extends BaseEntity {
+
     /**
      * 被举报的新闻ID
      * 懒加载，级联刷新操作
