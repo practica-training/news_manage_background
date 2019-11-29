@@ -36,7 +36,12 @@ public class UserReport extends BaseEntity {
      * 举报原因
      */
     private String reportReason;
-
+    /**
+     * 所举报的评论
+     */
+    @OneToOne
+    @JoinColumn(name = "commentID")
+    private Comment comment;
     /**
      * 举报时间
      */
