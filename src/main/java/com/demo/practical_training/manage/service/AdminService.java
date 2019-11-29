@@ -29,8 +29,8 @@ public interface AdminService {
     public ResponseResult reviewNews(String id);
     //审核新闻发布
     public ResponseResult reviewNewsPublish(String id, News news);
-    //对新闻下架处理
-    public ResponseResult reviewNewsOff(String id, News news);
+//    //对新闻下架处理
+//    public ResponseResult reviewNewsOff(String id, News news);
     //审核用户举报
     public ResponseResult reviewUser(String id);
     //对用户封号处理

@@ -37,12 +37,6 @@ public class UserReport extends BaseEntity {
      */
     private String reportReason;
     /**
-     * 所举报的评论
-     */
-    @OneToOne
-    @JoinColumn(name = "commentID")
-    private Comment comment;
-    /**
      * 举报时间
      */
     @Column(columnDefinition = "TIMESTAMP")

@@ -84,16 +84,16 @@ public class AdminController {
         return adminService.reviewNewsPublish(id,news);
     }
 
-    /**
-     *对新闻下架处理
-     * @param id
-     * @param news
-     * @return
-     */
-    @PutMapping("/reviewNewsOff/{id}")
-    public ResponseResult reviewNewsOff(@PathVariable("id") String id,@RequestBody News news){
-        return adminService.reviewNewsOff(id,news);
-    }
+//    /**
+//     *对新闻下架处理
+//     * @param id
+//     * @param news
+//     * @return
+//     */
+//    @PutMapping("/reviewNewsOff/{id}")
+//    public ResponseResult reviewNewsOff(@PathVariable("id") String id,@RequestBody News news){
+//        return adminService.reviewNewsOff(id,news);
+//    }
 
     /*
      *审核新闻举报
@@ -114,7 +114,7 @@ public class AdminController {
      */
     @PutMapping("/reviewUser/{id}")
     public ResponseResult reviewUser(@PathVariable("id") String id){
-        return adminService.reviewNews(id);
+        return adminService.reviewUser(id);
     }
 
     /**

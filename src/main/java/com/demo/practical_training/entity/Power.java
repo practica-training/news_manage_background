@@ -1,7 +1,5 @@
 package com.demo.practical_training.entity;
 
-import javax.persistence.Entity;
-
 /**
  * 管理员权限
  * 1.超级管理员具有全部权限

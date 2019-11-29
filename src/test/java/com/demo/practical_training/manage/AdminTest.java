@@ -2,7 +2,6 @@ package com.demo.practical_training.manage;
 
 import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.entity.Admin;
-import com.demo.practical_training.entity.NewsReport;
 import com.demo.practical_training.manage.service.AdminService;
 import com.demo.practical_training.manage.service.NewsReportService;
 import com.demo.practical_training.utils.GenerateUtil;
@@ -44,8 +43,7 @@ public class AdminTest {
      */
     @Test
     public void testReviewNews(){
-        NewsReport report = newsReportService.findById("4028ab0d6ea7109d016ea710d7090000");
-        ResponseResult responseResult = adminService.reviewNews(report.getId());
+        ResponseResult responseResult = adminService.reviewNews("8a8180846eafdb1e016eafdc394f0020");
         System.out.println(responseResult);
     }
 }

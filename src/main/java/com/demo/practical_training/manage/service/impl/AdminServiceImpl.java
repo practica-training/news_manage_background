@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -174,17 +175,17 @@ public class AdminServiceImpl implements AdminService {
 
     /**
      * 审核新闻举报
+     *  1将所有有关该新闻的举报全部改成违规
+     *  *将新闻进行下架
      * @param id
      * @return
      */
     @Override
     public ResponseResult reviewNews(String id) {
-        //1.根据id查询新闻举报
-        NewsReport newsReport = newsReportService.findById(id);
-        //2.审核状态 0等待审核 1审核完成  是否违规 0没有违规 1违规
-        if(newsReport.getReviewState() == Const.NEWS_UNDER_REVIEW && newsReport.getIsIllegal()==1){
-            //2.1提示用户举报成功，已加入违规新闻
-            //新建违规新闻
+        //1.根据id查询新闻
+        News news = newsService.findById(id);
+        List<NewsReport> list = newsReportService.findByNewsid(news.getId());
+        for (NewsReport newsReport : list) {
             NewsViolation newsViolation = new NewsViolation();
             newsViolation.setNews(newsReport.getNews());
             newsViolation.setViolationReason(newsReport.getReportReason());
@@ -192,14 +193,10 @@ public class AdminServiceImpl implements AdminService {
             newsViolation.setReviewTime(new Timestamp(date.getTime()));
             newsReport.getNews().setNewsState(Const.NEWS_DISABLE);
             newsViolationService.add(newsViolation);
-            return new ResponseResult(AdminCode.ADMIN_ALLOW_NEWS);
-        }else if(newsReport.getReviewState() == Const.NEWS_DRAFT){
-            //2.2提示等待审核
-            return new ResponseResult(AdminCode.ADMIN_WAIT_NEWS);
-        }else{
-            //2.3否则，提示用户举报失败
-            return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_NEWS);
         }
+        news.setNewsState(Const.NEWS_OFF);
+        newsService.updateById(id, news);
+        return new ResponseResult(AdminCode.ADMIN_ALLOW_NEWSEXISTENCE);
     }
 
     /**
@@ -220,21 +217,21 @@ public class AdminServiceImpl implements AdminService {
         return new ResponseResult(AdminCode.ADMIN_NEWSPUBLISH_WAIT);
     }
 
-    /**
-     * 对新闻下架处理
-     * @param id
-     * @param news
-     * @return
-     */
-    @Override
-    public ResponseResult reviewNewsOff(String id, News news) {
-        //1.调用News更新方法
-        newsService.updateById(id, news);
-        if(news.getNewsState()==Const.NEWS_OFF){
-            return new ResponseResult(AdminCode.ADMIN_ALLOW_NEWSEXISTENCE);
-        }
-        return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_NEWEXISTENCE);
-    }
+//    /**
+//     * 对新闻下架处理
+//     * @param id
+//     * @param news
+//     * @return
+//     */
+//    @Override
+//    public ResponseResult reviewNewsOff(String id, News news) {
+//        //1.调用News更新方法
+//        newsService.updateById(id, news);
+//        if(news.getNewsState()==Const.NEWS_OFF){
+//            return new ResponseResult(AdminCode.ADMIN_ALLOW_NEWSEXISTENCE);
+//        }
+//        return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_NEWEXISTENCE);
+//    }
 
     /**
      * 审核用户举报
