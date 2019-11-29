@@ -1,9 +1,9 @@
 package com.demo.practical_training.entity;
 
 import com.demo.practical_training.common.entity.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -40,6 +40,7 @@ public class NewsReport extends BaseEntity {
     /**
      * 举报时间
      */
+    @JsonFormat(pattern="yyyy/MM/dd HH:mm:ss",timezone="GMT+8")
     @Column(columnDefinition = "TIMESTAMP")
     private Timestamp reportTime;
     /**

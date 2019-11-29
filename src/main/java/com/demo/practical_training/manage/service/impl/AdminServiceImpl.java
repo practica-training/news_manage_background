@@ -158,6 +158,19 @@ public class AdminServiceImpl implements AdminService {
         }
         return null;
     }
+    /**
+     * 根据name查询管理员
+     * @param name
+     * @return
+     */
+    @Override
+    public Admin findByName(String name) {
+        Optional<Admin> optional = adminRepository.findById(name);
+        if(optional.isPresent()){
+            return optional.get();
+        }
+        return null;
+    }
 
     /**
      * 审核新闻举报
