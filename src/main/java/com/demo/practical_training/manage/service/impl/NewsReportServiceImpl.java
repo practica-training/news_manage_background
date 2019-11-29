@@ -58,13 +58,7 @@ public class NewsReportServiceImpl implements NewsReportService {
         Page<NewsReport> all = NewsReportRepository.findAll(example, pageRequest.getPageable());
         //新建QueryResult<T> 对象
         QueryResult<NewsReport> NewsReportQueryResult = new QueryResult<>();
-        /**
-         * 解决懒加载
-         */
-//        for (NewsReport newsReport : all) {
-////            newsReport.getUser().getId();
-////            newsReport.getNews().getId();
-////        }
+
         //分别给QueryResult<T> 对象中的list集合total赋值
         NewsReportQueryResult.setList(all.getContent());
         NewsReportQueryResult.setTotal(all.getTotalElements());

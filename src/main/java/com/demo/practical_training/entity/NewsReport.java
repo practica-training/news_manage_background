@@ -27,7 +27,6 @@ public class NewsReport extends BaseEntity {
     /**
      * 被举报的新闻ID
      *      懒加载，级联刷新操作
-     *      不可为空，不可更新，插入
      */
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY,cascade = {CascadeType.MERGE})

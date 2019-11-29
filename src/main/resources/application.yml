@@ -20,6 +20,7 @@ spring:
     hibernate:
       ddl-auto: update
       enable_lazy_load_no_trans: true
+    #    解决懒加载
     open-in-view: true
 logging:
   #    path: ./logs
