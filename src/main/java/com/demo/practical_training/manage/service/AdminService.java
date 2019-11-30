@@ -33,8 +33,8 @@ public interface AdminService {
 //    public ResponseResult reviewNewsOff(String id, News news);
     //审核用户举报
     public ResponseResult reviewUser(String id);
-    //对用户封号处理
-    public ResponseResult reviewUserOff(String id, User user);
+//    //对用户封号处理
+//    public ResponseResult reviewUserOff(String id, User user);
     //对用户是实名认证处理
     public ResponseResult reviewUserVerified(String id, User user);
     //审核用户申请为新闻发布者

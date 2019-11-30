@@ -240,12 +240,10 @@ public class AdminServiceImpl implements AdminService {
      */
     @Override
     public ResponseResult reviewUser(String id) {
-        //1.根据id查询用户举报
-        UserReport userReport = userReportService.findById(id);
-        //2.审核状态 0等待审核 1审核完成
-        if(userReport.getReviewState() == Const.USER_NORMAL_USER && userReport.getIsIllegal()==1){
-            //2.1提示用户举报成功，已加入违规用户
-            //新建违规用户
+        //1.根据id查询用户
+        User user = userService.findById(id);
+        List<UserReport> list = userReportService.findByUserid(user.getId());
+        for (UserReport userReport : list) {
             UserViolation UserViolation = new UserViolation();
             UserViolation.setUser(userReport.getUser());
             UserViolation.setReason(userReport.getReportReason());
@@ -253,32 +251,28 @@ public class AdminServiceImpl implements AdminService {
             UserViolation.setEndTime(new Timestamp(date.getTime()));
             userReport.getUser().setUserState(Const.USER_NORMAL_USER);
             userViolationService.add(UserViolation);
-            return new ResponseResult(AdminCode.ADMIN_ALLOW_REVIEW);
-
-        }else if(userReport.getReviewState() == Const.USER_LOGGED_OUT){
-            //2.2提示等待审核
-            return new ResponseResult(AdminCode.ADMIN_WAIT_NEWS);
-        }else{
-            //2.3否则，提示用户举报失败
-            return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_REVIEW);
         }
+        user.setUserState(Const.USER_BANNED);
+        userService.updateById(id,user);
+        return new ResponseResult(AdminCode.ADMIN_ALLOW_REVIEW);
+
     }
 
-    /**
-     * 对用户封号处理
-     * @param id
-     * @param user
-     * @return
-     */
-    @Override
-    public ResponseResult reviewUserOff(String id, User user) {
-        //1.调用User更新方法
-        userService.updateById(id, user);
-        if(user.getUserState()== Const.NEWS_OFF){
-            return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_USEREXISTENCE);
-        }
-        return new ResponseResult(AdminCode.ADMIN_ALLOW_USEREXISTENCE);
-    }
+//    /**
+//     * 对用户封号处理
+//     * @param id
+//     * @param user
+//     * @return
+//     */
+//    @Override
+//    public ResponseResult reviewUserOff(String id, User user) {
+//        //1.调用User更新方法
+//        userService.updateById(id, user);
+//        if(user.getUserState()== Const.NEWS_OFF){
+//            return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_USEREXISTENCE);
+//        }
+//        return new ResponseResult(AdminCode.ADMIN_ALLOW_USEREXISTENCE);
+//    }
 
     /**
      * 对用户实名认证处理
