@@ -46,9 +46,15 @@ public class User extends BaseEntity {
     @Column(columnDefinition = "TIMESTAMP")
     private Timestamp registrationTime;
     /**
-     * 用户状态 1正常用户 2新闻发布者 0已注销 -1违规禁言 -2违规封号
+     * 用户状态 1正常用户 2新闻发布者 0已注销 -1违规禁言
      */
     private Integer userState;
+    /**
+     * 恢复正常能够说话的日子
+     */
+    @Column(columnDefinition = "DATE")
+    private Timestamp normalDate;
+
     /**
      * 是否实名认证 1是 0否
      */
