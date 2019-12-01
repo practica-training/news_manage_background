@@ -3,7 +3,6 @@ package com.demo.practical_training.entity;
 import com.demo.practical_training.common.entity.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -35,6 +34,7 @@ public class News extends BaseEntity {
     /**
      * 新闻创建时间
      */
+
     @Column(columnDefinition = "DATE")
     private Timestamp createTime;
     /**

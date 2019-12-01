@@ -2,6 +2,7 @@ package com.demo.practical_training.manage;
 
 import com.demo.practical_training.common.response.QueryResponseResult;
 import com.demo.practical_training.common.web.STablePageRequest;
+import com.demo.practical_training.dao.NewsReportRepository;
 import com.demo.practical_training.entity.News;
 import com.demo.practical_training.entity.NewsReport;
 import com.demo.practical_training.entity.User;
@@ -13,11 +14,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -28,24 +31,28 @@ public class NewsReportTest {
     NewsService newsService;
     @Autowired
     UserService userService;
+    @Autowired
+    NewsReportRepository newsReportRepository;
 
     /**
      * 测试新增新闻举报
      */
     @Test
     @Transactional
+    @Rollback(false)
     public void testAdd(){
         NewsReport newsReport = new NewsReport();
-        News news = newsService.findById("8abef8d06eafcd8b016eafcdc3c10001");
+        News news = newsService.findById("8a8180846eafdb1e016eafdc394f0020");
         User user = userService.findById("4028ab0d6eafe408016eafe43e4c0001");
         newsReport.setIsIllegal(1);
-        newsReport.setReviewState(1);
+        newsReport.setReviewState(0);
         newsReport.setNews(news);
         newsReport.setUser(user);
-        newsReport.setReportReason("色情新闻");
+        newsReport.setReportReason("呕吐新闻");
         Date date = new Date();
         newsReport.setReportTime(new Timestamp(date.getTime()));
-        newsReportService.add(newsReport);
+        NewsReport save = newsReportRepository.save(newsReport);
+        System.out.println(save);
     }
 
     /**
@@ -69,9 +76,11 @@ public class NewsReportTest {
     }
 
     /**
-     * 测试删除全部用户
+     * 测试根据newsid查询新闻举报
      */
     @Test
-    public void testDeleteAll(){
+    public void testFindByNewsid(){
+        List<NewsReport> list = newsReportService.findByNewsid("8a8180846eafdb1e016eafdc359b001f");
+        System.out.println(list);
     }
 }

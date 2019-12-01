@@ -7,6 +7,8 @@ import com.demo.practical_training.entity.NewsReport;
 import com.demo.practical_training.model.request.QueryNewsReportRequest;
 import com.demo.practical_training.model.response.NewsReportResult;
 
+import java.util.List;
+
 /**
  * 新闻举报业务层
  */
@@ -21,4 +23,6 @@ public interface NewsReportService {
     public ResponseResult deleteById(String id);
     //根据id查询新闻举报
     public NewsReport findById(String id);
+    //根据新闻id查询新闻举报
+    public List<NewsReport> findByNewsid(String newsid);
 }

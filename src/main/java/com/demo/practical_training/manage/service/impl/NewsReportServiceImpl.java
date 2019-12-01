@@ -5,8 +5,9 @@ import com.demo.practical_training.common.response.QueryResponseResult;
 import com.demo.practical_training.common.response.QueryResult;
 import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.common.web.STablePageRequest;
-import com.demo.practical_training.entity.NewsReport;
 import com.demo.practical_training.dao.NewsReportRepository;
+import com.demo.practical_training.entity.NewsReport;
+import com.demo.practical_training.entity.dto.NewsReportDTO;
 import com.demo.practical_training.manage.service.NewsReportService;
 import com.demo.practical_training.model.request.QueryNewsReportRequest;
 import com.demo.practical_training.model.response.NewsReportResult;
@@ -18,13 +19,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
 @Transactional()
 public class NewsReportServiceImpl implements NewsReportService {
     @Autowired
-    NewsReportRepository NewsReportRepository;
+    NewsReportRepository newsReportRepository;
     /**
      * 分页和排序加动态查询新闻举报页面
      *
@@ -49,18 +52,29 @@ public class NewsReportServiceImpl implements NewsReportService {
         if (StringUtils.isNotEmpty(queryNewsReportRequest.getId())) {
             NewsReport.setId(queryNewsReportRequest.getId());
         }
+        NewsReport.setReviewState(0);
         //创建条件实例对象
         Example<NewsReport> example = Example.of(NewsReport, exampleMatcher);
 //        System.out.println(example);
 //        System.out.println(pageRequest);
 
         //根据分页对象和条件实例对象查询数据
-        Page<NewsReport> all = NewsReportRepository.findAll(example, pageRequest.getPageable());
+        Page<NewsReport> all = newsReportRepository.findAll(example, pageRequest.getPageable());
         //新建QueryResult<T> 对象
-        QueryResult<NewsReport> NewsReportQueryResult = new QueryResult<>();
-
+        List<NewsReportDTO> list = new ArrayList<>();
+        for (NewsReport newsReport : all) {
+            NewsReportDTO newsReportDTO = new NewsReportDTO();
+            newsReportDTO.setId(newsReportDTO.getId());
+            newsReportDTO.setNewsId(newsReport.getNews().getId());
+            newsReportDTO.setNewsTitle(newsReport.getNews().getNewsTitle());
+            newsReportDTO.setReason(newsReport.getReportReason());
+            newsReportDTO.setReportTime(newsReport.getReportTime().toString());
+            newsReportDTO.setUserName(newsReport.getUser().getUserName());
+            list.add(newsReportDTO);
+        }
+        QueryResult<NewsReportDTO> NewsReportQueryResult = new QueryResult<>();
         //分别给QueryResult<T> 对象中的list集合total赋值
-        NewsReportQueryResult.setList(all.getContent());
+        NewsReportQueryResult.setList(list);
         NewsReportQueryResult.setTotal(all.getTotalElements());
         //返回结果
         return new QueryResponseResult(CommonCode.SUCCESS, NewsReportQueryResult);
@@ -73,7 +87,7 @@ public class NewsReportServiceImpl implements NewsReportService {
      */
     @Override
     public NewsReportResult add(NewsReport NewsReport) {
-        NewsReport NewsReport1 = NewsReportRepository.save(NewsReport);
+        NewsReport NewsReport1 = newsReportRepository.saveAndFlush(NewsReport);
         return new NewsReportResult(CommonCode.SUCCESS,NewsReport1);
     }
 
@@ -89,9 +103,9 @@ public class NewsReportServiceImpl implements NewsReportService {
         NewsReport NewsReport1 = this.findById(id);
         //若存在，则调用set方法更新数据，并保存
         if(NewsReport1!=null){
-            
-            NewsReportRepository.save(NewsReport1);
-            NewsReport NewsReport2 = NewsReportRepository.save(NewsReport1);
+
+            newsReportRepository.save(NewsReport1);
+            NewsReport NewsReport2 = newsReportRepository.save(NewsReport1);
             if(NewsReport2!=null){
                 return new NewsReportResult(CommonCode.SUCCESS,NewsReport2);
             }
@@ -112,7 +126,7 @@ public class NewsReportServiceImpl implements NewsReportService {
         NewsReport NewsReport1 = this.findById(id);
         if(NewsReport1!=null){
             //若存在，删除新闻举报
-            NewsReportRepository.deleteById(id);
+            newsReportRepository.deleteById(id);
             return new ResponseResult(CommonCode.SUCCESS);
         }
         //若不存在，则返回fail
@@ -126,10 +140,22 @@ public class NewsReportServiceImpl implements NewsReportService {
      */
     @Override
     public NewsReport findById(String id) {
-        Optional<NewsReport> optional = NewsReportRepository.findById(id);
+        Optional<NewsReport> optional = newsReportRepository.findById(id);
         if(optional.isPresent()){
             return optional.get();
         }
         return null;
     }
+
+    /**
+     * 根据newsid查询新闻举报
+     * @param newsid
+     * @return
+     */
+    @Override
+    public List<NewsReport> findByNewsid(String newsid) {
+        List<NewsReport> list = newsReportRepository.findByNewsid(newsid);
+        return list;
+    }
+
 }

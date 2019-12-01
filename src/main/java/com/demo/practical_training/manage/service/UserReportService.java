@@ -7,6 +7,8 @@ import com.demo.practical_training.entity.UserReport;
 import com.demo.practical_training.model.request.QueryUserReportRequest;
 import com.demo.practical_training.model.response.UserReportResult;
 
+import java.util.List;
+
 /**
  * 用户举报业务层
  */
@@ -21,4 +23,6 @@ public interface UserReportService {
     public ResponseResult deleteById(String id);
     //根据id查询用户举报
     public UserReport findById(String id);
+    //根据新闻id查询新闻举报
+    public List<UserReport> findByUserid(String userid);
 }

@@ -18,6 +18,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -128,5 +129,16 @@ public class UserReportServiceImpl implements UserReportService {
             return optional.get();
         }
         return null;
+    }
+
+    /**
+     * 根据userid查询用户举报
+     * @param userid
+     * @return
+     */
+    @Override
+    public List<UserReport> findByUserid(String userid) {
+        List<UserReport> list = UserReportRepository.findByUserid(userid);
+        return list;
     }
 }

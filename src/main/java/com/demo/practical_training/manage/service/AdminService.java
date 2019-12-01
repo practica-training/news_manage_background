@@ -23,16 +23,18 @@ public interface AdminService {
     public ResponseResult deleteById(String id);
     //根据id查询管理员
     public Admin findById(String id);
+    //根据id查询管理员
+    public Admin findByName(String name);
     //审核新闻举报
     public ResponseResult reviewNews(String id);
     //审核新闻发布
     public ResponseResult reviewNewsPublish(String id, News news);
-    //对新闻下架处理
-    public ResponseResult reviewNewsOff(String id, News news);
+//    //对新闻下架处理
+//    public ResponseResult reviewNewsOff(String id, News news);
     //审核用户举报
     public ResponseResult reviewUser(String id);
-    //对用户封号处理
-    public ResponseResult reviewUserOff(String id, User user);
+//    //对用户封号处理
+//    public ResponseResult reviewUserOff(String id, User user);
     //对用户是实名认证处理
     public ResponseResult reviewUserVerified(String id, User user);
     //审核用户申请为新闻发布者
