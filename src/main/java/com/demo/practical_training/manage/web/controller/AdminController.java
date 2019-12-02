@@ -117,16 +117,16 @@ public class AdminController {
         return adminService.reviewUser(id);
     }
 
-    /**
-     *对用户封号处理
-     * @param id
-     * @param user
-     * @return
-     */
-    @PutMapping("/reviewUserOff/{id}")
-    public ResponseResult reviewUserOff(@PathVariable("id") String id,@RequestBody User user){
-        return adminService.reviewUserOff(id,user);
-    }
+//    /**
+//     *对用户封号处理
+//     * @param id
+//     * @param user
+//     * @return
+//     */
+//    @PutMapping("/reviewUserOff/{id}")
+//    public ResponseResult reviewUserOff(@PathVariable("id") String id,@RequestBody User user){
+//        return adminService.reviewUserOff(id,user);
+//    }
 
     /**
      *对用户实名认证处理
