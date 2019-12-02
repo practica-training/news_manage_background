@@ -123,10 +123,10 @@ public class AdminController {
      * @param user
      * @return
      */
-    @PutMapping("/reviewUserOff/{id}")
-    public ResponseResult reviewUserOff(@PathVariable("id") String id,@RequestBody User user){
-        return adminService.reviewUserOff(id,user);
-    }
+//    @PutMapping("/reviewUserOff/{id}")
+//    public ResponseResult reviewUserOff(@PathVariable("id") String id,@RequestBody User user){
+//        return adminService.reviewUserOff(id,user);
+//    }
 
     /**
      *对用户实名认证处理
