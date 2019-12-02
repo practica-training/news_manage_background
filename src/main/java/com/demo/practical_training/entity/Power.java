@@ -7,6 +7,14 @@ package com.demo.practical_training.entity;
  *      用户与新闻举报
  *      审核新闻举报 0
  *          返回根据举报时间降序，而且审核状态为"未审核"的举报列表
+ *          {
+ *           id:"举报id",
+ *           newsId:"新闻id",
+ *           newsTitle:"新闻标题",
+ *           userName:"举报者",
+ *           reason:"举报原因",
+ *           reportTime:"举报时间"
+ *         },
  *          对新闻进行审核，可以是
  *              忽略该举报
  *                  发送举报id
@@ -28,6 +36,16 @@ package com.demo.practical_training.entity;
  *
  *      审核用户举报 0
  *          返回根据举报时间降序，而且审核状态为"未审核"的举报列表
+ *          {
+     *          reportId: "举报id",
+    *           userName: "举报者",
+    *           reportedUserName: "被举报者1",
+    *           reportedUserId: "被举报者id1",
+    *           comment: "评论内容",
+    *           userName: "举报者",
+    *           reason: "举报原因",
+    *           reportTime: "举报时间"
+ *           }
  *          对用户的举报进行审核
  *              忽略该举报
 *                   发送举报id
@@ -50,13 +68,40 @@ package com.demo.practical_training.entity;
  *      用户新闻申请
  *      审核用户实名认证 1
  *          根据申请时间降序，而且审核状态为"未审核"的申请列表
+ *          {
+ *              userId:"申请实名认证的用户id",
+ *              userName:"申请者姓名",
+ *              registrationTime:"用户的注册时间",
+ *              idCard:"申请者的身份证号码",
+ *              realName:"申请者的真实姓名",
+ *              photo:"申请者拍的身份证照片"
+ *          }
  *          为申请的审核可以是
  *              审核不通过
  *                  发送审核id，不通过的原因
  *                  将状态改为不通过
  *              审核通过
+ *                  发送用户id
+ *                  将所有有关用户的申请一致改为通过
+ *                  将User状态改为已审核
  *
  *      审核新闻发布 1
+ *          根据申请时间降序，而且审核状态为"未审核"的申请列表
+ *          {
+ *           newsId: "新闻id",
+ *           newsTitle: "新闻标题",
+ *           content: "新闻内容",
+ *           newsTypeList: ["类型1", "类型2"],
+ *           newsAvatar: "新闻封面",
+ *           createTime:"创建时间"
+ *         }
+ *         对新闻的审核发布可以是
+ *              审核通过
+ *                  发送审核id
+ *                  将新闻状态改成发布，并将发布时间改成now，审核状态改成审核通过
+ *               审核不通过
+ *                  发送审核id，不通过原因
+ *                  将新闻状态改成不通过，并将不通过原因写在
  *
  *      用户新闻管理
  *      管理用户（封号） 2
