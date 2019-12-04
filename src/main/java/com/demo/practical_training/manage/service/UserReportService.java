@@ -23,6 +23,6 @@ public interface UserReportService {
     public ResponseResult deleteById(String id);
     //根据id查询用户举报
     public UserReport findById(String id);
-    //根据新闻id查询新闻举报
+    //根据用户id查询用户举报
     public List<UserReport> findByUserid(String userid);
 }

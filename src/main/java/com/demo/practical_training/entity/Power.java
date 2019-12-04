@@ -42,7 +42,6 @@ package com.demo.practical_training.entity;
     *           reportedUserName: "被举报者1",
     *           reportedUserId: "被举报者id1",
     *           comment: "评论内容",
-    *           userName: "举报者",
     *           reason: "举报原因",
     *           reportTime: "举报时间"
  *           }
@@ -76,13 +75,13 @@ package com.demo.practical_training.entity;
  *              realName:"申请者的真实姓名",
  *              photo:"申请者拍的身份证照片"
  *          }
- *          为申请的审核可以是
+ *          申请的审核可以是
  *              审核不通过
- *                  发送审核id，不通过的原因
+ *                  发送用户实名认证id，不通过的原因
  *                  将状态改为不通过
  *              审核通过
- *                  发送用户id
- *                  将所有有关用户的申请一致改为通过
+ *                  发送用户实名认证id
+ *                  将用户的申请改为通过
  *                  将User状态改为已审核
  *
  *      审核新闻发布 1
@@ -98,7 +97,7 @@ package com.demo.practical_training.entity;
  *         对新闻的审核发布可以是
  *              审核通过
  *                  发送审核id
- *                  将新闻状态改成发布，并将发布时间改成now，审核状态改成审核通过
+ *                  将新闻状态改成发布，并将发布时间改成now
  *               审核不通过
  *                  发送审核id，不通过原因
  *                  将新闻状态改成不通过，并将不通过原因写在

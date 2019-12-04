@@ -2,7 +2,6 @@ package com.demo.practical_training.entity;
 
 import com.demo.practical_training.common.entity.BaseEntity;
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -14,7 +13,12 @@ import java.sql.Timestamp;
 @Data
 public class UserVerified extends BaseEntity {
 
-    @OneToOne
+    /**
+     * 用户ID
+     * 懒加载，级联刷新操作
+     *
+     */
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.REFRESH)
     @JoinColumn(name = "userID")
     private User user;
     /**

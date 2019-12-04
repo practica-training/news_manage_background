@@ -48,6 +48,8 @@ public class AdminServiceImpl implements AdminService {
     NewsManagementLogService newsManagementLogService;
     @Autowired
     UserManagementLogService userManagementLogService;
+    @Autowired
+    UserVerifiedService userVerifiedService;
     /**
      * 分页和排序加动态查询管理员页面
      *
@@ -200,21 +202,30 @@ public class AdminServiceImpl implements AdminService {
     }
 
     /**
-     * 审核新闻发布
+     * 审核新闻发布成功
      * @param id
-     * @param news
      * @return
      */
     @Override
-    public ResponseResult reviewNewsPublish(String id, News news) {
-        //1.调用News更新方法
-        newsService.updateById(id, news);
-        if(news.getNewsState()==Const.NEWS_AUDIT_FAILURE){
-            return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_NEWSPUBLISH);
-        }else if(news.getNewsState()==Const.NEWS_PUBLISH){
-            return new ResponseResult(AdminCode.ADMIN_ALLOW_NEWSPUBLISH);
-        }
-        return new ResponseResult(AdminCode.ADMIN_NEWSPUBLISH_WAIT);
+    public ResponseResult reviewNewsPublishOn(String id) {
+        News news = newsService.findById(id);
+        news.setNewsState(3);
+        Date date = new Date();
+        news.setPublishTime(new Timestamp(date.getTime()));
+        return new ResponseResult(AdminCode.ADMIN_ALLOW_NEWSPUBLISH);
+    }
+
+    /**
+     * 审核新闻发布成功
+     * @param id
+     * @return
+     */
+    @Override
+    public ResponseResult reviewNewsPublishOff(String id,String offReason) {
+        News news = newsService.findById(id);
+        news.setNewsState(2);
+        news.setFailureReason(offReason);
+        return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_NEWSPUBLISH);
     }
 
 //    /**
@@ -235,13 +246,13 @@ public class AdminServiceImpl implements AdminService {
 
     /**
      * 审核用户举报
-     * @param id
+     * @param user1
      * @return
      */
     @Override
-    public ResponseResult reviewUser(String id) {
+    public ResponseResult reviewUser(User user1) {
         //1.根据id查询用户
-        User user = userService.findById(id);
+        User user = userService.findById(user1.getId());
         List<UserReport> list = userReportService.findByUserid(user.getId());
         for (UserReport userReport : list) {
             UserViolation UserViolation = new UserViolation();
@@ -253,9 +264,9 @@ public class AdminServiceImpl implements AdminService {
             userViolationService.add(UserViolation);
         }
         user.setUserState(Const.USER_BANNED);
-        userService.updateById(id,user);
+        user.setNormalDate(user1.getNormalDate());
+        userService.updateById(user1.getId(),user);
         return new ResponseResult(AdminCode.ADMIN_ALLOW_REVIEW);
-
     }
 
 //    /**
@@ -275,20 +286,33 @@ public class AdminServiceImpl implements AdminService {
 //    }
 
     /**
-     * 对用户实名认证处理
+     * 对用户实名认证处理审核通过
      * @param id
-     * @param user
+     * @param id
      * @return
      */
     @Override
-    public ResponseResult reviewUserVerified(String id, User user) {
-        //1.调用User更新方法
-        userService.updateById(id, user);
-        if(user.getIsCertified()==Const.USER_VERIFIED){
-            return new ResponseResult(AdminCode.ADMIN_ALLOW_USER);
-        }
+    public ResponseResult reviewUserVerifiedOn(String id) {
+        UserVerified userVerified = userVerifiedService.findById(id);
+        userVerified.setReviewState(1);
+        userVerified.getUser().setIsCertified(1);
+        return new ResponseResult(AdminCode.ADMIN_ALLOW_USER);
+    }
+
+    /**
+     * 对用户实名认证处理审核不通过
+     * @param id
+     * @param id
+     * @return
+     */
+    @Override
+    public ResponseResult reviewUserVerifiedOff(String id,String offReason) {
+        UserVerified userVerified = userVerifiedService.findById(id);
+        userVerified.setReviewState(0);
+        userVerified.setFailureReason(offReason);
         return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_USER);
     }
+
 
     /**
      * 审核用户申请为新闻发布者
