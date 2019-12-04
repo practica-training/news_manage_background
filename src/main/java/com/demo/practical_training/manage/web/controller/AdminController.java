@@ -4,8 +4,8 @@ import com.demo.practical_training.common.response.QueryResponseResult;
 import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.common.web.STablePageRequest;
 import com.demo.practical_training.entity.Admin;
-import com.demo.practical_training.entity.News;
 import com.demo.practical_training.entity.User;
+import com.demo.practical_training.entity.dto.ReasonDTO;
 import com.demo.practical_training.manage.service.AdminService;
 import com.demo.practical_training.model.request.QueryAdminRequest;
 import com.demo.practical_training.model.response.AdminResult;
@@ -74,14 +74,23 @@ public class AdminController {
     }
 
     /**
-     * 审核新闻发布
+     *新闻发布审核成功
      * @param id
-     * @param news
      * @return
      */
-    @PutMapping("/reviewNewsPublish/{id}")
-    public ResponseResult reviewNewsPublish(@PathVariable("id") String id,@RequestBody News news){
-        return adminService.reviewNewsPublish(id,news);
+    @PutMapping("/reviewNewsPublishOn/{id}")
+    public ResponseResult reviewNewsPublishOn(@PathVariable("id") String id){
+        return adminService.reviewNewsPublishOn(id);
+    }
+
+    /**
+     *新闻发布审核失败
+     * @param reasonDTO
+     * @return
+     */
+    @PutMapping("/reviewNewsPublishOff")
+    public ResponseResult reviewNewsPublishOff(@RequestBody ReasonDTO reasonDTO) {
+        return adminService.reviewNewsPublishOff(reasonDTO.getId(),reasonDTO.getFailureReason());
     }
 
 //    /**
@@ -112,32 +121,42 @@ public class AdminController {
      * @param news
      * @return
      */
-    @PutMapping("/reviewUser/{id}")
-    public ResponseResult reviewUser(@PathVariable("id") String id){
-        return adminService.reviewUser(id);
+    @PutMapping("/reviewUser")
+    public ResponseResult reviewUser(@RequestBody User user){
+        return adminService.reviewUser(user);
     }
 
-    /**
-     *对用户封号处理
-     * @param id
-     * @param user
-     * @return
-     */
+//    /**
+//     *对用户封号处理
+//     * @param id
+//     * @param user
+//     * @return
+//     */
 //    @PutMapping("/reviewUserOff/{id}")
 //    public ResponseResult reviewUserOff(@PathVariable("id") String id,@RequestBody User user){
 //        return adminService.reviewUserOff(id,user);
 //    }
 
     /**
-     *对用户实名认证处理
+     *对用户实名认证处理通过
      * @param id
-     * @param user
      * @return
      */
-    @PutMapping("/reviewUserVerified/{id}")
-    public ResponseResult reviewUserVerified(@PathVariable("id") String id,@RequestBody User user){
-        return adminService.reviewUserVerified(id,user);
+    @PutMapping("/reviewUserVerifiedOn/{id}")
+    public ResponseResult reviewUserVerifiedOn(@PathVariable("id") String id){
+        return adminService.reviewUserVerifiedOn(id);
     }
+
+    /**
+     *对用户实名认证处理通过
+     * @param reasonDTO
+     * @return
+     */
+    @PutMapping("/reviewUserVerifiedOff")
+    public ResponseResult reviewUserVerifiedOff(@RequestBody ReasonDTO reasonDTO){
+        return adminService.reviewUserVerifiedOff(reasonDTO.getId(),reasonDTO.getFailureReason());
+    }
+
 
     /**
      *审核用户申请为新闻发布者

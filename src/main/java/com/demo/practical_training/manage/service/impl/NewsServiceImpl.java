@@ -7,6 +7,7 @@ import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.common.web.STablePageRequest;
 import com.demo.practical_training.dao.NewsRepository;
 import com.demo.practical_training.entity.News;
+import com.demo.practical_training.entity.dto.NewsDTO;
 import com.demo.practical_training.manage.service.NewsService;
 import com.demo.practical_training.model.request.QueryNewsRequest;
 import com.demo.practical_training.model.response.NewsResult;
@@ -18,6 +19,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -42,6 +45,7 @@ public class NewsServiceImpl implements NewsService {
         exampleMatcher = exampleMatcher.withMatcher("newsTitle", ExampleMatcher.GenericPropertyMatchers.contains());
         //创建条件值对象
         News news = new News();
+        news.setNewsState(1);
         //判断新闻标题是否为空
         if (StringUtils.isNotEmpty(queryNewsRequest.getNewsTitle())) {
             news.setNewsTitle(queryNewsRequest.getNewsTitle());
@@ -55,20 +59,25 @@ public class NewsServiceImpl implements NewsService {
 
         //根据分页对象和条件实例对象查询数据
         Page<News> all = newsRepository.findAll(example, pageRequest.getPageable());
-//        /**
-//         * 解决懒加载
-//         */
-//        for (News news1 : all) {
-//            news1.getNewsLabelList().size();
-//            news1.getNewsTypeList().size();
-//        }
+
         //新建QueryResult<T> 对象
-        QueryResult<News> newsQueryResult = new QueryResult<>();
+        List<NewsDTO> list = new ArrayList<>();
+        for (News news1 : all) {
+            NewsDTO newsDTO = new NewsDTO();
+            newsDTO.setId(newsDTO.getNewsId());
+            newsDTO.setContent(news1.getContent());
+            newsDTO.setCreateTime(news1.getCreateTime().toString());
+            newsDTO.setNewsAvatar(news1.getNewsAvatar());
+            newsDTO.setNewsTitle(news1.getNewsTitle());
+            newsDTO.setNewsTypeList(news1.getNewsTypeList());
+            list.add(newsDTO);
+        }
+        QueryResult<NewsDTO> newsDTOQueryResult = new QueryResult<>();
         //分别给QueryResult<T> 对象中的list集合total赋值
-        newsQueryResult.setList(all.getContent());
-        newsQueryResult.setTotal(all.getTotalElements());
+        newsDTOQueryResult.setList(list);
+        newsDTOQueryResult.setTotal(all.getTotalElements());
         //返回结果
-        return new QueryResponseResult(CommonCode.SUCCESS, newsQueryResult);
+        return new QueryResponseResult(CommonCode.SUCCESS, newsDTOQueryResult);
     }
 
     /**

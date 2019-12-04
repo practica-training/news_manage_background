@@ -7,6 +7,7 @@ import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.common.web.STablePageRequest;
 import com.demo.practical_training.dao.UserReportRepository;
 import com.demo.practical_training.entity.UserReport;
+import com.demo.practical_training.entity.dto.UserReportDTO;
 import com.demo.practical_training.manage.service.UserReportService;
 import com.demo.practical_training.model.request.QueryUserReportRequest;
 import com.demo.practical_training.model.response.UserReportResult;
@@ -18,6 +19,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,6 +44,7 @@ public class UserReportServiceImpl implements UserReportService {
 //        exampleMatcher = exampleMatcher.withMatcher("UserReportTitle", ExampleMatcher.GenericPropertyMatchers.contains());
 //        //创建条件值对象
         UserReport UserReport = new UserReport();
+        UserReport.setReviewState(0);
 //        //判断用户举报标题是否为空
 //        if (StringUtils.isNotEmpty(queryUserReportRequest.getUserReportName())) {
 //            UserReport.setUserReportName(queryUserReportRequest.getUserReportName());
@@ -56,9 +59,22 @@ public class UserReportServiceImpl implements UserReportService {
         //根据分页对象和条件实例对象查询数据
         Page<UserReport> all = UserReportRepository.findAll(example, pageRequest.getPageable());
         //新建QueryResult<T> 对象
-        QueryResult<UserReport> UserReportQueryResult = new QueryResult<>();
+        List<UserReportDTO> list = new ArrayList<>();
+        for (UserReport userReport : all) {
+            UserReportDTO userReportDTO = new UserReportDTO();
+            userReportDTO.setId(userReport.getId());
+            userReportDTO.setComment(userReport.getComment().getCommentContent());
+            userReportDTO.setReason(userReport.getReportReason());
+            userReportDTO.setReportedUserId(userReport.getReported().getId());
+            userReportDTO.setReportedUserName(userReport.getReported().getUserName());
+            userReportDTO.setReportId(userReport.getUser().getId());
+            userReportDTO.setReportTime(userReport.getReportTime().toString());
+            userReportDTO.setUserName(userReport.getUser().getUserName());
+            list.add(userReportDTO);
+        }
+        QueryResult<UserReportDTO> UserReportQueryResult = new QueryResult<>();
         //分别给QueryResult<T> 对象中的list集合total赋值
-        UserReportQueryResult.setList(all.getContent());
+        UserReportQueryResult.setList(list);
         UserReportQueryResult.setTotal(all.getTotalElements());
         //返回结果
         return new QueryResponseResult(CommonCode.SUCCESS, UserReportQueryResult);
