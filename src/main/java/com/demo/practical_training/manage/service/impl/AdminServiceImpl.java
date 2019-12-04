@@ -189,6 +189,7 @@ public class AdminServiceImpl implements AdminService {
         List<NewsReport> list = newsReportService.findByNewsid(news.getId());
         for (NewsReport newsReport : list) {
             newsReport.setReviewState(1);
+            newsReportService.updateById(newsReport.getId(),newsReport);
             NewsViolation newsViolation = new NewsViolation();
             newsViolation.setNews(newsReport.getNews());
             newsViolation.setViolationReason(newsReport.getReportReason());
