@@ -105,7 +105,7 @@ public class AdminController {
 //    }
 
     /*
-     *审核新闻举报
+     *审核新闻举报 通过
      * @param id
      * @param news
      * @return

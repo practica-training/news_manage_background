@@ -52,7 +52,7 @@ public class AdminLoginController{
                 check = false;
         } else {
             request.setAttribute("msg", "用户不存在！");
-            return "redirect:/login";
+            return "用户不存在！";
         }
 
         if (check) {
