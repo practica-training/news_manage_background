@@ -69,6 +69,7 @@ package com.demo.practical_training.entity;
  *      审核用户实名认证 1
  *          根据申请时间降序，而且审核状态为"未审核"的申请列表
  *          {
+ *              id:"实名认证的id",
  *              userId:"申请实名认证的用户id",
  *              userName:"申请者姓名",
  *              registrationTime:"用户的注册时间",
