@@ -94,20 +94,19 @@ public class UserReportServiceImpl implements UserReportService {
     /**
      * 根据id修改用户举报
      * @param id
-     * @param UserReport
+     * @param userReport
      * @return
      */
     @Override
-    public UserReportResult updateById(String id, UserReport UserReport) {
+    public UserReportResult updateById(String id, UserReport userReport) {
         //根据Id查询用户举报
-        UserReport UserReport1 = this.findById(id);
+        UserReport userReport1 = this.findById(id);
         //若存在，则调用set方法更新数据，并保存
-        if(UserReport1!=null){
-            
-            UserReportRepository.save(UserReport1);
-            UserReport UserReport2 = UserReportRepository.save(UserReport1);
-            if(UserReport2!=null){
-                return new UserReportResult(CommonCode.SUCCESS,UserReport2);
+        if(userReport1!=null){
+            userReport1.setReviewState(userReport.getReviewState());
+            UserReport userReport2 = UserReportRepository.save(userReport1);
+            if(userReport2!=null){
+                return new UserReportResult(CommonCode.SUCCESS,userReport2);
             }
 
         }
