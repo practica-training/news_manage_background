@@ -12,6 +12,12 @@ spring:
     url: jdbc:mysql://zzhong.wang:3306/newsmanagetest?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: root
     password: qQ123456
+    http:
+      multipart:
+        enabled: true
+        max-file-size: 30MB
+        max-request-size: 30MB
+
 
 
   jpa:

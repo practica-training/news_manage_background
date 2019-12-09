@@ -49,6 +49,7 @@ public class UserServiceImpl implements UserService {
         if (StringUtils.isNotEmpty(queryUserRequest.getUserName())) {
             User.setUserName(queryUserRequest.getUserName());
         }
+
         //创建条件实例对象
         Example<User> example = Example.of(User, exampleMatcher);
 

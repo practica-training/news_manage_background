@@ -3,9 +3,7 @@ package com.demo.practical_training.entity;
 import com.demo.practical_training.common.entity.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import org.hibernate.annotations.GenerationTime;
 
-import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -33,6 +31,7 @@ public class UserReport extends BaseEntity {
     @OneToOne
     @JoinColumn(name = "reportedID")
     private User reported;
+
     @JsonIgnore
     @OneToOne
     @JoinColumn(name = "commentID")
