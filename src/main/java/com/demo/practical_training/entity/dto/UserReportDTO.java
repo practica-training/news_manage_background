@@ -29,13 +29,9 @@ public class UserReportDTO {
 
     //提供返回结果的业务层
 
-    public String getId() {
-        UUID uuid = UUID.randomUUID();
-        return uuid.toString().replace("-", "");
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
+//    public String getId() {
+//        UUID uuid = UUID.randomUUID();
+//        return uuid.toString().replace("-", "");
+//    }
 
 }

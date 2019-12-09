@@ -43,12 +43,13 @@ public class UserReportController {
     /**
      * 更新用户举报
      * @param id
-     * @param UserReport
+     * @param userReport
      * @return
      */
     @PutMapping("/id/{id}")
-    public UserReportResult update(@PathVariable("id") String id, @RequestBody UserReport UserReport){
-        return UserReportService.updateById(id,UserReport);
+    public UserReportResult update(@PathVariable("id") String id, @RequestBody UserReport userReport){
+
+        return UserReportService.updateById(id,userReport);
     }
 
     /**

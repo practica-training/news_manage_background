@@ -64,7 +64,7 @@ public class NewsReportServiceImpl implements NewsReportService {
         List<NewsReportDTO> list = new ArrayList<>();
         for (NewsReport newsReport : all) {
             NewsReportDTO newsReportDTO = new NewsReportDTO();
-            newsReportDTO.setId(newsReportDTO.getId());
+            newsReportDTO.setId(newsReport.getId());
             newsReportDTO.setNewsId(newsReport.getNews().getId());
             newsReportDTO.setNewsTitle(newsReport.getNews().getNewsTitle());
             newsReportDTO.setReason(newsReport.getReportReason());
@@ -94,11 +94,11 @@ public class NewsReportServiceImpl implements NewsReportService {
     /**
      * 根据id修改新闻举报
      * @param id
-     * @param NewsReport
+     * @param newsReport
      * @return
      */
     @Override
-    public NewsReportResult updateById(String id, NewsReport NewsReport) {
+    public NewsReportResult updateById(String id, NewsReport newsReport) {
         //根据Id查询新闻举报
         NewsReport NewsReport1 = this.findById(id);
         //若存在，则调用set方法更新数据，并保存

@@ -44,12 +44,14 @@ public class NewsReportController {
     /**
      * 更新新闻举报
      * @param id
-     * @param NewsReport
+     * @param newsReport
      * @return
      */
     @PutMapping("/id/{id}")
-    public NewsReportResult update(@PathVariable("id") String id, @RequestBody NewsReport NewsReport){
-        return NewsReportService.updateById(id,NewsReport);
+    public NewsReportResult update(@PathVariable("id") String id, @RequestBody NewsReport newsReport){
+        System.out.println("update"+id);
+        System.out.println(newsReport);
+        return NewsReportService.updateById(id,newsReport);
     }
 
     /**
