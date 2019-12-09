@@ -9,6 +9,7 @@ import com.demo.practical_training.common.web.STablePageRequest;
 import com.demo.practical_training.dao.AdminRepository;
 import com.demo.practical_training.dao.UserReportRepository;
 import com.demo.practical_training.dao.UserRepository;
+import com.demo.practical_training.dao.UserVerifiedRepository;
 import com.demo.practical_training.entity.*;
 import com.demo.practical_training.manage.service.*;
 import com.demo.practical_training.model.request.QueryAdminRequest;
@@ -38,6 +39,8 @@ public class AdminServiceImpl implements AdminService {
     UserRepository userRepository;
     @Autowired
     UserReportRepository userReportRepository;
+    @Autowired
+    UserVerifiedRepository userVerifiedRepository;
     @Autowired
     NewsViolationService newsViolationService;
     @Autowired
@@ -307,6 +310,7 @@ public class AdminServiceImpl implements AdminService {
         UserVerified userVerified = userVerifiedService.findById(id);
         userVerified.setReviewState(1);
         userVerified.getUser().setIsCertified(1);
+        userVerifiedRepository.save(userVerified);
         return new ResponseResult(AdminCode.ADMIN_ALLOW_USER);
     }
 
@@ -321,6 +325,7 @@ public class AdminServiceImpl implements AdminService {
         UserVerified userVerified = userVerifiedService.findById(id);
         userVerified.setReviewState(0);
         userVerified.setFailureReason(offReason);
+        userVerifiedRepository.save(userVerified);
         return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_USER);
     }
 

@@ -5,7 +5,6 @@ import com.demo.practical_training.dao.NewsRepository;
 import com.demo.practical_training.dao.UserReportRepository;
 import com.demo.practical_training.dao.UserRepository;
 import com.demo.practical_training.entity.Comment;
-import com.demo.practical_training.entity.News;
 import com.demo.practical_training.entity.User;
 import com.demo.practical_training.entity.UserReport;
 import com.demo.practical_training.utils.GenerateUtil;
@@ -15,8 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
