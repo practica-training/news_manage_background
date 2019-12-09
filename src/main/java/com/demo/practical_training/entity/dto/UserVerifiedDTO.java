@@ -15,6 +15,7 @@ public class UserVerifiedDTO {
 // *              realName:"申请者的真实姓名",
 // *              photo:"申请者拍的身份证照片"
 //     }
+    private String id;
     private String userId;
     private String userName;
     private String registrationTime;
@@ -23,4 +24,5 @@ public class UserVerifiedDTO {
     private String photo;
 
     //提供返回结果的业务层
+
 }

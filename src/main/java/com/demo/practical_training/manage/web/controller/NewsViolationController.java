@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/manage/NewsViolation")
-public class NesViolationController {
+public class NewsViolationController {
     @Autowired
     NewsViolationService NewsViolationService;
 

@@ -69,6 +69,7 @@ public class UserVerifiedServiceImpl implements UserVerifiedService {
 
         for (UserVerified userVerified : all) {
             UserVerifiedDTO userVerifiedDTO = new UserVerifiedDTO();
+            userVerifiedDTO.setId(userVerified.getId());
             userVerifiedDTO.setUserId(userVerified.getUser().getId());
             userVerifiedDTO.setUserName(userVerified.getUser().getUserName());
             userVerifiedDTO.setIdCard(userVerified.getIdCard());
