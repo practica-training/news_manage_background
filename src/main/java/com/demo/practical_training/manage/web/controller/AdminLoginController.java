@@ -4,7 +4,6 @@ import com.demo.practical_training.entity.Admin;
 import com.demo.practical_training.manage.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -21,23 +20,6 @@ public class AdminLoginController{
     @Autowired
     AdminService adminService;
 
-    @RequestMapping("/")
-    public String index(ModelMap map) {
-        HttpSession sessoin = request.getSession();
-        if (sessoin.getAttribute("adminname") != null) {
-            map.addAttribute("Admin", "Admin: " + sessoin.getAttribute("adminname"));
-            return "index";
-        } else {
-            //若未登陆则直接跳转至登陆界面
-            return "redirect:/login";
-        }
-    }
-
-    @RequestMapping(value = "/adminLogin", method = RequestMethod.GET)
-    public String login() {
-        return "login";
-    }
-
     @RequestMapping(value = "/adminLogin", method = RequestMethod.POST)
     public String login(HttpServletRequest request) {
         HttpSession sessoin = request.getSession();
@@ -51,17 +33,14 @@ public class AdminLoginController{
             else
                 check = false;
         } else {
-            request.setAttribute("msg", "用户不存在！");
             return "用户不存在！";
         }
-
         if (check) {
             sessoin.setAttribute("adminname", adminname);
             sessoin.setAttribute("adminPassword", adminPassword);
-            return "redirect:/";
+            return "登陆成功！";
         } else {
-            request.setAttribute("msg", "密码不正确！");
-            return "redirect:/login";
+            return "密码不正确！";
         }
     }
 }

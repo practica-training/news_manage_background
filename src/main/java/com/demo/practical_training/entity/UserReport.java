@@ -2,7 +2,9 @@ package com.demo.practical_training.entity;
 
 import com.demo.practical_training.common.entity.BaseEntity;
 import lombok.Data;
+import org.hibernate.annotations.GenerationTime;
 
+import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -39,12 +41,14 @@ public class UserReport extends BaseEntity {
     /**
      * 举报时间
      */
-    @Column(columnDefinition = "TIMESTAMP")
+    @Column(columnDefinition = "TIMESTAMP default current_timestamp")
     private Timestamp reportTime;
 
     /**
      * 审核状态 0等待审核 1审核完成
+     * 默认是0
      */
+    @Column(columnDefinition = "tinyint default 0")
     private Integer reviewState;
     /**
      * 是否违规 0没有违规 1违规
