@@ -2,8 +2,6 @@ package com.demo.practical_training.entity.dto;
 
 import lombok.Data;
 
-import java.util.UUID;
-
 /**
  * 封装实名认证返回对象
  */
@@ -17,7 +15,7 @@ public class UserVerifiedDTO {
 // *              realName:"申请者的真实姓名",
 // *              photo:"申请者拍的身份证照片"
 //     }
-    private String id;
+    private String userId;
     private String userName;
     private String registrationTime;
     private String idCard;
@@ -25,13 +23,4 @@ public class UserVerifiedDTO {
     private String photo;
 
     //提供返回结果的业务层
-
-    public String getId() {
-        UUID uuid = UUID.randomUUID();
-        return uuid.toString().replace("-", "");
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 }

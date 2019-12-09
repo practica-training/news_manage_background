@@ -13,6 +13,6 @@ import java.util.List;
 @Repository
 public interface UserReportRepository extends
         JpaRepository<UserReport, String>{
-    @Query(value = "select * from user_report b where b.userid=?1",nativeQuery = true)
-    List<UserReport> findByUserid(String userid);
+    @Query(value = "select * from user_report b where b.reportedid=?1",nativeQuery = true)
+    List<UserReport> findByReportedid(String reportedid);
 }

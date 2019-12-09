@@ -53,8 +53,10 @@ public class UserReportServiceImpl implements UserReportService {
         if (StringUtils.isNotEmpty(queryUserReportRequest.getId())) {
             UserReport.setId(queryUserReportRequest.getId());
         }
+
         //创建条件实例对象
         Example<UserReport> example = Example.of(UserReport, exampleMatcher);
+
 
         //根据分页对象和条件实例对象查询数据
         Page<UserReport> all = UserReportRepository.findAll(example, pageRequest.getPageable());
@@ -153,7 +155,7 @@ public class UserReportServiceImpl implements UserReportService {
      */
     @Override
     public List<UserReport> findByUserid(String userid) {
-        List<UserReport> list = UserReportRepository.findByUserid(userid);
+        List<UserReport> list = UserReportRepository.findByReportedid(userid);
         return list;
     }
 }

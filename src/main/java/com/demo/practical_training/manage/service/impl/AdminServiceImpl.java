@@ -7,6 +7,8 @@ import com.demo.practical_training.common.response.QueryResult;
 import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.common.web.STablePageRequest;
 import com.demo.practical_training.dao.AdminRepository;
+import com.demo.practical_training.dao.UserReportRepository;
+import com.demo.practical_training.dao.UserRepository;
 import com.demo.practical_training.entity.*;
 import com.demo.practical_training.manage.service.*;
 import com.demo.practical_training.model.request.QueryAdminRequest;
@@ -32,6 +34,10 @@ public class AdminServiceImpl implements AdminService {
     AdminRepository adminRepository;
     @Autowired
     NewsReportService newsReportService;
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    UserReportRepository userReportRepository;
     @Autowired
     NewsViolationService newsViolationService;
     @Autowired
@@ -257,6 +263,9 @@ public class AdminServiceImpl implements AdminService {
         User user = userService.findById(user1.getId());
         List<UserReport> list = userReportService.findByUserid(user.getId());
         for (UserReport userReport : list) {
+            userReport.setReviewState(1);
+            userReportRepository.save(userReport);
+            System.out.println(userReport);
             UserViolation UserViolation = new UserViolation();
             UserViolation.setUser(userReport.getUser());
             UserViolation.setReason(userReport.getReportReason());
@@ -267,7 +276,7 @@ public class AdminServiceImpl implements AdminService {
         }
         user.setUserState(Const.USER_BANNED);
         user.setNormalDate(user1.getNormalDate());
-        userService.updateById(user1.getId(),user);
+        userRepository.save(user);
         return new ResponseResult(AdminCode.ADMIN_ALLOW_REVIEW);
     }
 

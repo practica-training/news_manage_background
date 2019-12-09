@@ -123,6 +123,7 @@ public class AdminController {
      */
     @PutMapping("/reviewUser")
     public ResponseResult reviewUser(@RequestBody User user){
+        System.out.println(user);
         return adminService.reviewUser(user);
     }
 
@@ -148,7 +149,7 @@ public class AdminController {
     }
 
     /**
-     *对用户实名认证处理通过
+     *对用户实名认证处理不通过
      * @param reasonDTO
      * @return
      */
