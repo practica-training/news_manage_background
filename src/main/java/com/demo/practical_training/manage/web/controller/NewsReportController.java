@@ -27,6 +27,7 @@ public class NewsReportController {
      */
     @GetMapping
     public QueryResponseResult findList(STablePageRequest pageRequest, QueryNewsReportRequest queryNewsReportRequest){
+        System.out.println(pageRequest);
         return NewsReportService.findList(pageRequest,queryNewsReportRequest);
     }
 

@@ -36,15 +36,19 @@ public class Comment extends BaseEntity {
     @Column(columnDefinition="TIMESTAMP")
     private Timestamp commentTime;
     /**
-     * 回复用户ID
+     * 回复用户
      */
-    private String replyUserId;
+    @OneToOne
+    @JoinColumn(name = "replyUserId")
+    private User replyUser;
     /**
      * 回复用户是否已读,0未读,1已读
      */
+    @Column(columnDefinition = "tinyint default 0")
     private Integer replyUserHasRead;
     /**
      * 点赞数
      */
+    @Column(columnDefinition = "int default 0")
     private Long likeNumber;
 }

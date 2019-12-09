@@ -10,6 +10,7 @@ import com.demo.practical_training.manage.service.NewsReportService;
 import com.demo.practical_training.manage.service.NewsService;
 import com.demo.practical_training.manage.service.UserService;
 import com.demo.practical_training.model.request.QueryNewsReportRequest;
+import com.demo.practical_training.utils.GenerateUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,18 +42,20 @@ public class NewsReportTest {
     @Transactional
     @Rollback(false)
     public void testAdd(){
-        NewsReport newsReport = new NewsReport();
-        News news = newsService.findById("8a8180846eafdb1e016eafdc394f0020");
-        User user = userService.findById("4028ab0d6eafe408016eafe43e4c0001");
-        newsReport.setIsIllegal(1);
-        newsReport.setReviewState(0);
-        newsReport.setNews(news);
-        newsReport.setUser(user);
-        newsReport.setReportReason("呕吐新闻");
-        Date date = new Date();
-        newsReport.setReportTime(new Timestamp(date.getTime()));
-        NewsReport save = newsReportRepository.save(newsReport);
-        System.out.println(save);
+        for (int i = 0; i < 20; i++) {
+            NewsReport newsReport = new NewsReport();
+            News news = newsService.findById("8a8180846eafdb1e016eafdc4bd90025");
+            User user = userService.findById("4028ab0d6eafe408016eafe43e4c0001");
+            newsReport.setIsIllegal(1);
+            newsReport.setReviewState(0);
+            newsReport.setNews(news);
+            newsReport.setUser(user);
+            newsReport.setReportReason(GenerateUtil.getName()+GenerateUtil.getName());
+            Date date = new Date();
+            newsReport.setReportTime(new Timestamp(date.getTime()));
+            NewsReport save = newsReportRepository.save(newsReport);
+            System.out.println(save);
+        }
     }
 
     /**

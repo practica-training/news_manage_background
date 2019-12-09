@@ -24,7 +24,7 @@ spring:
     open-in-view: true
 logging:
   #    path: ./logs
-  file: "src//main//resources//logger//myLog.log"
+#  file: "src//main//resources//logger//myLog.log"
   level:
     root: info
     com.demo.practical_training.exception: debug
