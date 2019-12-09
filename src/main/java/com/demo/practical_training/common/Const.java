@@ -23,6 +23,7 @@ public class Const {
     //是否实名认证 1是 0否
     public static final int USER_NOT_VERIFIED = 0;
     public static final int USER_VERIFIED = 1;
+    public static final int USER_VERIFIED_FAIL = -1;
     /**
      * 管理员权限
      * 1.超级管理员具有全部权限

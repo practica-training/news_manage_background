@@ -6,10 +6,7 @@ import com.demo.practical_training.common.response.QueryResponseResult;
 import com.demo.practical_training.common.response.QueryResult;
 import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.common.web.STablePageRequest;
-import com.demo.practical_training.dao.AdminRepository;
-import com.demo.practical_training.dao.UserReportRepository;
-import com.demo.practical_training.dao.UserRepository;
-import com.demo.practical_training.dao.UserVerifiedRepository;
+import com.demo.practical_training.dao.*;
 import com.demo.practical_training.entity.*;
 import com.demo.practical_training.manage.service.*;
 import com.demo.practical_training.model.request.QueryAdminRequest;
@@ -37,6 +34,8 @@ public class AdminServiceImpl implements AdminService {
     NewsReportService newsReportService;
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    NewsRepository newsRepository;
     @Autowired
     UserReportRepository userReportRepository;
     @Autowired
@@ -223,19 +222,21 @@ public class AdminServiceImpl implements AdminService {
         news.setNewsState(3);
         Date date = new Date();
         news.setPublishTime(new Timestamp(date.getTime()));
+        newsRepository.save(news);
         return new ResponseResult(AdminCode.ADMIN_ALLOW_NEWSPUBLISH);
     }
 
     /**
-     * 审核新闻发布成功
+     * 审核新闻发布失败
      * @param id
      * @return
      */
     @Override
     public ResponseResult reviewNewsPublishOff(String id,String offReason) {
         News news = newsService.findById(id);
-        news.setNewsState(2);
+        news.setNewsState(Const.NEWS_AUDIT_FAILURE);
         news.setFailureReason(offReason);
+        newsRepository.save(news);
         return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_NEWSPUBLISH);
     }
 
@@ -323,7 +324,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public ResponseResult reviewUserVerifiedOff(String id,String offReason) {
         UserVerified userVerified = userVerifiedService.findById(id);
-        userVerified.setReviewState(0);
+        userVerified.setReviewState(Const.USER_VERIFIED_FAIL);
         userVerified.setFailureReason(offReason);
         userVerifiedRepository.save(userVerified);
         return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_USER);
