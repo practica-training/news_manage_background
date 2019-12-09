@@ -48,7 +48,8 @@ public class UserReportController {
      */
     @PutMapping("/id/{id}")
     public UserReportResult update(@PathVariable("id") String id, @RequestBody UserReport userReport){
-
+        System.out.println(id);
+        System.out.println(userReport);
         return UserReportService.updateById(id,userReport);
     }
 
