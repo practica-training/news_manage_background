@@ -90,6 +90,7 @@ public class AdminController {
      */
     @PutMapping("/reviewNewsPublishOff")
     public ResponseResult reviewNewsPublishOff(@RequestBody ReasonDTO reasonDTO) {
+        System.out.println(reasonDTO);
         return adminService.reviewNewsPublishOff(reasonDTO.getId(),reasonDTO.getFailureReason());
     }
 
@@ -155,6 +156,7 @@ public class AdminController {
      */
     @PutMapping("/reviewUserVerifiedOff")
     public ResponseResult reviewUserVerifiedOff(@RequestBody ReasonDTO reasonDTO){
+        System.out.println(reasonDTO);
         return adminService.reviewUserVerifiedOff(reasonDTO.getId(),reasonDTO.getFailureReason());
     }
 

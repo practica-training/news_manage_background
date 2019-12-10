@@ -1,6 +1,7 @@
 package com.demo.practical_training.entity;
 
 import com.demo.practical_training.common.entity.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.ToString;
 
@@ -65,6 +66,7 @@ public class User extends BaseEntity {
      * 用户和新闻标签，双向多对多
      * 为将来做个人推荐使用
      */
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "userAndLabel",
         joinColumns = @JoinColumn(name = "userID",referencedColumnName = "id"),
@@ -74,6 +76,7 @@ public class User extends BaseEntity {
     /**
      * 新闻发布者所写过的新闻，单向
      */
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "userid")
     private List<News> newsList;
