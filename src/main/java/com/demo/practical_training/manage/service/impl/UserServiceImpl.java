@@ -5,8 +5,10 @@ import com.demo.practical_training.common.response.QueryResponseResult;
 import com.demo.practical_training.common.response.QueryResult;
 import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.common.web.STablePageRequest;
-import com.demo.practical_training.entity.User;
+import com.demo.practical_training.common.web.UserPageRequest;
 import com.demo.practical_training.dao.UserRepository;
+import com.demo.practical_training.entity.User;
+import com.demo.practical_training.entity.dto.UserManageDTO;
 import com.demo.practical_training.manage.service.UserService;
 import com.demo.practical_training.model.request.QueryUserRequest;
 import com.demo.practical_training.model.response.UserResult;
@@ -18,6 +20,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,8 +29,61 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository UserRepository;
+
     /**
-     * 分页和排序加动态查询用户页面
+     * 分页和排序加动态查询管理用户页面
+     *
+     * @param pageRequest
+     * @param queryUserRequest
+     * @return
+     */
+    @Override
+    @Transactional(readOnly=true)
+    public QueryResponseResult findUserManageList(UserPageRequest pageRequest, QueryUserRequest queryUserRequest) {
+        //条件匹配器         
+        ExampleMatcher exampleMatcher = ExampleMatcher.matching();
+        //模糊匹配别名
+        exampleMatcher = exampleMatcher.withMatcher("UserTitle", ExampleMatcher.GenericPropertyMatchers.contains());
+        //创建条件值对象
+        User User = new User();
+        User.setUserState(-1);
+        //判断用户id是否为空
+        if (StringUtils.isNotEmpty(queryUserRequest.getId())) {
+            User.setId(queryUserRequest.getId());
+        }
+        //判断用户名是否为空
+        if (StringUtils.isNotEmpty(queryUserRequest.getUserName())) {
+            User.setUserName(queryUserRequest.getUserName());
+        }
+        //创建条件实例对象
+        Example<User> example = Example.of(User, exampleMatcher);
+
+        //根据分页对象和条件实例对象查询数据
+        Page<User> all = UserRepository.findAll(example, pageRequest.getPageable());
+
+        //新建QueryResult<T> 对象
+        List<UserManageDTO> list = new ArrayList<>();
+
+        for (User user : all) {
+            UserManageDTO userManageDTO = new UserManageDTO();
+            userManageDTO.setNormalDate(user.getNormalDate().toString());
+            userManageDTO.setRegistrationTime(user.getRegistrationTime().toString());
+            userManageDTO.setUserId(user.getId());
+            userManageDTO.setUserName(user.getUserName());
+            userManageDTO.setUserState(user.getUserState());
+            userManageDTO.setViolationNumber(user.getViolationNumber());
+            list.add(userManageDTO);
+        }
+        QueryResult<UserManageDTO> userManageDTOQueryResult = new QueryResult<>();
+        //分别给QueryResult<T> 对象中的list集合total赋值
+        userManageDTOQueryResult.setList(list);
+        userManageDTOQueryResult.setTotal(all.getTotalElements());
+        //返回结果
+        return new QueryResponseResult(CommonCode.SUCCESS, userManageDTOQueryResult);
+    }
+
+    /**
+     * 分页和排序加动态查询审核用户申请为新闻发布者页面
      *
      * @param pageRequest
      * @param queryUserRequest
@@ -41,15 +98,14 @@ public class UserServiceImpl implements UserService {
         exampleMatcher = exampleMatcher.withMatcher("UserTitle", ExampleMatcher.GenericPropertyMatchers.contains());
         //创建条件值对象
         User User = new User();
-        //判断用户名是否为空
+        //判断用户id是否为空
         if (StringUtils.isNotEmpty(queryUserRequest.getId())) {
             User.setId(queryUserRequest.getId());
         }
-        //判断用户id是否为空
+        //判断用户名是否为空
         if (StringUtils.isNotEmpty(queryUserRequest.getUserName())) {
             User.setUserName(queryUserRequest.getUserName());
         }
-
         //创建条件实例对象
         Example<User> example = Example.of(User, exampleMatcher);
 

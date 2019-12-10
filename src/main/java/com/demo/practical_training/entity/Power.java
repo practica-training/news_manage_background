@@ -104,7 +104,10 @@ package com.demo.practical_training.entity;
  *                  发送审核id，不通过原因
  *                  将新闻状态改成不通过，并将不通过原因写在新闻类中
  *
- *      用户新闻管理
+ *
+ *
+ *
+ *    ##### 用户新闻管理
  *      管理用户（封号） 2
  *          根据违规在前，不违规在后，申请时间降序
  *           {
@@ -119,7 +122,8 @@ package com.demo.practical_training.entity;
  *          对用户的操作可以是
  *              对用户进行禁言操作
                     发送用户id和惩罚天数和惩罚原因
- *                  将用户状态进行修改,并将正常时间改成该时间,注意还有惩罚原因failureReason
+ *                  将用户状态进行修改,并将正常时间改成该时间,
+ *                  注意还有惩罚原因failureReason                               ???
  *                  返回：
  *                      {
  *                          code:10000,
@@ -134,7 +138,7 @@ package com.demo.practical_training.entity;
  *                          message: "成功将该用户解除禁言"
  *                      }
  *
- *      管理新闻 （对新闻进行下架）2
+ *      管理新闻 （对新闻进行下架）2(未做)
  *             根据违规在前，不违规在后，发布时间降序
  *  *           {
  *      *           newsId: "新闻id",
@@ -174,8 +178,8 @@ package com.demo.practical_training.entity;
  *              userId:"申请新闻发布者的用户id",
  *              userName:"新闻发布者姓名",
  *              registrationTime:"新闻发布者的注册时间",
- *              idCard:"新闻发布者的身份证号码",
- *              realName:"新闻发布者的真实姓名",
+ *              idCard:"新闻发布者的身份证号码",                         ？？？？？
+ *              realName:"新闻发布者的真实姓名",                         ？？？？？
  *              reason:"申请原因"
  *          }
  *          申请的审核可以是
@@ -187,7 +191,7 @@ package com.demo.practical_training.entity;
  *                  将用户的申请改为通过
  *                  将UserApplyToNewsMaker状态改为已审核
  *
- *      管理员新闻发布者(将新闻发布者进行降级） 3
+ *      管理员新闻发布者(将新闻发布者进行降级） 3（未做）
             根据申请时间降序，而且审核状态为"未审核"的申请列表
  *          {
  *              userId:"新闻发布者id",

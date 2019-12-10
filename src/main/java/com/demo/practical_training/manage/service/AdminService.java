@@ -26,22 +26,26 @@ public interface AdminService {
     public Admin findByName(String name);
     //审核新闻举报
     public ResponseResult reviewNews(String id);
-    //审核新闻发布
+    //审核新闻发布通过
     public ResponseResult reviewNewsPublishOn(String id);
-    //审核新闻发布
+    //审核新闻发布不通过
     public ResponseResult reviewNewsPublishOff(String id,String offReason);
 //    //对新闻下架处理
 //    public ResponseResult reviewNewsOff(String id, News news);
     //审核用户举报
     public ResponseResult reviewUser(User user);
-//    //对用户封号处理
-//    public ResponseResult reviewUserOff(String id, User user);
+    //对用户进行禁言操作
+    public ResponseResult reviewUserOff(String id,String offReason,String normalDate);
+    //对用户进行解除禁言操作
+    public ResponseResult reviewUserOn(String id);
     //对用户是实名认证审核通过
     public ResponseResult reviewUserVerifiedOn(String id);
-    //对用户是实名认证审核通过
+    //对用户是实名认证审核不通过
     public ResponseResult reviewUserVerifiedOff(String id,String offReason);
-    //审核用户申请为新闻发布者
-    public ResponseResult reviewUserBecomePublish(String id, User user);
+    //审核用户申请为新闻发布者通过
+    public ResponseResult reviewUserBecomePublishOn(String id);
+    //审核用户申请为新闻发布者不通过
+    public ResponseResult reviewUserBecomePublishOff(String id,String offReason);
     //管理员新闻发布者(将新闻发布者进行降级）
     public ResponseResult reviewUserBecomeUser(String id, User user);
     //管理管理员

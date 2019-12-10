@@ -6,6 +6,7 @@ import com.demo.practical_training.common.web.STablePageRequest;
 import com.demo.practical_training.entity.Admin;
 import com.demo.practical_training.entity.User;
 import com.demo.practical_training.entity.dto.ReasonDTO;
+import com.demo.practical_training.entity.dto.UserOffDTO;
 import com.demo.practical_training.manage.service.AdminService;
 import com.demo.practical_training.model.request.QueryAdminRequest;
 import com.demo.practical_training.model.response.AdminResult;
@@ -128,16 +129,25 @@ public class AdminController {
         return adminService.reviewUser(user);
     }
 
-//    /**
-//     *对用户封号处理
-//     * @param id
-//     * @param user
-//     * @return
-//     */
-//    @PutMapping("/reviewUserOff/{id}")
-//    public ResponseResult reviewUserOff(@PathVariable("id") String id,@RequestBody User user){
-//        return adminService.reviewUserOff(id,user);
-//    }
+    /**
+     * 对用户进行禁言操作
+     * @param userOffDTO
+     * @return
+     */
+    @PutMapping("/reviewUserOff")
+    public ResponseResult reviewUserOff(@RequestBody UserOffDTO userOffDTO){
+        return adminService.reviewUserOff(userOffDTO.getId(),userOffDTO.getFailureReason(),userOffDTO.getNormalDate());
+    }
+
+    /**
+     * 对用户进行解除禁言操作
+     * @param id
+     * @return
+     */
+    @PutMapping("/reviewUserOn/{id}")
+    public ResponseResult reviewUserOn(@PathVariable("id") String id){
+        return adminService.reviewUserOn(id);
+    }
 
     /**
      *对用户实名认证处理通过
@@ -162,14 +172,24 @@ public class AdminController {
 
 
     /**
-     *审核用户申请为新闻发布者
-     * @param id
-     * @param user
+     *审核用户申请为新闻发布者不通过
+     * @param reasonDTO
      * @return
      */
-    @PutMapping("/reviewUserBecomePublish/{id}")
-    public ResponseResult reviewUserBecomePublish(@PathVariable("id") String id,@RequestBody User user){
-        return adminService.reviewUserBecomePublish(id,user);
+    @PutMapping("/reviewUserBecomePublishOn")
+    public ResponseResult reviewUserBecomePublishOff(@RequestBody ReasonDTO reasonDTO){
+        return adminService.reviewUserBecomePublishOff(reasonDTO.getId(),reasonDTO.getFailureReason());
+    }
+
+
+    /**
+     *审核用户申请为新闻发布者通过
+     * @param id
+     * @return
+     */
+    @PutMapping("/reviewUserBecomePublishOn/{id}")
+    public ResponseResult reviewUserBecomePublishOn(@PathVariable("id") String id){
+        return adminService.reviewUserBecomePublishOn(id);
     }
 
     /**

@@ -21,6 +21,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -41,6 +43,8 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     UserVerifiedRepository userVerifiedRepository;
     @Autowired
+    UserApplyToNewsMakerRepository userApplyToNewsMakerRepository;
+    @Autowired
     NewsViolationService newsViolationService;
     @Autowired
     NewsService newsService;
@@ -58,6 +62,9 @@ public class AdminServiceImpl implements AdminService {
     UserManagementLogService userManagementLogService;
     @Autowired
     UserVerifiedService userVerifiedService;
+    @Autowired
+    UserApplyToNewsMakerService userApplyToNewsMakerService;
+
     /**
      * 分页和排序加动态查询管理员页面
      *
@@ -284,21 +291,42 @@ public class AdminServiceImpl implements AdminService {
         return new ResponseResult(AdminCode.ADMIN_ALLOW_REVIEW);
     }
 
-//    /**
-//     * 对用户封号处理
-//     * @param id
-//     * @param user
-//     * @return
-//     */
-//    @Override
-//    public ResponseResult reviewUserOff(String id, User user) {
-//        //1.调用User更新方法
-//        userService.updateById(id, user);
-//        if(user.getUserState()== Const.NEWS_OFF){
-//            return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_USEREXISTENCE);
-//        }
-//        return new ResponseResult(AdminCode.ADMIN_ALLOW_USEREXISTENCE);
-//    }
+    /**
+     * 对用户进行禁言操作
+     * @param id
+     * @param offReason
+     * @param normalDate
+     * @return
+     */
+    @Override
+    public ResponseResult reviewUserOff(String id,String offReason,String normalDate) {
+        User user = userService.findById(id);
+        user.setUserState(Const.USER_BANNED);
+        String str = "yyyy-MM-dd HH:mm:ss";
+        SimpleDateFormat sdf = new SimpleDateFormat(str);
+        try {
+            Date date = sdf.parse(normalDate);
+            user.setNormalDate(new Timestamp(date.getTime()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        userRepository.save(user);
+        return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_USEREXISTENCE);
+    }
+
+    /**
+     * 对用户进行解除禁言操作
+     * @param id
+     * @return
+     */
+    @Override
+    public ResponseResult reviewUserOn(String id) {
+        User user = userService.findById(id);
+        user.setNormalDate(null);
+        user.setUserState(Const.USER_NORMAL_USER);
+        userRepository.save(user);
+        return new ResponseResult(AdminCode.ADMIN_ALLOW_USEREXISTENCE);
+    }
 
     /**
      * 对用户实名认证处理审核通过
@@ -332,23 +360,35 @@ public class AdminServiceImpl implements AdminService {
 
 
     /**
-     * 审核用户申请为新闻发布者
+     * 审核用户申请为新闻发布者通过
      * @param id
-     * @param user
      * @return
      */
     @Override
-    public ResponseResult reviewUserBecomePublish(String id, User user) {
-        //1.调用User更新方法
-        userService.updateById(id, user);
-        if(user.getUserState()==Const.USER_NEWS_PUBLISHER){
-            return new ResponseResult(AdminCode.ADMIN_ALLOW_USERPUBLISH);
-        }
+    public ResponseResult reviewUserBecomePublishOn(String id) {
+        UserApplyToNewsMaker userApplyToNewsMaker = userApplyToNewsMakerService.findById(id);
+        userApplyToNewsMaker.setReviewState(Const.PUBLISH);
+        userApplyToNewsMakerRepository.save(userApplyToNewsMaker);
+        return new ResponseResult(AdminCode.ADMIN_ALLOW_USERPUBLISH);
+    }
+
+    /**
+     * 审核用户申请为新闻发布者不通过
+     * @param id
+     * @param id
+     * @return
+     */
+    @Override
+    public ResponseResult reviewUserBecomePublishOff(String id,String offReason) {
+        UserApplyToNewsMaker userApplyToNewsMaker = userApplyToNewsMakerService.findById(id);
+        userApplyToNewsMaker.setReviewState(Const.PUBLISH_FAIL);
+        userApplyToNewsMaker.setFailureReason(offReason);
+        userApplyToNewsMakerRepository.save(userApplyToNewsMaker);
         return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_USERPUBLISH);
     }
 
     /**
-     * 审核用户申请为新闻发布者
+     * 管理员新闻发布者(将新闻发布者进行降级）
      * @param id
      * @param user
      * @return

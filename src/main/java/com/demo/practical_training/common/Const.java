@@ -24,6 +24,10 @@ public class Const {
     public static final int USER_NOT_VERIFIED = 0;
     public static final int USER_VERIFIED = 1;
     public static final int USER_VERIFIED_FAIL = -1;
+//    新闻发布者管理 审核状态 0等待审核 1通过审核 -1审核失败
+    public static final int PUBLISH_NOT = 0;
+    public static final int PUBLISH = 1;
+    public static final int PUBLISH_FAIL = -1;
     /**
      * 管理员权限
      * 1.超级管理员具有全部权限

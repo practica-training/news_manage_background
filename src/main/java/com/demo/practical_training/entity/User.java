@@ -1,6 +1,7 @@
 package com.demo.practical_training.entity;
 
 import com.demo.practical_training.common.entity.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.ToString;
@@ -43,6 +44,7 @@ public class User extends BaseEntity {
      * 注册时间
      */
     @Column(columnDefinition = "TIMESTAMP")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Timestamp registrationTime;
     /**
      * 用户状态 1正常用户 2新闻发布者 0已注销 -1违规禁言

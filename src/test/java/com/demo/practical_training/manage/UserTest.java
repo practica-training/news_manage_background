@@ -1,8 +1,11 @@
 package com.demo.practical_training.manage;
 
-import com.demo.practical_training.entity.User;
+import com.demo.practical_training.common.response.QueryResponseResult;
+import com.demo.practical_training.common.web.UserPageRequest;
 import com.demo.practical_training.dao.UserRepository;
+import com.demo.practical_training.entity.User;
 import com.demo.practical_training.manage.service.UserService;
+import com.demo.practical_training.model.request.QueryUserRequest;
 import com.demo.practical_training.utils.GenerateUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -66,7 +69,10 @@ public class UserTest {
      */
     @Test
     public void testFindList(){
-
+        UserPageRequest userPageRequest = new UserPageRequest();
+        QueryUserRequest queryUserRequest = new QueryUserRequest();
+        QueryResponseResult list = userService.findUserManageList(userPageRequest, queryUserRequest);
+        System.out.println(list);
     }
 
     /**

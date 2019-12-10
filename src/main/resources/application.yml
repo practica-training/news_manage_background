@@ -5,6 +5,7 @@ spring:
   jackson:
     serialization:
       FAIL_ON_EMPTY_BEANS: false
+    date-format: yyyy-MM-dd
   datasource:
     #    url: jdbc:mysql://cdb-q5u06yqp.gz.tencentcdb.com:10080/practical_training?serverTimezone=UTC
     #    username: newsmanage
