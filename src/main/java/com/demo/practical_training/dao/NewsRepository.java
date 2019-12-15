@@ -1,7 +1,10 @@
 package com.demo.practical_training.dao;
 
 import com.demo.practical_training.entity.News;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 /**
  * 新闻持久层
@@ -9,5 +12,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface NewsRepository extends
         JpaRepository<News, String>//分页和排序
 {
+    //可以在SQL中增加更多的条件查询
+    @Query(value = "SELECT * FROM news WHERE news.news_state = 1 or news.news_state = -2 ORDER BY ?#{#pageable}",
+            countQuery = "SELECT count(*) FROM news WHERE news.news_state = 1 or news.news_state = -2",
+            nativeQuery = true)
+    Page<News> findAllByPage(Pageable pageable);
 
 }

@@ -11,6 +11,8 @@ import com.demo.practical_training.model.response.NewsResult;
  * 新闻业务层
  */
 public interface NewsService {
+    //页面分页与查询 管理新闻
+    public QueryResponseResult findNewsManageList(Integer pageNum,Integer pageSize);
     //页面分页与查询
     public QueryResponseResult findList(STablePageRequest pageRequest, QueryNewsRequest queryNewsRequest);
     //增加新闻

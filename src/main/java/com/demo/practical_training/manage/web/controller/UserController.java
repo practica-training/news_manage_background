@@ -25,10 +25,34 @@ public class UserController {
      * @param queryUserRequest
      * @return
      */
-    @GetMapping
+    @GetMapping("/findList")
     public QueryResponseResult findList(STablePageRequest pageRequest, QueryUserRequest queryUserRequest){
         return userService.findList(pageRequest,queryUserRequest);
     }
+
+    /**
+     * 分页排序条件查询新闻发布者列表
+     * @param pageRequest
+     * @param queryUserRequest
+     * @return
+     */
+    @GetMapping("/findPublicList")
+    public QueryResponseResult findPublicList(STablePageRequest pageRequest, QueryUserRequest queryUserRequest){
+        return userService.findPublicList(pageRequest,queryUserRequest);
+    }
+
+    /**
+     * 分页和排序加动态查询管理用户页面
+     * @param pageSize
+     * @param pageNum
+     * @return
+     */
+    @GetMapping("/findUserManageList/{pageNum}/{pageSize}")
+    public QueryResponseResult findUserManageList(@PathVariable("pageNum") Integer pageNum,@PathVariable("pageSize") Integer pageSize){
+        return userService.findUserManageList(pageNum,pageSize);
+    }
+
+
 
     /**
      * 新增用户

@@ -20,6 +20,19 @@ public class NewsController {
     NewsService newsService;
 
     /**
+     * 分页和排序加动态查询管理新闻页面
+     * @param pageSize
+     * @param pageNum
+     * @return
+     */
+    @GetMapping("/findNewsManageList/{pageNum}/{pageSize}")
+    public QueryResponseResult findNewsManageList(@PathVariable("pageNum") Integer pageNum,@PathVariable("pageSize") Integer pageSize){
+        return newsService.findNewsManageList(pageNum,pageSize);
+    }
+
+
+
+    /**
      * 分页排序条件查询新闻列表
      * @param pageRequest
      * @param queryNewsRequest

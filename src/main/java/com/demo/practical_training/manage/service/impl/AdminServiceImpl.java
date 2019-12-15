@@ -8,6 +8,7 @@ import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.common.web.STablePageRequest;
 import com.demo.practical_training.dao.*;
 import com.demo.practical_training.entity.*;
+import com.demo.practical_training.entity.dto.AdminDTO;
 import com.demo.practical_training.manage.service.*;
 import com.demo.practical_training.model.request.QueryAdminRequest;
 import com.demo.practical_training.model.response.AdminCode;
@@ -23,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -65,6 +67,48 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     UserApplyToNewsMakerService userApplyToNewsMakerService;
 
+
+    /**
+     * 分页和排序加动态查询 管理管理员  页面
+     *
+     * @param pageRequest
+     * @param queryAdminRequest
+     * @return
+     */
+    @Override
+    @Transactional(readOnly=true)
+    public QueryResponseResult findManageList(STablePageRequest pageRequest, QueryAdminRequest queryAdminRequest) {
+        //条件匹配器         
+        ExampleMatcher exampleMatcher = ExampleMatcher.matching();
+
+        //创建条件值对象
+        Admin Admin = new Admin();
+        //判断管理员id是否为空
+        if (StringUtils.isNotEmpty(queryAdminRequest.getId())) {
+            Admin.setId(queryAdminRequest.getId());
+        }
+        //创建条件实例对象
+        Example<Admin> example = Example.of(Admin, exampleMatcher);
+
+        //根据分页对象和条件实例对象查询数据
+        Page<Admin> all = adminRepository.findAll(example, pageRequest.getPageable());
+        List<AdminDTO> list = new ArrayList<>();
+        for (Admin admin : all) {
+            AdminDTO adminDTO = new AdminDTO();
+            adminDTO.setAdminId(admin.getId());
+            adminDTO.setAdminName(admin.getAdminName());
+            adminDTO.setPower(admin.getPower());
+            list.add(adminDTO);
+        }
+        QueryResult<AdminDTO> adminDTOQueryResult = new QueryResult<>();
+        //分别给QueryResult<T> 对象中的list集合total赋值
+        adminDTOQueryResult.setList(list);
+        adminDTOQueryResult.setTotal(all.getTotalElements());
+        //返回结果
+        return new QueryResponseResult(CommonCode.SUCCESS, adminDTOQueryResult);
+
+    }
+
     /**
      * 分页和排序加动态查询管理员页面
      *
@@ -77,14 +121,8 @@ public class AdminServiceImpl implements AdminService {
     public QueryResponseResult findList(STablePageRequest pageRequest, QueryAdminRequest queryAdminRequest) {
         //条件匹配器         
         ExampleMatcher exampleMatcher = ExampleMatcher.matching();
-        //模糊匹配别名
-        exampleMatcher = exampleMatcher.withMatcher("AdminTitle", ExampleMatcher.GenericPropertyMatchers.contains());
         //创建条件值对象
         Admin Admin = new Admin();
-        //判断管理员标题是否为空
-        if (StringUtils.isNotEmpty(queryAdminRequest.getAdminName())) {
-            Admin.setAdminName(queryAdminRequest.getAdminName());
-        }
         //判断管理员id是否为空
         if (StringUtils.isNotEmpty(queryAdminRequest.getId())) {
             Admin.setId(queryAdminRequest.getId());
@@ -247,22 +285,6 @@ public class AdminServiceImpl implements AdminService {
         return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_NEWSPUBLISH);
     }
 
-//    /**
-//     * 对新闻下架处理
-//     * @param id
-//     * @param news
-//     * @return
-//     */
-//    @Override
-//    public ResponseResult reviewNewsOff(String id, News news) {
-//        //1.调用News更新方法
-//        newsService.updateById(id, news);
-//        if(news.getNewsState()==Const.NEWS_OFF){
-//            return new ResponseResult(AdminCode.ADMIN_ALLOW_NEWSEXISTENCE);
-//        }
-//        return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_NEWEXISTENCE);
-//    }
-
     /**
      * 审核用户举报
      * @param user1
@@ -289,6 +311,33 @@ public class AdminServiceImpl implements AdminService {
         user.setNormalDate(user1.getNormalDate());
         userRepository.save(user);
         return new ResponseResult(AdminCode.ADMIN_ALLOW_REVIEW);
+    }
+    /**
+     * 对新闻进行下架操作
+     * @param id
+     * @param offReason
+     * @return
+     */
+    @Override
+    public ResponseResult reviewNewsOff(String id,String offReason) {
+        News news = newsService.findById(id);
+        news.setNewsState(Const.NEWS_OFF);
+        news.setFailureReason(offReason);
+        newsRepository.save(news);
+        return new ResponseResult(AdminCode.ADMIN_ALLOW_NEWSEXISTENCE);
+    }
+
+    /**
+     * 对新闻进行解除下架操作
+     * @param id
+     * @return
+     */
+    @Override
+    public ResponseResult reviewNewsOn(String id) {
+        News news = newsService.findById(id);
+        news.setNewsState(Const.NEWS_PUBLISH);
+        newsRepository.save(news);
+        return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_NEWEXISTENCE);
     }
 
     /**
@@ -390,53 +439,31 @@ public class AdminServiceImpl implements AdminService {
     /**
      * 管理员新闻发布者(将新闻发布者进行降级）
      * @param id
-     * @param user
      * @return
      */
     @Override
-    public ResponseResult reviewUserBecomeUser(String id, User user) {
-        //1.调用User更新方法
-        userService.updateById(id, user);
-//        //新建日志对象
-//        UserManagementLog userManagementLog = new UserManagementLog();
-        if(user.getUserState()==Const.USER_NORMAL_USER){
-            //记录日志
-
-            return new ResponseResult(AdminCode.ADMIN_ALLOW_BECOMEUSER);
-        }
-        return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_BECOMEUSER);
+    public ResponseResult reviewUserBecomeUser(String id) {
+        User user = userService.findById(id);
+        user.setUserState(Const.USER_NORMAL_USER);
+        return new ResponseResult(AdminCode.ADMIN_ALLOW_BECOMEUSER);
     }
 
     /**
      * 管理管理员
      * @param id
-     * @param admin
+     * @param power
      * @return
      */
     @Override
-    public ResponseResult ManagementAdmin(String id,  Admin admin) {
-        //1.调用admin更新方法
-        AdminResult adminResult = this.updateById(id, admin);
-        //新建超级管理员管理普通管理员的日志对象
-        AdminManagementLog adminManagementLog = new AdminManagementLog();
-        if(adminResult!=null){
-            //记录日志
-            adminManagementLog.setAdmin(admin);
-            adminManagementLog.setOperationalContent(CommonCode.SUCCESS.message());
-            Date date = new Date();
-            adminManagementLog.setProcessingTime(new Timestamp(date.getTime()));
-            adminManagementLogService.add(adminManagementLog);
-            //返回结果
-            return new ResponseResult(CommonCode.SUCCESS);
+    public ResponseResult ManagementAdmin(String id,  Integer power) {
+        Optional<Admin> optional = adminRepository.findById(id);
+        if(optional.isPresent()){
+            Admin admin = optional.get();
+            admin.setPower(power);
+            adminRepository.save(admin);
+            return new ResponseResult(AdminCode.ADMIN_BECOMEUSER);
         }
-        //记录日志
-        adminManagementLog.setAdmin(admin);
-        adminManagementLog.setOperationalContent(CommonCode.FAIL.message());
-        Date date = new Date();
-        adminManagementLog.setProcessingTime(new Timestamp(date.getTime()));
-        adminManagementLogService.add(adminManagementLog);
-        //返回结果
-        return new ResponseResult(CommonCode.FAIL);
+        return new ResponseResult(AdminCode.ADMIN_NOT_BECOMEUSER);
     }
 
 }

@@ -6,20 +6,17 @@ import lombok.Data;
  * 封装实名认证返回对象
  */
 @Data
-public class UserApplyToNewsMakerDTO {
-//    {
-// *              id:"申请的id",
-// *              userId:"申请新闻发布者的用户id",
-// *              userName:"新闻发布者姓名",
+public class PublisherManageDTO {
+// *          {
+// *              userId:"新闻发布者id",
+// *              userName:"新闻发布者名",
 // *              registrationTime:"新闻发布者的注册时间",
-// *              reason:"申请原因"
-//            *          }
-    private String id;
+// *              newsListSize:"发布的新闻数"
+//                *          }
     private String userId;
     private String userName;
+    private Integer newsListSize;
     private String registrationTime;
-    private String reason;
-
     //提供返回结果的业务层
 
 }

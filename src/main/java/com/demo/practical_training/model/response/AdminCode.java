@@ -20,12 +20,13 @@ public enum AdminCode implements ResultCode {
     ADMIN_ALLOW_NEWSPUBLISH(true,24009,"新闻发布成功！"),
     ADMIN_NOT_ALLOW_NEWSPUBLISH(false,24010,"新闻发布失败！"),
     ADMIN_NEWSPUBLISH_WAIT(false,24011,"新闻发布等待审核！"),
-    ADMIN_ALLOW_NEWSEXISTENCE(true,24012,"新闻下架成功！"),
-    ADMIN_NOT_ALLOW_NEWEXISTENCE(false,24013,"新闻下架失败！"),
+    ADMIN_ALLOW_NEWSEXISTENCE(true,10000,"新闻下架成功！"),
+    ADMIN_NOT_ALLOW_NEWEXISTENCE(false,10000,"成功将新闻变成正常！"),
     ADMIN_ALLOW_USERPUBLISH(true,24014,"允许成为新闻发布者！"),
     ADMIN_NOT_ALLOW_USERPUBLISH(false,24015,"不允许成为新闻发布者！"),
     ADMIN_ALLOW_BECOMEUSER(true,24014,"降级为普通用户！"),
-    ADMIN_NOT_ALLOW_BECOMEUSER(false,24015,"降级为普通用户失败！");
+    ADMIN_BECOMEUSER(false,24015,"修改管理员等级成功！"),
+    ADMIN_NOT_BECOMEUSER(false,24015,"修改管理员等级失败！");
 
 
     //操作代码

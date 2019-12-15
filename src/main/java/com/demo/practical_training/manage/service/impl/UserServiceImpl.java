@@ -1,22 +1,21 @@
 package com.demo.practical_training.manage.service.impl;
 
+import com.demo.practical_training.common.Const;
 import com.demo.practical_training.common.response.CommonCode;
 import com.demo.practical_training.common.response.QueryResponseResult;
 import com.demo.practical_training.common.response.QueryResult;
 import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.common.web.STablePageRequest;
-import com.demo.practical_training.common.web.UserPageRequest;
 import com.demo.practical_training.dao.UserRepository;
 import com.demo.practical_training.entity.User;
+import com.demo.practical_training.entity.dto.PublisherManageDTO;
 import com.demo.practical_training.entity.dto.UserManageDTO;
 import com.demo.practical_training.manage.service.UserService;
 import com.demo.practical_training.model.request.QueryUserRequest;
 import com.demo.practical_training.model.response.UserResult;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.data.domain.Page;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,8 +29,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository UserRepository;
 
+
     /**
-     * 分页和排序加动态查询管理用户页面
+     * 分页和排序加动态查询审核用户申请为新闻发布者页面
      *
      * @param pageRequest
      * @param queryUserRequest
@@ -39,14 +39,14 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     @Transactional(readOnly=true)
-    public QueryResponseResult findUserManageList(UserPageRequest pageRequest, QueryUserRequest queryUserRequest) {
+    public QueryResponseResult findPublicList(STablePageRequest pageRequest, QueryUserRequest queryUserRequest) {
         //条件匹配器         
         ExampleMatcher exampleMatcher = ExampleMatcher.matching();
         //模糊匹配别名
         exampleMatcher = exampleMatcher.withMatcher("UserTitle", ExampleMatcher.GenericPropertyMatchers.contains());
         //创建条件值对象
         User User = new User();
-        User.setUserState(-1);
+        User.setUserState(Const.NEWS_PUBLISH);
         //判断用户id是否为空
         if (StringUtils.isNotEmpty(queryUserRequest.getId())) {
             User.setId(queryUserRequest.getId());
@@ -60,14 +60,57 @@ public class UserServiceImpl implements UserService {
 
         //根据分页对象和条件实例对象查询数据
         Page<User> all = UserRepository.findAll(example, pageRequest.getPageable());
+        //新建QueryResult<T> 对象
+        List<PublisherManageDTO> list = new ArrayList<>();
+
+        for (User user : all) {
+            PublisherManageDTO publisherManageDTO = new PublisherManageDTO();
+            if(user.getRegistrationTime()!=null){
+                publisherManageDTO.setRegistrationTime(user.getRegistrationTime().toString());
+            }
+            publisherManageDTO.setUserId(user.getId());
+            publisherManageDTO.setUserName(user.getUserName());
+            publisherManageDTO.setNewsListSize(user.getNewsList().size());
+            publisherManageDTO.setRegistrationTime(user.getRegistrationTime().toString());
+            list.add(publisherManageDTO);
+        }
+        QueryResult<PublisherManageDTO> publisherManageDTOQueryResult = new QueryResult<>();
+        //分别给QueryResult<T> 对象中的list集合total赋值
+        publisherManageDTOQueryResult.setList(list);
+        publisherManageDTOQueryResult.setTotal(all.getTotalElements());
+        //返回结果
+        return new QueryResponseResult(CommonCode.SUCCESS, publisherManageDTOQueryResult);
+    }
+
+    /**
+     * 分页和排序加动态查询管理用户页面
+     *
+     * @return
+     */
+    @Override
+    @Transactional(readOnly=true)
+    public QueryResponseResult findUserManageList(Integer pageNum,Integer pageSize) {
+       if(pageNum<=0||pageNum==null){
+           pageNum = 1;
+       }
+        if(pageSize<=0||pageSize==null){
+            pageSize = 10;
+        }
+        Pageable pageable = new PageRequest(pageNum, pageSize,
+                new Sort(Sort.Direction.ASC, "user_state"));
+
+        //根据分页对象和条件实例对象查询数据
+        Page<User> all = UserRepository.findAllByPage(pageable);
 
         //新建QueryResult<T> 对象
         List<UserManageDTO> list = new ArrayList<>();
 
         for (User user : all) {
             UserManageDTO userManageDTO = new UserManageDTO();
-            userManageDTO.setNormalDate(user.getNormalDate().toString());
-            userManageDTO.setRegistrationTime(user.getRegistrationTime().toString());
+            if(user.getNormalDate()!=null&&user.getRegistrationTime()!=null){
+                userManageDTO.setNormalDate(user.getNormalDate().toString());
+                userManageDTO.setRegistrationTime(user.getRegistrationTime().toString());
+            }
             userManageDTO.setUserId(user.getId());
             userManageDTO.setUserName(user.getUserName());
             userManageDTO.setUserState(user.getUserState());

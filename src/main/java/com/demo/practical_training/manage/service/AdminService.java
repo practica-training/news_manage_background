@@ -13,6 +13,8 @@ import com.demo.practical_training.model.response.AdminResult;
  */
 public interface AdminService {
     //页面分页与查询
+    public QueryResponseResult findManageList(STablePageRequest pageRequest, QueryAdminRequest queryAdminRequest);
+    //页面分页与查询
     public QueryResponseResult findList(STablePageRequest pageRequest, QueryAdminRequest queryAdminRequest);
     //增加管理员
     public AdminResult add(Admin Admin);
@@ -30,8 +32,10 @@ public interface AdminService {
     public ResponseResult reviewNewsPublishOn(String id);
     //审核新闻发布不通过
     public ResponseResult reviewNewsPublishOff(String id,String offReason);
-//    //对新闻下架处理
-//    public ResponseResult reviewNewsOff(String id, News news);
+//  对新闻下架处理
+    public ResponseResult reviewNewsOff(String id,String offReason);
+//  对新闻进行解除下架处理
+    public ResponseResult reviewNewsOn(String id);
     //审核用户举报
     public ResponseResult reviewUser(User user);
     //对用户进行禁言操作
@@ -47,8 +51,8 @@ public interface AdminService {
     //审核用户申请为新闻发布者不通过
     public ResponseResult reviewUserBecomePublishOff(String id,String offReason);
     //管理员新闻发布者(将新闻发布者进行降级）
-    public ResponseResult reviewUserBecomeUser(String id, User user);
+    public ResponseResult reviewUserBecomeUser(String id);
     //管理管理员
-    public ResponseResult ManagementAdmin(String id, Admin admin);
+    public ResponseResult ManagementAdmin(String id, Integer power);
 }
 

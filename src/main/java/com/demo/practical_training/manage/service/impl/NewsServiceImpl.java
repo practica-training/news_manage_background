@@ -8,14 +8,13 @@ import com.demo.practical_training.common.web.STablePageRequest;
 import com.demo.practical_training.dao.NewsRepository;
 import com.demo.practical_training.entity.News;
 import com.demo.practical_training.entity.dto.NewsDTO;
+import com.demo.practical_training.entity.dto.NewsManageDTO;
 import com.demo.practical_training.manage.service.NewsService;
 import com.demo.practical_training.model.request.QueryNewsRequest;
 import com.demo.practical_training.model.response.NewsResult;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.data.domain.Page;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +27,50 @@ import java.util.Optional;
 public class NewsServiceImpl implements NewsService {
     @Autowired
     NewsRepository newsRepository;
+
+    /**
+     * 分页和排序加动态查询管理用户页面
+     *
+     * @return
+     */
+    @Override
+    @Transactional(readOnly=true)
+    public QueryResponseResult findNewsManageList(Integer pageNum,Integer pageSize) {
+        if(pageNum<=0||pageNum==null){
+            pageNum = 1;
+        }
+        if(pageSize<=0||pageSize==null){
+            pageSize = 10;
+        }
+        Pageable pageable = new PageRequest(pageNum, pageSize,
+                new Sort(Sort.Direction.ASC, "news_state"));
+
+        //根据分页对象和条件实例对象查询数据
+        Page<News> all = newsRepository.findAllByPage(pageable);
+
+        //新建QueryResult<T> 对象
+        List<NewsManageDTO> list = new ArrayList<>();
+        for (News news1 : all) {
+            NewsManageDTO newsManageDTO = new NewsManageDTO();
+            newsManageDTO.setContent(news1.getContent());
+            newsManageDTO.setLikeNumber(news1.getLikeNumber());
+            newsManageDTO.setNewsAvatar(news1.getNewsAvatar());
+            newsManageDTO.setNewsState(news1.getNewsState());
+            newsManageDTO.setNewsTitle(news1.getNewsTitle());
+            newsManageDTO.setReadNumber(news1.getReadNumber());
+            newsManageDTO.setNewsId(news1.getId());
+            if(news1.getPublishTime()!=null){
+                newsManageDTO.setPublishTime(news1.getPublishTime().toString());
+            }
+            list.add(newsManageDTO);
+        }
+        QueryResult<NewsManageDTO> newsManageDTOQueryResult = new QueryResult<>();
+        //分别给QueryResult<T> 对象中的list集合total赋值
+        newsManageDTOQueryResult.setList(list);
+        newsManageDTOQueryResult.setTotal(all.getTotalElements());
+        //返回结果
+        return new QueryResponseResult(CommonCode.SUCCESS, newsManageDTOQueryResult);
+    }
 
     /**
      * 分页和排序加动态查询新闻页面

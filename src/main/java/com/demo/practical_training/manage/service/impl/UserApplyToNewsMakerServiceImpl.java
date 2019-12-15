@@ -34,8 +34,9 @@ public class UserApplyToNewsMakerServiceImpl implements UserApplyToNewsMakerServ
     UserApplyToNewsMakerRepository UserApplyToNewsMakerRepository;
     @Autowired
     NewsService newsService;
+
     /**
-     * 分页和排序加动态查询实名认证页面
+     * 分页和排序加动态查询实页面
      *
      * @param pageRequest
      * @param queryUserApplyToNewsMakerRequest
@@ -72,9 +73,7 @@ public class UserApplyToNewsMakerServiceImpl implements UserApplyToNewsMakerServ
             UserApplyToNewsMakerDTO.setId(userApplyToNewsMaker.getId());
             UserApplyToNewsMakerDTO.setUserId(userApplyToNewsMaker.getUser().getId());
             UserApplyToNewsMakerDTO.setUserName(userApplyToNewsMaker.getUser().getUserName());
-//            UserApplyToNewsMakerDTO.setIdCard(userApplyToNewsMaker.getUser().);
             UserApplyToNewsMakerDTO.setReason(userApplyToNewsMaker.getReason());
-//            UserApplyToNewsMakerDTO.setRealName(userApplyToNewsMaker.getRealName());
             UserApplyToNewsMakerDTO.setRegistrationTime(userApplyToNewsMaker.getVerifiedTime().toString());
             list.add(UserApplyToNewsMakerDTO);
         }

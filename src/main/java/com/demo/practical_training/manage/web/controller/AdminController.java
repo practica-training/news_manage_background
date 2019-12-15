@@ -5,6 +5,7 @@ import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.common.web.STablePageRequest;
 import com.demo.practical_training.entity.Admin;
 import com.demo.practical_training.entity.User;
+import com.demo.practical_training.entity.dto.NewsOffDTO;
 import com.demo.practical_training.entity.dto.ReasonDTO;
 import com.demo.practical_training.entity.dto.UserOffDTO;
 import com.demo.practical_training.manage.service.AdminService;
@@ -21,6 +22,18 @@ import org.springframework.web.bind.annotation.*;
 public class AdminController {
     @Autowired
     AdminService adminService;
+
+
+    /**
+     * 分页排序条件查询管理管理员列表
+     * @param pageRequest
+     * @param queryAdminRequest
+     * @return
+     */
+    @GetMapping("/findManageList")
+    public QueryResponseResult findManageList(STablePageRequest pageRequest, QueryAdminRequest queryAdminRequest){
+        return adminService.findManageList(pageRequest,queryAdminRequest);
+    }
 
     /**
      * 分页排序条件查询管理员列表
@@ -95,16 +108,27 @@ public class AdminController {
         return adminService.reviewNewsPublishOff(reasonDTO.getId(),reasonDTO.getFailureReason());
     }
 
-//    /**
-//     *对新闻下架处理
-//     * @param id
-//     * @param news
-//     * @return
-//     */
-//    @PutMapping("/reviewNewsOff/{id}")
-//    public ResponseResult reviewNewsOff(@PathVariable("id") String id,@RequestBody News news){
-//        return adminService.reviewNewsOff(id,news);
-//    }
+
+
+    /**
+     * 对新闻下架处理
+     * @param newsOffDTO
+     * @return
+     */
+    @PutMapping("/reviewNewsOff")
+    public ResponseResult reviewNewsOff(@RequestBody NewsOffDTO newsOffDTO){
+        return adminService.reviewNewsOff(newsOffDTO.getId(),newsOffDTO.getFailureReason());
+    }
+
+    /**
+     * 对新闻进行解除下架处理
+     * @param id
+     * @return
+     */
+    @PutMapping("/reviewNewsOn/{id}")
+    public ResponseResult reviewNewsOn(@PathVariable("id") String id){
+        return adminService.reviewNewsOn(id);
+    }
 
     /*
      *审核新闻举报 通过
@@ -116,6 +140,8 @@ public class AdminController {
     public ResponseResult reviewNews(@PathVariable("id") String id){
         return adminService.reviewNews(id);
     }
+
+
 
     /*
      *审核用户举报
@@ -195,22 +221,21 @@ public class AdminController {
     /**
      *管理员新闻发布者(将新闻发布者进行降级）
      * @param id
-     * @param user
      * @return
      */
     @PutMapping("/reviewUserBecomeUser/{id}")
-    public ResponseResult reviewUserBecomeUser(@PathVariable("id") String id,@RequestBody User user){
-        return adminService.reviewUserBecomeUser(id,user);
+    public ResponseResult reviewUserBecomeUser(@PathVariable("id") String id){
+        return adminService.reviewUserBecomeUser(id);
     }
 
     /**
      *管理管理员
      * @param id
-     * @param admin
+     * @param power
      * @return
      */
-    @PutMapping("/ManagementAdmin/{id}")
-    public ResponseResult ManagementAdmin(@PathVariable("id") String id,@RequestBody Admin admin){
-        return adminService.ManagementAdmin(id,admin);
+    @PutMapping("/ManagementAdmin/{id}/{power}")
+    public ResponseResult ManagementAdmin(@PathVariable("id") String id,@PathVariable("power") Integer power){
+        return adminService.ManagementAdmin(id,power);
     }
 }

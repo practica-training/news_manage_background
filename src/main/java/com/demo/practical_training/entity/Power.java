@@ -109,7 +109,7 @@ package com.demo.practical_training.entity;
  *
  *    ##### 用户新闻管理
  *      管理用户（封号） 2
- *          根据违规在前，不违规在后，申请时间降序
+ *          根据违规在前，不违规在后，申请时间降序    ??????
  *           {
      *           userId: "用户id",
      *           userName: "用户姓名",
@@ -123,7 +123,7 @@ package com.demo.practical_training.entity;
  *              对用户进行禁言操作
                     发送用户id和惩罚天数和惩罚原因
  *                  将用户状态进行修改,并将正常时间改成该时间,
- *                  注意还有惩罚原因failureReason                               ???
+ *
  *                  返回：
  *                      {
  *                          code:10000,
@@ -144,7 +144,7 @@ package com.demo.practical_training.entity;
  *      *           newsId: "新闻id",
  *                  newsAvatar:"新闻封面路径",
  *      *           newsTitle: "新闻标题",
- *      *           userState: "是否违规",
+ *      *           newsState: "是否违规",
  *                  violationReason:"违规原因",
  *      *           content: "新闻内容",
              *      readNumber:"阅读数",
@@ -153,7 +153,7 @@ package com.demo.practical_training.entity;
  *  *              注意发布时间格式为yyyy-mm-dd
  *  *          },
  *  *          对新闻的操作可以是
- *  *              对用户进行下架操作
+ *  *              对新闻进行下架操作
  *                     发送新闻id和惩罚原因
  *  *                  将新闻状态进行修改,并修改failureReason
  *  *                  返回：
@@ -178,8 +178,6 @@ package com.demo.practical_training.entity;
  *              userId:"申请新闻发布者的用户id",
  *              userName:"新闻发布者姓名",
  *              registrationTime:"新闻发布者的注册时间",
- *              idCard:"新闻发布者的身份证号码",                         ？？？？？
- *              realName:"新闻发布者的真实姓名",                         ？？？？？
  *              reason:"申请原因"
  *          }
  *          申请的审核可以是
@@ -191,31 +189,29 @@ package com.demo.practical_training.entity;
  *                  将用户的申请改为通过
  *                  将UserApplyToNewsMaker状态改为已审核
  *
+ *
+ *
  *      管理员新闻发布者(将新闻发布者进行降级） 3（未做）
             根据申请时间降序，而且审核状态为"未审核"的申请列表
  *          {
  *              userId:"新闻发布者id",
  *              userName:"新闻发布者名",
  *              registrationTime:"新闻发布者的注册时间",
- *              idCard:"新闻发布者的身份证号码",
- *              realName:"新闻发布者的真实姓名",
- *              reason:"申请原因",
  *              newsListSize:"发布的新闻数"
  *          }
  *          新闻发布者管理可以是
  *              将新闻发布者降级为普通用户
- *                  发送新闻发布者的id,降级原因failureReason
- *                  找到用户之前的申请，在UserApplyToNewsMaker插入failureReason，并将状态改成审核不通过
+ *                  发送新闻发布者的id
  *                  将新闻发布者进行降级
  *
  *      超级管理员
  *      管理管理员 4
             根据权力等级时间降序
  *          {
- *              adminId:"管理员id",
- *              adminName:"管理员用户名",
- *              power:"权力等级"
- *          }
+ *  *              adminId:"管理员id",
+ *  *              adminName:"管理员用户名",
+ *  *              power:"权力等级"
+ *  *          }
  *          对管理员的管理可以是
  *             修改管理员的权力
  *                  发送管理员的id,新的权力等级
