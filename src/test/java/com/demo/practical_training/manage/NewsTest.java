@@ -2,6 +2,7 @@ package com.demo.practical_training.manage;
 
 import com.demo.practical_training.common.response.QueryResponseResult;
 import com.demo.practical_training.common.response.ResponseResult;
+import com.demo.practical_training.common.web.NewsPageRequest;
 import com.demo.practical_training.common.web.STablePageRequest;
 import com.demo.practical_training.dao.NewsRepository;
 import com.demo.practical_training.entity.News;
@@ -68,6 +69,17 @@ public class NewsTest {
         QueryNewsRequest queryNewsRequest = new QueryNewsRequest();
         queryNewsRequest.setNewsTitle("王者荣耀");
         QueryResponseResult list = newsService.findList(sTablePageRequest, queryNewsRequest);
+        System.out.println(list);
+    }
+
+    /**
+     * 测试分页排序条件查询
+     */
+    @Test
+    @Transactional
+    public void testFindNewsManageList(){
+        NewsPageRequest sTablePageRequest = new NewsPageRequest();
+        QueryResponseResult list = newsService.findNewsManageList(sTablePageRequest);
         System.out.println(list);
     }
 

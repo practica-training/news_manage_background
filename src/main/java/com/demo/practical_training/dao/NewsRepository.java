@@ -13,9 +13,8 @@ public interface NewsRepository extends
         JpaRepository<News, String>//分页和排序
 {
     //可以在SQL中增加更多的条件查询
-    @Query(value = "SELECT * FROM news WHERE news.news_state = 1 or news.news_state = -2 ORDER BY ?#{#pageable}",
-            countQuery = "SELECT count(*) FROM news WHERE news.news_state = 1 or news.news_state = -2",
+    @Query(value = "SELECT * FROM news WHERE news.news_state=-2 OR news.news_state=1 \n#pageable\n",
+            countQuery = "SELECT count(*) FROM news",
             nativeQuery = true)
-    Page<News> findAllByPage(Pageable pageable);
-
+    Page<News> findAllPage(Pageable pageable);
 }
