@@ -15,8 +15,8 @@ public class UserPageRequest {
     private int 	pageNo 	= 1;
     private int 	pageSize	= 10;
     //排序条件
-    private String  sortField	= "userState";
-    private String  sortUser	= "descend";
+    private String  sortField	= "user_state";
+    private String  sortUser	= "asc";
 
     //接收前段的分页条件的 setter函数
 
@@ -46,10 +46,10 @@ public class UserPageRequest {
         if(StringUtils.isNotBlank(sortField) || StringUtils.isNotBlank(sortUser))
         {
             //new 一个默认 降序 排序对象Sort
-            Sort pageSort = new Sort(Direction.DESC,sortField);
+            Sort pageSort = new Sort(Direction.ASC,sortField);
             //否则 new 升序  排序对象Sort
             if(!sortUser.equals("descend")) {
-                pageSort = new Sort(Direction.ASC,sortField);
+                pageSort = new Sort(Direction.DESC,sortField);
             }
 
             //如果排序条件 不为null 或 ""  分页 + 排序

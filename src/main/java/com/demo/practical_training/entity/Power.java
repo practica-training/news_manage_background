@@ -109,7 +109,7 @@ package com.demo.practical_training.entity;
  *
  *    ##### 用户新闻管理
  *      管理用户（封号） 2
- *          根据违规在前，不违规在后，申请时间降序    ??????
+ *          根据违规在前，不违规在后，申请时间降序
  *           {
      *           userId: "用户id",
      *           userName: "用户姓名",

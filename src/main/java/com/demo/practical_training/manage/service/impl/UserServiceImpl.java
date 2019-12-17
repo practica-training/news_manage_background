@@ -6,6 +6,7 @@ import com.demo.practical_training.common.response.QueryResponseResult;
 import com.demo.practical_training.common.response.QueryResult;
 import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.common.web.STablePageRequest;
+import com.demo.practical_training.common.web.UserPageRequest;
 import com.demo.practical_training.dao.UserRepository;
 import com.demo.practical_training.entity.User;
 import com.demo.practical_training.entity.dto.PublisherManageDTO;
@@ -89,18 +90,10 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     @Transactional(readOnly=true)
-    public QueryResponseResult findUserManageList(Integer pageNum,Integer pageSize) {
-       if(pageNum<=0||pageNum==null){
-           pageNum = 1;
-       }
-        if(pageSize<=0||pageSize==null){
-            pageSize = 10;
-        }
-        Pageable pageable = new PageRequest(pageNum, pageSize,
-                new Sort(Sort.Direction.ASC, "user_state"));
+    public QueryResponseResult findUserManageList(UserPageRequest pageRequest) {
 
         //根据分页对象和条件实例对象查询数据
-        Page<User> all = UserRepository.findAllByPage(pageable);
+        Page<User> all = UserRepository.findAllByPage(pageRequest.getPageable());
 
         //新建QueryResult<T> 对象
         List<UserManageDTO> list = new ArrayList<>();

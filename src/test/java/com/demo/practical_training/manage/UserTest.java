@@ -1,6 +1,7 @@
 package com.demo.practical_training.manage;
 
 import com.demo.practical_training.common.response.QueryResponseResult;
+import com.demo.practical_training.common.web.UserPageRequest;
 import com.demo.practical_training.dao.UserRepository;
 import com.demo.practical_training.entity.User;
 import com.demo.practical_training.manage.service.UserService;
@@ -67,7 +68,8 @@ public class UserTest {
      */
     @Test
     public void testFindList(){
-        QueryResponseResult list = userService.findUserManageList(1,10);
+        UserPageRequest userPageRequest = new UserPageRequest();
+        QueryResponseResult list = userService.findUserManageList(userPageRequest);
         System.out.println(list);
     }
 

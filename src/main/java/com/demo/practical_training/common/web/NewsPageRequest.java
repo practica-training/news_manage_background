@@ -12,19 +12,19 @@ import org.springframework.data.domain.Sort.Direction;
 public class NewsPageRequest {
 
     //分页条件
-    private int 	pageNo 	= 1;
-    private int 	pageSize	= 10;
+    private Integer 	pageNo 	= 1;
+    private Integer 	pageSize	= 10;
     //排序条件
     private String  sortField	= "news_state";
     private String  sortNews	= "asc";
 
     //接收前段的分页条件的 setter函数
 
-    public void setPageNo(int pageNo) {
+    public void setPageNo(Integer pageNo) {
         this.pageNo = pageNo;
     }
 
-    public void setPageSize(int pageSize) {
+    public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
     }
 

@@ -3,6 +3,7 @@ package com.demo.practical_training.manage.web.controller;
 import com.demo.practical_training.common.response.QueryResponseResult;
 import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.common.web.STablePageRequest;
+import com.demo.practical_training.common.web.UserPageRequest;
 import com.demo.practical_training.entity.User;
 import com.demo.practical_training.manage.service.UserService;
 import com.demo.practical_training.model.request.QueryUserRequest;
@@ -43,13 +44,12 @@ public class UserController {
 
     /**
      * 分页和排序加动态查询管理用户页面
-     * @param pageSize
-     * @param pageNum
+     * @param pageRequest
      * @return
      */
-    @GetMapping("/findUserManageList/{pageNum}/{pageSize}")
-    public QueryResponseResult findUserManageList(@PathVariable("pageNum") Integer pageNum,@PathVariable("pageSize") Integer pageSize){
-        return userService.findUserManageList(pageNum,pageSize);
+    @GetMapping("/findUserManageList")
+    public QueryResponseResult findUserManageList(UserPageRequest pageRequest){
+        return userService.findUserManageList(pageRequest);
     }
 
 
