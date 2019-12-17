@@ -47,6 +47,14 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     UserApplyToNewsMakerRepository userApplyToNewsMakerRepository;
     @Autowired
+    AdminManagementLogRepository adminManagementLogRepository;
+    @Autowired
+    UserManagementLogRepository userManagementLogRepository;
+    @Autowired
+    NewsManagementLogRepository newsManagementLogRepository;
+
+
+    @Autowired
     NewsViolationService newsViolationService;
     @Autowired
     NewsService newsService;
@@ -229,6 +237,36 @@ public class AdminServiceImpl implements AdminService {
     }
 
     /**
+     * 忽略新闻举报
+     * @param id
+     * @return
+     */
+    @Override
+    public ResponseResult reviewNewsMiss(String id) {
+        //1.根据id查询新闻
+        Optional<News> optional = newsRepository.findById(id);
+        if(optional.isPresent()){
+            News news = optional.get();
+
+            NewsManagementLog newsManagementLog = new NewsManagementLog();
+            newsManagementLog.setNews(news);
+            newsManagementLog.setOperationalContent("新闻id为" + news.getId() + "忽略新闻举报成功");
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String format = df.format(new Date());
+            newsManagementLog.setProcessingTime(Timestamp.valueOf(format));
+            newsManagementLogRepository.save(newsManagementLog);
+
+            List<NewsReport> list = newsReportService.findByNewsid(id);
+            for (NewsReport newsReport : list) {
+                newsReport.setReviewState(1);
+                newsReportService.updateById(newsReport.getId(),newsReport);
+            }
+            return new ResponseResult(AdminCode.ADMIN_ALLOW_NEWS_MISS);
+        }
+        return new ResponseResult(AdminCode.ADMIN_ALLOW_NEWS_MISS_FAIL);
+    }
+
+    /**
      * 审核新闻举报
      *  1将所有有关该新闻的举报全部改成违规
      *  *将新闻进行下架
@@ -238,22 +276,35 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public ResponseResult reviewNews(String id) {
         //1.根据id查询新闻
-        News news = newsService.findById(id);
-        List<NewsReport> list = newsReportService.findByNewsid(news.getId());
-        for (NewsReport newsReport : list) {
-            newsReport.setReviewState(1);
-            newsReportService.updateById(newsReport.getId(),newsReport);
-            NewsViolation newsViolation = new NewsViolation();
-            newsViolation.setNews(newsReport.getNews());
-            newsViolation.setViolationReason(newsReport.getReportReason());
-            Date date = new Date();
-            newsViolation.setReviewTime(new Timestamp(date.getTime()));
-            newsReport.getNews().setNewsState(Const.NEWS_DISABLE);
-            newsViolationService.add(newsViolation);
+        Optional<News> optional = newsRepository.findById(id);
+        if(optional.isPresent()){
+            News news = optional.get();
+
+            NewsManagementLog newsManagementLog = new NewsManagementLog();
+            newsManagementLog.setNews(news);
+            newsManagementLog.setOperationalContent("新闻id为" + news.getId() + "审核新闻举报成功");
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String format = df.format(new Date());
+            newsManagementLog.setProcessingTime(Timestamp.valueOf(format));
+            newsManagementLogRepository.save(newsManagementLog);
+
+            List<NewsReport> list = newsReportService.findByNewsid(id);
+            for (NewsReport newsReport : list) {
+                newsReport.setReviewState(1);
+                newsReportService.updateById(newsReport.getId(),newsReport);
+                NewsViolation newsViolation = new NewsViolation();
+                newsViolation.setNews(newsReport.getNews());
+                newsViolation.setViolationReason(newsReport.getReportReason());
+                Date date = new Date();
+                newsViolation.setReviewTime(new Timestamp(date.getTime()));
+                newsReport.getNews().setNewsState(Const.NEWS_DISABLE);
+                newsViolationService.add(newsViolation);
+            }
+            news.setNewsState(Const.NEWS_OFF);
+            newsService.updateById(id, news);
+            return new ResponseResult(AdminCode.ADMIN_ALLOW_NEWS);
         }
-        news.setNewsState(Const.NEWS_OFF);
-        newsService.updateById(id, news);
-        return new ResponseResult(AdminCode.ADMIN_ALLOW_NEWSEXISTENCE);
+        return new ResponseResult(AdminCode.ADMIN_ALLOW_NEWS_FAIL);
     }
 
     /**
@@ -263,12 +314,26 @@ public class AdminServiceImpl implements AdminService {
      */
     @Override
     public ResponseResult reviewNewsPublishOn(String id) {
-        News news = newsService.findById(id);
-        news.setNewsState(3);
-        Date date = new Date();
-        news.setPublishTime(new Timestamp(date.getTime()));
-        newsRepository.save(news);
-        return new ResponseResult(AdminCode.ADMIN_ALLOW_NEWSPUBLISH);
+        Optional<News> optional = newsRepository.findById(id);
+
+        if(optional.isPresent()) {
+            News news = optional.get();
+
+            NewsManagementLog newsManagementLog = new NewsManagementLog();
+            newsManagementLog.setNews(news);
+            newsManagementLog.setOperationalContent("新闻id为" + news.getId() + "审核发布成功");
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String format = df.format(new Date());
+            newsManagementLog.setProcessingTime(Timestamp.valueOf(format));
+            newsManagementLogRepository.save(newsManagementLog);
+
+            news.setNewsState(3);
+            Date date = new Date();
+            news.setPublishTime(new Timestamp(date.getTime()));
+            newsRepository.save(news);
+            return new ResponseResult(AdminCode.ADMIN_ALLOW_NEWSPUBLISH);
+        }
+        return new ResponseResult(AdminCode.ADMIN_ALLOW_NEWSPUBLISH_FAIL);
     }
 
     /**
@@ -278,40 +343,30 @@ public class AdminServiceImpl implements AdminService {
      */
     @Override
     public ResponseResult reviewNewsPublishOff(String id,String offReason) {
-        News news = newsService.findById(id);
-        news.setNewsState(Const.NEWS_AUDIT_FAILURE);
-        news.setFailureReason(offReason);
-        newsRepository.save(news);
-        return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_NEWSPUBLISH);
+
+        Optional<News> optional = newsRepository.findById(id);
+
+        if(optional.isPresent()) {
+            News news = optional.get();
+
+            NewsManagementLog newsManagementLog = new NewsManagementLog();
+            newsManagementLog.setNews(news);
+            newsManagementLog.setOperationalContent("新闻id为" + news.getId() + "审核发布失败");
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String format = df.format(new Date());
+            newsManagementLog.setProcessingTime(Timestamp.valueOf(format));
+            newsManagementLogRepository.save(newsManagementLog);
+
+            news.setNewsState(Const.NEWS_AUDIT_FAILURE);
+            news.setFailureReason(offReason);
+            newsRepository.save(news);
+            return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_NEWSPUBLISH);
+        }
+        return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_NEWSPUBLISH_FAIL);
+
     }
 
-    /**
-     * 审核用户举报
-     * @param user1
-     * @return
-     */
-    @Override
-    public ResponseResult reviewUser(User user1) {
-        //1.根据id查询用户
-        User user = userService.findById(user1.getId());
-        List<UserReport> list = userReportService.findByUserid(user.getId());
-        for (UserReport userReport : list) {
-            userReport.setReviewState(1);
-            userReportRepository.save(userReport);
-            System.out.println(userReport);
-            UserViolation UserViolation = new UserViolation();
-            UserViolation.setUser(userReport.getUser());
-            UserViolation.setReason(userReport.getReportReason());
-            Date date = new Date();
-            UserViolation.setEndTime(new Timestamp(date.getTime()));
-            userReport.getUser().setUserState(Const.USER_NORMAL_USER);
-            userViolationService.add(UserViolation);
-        }
-        user.setUserState(Const.USER_BANNED);
-        user.setNormalDate(user1.getNormalDate());
-        userRepository.save(user);
-        return new ResponseResult(AdminCode.ADMIN_ALLOW_REVIEW);
-    }
+
     /**
      * 对新闻进行下架操作
      * @param id
@@ -320,11 +375,25 @@ public class AdminServiceImpl implements AdminService {
      */
     @Override
     public ResponseResult reviewNewsOff(String id,String offReason) {
-        News news = newsService.findById(id);
-        news.setNewsState(Const.NEWS_OFF);
-        news.setFailureReason(offReason);
-        newsRepository.save(news);
-        return new ResponseResult(AdminCode.ADMIN_ALLOW_NEWSEXISTENCE);
+        Optional<News> optional = newsRepository.findById(id);
+
+        if(optional.isPresent()){
+            News news = optional.get();
+
+            NewsManagementLog newsManagementLog = new NewsManagementLog();
+            newsManagementLog.setNews(news);
+            newsManagementLog.setOperationalContent("将新闻id为"+news.getId()+"下架");
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String format = df.format(new Date());
+            newsManagementLog.setProcessingTime(Timestamp.valueOf(format));
+            newsManagementLogRepository.save(newsManagementLog);
+
+            news.setNewsState(Const.NEWS_OFF);
+            news.setFailureReason(offReason);
+            newsRepository.save(news);
+            return new ResponseResult(AdminCode.ADMIN_ALLOW_NEWSEXISTENCE);
+        }
+        return new ResponseResult(AdminCode.ADMIN_ALLOW_NEWSEXISTENCE_FAIL);
     }
 
     /**
@@ -334,11 +403,103 @@ public class AdminServiceImpl implements AdminService {
      */
     @Override
     public ResponseResult reviewNewsOn(String id) {
-        News news = newsService.findById(id);
-        news.setNewsState(Const.NEWS_PUBLISH);
-        newsRepository.save(news);
-        return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_NEWEXISTENCE);
+        Optional<News> optional = newsRepository.findById(id);
+        if(optional.isPresent()){
+            News news = optional.get();
+
+            NewsManagementLog newsManagementLog = new NewsManagementLog();
+            newsManagementLog.setNews(news);
+            newsManagementLog.setOperationalContent("将新闻id为"+news.getId()+"解除下架");
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String format = df.format(new Date());
+            newsManagementLog.setProcessingTime(Timestamp.valueOf(format));
+            newsManagementLogRepository.save(newsManagementLog);
+
+            news.setNewsState(Const.NEWS_PUBLISH);
+            newsRepository.save(news);
+            return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_NEWEXISTENCE);
+        }
+        return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_NEWEXISTENCE_FAIL);
     }
+
+
+   /**
+     * 忽略用户举报
+     * @param id
+     * @return
+     */
+    @Override
+    public ResponseResult reviewUserMiss(String id) {
+        //1.根据id查询用户
+        Optional<User> optional = userRepository.findById(id);
+        if (optional.isPresent()){
+            User user = optional.get();
+
+            UserManagementLog userManagementLog = new UserManagementLog();
+            userManagementLog.setOperationalContent("对普通用户"+user.getUserName()+"忽略举报");
+            userManagementLog.setUser(user);
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String format = df.format(new Date());
+            userManagementLog.setProcessingTime(Timestamp.valueOf(format));
+            userManagementLogRepository.save(userManagementLog);
+
+            List<UserReport> list = userReportService.findByUserid(id);
+            for (UserReport userReport : list) {
+                userReport.setReviewState(1);
+                userReportRepository.save(userReport);
+            }
+            return new ResponseResult(AdminCode.ADMIN_ALLOW);
+        }
+        return new ResponseResult(AdminCode.ADMIN_ALLOW_FAIL);
+    }
+
+    /**
+     * 审核用户举报  惩罚用户
+     * @param id
+     * @return
+     */
+    @Override
+    public ResponseResult reviewUser(String id,String normalDate) {
+        //1.根据id查询用户
+        Optional<User> optional = userRepository.findById(id);
+        if (optional.isPresent()){
+            User user = optional.get();
+
+            UserManagementLog userManagementLog = new UserManagementLog();
+            userManagementLog.setOperationalContent("对普通用户"+user.getUserName()+"进行违规惩罚");
+            userManagementLog.setUser(user);
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String format = df.format(new Date());
+            userManagementLog.setProcessingTime(Timestamp.valueOf(format));
+            userManagementLogRepository.save(userManagementLog);
+
+            List<UserReport> list = userReportService.findByUserid(id);
+            for (UserReport userReport : list) {
+                userReport.setReviewState(1);
+                userReportRepository.save(userReport);
+                UserViolation UserViolation = new UserViolation();
+                UserViolation.setUser(userReport.getUser());
+                UserViolation.setReason(userReport.getReportReason());
+                Date date = new Date();
+                UserViolation.setEndTime(new Timestamp(date.getTime()));
+                userReport.getUser().setUserState(Const.USER_NORMAL_USER);
+                userViolationService.add(UserViolation);
+            }
+            user.setUserState(Const.USER_BANNED);
+            String str = "yyyy-MM-dd HH:mm:ss";
+            SimpleDateFormat sdf = new SimpleDateFormat(str);
+            try {
+                Date date = sdf.parse(normalDate);
+                user.setNormalDate(new Timestamp(date.getTime()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            userRepository.save(user);
+            return new ResponseResult(AdminCode.ADMIN_ALLOW_REVIEW);
+        }
+        return new ResponseResult(AdminCode.ADMIN_ALLOW_REVIEW_FAIL);
+    }
+
 
     /**
      * 对用户进行禁言操作
@@ -349,18 +510,33 @@ public class AdminServiceImpl implements AdminService {
      */
     @Override
     public ResponseResult reviewUserOff(String id,String offReason,String normalDate) {
-        User user = userService.findById(id);
-        user.setUserState(Const.USER_BANNED);
-        String str = "yyyy-MM-dd HH:mm:ss";
-        SimpleDateFormat sdf = new SimpleDateFormat(str);
-        try {
-            Date date = sdf.parse(normalDate);
-            user.setNormalDate(new Timestamp(date.getTime()));
-        } catch (ParseException e) {
-            e.printStackTrace();
+
+        Optional<User> optional = userRepository.findById(id);
+        if(optional.isPresent()){
+            User user = optional.get();
+
+            UserManagementLog userManagementLog = new UserManagementLog();
+            userManagementLog.setOperationalContent("普通用户"+user.getUserName()+"进行禁言");
+            userManagementLog.setUser(user);
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String format = df.format(new Date());
+            userManagementLog.setProcessingTime(Timestamp.valueOf(format));
+            userManagementLogRepository.save(userManagementLog);
+
+
+            user.setUserState(Const.USER_BANNED);
+            String str = "yyyy-MM-dd HH:mm:ss";
+            SimpleDateFormat sdf = new SimpleDateFormat(str);
+            try {
+                Date date = sdf.parse(normalDate);
+                user.setNormalDate(new Timestamp(date.getTime()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            userRepository.save(user);
+            return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_USEREXISTENCE);
         }
-        userRepository.save(user);
-        return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_USEREXISTENCE);
+        return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_USEREXISTENCE_FAIL);
     }
 
     /**
@@ -370,11 +546,26 @@ public class AdminServiceImpl implements AdminService {
      */
     @Override
     public ResponseResult reviewUserOn(String id) {
-        User user = userService.findById(id);
-        user.setNormalDate(null);
-        user.setUserState(Const.USER_NORMAL_USER);
-        userRepository.save(user);
-        return new ResponseResult(AdminCode.ADMIN_ALLOW_USEREXISTENCE);
+        Optional<User> optional = userRepository.findById(id);
+        if(optional.isPresent()){
+            User user = optional.get();
+
+            UserManagementLog userManagementLog = new UserManagementLog();
+            userManagementLog.setOperationalContent("普通用户"+user.getUserName()+"解除禁言");
+            userManagementLog.setUser(user);
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String format = df.format(new Date());
+            userManagementLog.setProcessingTime(Timestamp.valueOf(format));
+            userManagementLogRepository.save(userManagementLog);
+
+
+            user.setNormalDate(null);
+            user.setUserState(Const.USER_NORMAL_USER);
+            userRepository.save(user);
+            return new ResponseResult(AdminCode.ADMIN_ALLOW_USEREXISTENCE);
+        }
+
+        return new ResponseResult(AdminCode.ADMIN_ALLOW_USEREXISTENCE_FAIL);
     }
 
     /**
@@ -385,11 +576,25 @@ public class AdminServiceImpl implements AdminService {
      */
     @Override
     public ResponseResult reviewUserVerifiedOn(String id) {
-        UserVerified userVerified = userVerifiedService.findById(id);
-        userVerified.setReviewState(1);
-        userVerified.getUser().setIsCertified(1);
-        userVerifiedRepository.save(userVerified);
-        return new ResponseResult(AdminCode.ADMIN_ALLOW_USER);
+        Optional<UserVerified> optional = userVerifiedRepository.findById(id);
+        if(optional.isPresent()){
+            UserVerified userVerified = optional.get();
+            //记录管理员管理新闻发布者日志
+
+            UserManagementLog userManagementLog = new UserManagementLog();
+            userManagementLog.setOperationalContent("普通用户"+userVerified.getUser().getUserName()+"用户实名认证处理审核通过");
+            userManagementLog.setUser(userVerified.getUser());
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String format = df.format(new Date());
+            userManagementLog.setProcessingTime(Timestamp.valueOf(format));
+            userManagementLogRepository.save(userManagementLog);
+
+            userVerified.setReviewState(1);
+            userVerified.getUser().setIsCertified(1);
+            userVerifiedRepository.save(userVerified);
+            return new ResponseResult(AdminCode.ADMIN_ALLOW_USER);
+        }
+        return new ResponseResult(AdminCode.ADMIN_ALLOW_USER_FAIL);
     }
 
     /**
@@ -400,11 +605,25 @@ public class AdminServiceImpl implements AdminService {
      */
     @Override
     public ResponseResult reviewUserVerifiedOff(String id,String offReason) {
-        UserVerified userVerified = userVerifiedService.findById(id);
-        userVerified.setReviewState(Const.USER_VERIFIED_FAIL);
-        userVerified.setFailureReason(offReason);
-        userVerifiedRepository.save(userVerified);
-        return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_USER);
+        Optional<UserVerified> optional = userVerifiedRepository.findById(id);
+        if(optional.isPresent()){
+            UserVerified userVerified = optional.get();
+            //记录管理员管理新闻发布者日志
+
+            UserManagementLog userManagementLog = new UserManagementLog();
+            userManagementLog.setOperationalContent("普通用户"+userVerified.getUser().getUserName()+"用户实名认证处理审核不通过");
+            userManagementLog.setUser(userVerified.getUser());
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String format = df.format(new Date());
+            userManagementLog.setProcessingTime(Timestamp.valueOf(format));
+            userManagementLogRepository.save(userManagementLog);
+
+            userVerified.setReviewState(Const.USER_VERIFIED_FAIL);
+            userVerified.setFailureReason(offReason);
+            userVerifiedRepository.save(userVerified);
+            return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_USER);
+        }
+        return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_USER_FAIL);
     }
 
 
@@ -415,10 +634,24 @@ public class AdminServiceImpl implements AdminService {
      */
     @Override
     public ResponseResult reviewUserBecomePublishOn(String id) {
-        UserApplyToNewsMaker userApplyToNewsMaker = userApplyToNewsMakerService.findById(id);
-        userApplyToNewsMaker.setReviewState(Const.PUBLISH);
-        userApplyToNewsMakerRepository.save(userApplyToNewsMaker);
-        return new ResponseResult(AdminCode.ADMIN_ALLOW_USERPUBLISH);
+        Optional<UserApplyToNewsMaker> optional = userApplyToNewsMakerRepository.findById(id);
+        if(optional.isPresent()){
+            UserApplyToNewsMaker userApplyToNewsMaker = optional.get();
+            //记录管理员管理新闻发布者日志
+
+            UserManagementLog userManagementLog = new UserManagementLog();
+            userManagementLog.setOperationalContent("普通用户"+userApplyToNewsMaker.getUser().getUserName()+"申请为新闻发布者通过");
+            userManagementLog.setUser(userApplyToNewsMaker.getUser());
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String format = df.format(new Date());
+            userManagementLog.setProcessingTime(Timestamp.valueOf(format));
+            userManagementLogRepository.save(userManagementLog);
+
+            userApplyToNewsMaker.setReviewState(Const.PUBLISH);
+            userApplyToNewsMakerRepository.save(userApplyToNewsMaker);
+            return new ResponseResult(AdminCode.ADMIN_ALLOW_USERPUBLISH);
+        }
+        return new ResponseResult(AdminCode.ADMIN_ALLOW_USERPUBLISH_FAIL);
     }
 
     /**
@@ -429,11 +662,26 @@ public class AdminServiceImpl implements AdminService {
      */
     @Override
     public ResponseResult reviewUserBecomePublishOff(String id,String offReason) {
-        UserApplyToNewsMaker userApplyToNewsMaker = userApplyToNewsMakerService.findById(id);
-        userApplyToNewsMaker.setReviewState(Const.PUBLISH_FAIL);
-        userApplyToNewsMaker.setFailureReason(offReason);
-        userApplyToNewsMakerRepository.save(userApplyToNewsMaker);
-        return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_USERPUBLISH);
+
+        Optional<UserApplyToNewsMaker> optional = userApplyToNewsMakerRepository.findById(id);
+        if(optional.isPresent()){
+            UserApplyToNewsMaker userApplyToNewsMaker = optional.get();
+            //记录管理员管理新闻发布者日志
+            UserManagementLog userManagementLog = new UserManagementLog();
+            userManagementLog.setOperationalContent("普通用户"+userApplyToNewsMaker.getUser().getUserName()+"申请为新闻发布者不通过");
+            userManagementLog.setUser(userApplyToNewsMaker.getUser());
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String format = df.format(new Date());
+            userManagementLog.setProcessingTime(Timestamp.valueOf(format));
+            userManagementLogRepository.save(userManagementLog);
+
+            userApplyToNewsMaker.setReviewState(Const.PUBLISH_FAIL);
+            userApplyToNewsMaker.setFailureReason(offReason);
+            userApplyToNewsMakerRepository.save(userApplyToNewsMaker);
+            return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_USERPUBLISH);
+        }
+        return new ResponseResult(AdminCode.ADMIN_ALLOW_USERPUBLISH_FAIL);
+
     }
 
     /**
@@ -443,9 +691,21 @@ public class AdminServiceImpl implements AdminService {
      */
     @Override
     public ResponseResult reviewUserBecomeUser(String id) {
-        User user = userService.findById(id);
-        user.setUserState(Const.USER_NORMAL_USER);
-        return new ResponseResult(AdminCode.ADMIN_ALLOW_BECOMEUSER);
+        Optional<User> optional = userRepository.findById(id);
+        if (optional.isPresent()){
+            User user = optional.get();
+            //记录管理员管理新闻发布者日志
+            UserManagementLog userManagementLog = new UserManagementLog();
+            userManagementLog.setOperationalContent("将新闻发布者"+user.getUserName()+"降级为普通用户");
+            userManagementLog.setUser(user);
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String format = df.format(new Date());
+            userManagementLog.setProcessingTime(Timestamp.valueOf(format));
+            userManagementLogRepository.save(userManagementLog);
+            user.setUserState(Const.USER_NORMAL_USER);
+            return new ResponseResult(AdminCode.ADMIN_ALLOW_BECOMEUSER);
+        }
+        return new ResponseResult(AdminCode.ADMIN_ALLOW_BECOMEUSER_FAIL);
     }
 
     /**
@@ -459,7 +719,15 @@ public class AdminServiceImpl implements AdminService {
         Optional<Admin> optional = adminRepository.findById(id);
         if(optional.isPresent()){
             Admin admin = optional.get();
+            //记录超级管理员管理管理员日志
+            AdminManagementLog adminManagementLog  = new AdminManagementLog();
+            adminManagementLog.setOperationalContent("将管理员"+admin.getAdminName()+"等级从"+admin.getPower()+"变为"+power);
+            adminManagementLog.setAdmin(admin);
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String format = df.format(new Date());
+            adminManagementLog.setProcessingTime(Timestamp.valueOf(format));
             admin.setPower(power);
+            adminManagementLogRepository.save(adminManagementLog);
             adminRepository.save(admin);
             return new ResponseResult(AdminCode.ADMIN_BECOMEUSER);
         }

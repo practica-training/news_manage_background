@@ -4,7 +4,6 @@ import com.demo.practical_training.common.response.QueryResponseResult;
 import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.common.web.STablePageRequest;
 import com.demo.practical_training.entity.Admin;
-import com.demo.practical_training.entity.User;
 import com.demo.practical_training.model.request.QueryAdminRequest;
 import com.demo.practical_training.model.response.AdminResult;
 
@@ -26,8 +25,17 @@ public interface AdminService {
     public Admin findById(String id);
     //根据id查询管理员
     public Admin findByName(String name);
+
     //审核新闻举报
     public ResponseResult reviewNews(String id);
+    //忽略新闻举报
+    public ResponseResult reviewNewsMiss(String id);
+
+    //审核用户举报
+    public ResponseResult reviewUser(String id,String normalDate);
+    //忽略用户举报
+    public ResponseResult reviewUserMiss(String id);
+
     //审核新闻发布通过
     public ResponseResult reviewNewsPublishOn(String id);
     //审核新闻发布不通过
@@ -36,8 +44,6 @@ public interface AdminService {
     public ResponseResult reviewNewsOff(String id,String offReason);
 //  对新闻进行解除下架处理
     public ResponseResult reviewNewsOn(String id);
-    //审核用户举报
-    public ResponseResult reviewUser(User user);
     //对用户进行禁言操作
     public ResponseResult reviewUserOff(String id,String offReason,String normalDate);
     //对用户进行解除禁言操作
