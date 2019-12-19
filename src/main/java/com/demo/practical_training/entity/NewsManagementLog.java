@@ -16,11 +16,11 @@ import java.sql.Timestamp;
 @Data
 public class NewsManagementLog extends BaseEntity {
     /**
-     * 管理员ID
-     */
-    @OneToOne
-    @JoinColumn(name = "adminid",unique = true, nullable = false)
-    private Admin admin;
+//     * 管理员ID
+//     */
+//    @OneToOne
+//    @JoinColumn(name = "adminid",unique = true, nullable = false)
+//    private Admin admin;
     /**
      * 新闻ID
      */

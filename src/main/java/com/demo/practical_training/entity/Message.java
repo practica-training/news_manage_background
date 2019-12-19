@@ -2,7 +2,6 @@ package com.demo.practical_training.entity;
 
 import com.demo.practical_training.common.entity.BaseEntity;
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -29,7 +28,7 @@ public class Message extends BaseEntity {
      */
     private String content;
     /**
-     * 是否已读
+     * 是否已读 0未读/1已读
      */
     private Integer isRead;
     /**

@@ -9,6 +9,13 @@ import lombok.ToString;
 @ToString
 public enum AdminCode implements ResultCode {
 
+    LOGIN_SUCCESS(true,10000,"用户登陆成功！"),
+    LOGIN_USER_MISS(false,10001,"用户不存在！"),
+    LOGIN_PASSWORD_FAIL(false,10002,"密码不正确！"),
+
+    REGIT_FAIL(false,10001,"用户名已存在，请换一个！"),
+    REGIT_SUCCESS(true,10000,"用户注册成功！"),
+
     ADMIN_ALLOW_NEWS(true,24001,"举报新闻成功,此新闻已加入违规新闻！"),
     ADMIN_ALLOW_NEWS_FAIL(false,24002,"举报新闻失败！"),
 
@@ -57,6 +64,12 @@ public enum AdminCode implements ResultCode {
 
     ADMIN_ALLOW_BECOMEUSER(true,24014,"降级为普通用户成功！"),
     ADMIN_ALLOW_BECOMEUSER_FAIL(false,24014,"降级为普通用户失败！"),
+
+    USEAPHINE_NOT_ALLOW(false,24014,"手机号已存在！"),
+    USEAPHINE_ALLOW(false,24014,"手机号可用！"),
+
+    USEANICKNAME_NOT_ALLOW(false,24014,"昵称已存在！"),
+    USEANICKNAME_ALLOW(false,24014,"昵称可用！"),
 
     ADMIN_BECOMEUSER(true,24015,"修改管理员等级成功！"),
     ADMIN_NOT_BECOMEUSER(false,24015,"修改管理员等级失败！");

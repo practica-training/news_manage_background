@@ -8,6 +8,8 @@ import com.demo.practical_training.entity.User;
 import com.demo.practical_training.model.request.QueryUserRequest;
 import com.demo.practical_training.model.response.UserResult;
 
+import java.util.List;
+
 /**
  * 用户业务层
  */
@@ -26,4 +28,10 @@ public interface UserService {
     public ResponseResult deleteById(String id);
     //根据id查询用户
     public User findById(String id);
+    //根据用户名查询用户
+    public List<User> findByUserName(String name);
+    //根据昵称查询用户
+    public List<User> findByUserNickname(String name);
+    //根据手机号查询用户
+    public List<User> findByUserPhone(String userPhone);
 }

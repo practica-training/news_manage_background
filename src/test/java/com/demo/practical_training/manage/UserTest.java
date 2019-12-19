@@ -16,6 +16,7 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -74,11 +75,23 @@ public class UserTest {
     }
 
     /**
-     * 测试根据id删除用户
+     * 测试根据name查询用户
      */
     @Test
-    public void testDeleteById(){
+    public void testFindByName(){
+        List<User> list = userService.findByUserName("唐杰涛");
+        System.out.println(list.get(0));
+    }
 
+    /**
+     * 测试根据name查询用户
+     */
+    @Test
+    public void testFindByPhone(){
+        List<User> list = userService.findByUserPhone("111");
+        if(null == list || list.size() ==0 ){
+            System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+        }
     }
 
     /**

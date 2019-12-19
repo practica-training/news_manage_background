@@ -2,9 +2,11 @@ package com.demo.practical_training.entity;
 
 import com.demo.practical_training.common.entity.BaseEntity;
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import java.sql.Timestamp;
 
 /**
@@ -29,6 +31,5 @@ public class AdminManagementLog extends BaseEntity {
      */
     @Column(columnDefinition="TIMESTAMP")
     private Timestamp processingTime;
-
 
 }

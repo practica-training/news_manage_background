@@ -2,13 +2,9 @@ package com.demo.practical_training.entity;
 
 import com.demo.practical_training.common.entity.BaseEntity;
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import java.io.Serializable;
 
 @Entity
 @Data
@@ -21,6 +17,7 @@ public class Admin extends BaseEntity {
     /**
      * 管理员用户名
      */
+    @Column(unique = true)
     private String adminName;
     /**
      * 管理员登陆密码
