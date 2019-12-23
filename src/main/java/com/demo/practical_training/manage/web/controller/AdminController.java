@@ -4,7 +4,6 @@ import com.demo.practical_training.common.response.QueryResponseResult;
 import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.common.web.STablePageRequest;
 import com.demo.practical_training.entity.Admin;
-import com.demo.practical_training.entity.User;
 import com.demo.practical_training.entity.dto.NewsOffDTO;
 import com.demo.practical_training.entity.dto.ReasonDTO;
 import com.demo.practical_training.entity.dto.UserOffDTO;
@@ -130,7 +129,7 @@ public class AdminController {
         return adminService.reviewNewsOn(id);
     }
 
-    /*
+       /*
      *审核新闻举报 通过
      * @param id
      * @param news
@@ -142,17 +141,38 @@ public class AdminController {
     }
 
 
+    /*
+     *忽略新闻举报
+     * @param id
+     * @param news
+     * @return
+     */
+    @PutMapping("/reviewNewsMiss/{id}")
+    public ResponseResult reviewNewsMiss(@PathVariable("id") String id){
+        return adminService.reviewNewsMiss(id);
+    }
+
 
     /*
-     *审核用户举报
+     *审核用户举报  惩罚用户
      * @param id
      * @param news
      * @return
      */
     @PutMapping("/reviewUser")
-    public ResponseResult reviewUser(@RequestBody User user){
-        System.out.println(user);
-        return adminService.reviewUser(user);
+    public ResponseResult reviewUser(@RequestBody UserOffDTO userOffDTO){
+        return adminService.reviewUser(userOffDTO.getId(),userOffDTO.getNormalDate());
+    }
+
+
+    /*
+     *忽略用户举报
+     * @param id
+     * @return
+     */
+    @PutMapping("/reviewUserMiss/{id}")
+    public ResponseResult reviewUserMiss(@PathVariable("id") String id){
+        return adminService.reviewUserMiss(id);
     }
 
     /**

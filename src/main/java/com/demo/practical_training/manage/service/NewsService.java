@@ -2,6 +2,7 @@ package com.demo.practical_training.manage.service;
 
 import com.demo.practical_training.common.response.QueryResponseResult;
 import com.demo.practical_training.common.response.ResponseResult;
+import com.demo.practical_training.common.web.NewsPageRequest;
 import com.demo.practical_training.common.web.STablePageRequest;
 import com.demo.practical_training.entity.News;
 import com.demo.practical_training.model.request.QueryNewsRequest;
@@ -12,7 +13,7 @@ import com.demo.practical_training.model.response.NewsResult;
  */
 public interface NewsService {
     //页面分页与查询 管理新闻
-    public QueryResponseResult findNewsManageList(Integer pageNum,Integer pageSize);
+    public QueryResponseResult findNewsManageList(NewsPageRequest pageRequest);
     //页面分页与查询
     public QueryResponseResult findList(STablePageRequest pageRequest, QueryNewsRequest queryNewsRequest);
     //增加新闻

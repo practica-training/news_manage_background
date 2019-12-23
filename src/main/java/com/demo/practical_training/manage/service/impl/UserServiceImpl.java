@@ -6,6 +6,7 @@ import com.demo.practical_training.common.response.QueryResponseResult;
 import com.demo.practical_training.common.response.QueryResult;
 import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.common.web.STablePageRequest;
+import com.demo.practical_training.common.web.UserPageRequest;
 import com.demo.practical_training.dao.UserRepository;
 import com.demo.practical_training.entity.User;
 import com.demo.practical_training.entity.dto.PublisherManageDTO;
@@ -15,7 +16,9 @@ import com.demo.practical_training.model.request.QueryUserRequest;
 import com.demo.practical_training.model.response.UserResult;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.*;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,7 +31,7 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository UserRepository;
-
+    private User user2;
 
     /**
      * 分页和排序加动态查询审核用户申请为新闻发布者页面
@@ -89,18 +92,10 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     @Transactional(readOnly=true)
-    public QueryResponseResult findUserManageList(Integer pageNum,Integer pageSize) {
-       if(pageNum<=0||pageNum==null){
-           pageNum = 1;
-       }
-        if(pageSize<=0||pageSize==null){
-            pageSize = 10;
-        }
-        Pageable pageable = new PageRequest(pageNum, pageSize,
-                new Sort(Sort.Direction.ASC, "user_state"));
+    public QueryResponseResult findUserManageList(UserPageRequest pageRequest) {
 
         //根据分页对象和条件实例对象查询数据
-        Page<User> all = UserRepository.findAllByPage(pageable);
+        Page<User> all = UserRepository.findAllByPage(pageRequest.getPageable());
 
         //新建QueryResult<T> 对象
         List<UserManageDTO> list = new ArrayList<>();
@@ -183,32 +178,27 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResult updateById(String id, User user) {
         //根据Id查询用户
-        User user1 = this.findById(id);
+        Optional<User> optional = UserRepository.findById(id);
         //若存在，则调用set方法更新数据，并保存
-        if(user1!=null){
-            //设置用户名
-            user1.setUserName(user.getUserName());
+        if(optional.isPresent()){
+            User user1 = optional.get();
+            //设置昵称
+            user1.setUserNickname(user.getUserNickname());
             //设置性别 0女 1男
             user1.setUserSex(user.getUserSex());
             //设置用户密码
             user1.setUserPassword(user.getUserPassword());
             //设置手机号码
             user1.setUserPhone(user.getUserPhone());
-            //设置是否实名认证
-            user1.setIsCertified(user.getIsCertified());
-            //设置违规次数
-            user1.setViolationNumber(user.getViolationNumber());
-            //设置用户状态 1正常 0已注销 -1违规禁言 -2违规封号
-            user1.setUserState(user.getUserState());
-            //设置用户头像路径
-            user1.setUserAvatar(user.getUserAvatar());
-            //设置注册时间
-            user.setRegistrationTime(user.getRegistrationTime());
-            User user2 = UserRepository.save(user1);
+            User user2 = null;
+            try {
+                user2 = UserRepository.save(user1);
+            } catch (Exception e) {
+                return new UserResult(CommonCode.FAIL,null);
+            }
             if(user2!=null){
                 return new UserResult(CommonCode.SUCCESS,user2);
             }
-
         }
         //若不存在，则返回失败
         return new UserResult(CommonCode.FAIL,null);
@@ -244,5 +234,38 @@ public class UserServiceImpl implements UserService {
             return optional.get();
         }
         return null;
+    }
+
+    /**
+     * 根据用户查询用户
+     * @param name
+     * @return
+     */
+    @Override
+    public List<User> findByUserName(String name) {
+        List<User> users = UserRepository.findByUserName(name);
+        return users;
+    }
+
+    /**
+     * 根据昵称查询用户
+     * @param name
+     * @return
+     */
+    @Override
+    public List<User> findByUserNickname(String name) {
+        List<User> users = UserRepository.findByUserNickname(name);
+        return users;
+    }
+
+    /**
+     * 根据昵称查询用户
+     * @param userPhone
+     * @return
+     */
+    @Override
+    public List<User> findByUserPhone(String userPhone) {
+        List<User> users = UserRepository.findByUserPhone(userPhone);
+        return users;
     }
 }

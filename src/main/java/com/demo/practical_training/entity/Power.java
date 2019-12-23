@@ -109,7 +109,7 @@ package com.demo.practical_training.entity;
  *
  *    ##### 用户新闻管理
  *      管理用户（封号） 2
- *          根据违规在前，不违规在后，申请时间降序    ??????
+ *          根据违规在前，不违规在后，申请时间降序
  *           {
      *           userId: "用户id",
      *           userName: "用户姓名",
@@ -224,6 +224,63 @@ package com.demo.practical_training.entity;
  *          新闻管理日志
  *          用户管理日志
  *
+ *  前端功能：
+ *  1、用户登陆：
+ *       url: /manage/user/userLogin
+ *      请求方式：POST
+ *      接收参数：账号密码
+ *      返回结果：用户id 操作代码 提示信息
+ *  2、用户注册：
+ *       url: /manage/user/userRegist
+ *      请求方式：POST
+ *      接收参数：用户对象
+ *      返回结果：//操作是否成功 //操作代码   //提示信息
+ *  3、获取用户信息
+ *          url: /manage/user/id
+ *         请求方式：GET
+ *         接收参数：用户id
+ *         返回结果:用户对象
+ *  4、修改用户资料：
+ *  上传头像 实名认证：
+ *  *        url: /upload/image
+ *  *       请求方式：POST
+ *  *       接收参数：file
+ *  *       返回结果:/文件名放在model里，以便后续显示用  //提示信息
+ *  修改用户资料：
+ *          url: /manage/user/id
+ *          请求方式：PUT
+ *          接收参数：用户ID 用户对象
+ *          返回结果:用户对象 //操作是否成功 //操作代码   //提示信息
+ *   获取用户消息列表：
+ *          url: /manage/message/getUserMessage/id
+ *          请求方式：GET
+ *          接收参数：要查询的用户Id
+ *          返回结果：此用户所有消息
+ *   获取消息详情：
+ *          url: /manage/message/getMessage/id
+ *          请求方式：GET
+ *          接收参数：要查询的消息Id
+ *          返回结果：消息对象
+ *   发布文章：
+ *          url: /manage/news
+ *          请求方式：POST
+ *          接收参数:新闻对象
+ *          返回结果：新闻对象 //操作是否成功 //操作代码   //提示信息
+ *   提出反馈：
+ *          url: /manage/message
+ *          请求方式：POST
+ *          接收参数:消息对象
+ *          返回结果：操作是否成功 //操作代码  //提示信息
+ *   手机号是否重复：
+ *          url: /manage/user//phoneAlong/{userPhone}
+ *          请求方式：POST
+ *          接收参数:手机号
+ *          返回结果：操作是否成功 //操作代码  //提示信息
+ *   昵称是否重复：
+ *          url: /manage/user/nickNameAlong
+ *          请求方式：POST
+ *          接收参数:昵称
+ *          返回结果：操作是否成功 //操作代码  //提示信息
  * 管理员分为5个等级
  *
  */

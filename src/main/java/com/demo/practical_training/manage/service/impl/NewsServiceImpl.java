@@ -4,6 +4,7 @@ import com.demo.practical_training.common.response.CommonCode;
 import com.demo.practical_training.common.response.QueryResponseResult;
 import com.demo.practical_training.common.response.QueryResult;
 import com.demo.practical_training.common.response.ResponseResult;
+import com.demo.practical_training.common.web.NewsPageRequest;
 import com.demo.practical_training.common.web.STablePageRequest;
 import com.demo.practical_training.dao.NewsRepository;
 import com.demo.practical_training.entity.News;
@@ -14,7 +15,9 @@ import com.demo.practical_training.model.request.QueryNewsRequest;
 import com.demo.practical_training.model.response.NewsResult;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.*;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,24 +32,17 @@ public class NewsServiceImpl implements NewsService {
     NewsRepository newsRepository;
 
     /**
-     * 分页和排序加动态查询管理用户页面
+     * 分页和排序加动态查询管理新闻页面
      *
      * @return
      */
     @Override
     @Transactional(readOnly=true)
-    public QueryResponseResult findNewsManageList(Integer pageNum,Integer pageSize) {
-        if(pageNum<=0||pageNum==null){
-            pageNum = 1;
-        }
-        if(pageSize<=0||pageSize==null){
-            pageSize = 10;
-        }
-        Pageable pageable = new PageRequest(pageNum, pageSize,
-                new Sort(Sort.Direction.ASC, "news_state"));
+    public QueryResponseResult findNewsManageList(NewsPageRequest pageRequest) {
 
         //根据分页对象和条件实例对象查询数据
-        Page<News> all = newsRepository.findAllByPage(pageable);
+        Page<News> all = newsRepository.findAllPage(pageRequest.getPageable());
+        System.out.println(all);
 
         //新建QueryResult<T> 对象
         List<NewsManageDTO> list = new ArrayList<>();

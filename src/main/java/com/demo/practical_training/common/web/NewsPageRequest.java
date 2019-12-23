@@ -9,22 +9,22 @@ import org.springframework.data.domain.Sort.Direction;
 /*自定义的分页条件接收对象：
 **提供根据前端的分页条件封装spring data jpa的分页对象Pageable。
 **/
-public class UserPageRequest {
+public class NewsPageRequest {
 
     //分页条件
-    private int 	pageNo 	= 1;
-    private int 	pageSize	= 10;
+    private Integer 	pageNo 	= 1;
+    private Integer 	pageSize	= 10;
     //排序条件
-    private String  sortField	= "user_state";
-    private String  sortUser	= "asc";
+    private String  sortField	= "news_state";
+    private String  sortNews	= "asc";
 
     //接收前段的分页条件的 setter函数
 
-    public void setPageNo(int pageNo) {
+    public void setPageNo(Integer pageNo) {
         this.pageNo = pageNo;
     }
 
-    public void setPageSize(int pageSize) {
+    public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
     }
 
@@ -32,8 +32,8 @@ public class UserPageRequest {
         this.sortField = sortField;
     }
 
-    public void setSortUser(String sortUser) {
-        this.sortUser = sortUser;
+    public void setSortNews(String sortNews) {
+        this.sortNews = sortNews;
     }
 
     //3.
@@ -43,12 +43,12 @@ public class UserPageRequest {
         Pageable pageable = null;
 
         //如果排序条件不为null 或 ""
-        if(StringUtils.isNotBlank(sortField) || StringUtils.isNotBlank(sortUser))
+        if(StringUtils.isNotBlank(sortField) || StringUtils.isNotBlank(sortNews))
         {
             //new 一个默认 降序 排序对象Sort
             Sort pageSort = new Sort(Direction.ASC,sortField);
             //否则 new 升序  排序对象Sort
-            if(!sortUser.equals("descend")) {
+            if(!sortNews.equals("asc")) {
                 pageSort = new Sort(Direction.DESC,sortField);
             }
 

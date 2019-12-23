@@ -14,8 +14,8 @@ import org.apache.commons.lang3.StringUtils;
 public class STablePageRequest {
 
     //分页条件
-    private int 	pageNo 	= 1;
-    private int 	pageSize	= 10;
+    private Integer 	pageNo 	= 1;
+    private Integer 	pageSize	= 10;
     //排序条件
     private String  sortField	= null;
     private String  sortNews	= null;

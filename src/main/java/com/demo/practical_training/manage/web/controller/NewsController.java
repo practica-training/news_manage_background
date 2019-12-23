@@ -2,6 +2,7 @@ package com.demo.practical_training.manage.web.controller;
 
 import com.demo.practical_training.common.response.QueryResponseResult;
 import com.demo.practical_training.common.response.ResponseResult;
+import com.demo.practical_training.common.web.NewsPageRequest;
 import com.demo.practical_training.common.web.STablePageRequest;
 import com.demo.practical_training.entity.News;
 import com.demo.practical_training.manage.service.NewsService;
@@ -21,14 +22,12 @@ public class NewsController {
 
     /**
      * 分页和排序加动态查询管理新闻页面
-     * @param pageSize
-     * @param pageNum
+     * @param pageRequest
      * @return
      */
-    @GetMapping("/findNewsManageList/{pageNum}/{pageSize}")
-    public QueryResponseResult findNewsManageList(@PathVariable("pageNum") Integer pageNum,@PathVariable("pageSize") Integer pageSize){
-        System.out.println(pageNum+" "+pageSize);
-        return newsService.findNewsManageList(pageNum,pageSize);
+    @GetMapping("/findNewsManageList")
+    public QueryResponseResult findNewsManageList(NewsPageRequest pageRequest){
+        return newsService.findNewsManageList(pageRequest);
     }
 
 

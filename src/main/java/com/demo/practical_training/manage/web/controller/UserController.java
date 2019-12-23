@@ -3,12 +3,16 @@ package com.demo.practical_training.manage.web.controller;
 import com.demo.practical_training.common.response.QueryResponseResult;
 import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.common.web.STablePageRequest;
+import com.demo.practical_training.common.web.UserPageRequest;
 import com.demo.practical_training.entity.User;
 import com.demo.practical_training.manage.service.UserService;
 import com.demo.practical_training.model.request.QueryUserRequest;
+import com.demo.practical_training.model.response.AdminCode;
 import com.demo.practical_training.model.response.UserResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 用户控制层
@@ -43,13 +47,12 @@ public class UserController {
 
     /**
      * 分页和排序加动态查询管理用户页面
-     * @param pageSize
-     * @param pageNum
+     * @param pageRequest
      * @return
      */
-    @GetMapping("/findUserManageList/{pageNum}/{pageSize}")
-    public QueryResponseResult findUserManageList(@PathVariable("pageNum") Integer pageNum,@PathVariable("pageSize") Integer pageSize){
-        return userService.findUserManageList(pageNum,pageSize);
+    @GetMapping("/findUserManageList")
+    public QueryResponseResult findUserManageList(UserPageRequest pageRequest){
+        return userService.findUserManageList(pageRequest);
     }
 
 
@@ -93,5 +96,33 @@ public class UserController {
     @GetMapping("/id/{id}")
     public User findOne(@PathVariable("id") String id){
         return userService.findById(id);
+    }
+
+    /**
+     * 根据手机号查询用户
+     * @param userPhone
+     * @return
+     */
+    @GetMapping("/phoneAlong/{userPhone}")
+    public ResponseResult phoneAlong(@PathVariable("userPhone") String userPhone){
+        List<User> list = userService.findByUserPhone(userPhone);
+        if(null == list || list.size() ==0 ){
+            return new ResponseResult(AdminCode.USEAPHINE_ALLOW);
+        }
+        return new ResponseResult(AdminCode.USEAPHINE_NOT_ALLOW);
+    }
+
+    /**
+     * 根据昵称查询用户
+     * @param userNickname
+     * @return
+     */
+    @GetMapping("/nickNameAlong")
+    public ResponseResult nickNameAlong(@RequestParam("userNickname") String userNickname){
+        List<User> list = userService.findByUserNickname(userNickname);
+        if(null == list || list.size() ==0 ){
+            return new ResponseResult(AdminCode.USEANICKNAME_ALLOW);
+        }
+        return new ResponseResult(AdminCode.USEANICKNAME_NOT_ALLOW);
     }
 }

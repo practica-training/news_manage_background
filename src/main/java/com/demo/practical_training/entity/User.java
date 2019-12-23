@@ -24,10 +24,16 @@ public class User extends BaseEntity {
      */
     private String userAvatar;
     /**
-     * 用户名(可改，但是唯一)
+     * 用户名(唯一)
      */
     @Column(unique = true)
     private String userName;
+
+    /**
+     * 昵称(可改，但是唯一)
+     */
+    @Column(unique = true)
+    private String userNickname;
     /**
      * 用户密码
      */

@@ -1,6 +1,7 @@
 package com.demo.practical_training.manage;
 
 import com.demo.practical_training.common.response.QueryResponseResult;
+import com.demo.practical_training.common.web.UserPageRequest;
 import com.demo.practical_training.dao.UserRepository;
 import com.demo.practical_training.entity.User;
 import com.demo.practical_training.manage.service.UserService;
@@ -15,6 +16,7 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -67,16 +69,29 @@ public class UserTest {
      */
     @Test
     public void testFindList(){
-        QueryResponseResult list = userService.findUserManageList(1,10);
+        UserPageRequest userPageRequest = new UserPageRequest();
+        QueryResponseResult list = userService.findUserManageList(userPageRequest);
         System.out.println(list);
     }
 
     /**
-     * 测试根据id删除用户
+     * 测试根据name查询用户
      */
     @Test
-    public void testDeleteById(){
+    public void testFindByName(){
+        List<User> list = userService.findByUserName("唐杰涛");
+        System.out.println(list.get(0));
+    }
 
+    /**
+     * 测试根据name查询用户
+     */
+    @Test
+    public void testFindByPhone(){
+        List<User> list = userService.findByUserPhone("111");
+        if(null == list || list.size() ==0 ){
+            System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+        }
     }
 
     /**
