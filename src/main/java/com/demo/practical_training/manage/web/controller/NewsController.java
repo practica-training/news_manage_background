@@ -27,6 +27,7 @@ public class NewsController {
      */
     @GetMapping("/findNewsManageList/{pageNum}/{pageSize}")
     public QueryResponseResult findNewsManageList(@PathVariable("pageNum") Integer pageNum,@PathVariable("pageSize") Integer pageSize){
+        System.out.println(pageNum+" "+pageSize);
         return newsService.findNewsManageList(pageNum,pageSize);
     }
 
