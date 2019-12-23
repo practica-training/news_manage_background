@@ -12,10 +12,13 @@ public class LoginResult{
     private int code ;
     //提示信息
     private String message;
+    //提示成功与否
+    private String success;
 
-    public LoginResult(String id, int code, String message) {
+    public LoginResult(String id, int code, String message ,String success) {
         this.id = id;
         this.code = code;
         this.message = message;
+        this.success = success;
     }
 }
