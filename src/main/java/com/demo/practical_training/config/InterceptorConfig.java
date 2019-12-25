@@ -17,12 +17,7 @@ public class InterceptorConfig extends WebMvcConfigurationSupport {
 //        registry.addInterceptor(newsManageInterceptor).addPathPatterns("/manage/news/**");
         super.addInterceptors(registry);
     }
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        //其他静态资源
-        registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
-        super.addResourceHandlers(registry);
-    }
+
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

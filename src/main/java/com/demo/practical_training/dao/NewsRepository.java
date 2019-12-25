@@ -32,4 +32,6 @@ public interface NewsRepository extends
             countQuery = "SELECT count(*) FROM news WHERE news.news_title like :name",
             nativeQuery = true)
     Page<News> findNewsByTitle(Pageable pageable,String name);
+    @Query(value = "select userid from news where id = :newsId",nativeQuery = true)
+    String findUserIdByNewsId(String newsId);
 }
