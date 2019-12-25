@@ -26,7 +26,7 @@ public class UploadController {
     public String uplaod(HttpServletRequest req, @RequestParam("file") MultipartFile file, Model m) {//1. 接受上传的文件  @RequestParam("file") MultipartFile file
         //2.根据时间戳创建新的文件名，这样即便是第二次上传相同名称的文件，也不会把第一次的文件覆盖了
         String fileName = System.currentTimeMillis() + file.getOriginalFilename();
-        //检验文件的类型
+        File fileDir = UploadUtils.getImgDirFile();
         String contentType = file.getContentType();
         if(!CONTENT_TYPES.contains(contentType)){
             return null;
@@ -38,9 +38,13 @@ public class UploadController {
                 return null;
             }
             //3.把浏览器上传的文件复制到希望的位置
-            file.transferTo(new File("D:\\ideaProject\\image\\"+fileName));
+            // 构建真实的文件路径
+            File newFile = new File(fileDir.getAbsolutePath() + File.separator + fileName);
+//            System.out.println(newFile.getAbsolutePath());
+            file.transferTo(newFile);
             //4.把文件名放在model里，以便后续显示用
             m.addAttribute("fileName", fileName);
+//            System.out.println(fileName);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             return "上传失败," + e.getMessage();
@@ -49,6 +53,6 @@ public class UploadController {
             return "上传失败," + e.getMessage();
         }
 
-        return "上传成功";
+        return "/static/img/"+fileName;
     }
 }
