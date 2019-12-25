@@ -52,7 +52,8 @@ public class AdminServiceImpl implements AdminService {
     UserManagementLogRepository userManagementLogRepository;
     @Autowired
     NewsManagementLogRepository newsManagementLogRepository;
-
+    @Autowired
+    MessageRepository messageRepository;
 
     @Autowired
     NewsViolationService newsViolationService;
@@ -302,6 +303,8 @@ public class AdminServiceImpl implements AdminService {
             }
             news.setNewsState(Const.NEWS_OFF);
             newsService.updateById(id, news);
+//            Message message = new Message();
+//            message.setFormID();
             return new ResponseResult(AdminCode.ADMIN_ALLOW_NEWS);
         }
         return new ResponseResult(AdminCode.ADMIN_ALLOW_NEWS_FAIL);
