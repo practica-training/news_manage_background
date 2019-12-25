@@ -34,6 +34,7 @@ package com.demo.practical_training.entity;
  *                          code:10000,
  *                          message:"成功将该新闻下架"
  *                      }
+ *                      发送信息给新闻发布者：“你的标题为xxx的新闻已下架”
  *
  *      审核用户举报 0
  *          返回根据举报时间降序，而且审核状态为"未审核"的举报列表

@@ -52,7 +52,8 @@ public class AdminServiceImpl implements AdminService {
     UserManagementLogRepository userManagementLogRepository;
     @Autowired
     NewsManagementLogRepository newsManagementLogRepository;
-
+    @Autowired
+    MessageRepository messageRepository;
 
     @Autowired
     NewsViolationService newsViolationService;
@@ -74,7 +75,8 @@ public class AdminServiceImpl implements AdminService {
     UserVerifiedService userVerifiedService;
     @Autowired
     UserApplyToNewsMakerService userApplyToNewsMakerService;
-
+    @Autowired
+    MessageService messageService;
 
     /**
      * 分页和排序加动态查询 管理管理员  页面
@@ -84,7 +86,7 @@ public class AdminServiceImpl implements AdminService {
      * @return
      */
     @Override
-    @Transactional(readOnly=true)
+    @Transactional(readOnly = true)
     public QueryResponseResult findManageList(STablePageRequest pageRequest, QueryAdminRequest queryAdminRequest) {
         //条件匹配器         
         ExampleMatcher exampleMatcher = ExampleMatcher.matching();
@@ -125,7 +127,7 @@ public class AdminServiceImpl implements AdminService {
      * @return
      */
     @Override
-    @Transactional(readOnly=true)
+    @Transactional(readOnly = true)
     public QueryResponseResult findList(STablePageRequest pageRequest, QueryAdminRequest queryAdminRequest) {
         //条件匹配器         
         ExampleMatcher exampleMatcher = ExampleMatcher.matching();
@@ -151,17 +153,19 @@ public class AdminServiceImpl implements AdminService {
 
     /**
      * 新增管理员
+     *
      * @param Admin
      * @return
      */
     @Override
     public AdminResult add(Admin Admin) {
         Admin Admin1 = adminRepository.save(Admin);
-        return new AdminResult(CommonCode.SUCCESS,Admin1);
+        return new AdminResult(CommonCode.SUCCESS, Admin1);
     }
 
     /**
      * 根据id修改管理员
+     *
      * @param id
      * @param admin
      * @return
@@ -171,7 +175,7 @@ public class AdminServiceImpl implements AdminService {
         //根据Id查询管理员
         Admin admin1 = this.findById(id);
         //若存在，则调用set方法更新数据，并保存
-        if(admin1!=null){
+        if (admin1 != null) {
             //设置管理员用户名
             admin1.setAdminName(admin.getAdminName());
             //设置管理员登陆密码
@@ -182,17 +186,18 @@ public class AdminServiceImpl implements AdminService {
             admin1.setPower(admin.getPower());
             adminRepository.save(admin1);
             Admin admin2 = adminRepository.save(admin1);
-            if(admin2!=null){
-                return new AdminResult(CommonCode.SUCCESS,admin2);
+            if (admin2 != null) {
+                return new AdminResult(CommonCode.SUCCESS, admin2);
             }
 
         }
         //若不存在，则返回失败
-        return new AdminResult(CommonCode.FAIL,null);
+        return new AdminResult(CommonCode.FAIL, null);
     }
 
     /**
      * 根据id删除管理员
+     *
      * @param id
      * @return
      */
@@ -200,7 +205,7 @@ public class AdminServiceImpl implements AdminService {
     public ResponseResult deleteById(String id) {
         //根据Id查询管理员
         Admin Admin1 = this.findById(id);
-        if(Admin1!=null){
+        if (Admin1 != null) {
             //若存在，删除管理员
             adminRepository.deleteById(id);
             return new ResponseResult(CommonCode.SUCCESS);
@@ -211,26 +216,29 @@ public class AdminServiceImpl implements AdminService {
 
     /**
      * 根据id查询管理员
+     *
      * @param id
      * @return
      */
     @Override
     public Admin findById(String id) {
         Optional<Admin> optional = adminRepository.findById(id);
-        if(optional.isPresent()){
+        if (optional.isPresent()) {
             return optional.get();
         }
         return null;
     }
+
     /**
      * 根据name查询管理员
+     *
      * @param name
      * @return
      */
     @Override
     public Admin findByName(String name) {
         Optional<Admin> optional = adminRepository.findById(name);
-        if(optional.isPresent()){
+        if (optional.isPresent()) {
             return optional.get();
         }
         return null;
@@ -238,6 +246,7 @@ public class AdminServiceImpl implements AdminService {
 
     /**
      * 忽略新闻举报
+     *
      * @param id
      * @return
      */
@@ -245,7 +254,7 @@ public class AdminServiceImpl implements AdminService {
     public ResponseResult reviewNewsMiss(String id) {
         //1.根据id查询新闻
         Optional<News> optional = newsRepository.findById(id);
-        if(optional.isPresent()){
+        if (optional.isPresent()) {
             News news = optional.get();
 
             NewsManagementLog newsManagementLog = new NewsManagementLog();
@@ -259,7 +268,7 @@ public class AdminServiceImpl implements AdminService {
             List<NewsReport> list = newsReportService.findByNewsid(id);
             for (NewsReport newsReport : list) {
                 newsReport.setReviewState(1);
-                newsReportService.updateById(newsReport.getId(),newsReport);
+                newsReportService.updateById(newsReport.getId(), newsReport);
             }
             return new ResponseResult(AdminCode.ADMIN_ALLOW_NEWS_MISS);
         }
@@ -268,8 +277,9 @@ public class AdminServiceImpl implements AdminService {
 
     /**
      * 审核新闻举报
-     *  1将所有有关该新闻的举报全部改成违规
-     *  *将新闻进行下架
+     * 1将所有有关该新闻的举报全部改成违规
+     * *将新闻进行下架
+     *
      * @param id
      * @return
      */
@@ -277,7 +287,7 @@ public class AdminServiceImpl implements AdminService {
     public ResponseResult reviewNews(String id) {
         //1.根据id查询新闻
         Optional<News> optional = newsRepository.findById(id);
-        if(optional.isPresent()){
+        if (optional.isPresent()) {
             News news = optional.get();
 
             NewsManagementLog newsManagementLog = new NewsManagementLog();
@@ -291,7 +301,7 @@ public class AdminServiceImpl implements AdminService {
             List<NewsReport> list = newsReportService.findByNewsid(id);
             for (NewsReport newsReport : list) {
                 newsReport.setReviewState(1);
-                newsReportService.updateById(newsReport.getId(),newsReport);
+                newsReportService.updateById(newsReport.getId(), newsReport);
                 NewsViolation newsViolation = new NewsViolation();
                 newsViolation.setNews(newsReport.getNews());
                 newsViolation.setViolationReason(newsReport.getReportReason());
@@ -302,13 +312,19 @@ public class AdminServiceImpl implements AdminService {
             }
             news.setNewsState(Const.NEWS_OFF);
             newsService.updateById(id, news);
+//            Message message = new Message();
+//            message.setFormID();
+
+//            messageService.downNewsMesssage(null,,"你的新闻已下架");
             return new ResponseResult(AdminCode.ADMIN_ALLOW_NEWS);
         }
+
         return new ResponseResult(AdminCode.ADMIN_ALLOW_NEWS_FAIL);
     }
 
     /**
      * 审核新闻发布成功
+     *
      * @param id
      * @return
      */
@@ -316,7 +332,7 @@ public class AdminServiceImpl implements AdminService {
     public ResponseResult reviewNewsPublishOn(String id) {
         Optional<News> optional = newsRepository.findById(id);
 
-        if(optional.isPresent()) {
+        if (optional.isPresent()) {
             News news = optional.get();
 
             NewsManagementLog newsManagementLog = new NewsManagementLog();
@@ -338,15 +354,16 @@ public class AdminServiceImpl implements AdminService {
 
     /**
      * 审核新闻发布失败
+     *
      * @param id
      * @return
      */
     @Override
-    public ResponseResult reviewNewsPublishOff(String id,String offReason) {
+    public ResponseResult reviewNewsPublishOff(String id, String offReason) {
 
         Optional<News> optional = newsRepository.findById(id);
 
-        if(optional.isPresent()) {
+        if (optional.isPresent()) {
             News news = optional.get();
 
             NewsManagementLog newsManagementLog = new NewsManagementLog();
@@ -369,20 +386,21 @@ public class AdminServiceImpl implements AdminService {
 
     /**
      * 对新闻进行下架操作
+     *
      * @param id
      * @param offReason
      * @return
      */
     @Override
-    public ResponseResult reviewNewsOff(String id,String offReason) {
+    public ResponseResult reviewNewsOff(String id, String offReason) {
         Optional<News> optional = newsRepository.findById(id);
 
-        if(optional.isPresent()){
+        if (optional.isPresent()) {
             News news = optional.get();
 
             NewsManagementLog newsManagementLog = new NewsManagementLog();
             newsManagementLog.setNews(news);
-            newsManagementLog.setOperationalContent("将新闻id为"+news.getId()+"下架");
+            newsManagementLog.setOperationalContent("将新闻id为" + news.getId() + "下架");
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String format = df.format(new Date());
             newsManagementLog.setProcessingTime(Timestamp.valueOf(format));
@@ -398,18 +416,19 @@ public class AdminServiceImpl implements AdminService {
 
     /**
      * 对新闻进行解除下架操作
+     *
      * @param id
      * @return
      */
     @Override
     public ResponseResult reviewNewsOn(String id) {
         Optional<News> optional = newsRepository.findById(id);
-        if(optional.isPresent()){
+        if (optional.isPresent()) {
             News news = optional.get();
 
             NewsManagementLog newsManagementLog = new NewsManagementLog();
             newsManagementLog.setNews(news);
-            newsManagementLog.setOperationalContent("将新闻id为"+news.getId()+"解除下架");
+            newsManagementLog.setOperationalContent("将新闻id为" + news.getId() + "解除下架");
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String format = df.format(new Date());
             newsManagementLog.setProcessingTime(Timestamp.valueOf(format));
@@ -423,8 +442,9 @@ public class AdminServiceImpl implements AdminService {
     }
 
 
-   /**
+    /**
      * 忽略用户举报
+     *
      * @param id
      * @return
      */
@@ -432,11 +452,11 @@ public class AdminServiceImpl implements AdminService {
     public ResponseResult reviewUserMiss(String id) {
         //1.根据id查询用户
         Optional<User> optional = userRepository.findById(id);
-        if (optional.isPresent()){
+        if (optional.isPresent()) {
             User user = optional.get();
 
             UserManagementLog userManagementLog = new UserManagementLog();
-            userManagementLog.setOperationalContent("对普通用户"+user.getUserName()+"忽略举报");
+            userManagementLog.setOperationalContent("对普通用户" + user.getUserName() + "忽略举报");
             userManagementLog.setUser(user);
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String format = df.format(new Date());
@@ -455,18 +475,19 @@ public class AdminServiceImpl implements AdminService {
 
     /**
      * 审核用户举报  惩罚用户
+     *
      * @param id
      * @return
      */
     @Override
-    public ResponseResult reviewUser(String id,String normalDate) {
+    public ResponseResult reviewUser(String id, String normalDate) {
         //1.根据id查询用户
         Optional<User> optional = userRepository.findById(id);
-        if (optional.isPresent()){
+        if (optional.isPresent()) {
             User user = optional.get();
 
             UserManagementLog userManagementLog = new UserManagementLog();
-            userManagementLog.setOperationalContent("对普通用户"+user.getUserName()+"进行违规惩罚");
+            userManagementLog.setOperationalContent("对普通用户" + user.getUserName() + "进行违规惩罚");
             userManagementLog.setUser(user);
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String format = df.format(new Date());
@@ -495,6 +516,7 @@ public class AdminServiceImpl implements AdminService {
                 e.printStackTrace();
             }
             userRepository.save(user);
+
             return new ResponseResult(AdminCode.ADMIN_ALLOW_REVIEW);
         }
         return new ResponseResult(AdminCode.ADMIN_ALLOW_REVIEW_FAIL);
@@ -503,20 +525,21 @@ public class AdminServiceImpl implements AdminService {
 
     /**
      * 对用户进行禁言操作
+     *
      * @param id
      * @param offReason
      * @param normalDate
      * @return
      */
     @Override
-    public ResponseResult reviewUserOff(String id,String offReason,String normalDate) {
+    public ResponseResult reviewUserOff(String id, String offReason, String normalDate) {
 
         Optional<User> optional = userRepository.findById(id);
-        if(optional.isPresent()){
+        if (optional.isPresent()) {
             User user = optional.get();
 
             UserManagementLog userManagementLog = new UserManagementLog();
-            userManagementLog.setOperationalContent("普通用户"+user.getUserName()+"进行禁言");
+            userManagementLog.setOperationalContent("普通用户" + user.getUserName() + "进行禁言");
             userManagementLog.setUser(user);
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String format = df.format(new Date());
@@ -534,6 +557,7 @@ public class AdminServiceImpl implements AdminService {
                 e.printStackTrace();
             }
             userRepository.save(user);
+            messageService.addMessage(null,user,"你被禁言到"+normalDate);
             return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_USEREXISTENCE);
         }
         return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_USEREXISTENCE_FAIL);
@@ -541,17 +565,18 @@ public class AdminServiceImpl implements AdminService {
 
     /**
      * 对用户进行解除禁言操作
+     *
      * @param id
      * @return
      */
     @Override
     public ResponseResult reviewUserOn(String id) {
         Optional<User> optional = userRepository.findById(id);
-        if(optional.isPresent()){
+        if (optional.isPresent()) {
             User user = optional.get();
 
             UserManagementLog userManagementLog = new UserManagementLog();
-            userManagementLog.setOperationalContent("普通用户"+user.getUserName()+"解除禁言");
+            userManagementLog.setOperationalContent("普通用户" + user.getUserName() + "解除禁言");
             userManagementLog.setUser(user);
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String format = df.format(new Date());
@@ -562,6 +587,8 @@ public class AdminServiceImpl implements AdminService {
             user.setNormalDate(null);
             user.setUserState(Const.USER_NORMAL_USER);
             userRepository.save(user);
+
+            messageService.deleteMessage(null,user,"禁言已解除");
             return new ResponseResult(AdminCode.ADMIN_ALLOW_USEREXISTENCE);
         }
 
@@ -570,6 +597,7 @@ public class AdminServiceImpl implements AdminService {
 
     /**
      * 对用户实名认证处理审核通过
+     *
      * @param id
      * @param id
      * @return
@@ -577,12 +605,12 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public ResponseResult reviewUserVerifiedOn(String id) {
         Optional<UserVerified> optional = userVerifiedRepository.findById(id);
-        if(optional.isPresent()){
+        if (optional.isPresent()) {
             UserVerified userVerified = optional.get();
             //记录管理员管理新闻发布者日志
 
             UserManagementLog userManagementLog = new UserManagementLog();
-            userManagementLog.setOperationalContent("普通用户"+userVerified.getUser().getUserName()+"用户实名认证处理审核通过");
+            userManagementLog.setOperationalContent("普通用户" + userVerified.getUser().getUserName() + "用户实名认证处理审核通过");
             userManagementLog.setUser(userVerified.getUser());
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String format = df.format(new Date());
@@ -599,19 +627,20 @@ public class AdminServiceImpl implements AdminService {
 
     /**
      * 对用户实名认证处理审核不通过
+     *
      * @param id
      * @param id
      * @return
      */
     @Override
-    public ResponseResult reviewUserVerifiedOff(String id,String offReason) {
+    public ResponseResult reviewUserVerifiedOff(String id, String offReason) {
         Optional<UserVerified> optional = userVerifiedRepository.findById(id);
-        if(optional.isPresent()){
+        if (optional.isPresent()) {
             UserVerified userVerified = optional.get();
             //记录管理员管理新闻发布者日志
 
             UserManagementLog userManagementLog = new UserManagementLog();
-            userManagementLog.setOperationalContent("普通用户"+userVerified.getUser().getUserName()+"用户实名认证处理审核不通过");
+            userManagementLog.setOperationalContent("普通用户" + userVerified.getUser().getUserName() + "用户实名认证处理审核不通过");
             userManagementLog.setUser(userVerified.getUser());
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String format = df.format(new Date());
@@ -629,18 +658,19 @@ public class AdminServiceImpl implements AdminService {
 
     /**
      * 审核用户申请为新闻发布者通过
+     *
      * @param id
      * @return
      */
     @Override
     public ResponseResult reviewUserBecomePublishOn(String id) {
         Optional<UserApplyToNewsMaker> optional = userApplyToNewsMakerRepository.findById(id);
-        if(optional.isPresent()){
+        if (optional.isPresent()) {
             UserApplyToNewsMaker userApplyToNewsMaker = optional.get();
             //记录管理员管理新闻发布者日志
 
             UserManagementLog userManagementLog = new UserManagementLog();
-            userManagementLog.setOperationalContent("普通用户"+userApplyToNewsMaker.getUser().getUserName()+"申请为新闻发布者通过");
+            userManagementLog.setOperationalContent("普通用户" + userApplyToNewsMaker.getUser().getUserName() + "申请为新闻发布者通过");
             userManagementLog.setUser(userApplyToNewsMaker.getUser());
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String format = df.format(new Date());
@@ -656,19 +686,20 @@ public class AdminServiceImpl implements AdminService {
 
     /**
      * 审核用户申请为新闻发布者不通过
+     *
      * @param id
      * @param id
      * @return
      */
     @Override
-    public ResponseResult reviewUserBecomePublishOff(String id,String offReason) {
+    public ResponseResult reviewUserBecomePublishOff(String id, String offReason) {
 
         Optional<UserApplyToNewsMaker> optional = userApplyToNewsMakerRepository.findById(id);
-        if(optional.isPresent()){
+        if (optional.isPresent()) {
             UserApplyToNewsMaker userApplyToNewsMaker = optional.get();
             //记录管理员管理新闻发布者日志
             UserManagementLog userManagementLog = new UserManagementLog();
-            userManagementLog.setOperationalContent("普通用户"+userApplyToNewsMaker.getUser().getUserName()+"申请为新闻发布者不通过");
+            userManagementLog.setOperationalContent("普通用户" + userApplyToNewsMaker.getUser().getUserName() + "申请为新闻发布者不通过");
             userManagementLog.setUser(userApplyToNewsMaker.getUser());
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String format = df.format(new Date());
@@ -686,23 +717,25 @@ public class AdminServiceImpl implements AdminService {
 
     /**
      * 管理员新闻发布者(将新闻发布者进行降级）
+     *
      * @param id
      * @return
      */
     @Override
     public ResponseResult reviewUserBecomeUser(String id) {
         Optional<User> optional = userRepository.findById(id);
-        if (optional.isPresent()){
+        if (optional.isPresent()) {
             User user = optional.get();
             //记录管理员管理新闻发布者日志
             UserManagementLog userManagementLog = new UserManagementLog();
-            userManagementLog.setOperationalContent("将新闻发布者"+user.getUserName()+"降级为普通用户");
+            userManagementLog.setOperationalContent("将新闻发布者" + user.getUserName() + "降级为普通用户");
             userManagementLog.setUser(user);
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String format = df.format(new Date());
             userManagementLog.setProcessingTime(Timestamp.valueOf(format));
             userManagementLogRepository.save(userManagementLog);
             user.setUserState(Const.USER_NORMAL_USER);
+
             return new ResponseResult(AdminCode.ADMIN_ALLOW_BECOMEUSER);
         }
         return new ResponseResult(AdminCode.ADMIN_ALLOW_BECOMEUSER_FAIL);
@@ -710,18 +743,19 @@ public class AdminServiceImpl implements AdminService {
 
     /**
      * 管理管理员
+     *
      * @param id
      * @param power
      * @return
      */
     @Override
-    public ResponseResult ManagementAdmin(String id,  Integer power) {
+    public ResponseResult ManagementAdmin(String id, Integer power) {
         Optional<Admin> optional = adminRepository.findById(id);
-        if(optional.isPresent()){
+        if (optional.isPresent()) {
             Admin admin = optional.get();
             //记录超级管理员管理管理员日志
-            AdminManagementLog adminManagementLog  = new AdminManagementLog();
-            adminManagementLog.setOperationalContent("将管理员"+admin.getAdminName()+"等级从"+admin.getPower()+"变为"+power);
+            AdminManagementLog adminManagementLog = new AdminManagementLog();
+            adminManagementLog.setOperationalContent("将管理员" + admin.getAdminName() + "等级从" + admin.getPower() + "变为" + power);
             adminManagementLog.setAdmin(admin);
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String format = df.format(new Date());
