@@ -12,4 +12,5 @@ import lombok.ToString;
 public class QueryNewsRequest extends RequestData {
     //新闻标题
     private String newsTitle;
+    private Integer page=1;
 }

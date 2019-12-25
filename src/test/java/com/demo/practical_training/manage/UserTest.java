@@ -93,7 +93,14 @@ public class UserTest {
             System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
         }
     }
-
+    @Test
+    public void addNickName(){
+        List<User> userList = this.userRepository.findAll();
+        for (int i = 0; i < userList.size(); i++) {
+            userList.get(i).setUserNickname(GenerateUtil.getName());
+        }
+        this.userRepository.saveAll(userList);
+    }
     /**
      * 测试删除全部用户
      */

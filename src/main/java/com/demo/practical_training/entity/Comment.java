@@ -50,5 +50,5 @@ public class Comment extends BaseEntity {
      * 点赞数
      */
     @Column(columnDefinition = "int default 0")
-    private Long likeNumber;
+    private Long likeNumber = 0L;
 }

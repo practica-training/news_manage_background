@@ -5,13 +5,18 @@ import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.common.web.NewsPageRequest;
 import com.demo.practical_training.common.web.STablePageRequest;
 import com.demo.practical_training.dao.NewsRepository;
+import com.demo.practical_training.dao.NewsTypeRepository;
 import com.demo.practical_training.entity.News;
+import com.demo.practical_training.entity.NewsType;
 import com.demo.practical_training.manage.service.NewsService;
 import com.demo.practical_training.model.request.QueryNewsRequest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,13 +24,16 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Random;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class NewsTest {
     @Autowired
     NewsService newsService;
-
+    @Autowired
+    NewsTypeRepository newsTypeRepository;
     @Autowired
     NewsRepository newsRepository;
 
@@ -91,4 +99,19 @@ public class NewsTest {
         ResponseResult responseResult = newsService.deleteById("4028ab0d6e82bb63016e82bba0170000");
         System.out.println(responseResult);
     }
+    @Test
+    @Transactional
+    public void testfindNewsByNewsType(){
+        String id = "8abef8d06f356f9a016f356fcabe0008";
+        Pageable pageable = PageRequest.of(0, 10);
+        Page<News> newsPage =  newsRepository.findAll(pageable);
+        List<NewsType> newsTypeList = this.newsTypeRepository.findAll();
+        int index = new Random().nextInt(newsTypeList.size());
+        NewsType newsType = newsTypeList.get(index);
+        Page<News> newsByNewsType = this.newsRepository.findNewsByNewsType(pageable, id);
+        for (News news : newsByNewsType) {
+            System.out.println(news);
+        }
+    }
+
 }

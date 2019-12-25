@@ -6,8 +6,12 @@ import com.demo.practical_training.common.response.QueryResult;
 import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.common.web.NewsPageRequest;
 import com.demo.practical_training.common.web.STablePageRequest;
+import com.demo.practical_training.dao.CommentRepository;
 import com.demo.practical_training.dao.NewsRepository;
+import com.demo.practical_training.dao.NewsTypeRepository;
+import com.demo.practical_training.entity.Comment;
 import com.demo.practical_training.entity.News;
+import com.demo.practical_training.entity.NewsType;
 import com.demo.practical_training.entity.dto.NewsDTO;
 import com.demo.practical_training.entity.dto.NewsManageDTO;
 import com.demo.practical_training.manage.service.NewsService;
@@ -15,9 +19,7 @@ import com.demo.practical_training.model.request.QueryNewsRequest;
 import com.demo.practical_training.model.response.NewsResult;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.data.domain.Page;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,7 +32,10 @@ import java.util.Optional;
 public class NewsServiceImpl implements NewsService {
     @Autowired
     NewsRepository newsRepository;
-
+    @Autowired
+    NewsTypeRepository newsTypeRepository;
+    @Autowired
+    CommentRepository commentRepository;
     /**
      * 分页和排序加动态查询管理新闻页面
      *
@@ -108,7 +113,7 @@ public class NewsServiceImpl implements NewsService {
             newsDTO.setCreateTime(news1.getCreateTime().toString());
             newsDTO.setNewsAvatar(news1.getNewsAvatar());
             newsDTO.setNewsTitle(news1.getNewsTitle());
-            newsDTO.setNewsTypeList(news1.getNewsTypeList());
+            newsDTO.setNewsTypeSet(news1.getNewsTypeSet());
             list.add(newsDTO);
         }
         QueryResult<NewsDTO> newsDTOQueryResult = new QueryResult<>();
@@ -205,6 +210,39 @@ public class NewsServiceImpl implements NewsService {
         if (optional.isPresent()) {
             return optional.get();
         }
+        return null;
+    }
+
+    @Override
+    public QueryResponseResult getNewsKinds() {
+        List<NewsType> newsTypeList = this.newsTypeRepository.findAll();
+        QueryResult<NewsType> queryResult = new QueryResult(newsTypeList,newsTypeList.size());
+        return new QueryResponseResult(CommonCode.SUCCESS,queryResult);
+    }
+
+    @Override
+    public QueryResponseResult getNewsByKindId(String id, Integer page) {
+        Pageable pageable = PageRequest.of(page-1,10);
+        Page<News> newsByNewsType = this.newsRepository.findNewsByNewsType(pageable, id);
+        QueryResult<News> queryResult = new QueryResult(newsByNewsType.getContent(),newsByNewsType.getSize());
+        QueryResponseResult queryResponseResult = new QueryResponseResult(CommonCode.SUCCESS,queryResult);
+        return queryResponseResult;
+    }
+
+    @Override
+    public QueryResponseResult getNewsByName(String name, Integer page) {
+        Pageable pageable = PageRequest.of(page-1,10);
+        Page<News> newsByNewsType = this.newsRepository.findNewsByTitle(pageable, "%"+name+"%");
+        QueryResult<News> queryResult = new QueryResult(newsByNewsType.getContent(),newsByNewsType.getTotalElements());
+        QueryResponseResult queryResponseResult = new QueryResponseResult(CommonCode.SUCCESS,queryResult);
+        return queryResponseResult;
+    }
+
+    @Override
+    public QueryResponseResult getNewsCommentList(String newsId,Integer page) {
+//        this.commentRepository.
+        Pageable pageable = PageRequest.of(page-1,10);
+//        Page<Comment> newsByNewsType = this.newsRepository.findNewsByTitle(pageable, "%"+name+"%");
         return null;
     }
 }

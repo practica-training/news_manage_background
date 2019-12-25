@@ -24,4 +24,12 @@ public interface NewsService {
     public ResponseResult deleteById(String id);
     //根据id查询新闻
     public News findById(String id);
+
+    QueryResponseResult getNewsKinds();
+
+    QueryResponseResult getNewsByKindId(String id, Integer page);
+
+    QueryResponseResult getNewsByName(String name, Integer page);
+
+    QueryResponseResult getNewsCommentList(String newsId, Integer page);
 }
