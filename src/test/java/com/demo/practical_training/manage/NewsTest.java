@@ -6,8 +6,10 @@ import com.demo.practical_training.common.web.NewsPageRequest;
 import com.demo.practical_training.common.web.STablePageRequest;
 import com.demo.practical_training.dao.NewsRepository;
 import com.demo.practical_training.dao.NewsTypeRepository;
+import com.demo.practical_training.dao.UserRepository;
 import com.demo.practical_training.entity.News;
 import com.demo.practical_training.entity.NewsType;
+import com.demo.practical_training.entity.User;
 import com.demo.practical_training.manage.service.NewsService;
 import com.demo.practical_training.model.request.QueryNewsRequest;
 import org.junit.Test;
@@ -23,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -36,6 +39,8 @@ public class NewsTest {
     NewsTypeRepository newsTypeRepository;
     @Autowired
     NewsRepository newsRepository;
+    @Autowired
+    UserRepository userRepository;
 
     /**
      * 测试新增新闻
@@ -112,6 +117,26 @@ public class NewsTest {
         for (News news : newsByNewsType) {
             System.out.println(news);
         }
+    }
+    @Test
+    public void addUserForNews(){
+        Pageable pageable = PageRequest.of(0, 10);
+        Page<User> userPage = this.userRepository.findAll(pageable);
+        List<News> newsList = this.newsRepository.findAll();
+        userPage.getContent().get(0).setNewsList(newsList);
+        userPage.forEach(user -> {
+            List<News> userNewsList = new ArrayList<>();
+            for (int i = 0; i < new Random().nextInt(10); i++) {
+                News news = newsList.get(new Random().nextInt(newsList.size()));
+                userNewsList.add(news);
+            }
+        });
+        this.userRepository.saveAll(userPage);
+    }
+    @Test
+    public void testfindUserIdByNewsId(){
+        String id = "8a8180846eafdb1e016eafdc31e4001e";
+        System.out.println(this.newsRepository.findUserIdByNewsId(id));
     }
 
 }
