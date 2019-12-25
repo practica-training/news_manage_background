@@ -34,5 +34,10 @@ public interface MessageService {
     public void addMessage(String fromId, User user, String context);
     //发送用户解除禁言消息
     public void deleteMessage(String fromId, User user, String context);
+    //发送用户审核通过消息
+    public void passUserMessage(String userId, String context);
+    //发送用户审核不通过消息
+    public void refuseUserMessage(String userId, String context);
+    //发送用户成为新闻发布者通过消息
 
 }

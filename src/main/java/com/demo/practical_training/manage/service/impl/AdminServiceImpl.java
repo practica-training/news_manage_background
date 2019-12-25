@@ -314,8 +314,8 @@ public class AdminServiceImpl implements AdminService {
             newsService.updateById(id, news);
 //            Message message = new Message();
 //            message.setFormID();
-
-//            messageService.downNewsMesssage(null,,"你的新闻已下架");
+//            String userId = this.newsRepository.findUserIdByNewsId(id);
+//            messageService.downNewsMesssage(null,userId,"你的新闻已下架");
             return new ResponseResult(AdminCode.ADMIN_ALLOW_NEWS);
         }
 
@@ -620,6 +620,8 @@ public class AdminServiceImpl implements AdminService {
             userVerified.setReviewState(1);
             userVerified.getUser().setIsCertified(1);
             userVerifiedRepository.save(userVerified);
+
+            messageService.passUserMessage(id,"你已审核通过");
             return new ResponseResult(AdminCode.ADMIN_ALLOW_USER);
         }
         return new ResponseResult(AdminCode.ADMIN_ALLOW_USER_FAIL);
@@ -650,6 +652,8 @@ public class AdminServiceImpl implements AdminService {
             userVerified.setReviewState(Const.USER_VERIFIED_FAIL);
             userVerified.setFailureReason(offReason);
             userVerifiedRepository.save(userVerified);
+
+            messageService.refuseUserMessage(id,"审核不通过");
             return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_USER);
         }
         return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_USER_FAIL);
@@ -679,6 +683,8 @@ public class AdminServiceImpl implements AdminService {
 
             userApplyToNewsMaker.setReviewState(Const.PUBLISH);
             userApplyToNewsMakerRepository.save(userApplyToNewsMaker);
+
+//            userApplyToNewsMaker.getUser()
             return new ResponseResult(AdminCode.ADMIN_ALLOW_USERPUBLISH);
         }
         return new ResponseResult(AdminCode.ADMIN_ALLOW_USERPUBLISH_FAIL);
