@@ -1,6 +1,7 @@
 package com.demo.practical_training.dao;
 
 import com.demo.practical_training.entity.News;
+import com.demo.practical_training.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -33,11 +34,4 @@ public interface NewsRepository extends
             nativeQuery = true)
     Page<News> findNewsByTitle(Pageable pageable,String name);
 
-    /**
-     * 通过新闻id找到作者id
-     * @param newsId
-     * @return
-     */
-    @Query(value = "select userid from news where id = :newsId",nativeQuery = true)
-    String findUserIdByNewsId(String newsId);
 }
