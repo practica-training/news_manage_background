@@ -126,6 +126,7 @@ public class AdminController {
      */
     @PutMapping("/reviewNewsOn/{id}")
     public ResponseResult reviewNewsOn(@PathVariable("id") String id){
+
         return adminService.reviewNewsOn(id);
     }
 

@@ -8,6 +8,7 @@ import com.demo.practical_training.common.web.STablePageRequest;
 import com.demo.practical_training.dao.MessageRepository;
 import com.demo.practical_training.dao.UserRepository;
 import com.demo.practical_training.entity.Message;
+import com.demo.practical_training.entity.User;
 import com.demo.practical_training.manage.service.MessageService;
 import com.demo.practical_training.model.request.QueryMessageRequest;
 import com.demo.practical_training.model.response.MessageResult;
@@ -66,7 +67,16 @@ public class MessageServiceImpl implements MessageService {
         //返回结果
         return new QueryResponseResult(CommonCode.SUCCESS, MessageQueryResult);
     }
-
+    /**
+     * 新增消息
+     * @return
+     */
+    public void addMessage(String fromId, User user, String context){
+        Message message = new Message();
+        message.setContent(context);
+        message.setUser(user);
+        messageRepository.save(message);
+    }
     /**
      * 新增消息
      * @param Message
