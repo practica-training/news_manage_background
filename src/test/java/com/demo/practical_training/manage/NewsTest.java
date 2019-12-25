@@ -134,9 +134,11 @@ public class NewsTest {
         this.userRepository.saveAll(userPage);
     }
     @Test
+//    @Transactionanal
     public void testfindUserIdByNewsId(){
         String id = "8a8180846eafdb1e016eafdc31e4001e";
-        System.out.println(this.newsRepository.findUserIdByNewsId(id));
+        User user = this.userRepository.findUserByNewsId(id);
+//        System.out.println(user);
     }
 
 }
