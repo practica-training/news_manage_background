@@ -4,6 +4,7 @@ import com.demo.practical_training.entity.NewsType;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -24,7 +25,7 @@ public class NewsDTO {
     private String newsId;
     private String newsTitle;
     private String content;
-    private List<NewsType> newsTypeList;
+    private Set<NewsType> newsTypeSet;
     private String newsAvatar;
     private String createTime;
 

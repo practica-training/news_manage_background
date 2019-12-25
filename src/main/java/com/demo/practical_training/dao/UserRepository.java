@@ -31,4 +31,5 @@ public interface UserRepository extends
     //相对于名字相等查询，参数为name
     List<User> findByUserPhone(String userPhone);
 
+
 }

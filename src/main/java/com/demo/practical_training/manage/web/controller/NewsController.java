@@ -19,7 +19,40 @@ import org.springframework.web.bind.annotation.*;
 public class NewsController {
     @Autowired
     NewsService newsService;
+    @GetMapping("/comment/{newsid}/{page}")
+    public QueryResponseResult getNewsCommentList(@PathVariable("newsId")String newsId,@PathVariable("page") Integer page){
+        return this.newsService.getNewsCommentList(newsId,page);
+    }
+    /**
+     * 获得所有新闻类型
+     * @return
+     */
+    @GetMapping("/kind")
+    public QueryResponseResult getNewsKinds(){
+        return newsService.getNewsKinds();
+    }
 
+    /**
+     * 根据新闻类别id分页查询新闻
+     * @return
+     */
+    @GetMapping("/kind/{id}/{page}")
+    public QueryResponseResult getNewsByKindId(@PathVariable("id") String id,@PathVariable("page") Integer page){
+        System.out.println(id+" "+page);
+        return newsService.getNewsByKindId(id,page);
+    }
+
+    /**
+     * 根据姓名模糊查询
+     * @return
+     */
+    @GetMapping("/name")
+    public QueryResponseResult getNewsByName( String newsTitle,Integer page){
+//        String newsTitle = queryNewsRequest.getNewsTitle();
+//        Integer page = queryNewsRequest.getPage();
+        System.out.println(newsTitle +" "+ page);
+        return newsService.getNewsByName(newsTitle, page);
+    }
     /**
      * 分页和排序加动态查询管理新闻页面
      * @param pageRequest

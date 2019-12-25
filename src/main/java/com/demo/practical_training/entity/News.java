@@ -7,6 +7,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 新闻
@@ -71,7 +72,7 @@ public class News extends BaseEntity {
             ,joinColumns = @JoinColumn(name = "newsid",referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "news_typeid",referencedColumnName = "id")
     )
-    private List<NewsType> newsTypeList;
+    private Set<NewsType> newsTypeSet;
     /**
      * 新闻和标签双向多对多
      * 为将来通过标签查找新闻所用
