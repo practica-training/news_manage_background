@@ -77,6 +77,12 @@ public class MessageServiceImpl implements MessageService {
         message.setUser(user);
         messageRepository.save(message);
     }
+
+    @Override
+    public void deleteMessage(String fromId, User user, String context) {
+
+    }
+
     /**
      * 新增消息
      * @param Message
@@ -156,5 +162,15 @@ public class MessageServiceImpl implements MessageService {
             return list;
         }
         return null;
+    }
+
+    @Override
+    public void missNewsMessage(User user, String context) {
+
+    }
+
+    @Override
+    public void downNewsMesssage(String fromId, User user, String context) {
+
     }
 }

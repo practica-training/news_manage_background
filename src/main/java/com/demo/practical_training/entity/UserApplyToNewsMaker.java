@@ -23,7 +23,7 @@ public class UserApplyToNewsMaker extends BaseEntity {
     /**
      * 审核状态 0等待审核 1通过审核 -1审核失败
      */
-    private Integer reviewState;
+    private Integer reviewState = 0;
     /**
      * 失败原因（当审核失败时有）
      */
@@ -31,6 +31,6 @@ public class UserApplyToNewsMaker extends BaseEntity {
     /**
      * 审核时间（审核状态改变一次就刷新一次）
      */
-    @Column(columnDefinition = "TIMESTAMP")
+    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp verifiedTime;
 }
