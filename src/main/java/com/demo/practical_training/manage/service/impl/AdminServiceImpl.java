@@ -236,10 +236,10 @@ public class AdminServiceImpl implements AdminService {
      * @return
      */
     @Override
-    public Admin findByName(String name) {
-        Optional<Admin> optional = adminRepository.findById(name);
-        if (optional.isPresent()) {
-            return optional.get();
+    public List<Admin> findByName(String name) {
+        List<Admin> list = adminRepository.findByAdminName(name);
+        if (list!=null&&list.size()!=0) {
+            return list;
         }
         return null;
     }

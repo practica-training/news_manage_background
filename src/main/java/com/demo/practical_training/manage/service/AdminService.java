@@ -7,6 +7,8 @@ import com.demo.practical_training.entity.Admin;
 import com.demo.practical_training.model.request.QueryAdminRequest;
 import com.demo.practical_training.model.response.AdminResult;
 
+import java.util.List;
+
 /**
  * 管理员业务层
  */
@@ -23,8 +25,8 @@ public interface AdminService {
     public ResponseResult deleteById(String id);
     //根据id查询管理员
     public Admin findById(String id);
-    //根据id查询管理员
-    public Admin findByName(String name);
+    //根据name查询管理员
+    public List<Admin> findByName(String name);
 
     //审核新闻举报
     public ResponseResult reviewNews(String id);

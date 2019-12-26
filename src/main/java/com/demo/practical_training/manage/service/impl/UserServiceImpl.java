@@ -22,6 +22,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -32,6 +33,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository UserRepository;
     private User user2;
+    String path = null;
 
     /**
      * 分页和排序加动态查询审核用户申请为新闻发布者页面
@@ -186,10 +188,21 @@ public class UserServiceImpl implements UserService {
             user1.setUserNickname(user.getUserNickname());
             //设置性别 0女 1男
             user1.setUserSex(user.getUserSex());
-            //设置用户密码
-            user1.setUserPassword(user.getUserPassword());
-            //设置手机号码
-            user1.setUserPhone(user.getUserPhone());
+            if(user1.getUserPassword()!=user.getUserPassword()){
+                //设置用户密码
+                user1.setUserPassword(user.getUserPassword());
+            }
+            if(user1.getUserPhone()!=user.getUserPhone()){
+                //设置手机号码
+                user1.setUserPhone(user.getUserPhone());
+            }
+            if(user1.getUserAvatar()!=user.getUserAvatar()){
+                //设置头像
+                user1.setUserAvatar(user.getUserAvatar());
+                path = "D:\\ideaProject\\image\\"+ user.getUserAvatar();
+                File file = new File(path);
+                file.delete();
+            }
             User user2 = null;
             try {
                 user2 = UserRepository.save(user1);
@@ -259,7 +272,7 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * 根据昵称查询用户
+     * 根据手机号查询用户
      * @param userPhone
      * @return
      */
