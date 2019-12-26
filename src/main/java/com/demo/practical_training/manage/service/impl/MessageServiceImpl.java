@@ -77,12 +77,6 @@ public class MessageServiceImpl implements MessageService {
         message.setUser(user);
         messageRepository.save(message);
     }
-
-    @Override
-    public void deleteMessage(String fromId, User user, String context) {
-
-    }
-
     /**
      * 新增消息
      * @param Message
@@ -164,13 +158,108 @@ public class MessageServiceImpl implements MessageService {
         return null;
     }
 
+    /**
+     * 用户举报后下架新闻
+     * @param fromId
+     * @param user
+     * @param context
+     */
     @Override
-    public void missNewsMessage(User user, String context) {
-
+    public void downNewsMessage(String fromId, User user, String context) {
+        Message message = new Message();
+        message.setFormID(fromId);
+        message.setUser(user);
+        message.setContent(context);
+        messageRepository.save(message);
     }
 
     @Override
-    public void downNewsMesssage(String fromId, User user, String context) {
+    public void passNewsMessage(String fromId, User user, String context) {
+        Message message = new Message();
+        message.setFormID(fromId);
+        message.setUser(user);
+        message.setContent(context);
+        messageRepository.save(message);
+    }
 
+    @Override
+    public void refuseNewsMessage(String fromId, User user, String context, String offReason) {
+        Message message = new Message();
+        message.setFormID(fromId);
+        message.setUser(user);
+        message.setContent(context+"/n"+offReason);
+        messageRepository.save(message);
+    }
+
+    @Override
+    public void downSuccessMessage(String fromId, User user, String context, String offReason) {
+        Message message = new Message();
+        message.setFormID(fromId);
+        message.setUser(user);
+        message.setContent(context+"/n"+offReason);
+        messageRepository.save(message);
+    }
+
+    @Override
+    public void downRemoveMessage(String fromId, User user, String context) {
+        Message message = new Message();
+        message.setFormID(fromId);
+        message.setUser(user);
+        message.setContent(context);
+        messageRepository.save(message);
+    }
+
+    @Override
+    public void addMessage(String fromId, User user, String context, String offReason) {
+        Message message = new Message();
+        message.setFormID(fromId);
+        message.setUser(user);
+        message.setContent(context+" "+offReason);
+        messageRepository.save(message);
+    }
+
+    @Override
+    public void deleteMessage(String fromId, User user, String context) {
+        Message message = new Message();
+        message.setFormID(fromId);
+        message.setUser(user);
+        message.setContent(context);
+        messageRepository.save(message);
+    }
+
+    @Override
+    public void passUserMessage(String fromId, User user, String context) {
+        Message message = new Message();
+        message.setFormID(fromId);
+        message.setUser(user);
+        message.setContent(context);
+        messageRepository.save(message);
+    }
+
+    @Override
+    public void refuseUserMessage(String fromId, User user, String context, String offReason) {
+        Message message = new Message();
+        message.setFormID(fromId);
+        message.setUser(user);
+        message.setContent(context+" "+offReason);
+        messageRepository.save(message);
+    }
+
+    @Override
+    public void passPublisherMessage(String fromId, User user, String context) {
+        Message message = new Message();
+        message.setFormID(fromId);
+        message.setUser(user);
+        message.setContent(context);
+        messageRepository.save(message);
+    }
+
+    @Override
+    public void refusePublisherMessage(String fromId, User user, String context, String offReason) {
+        Message message = new Message();
+        message.setFormID(fromId);
+        message.setUser(user);
+        message.setContent(context+" "+offReason);
+        messageRepository.save(message);
     }
 }
