@@ -3,6 +3,8 @@ package com.demo.practical_training.manage;
 import com.demo.practical_training.common.response.QueryResponseResult;
 import com.demo.practical_training.common.web.STablePageRequest;
 import com.demo.practical_training.dao.NewsReportRepository;
+import com.demo.practical_training.dao.NewsRepository;
+import com.demo.practical_training.dao.UserRepository;
 import com.demo.practical_training.entity.News;
 import com.demo.practical_training.entity.NewsReport;
 import com.demo.practical_training.entity.User;
@@ -22,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -34,7 +37,10 @@ public class NewsReportTest {
     UserService userService;
     @Autowired
     NewsReportRepository newsReportRepository;
-
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    NewsRepository newsRepository;
     /**
      * 测试新增新闻举报
      */
@@ -42,14 +48,14 @@ public class NewsReportTest {
     @Transactional
     @Rollback(false)
     public void testAdd(){
+        List<User> users = this.userRepository.findAll();
+        List<News> newsList = this.newsRepository.findAll();
         for (int i = 0; i < 20; i++) {
             NewsReport newsReport = new NewsReport();
-            News news = newsService.findById("8a8180846eafdb1e016eafdc4bd90025");
-            User user = userService.findById("4028ab0d6eafe408016eafe43e4c0001");
             newsReport.setIsIllegal(1);
             newsReport.setReviewState(0);
-            newsReport.setNews(news);
-            newsReport.setUser(user);
+            newsReport.setNews(newsList.get(new Random().nextInt(newsList.size())));
+            newsReport.setUser(users.get(new Random().nextInt(users.size())));
             newsReport.setReportReason(GenerateUtil.getName()+GenerateUtil.getName());
             Date date = new Date();
             newsReport.setReportTime(new Timestamp(date.getTime()));

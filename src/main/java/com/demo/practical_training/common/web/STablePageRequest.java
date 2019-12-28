@@ -35,7 +35,7 @@ public class STablePageRequest {
             //new 一个默认 降序 排序对象Sort
             Sort pageSort = new Sort(Direction.DESC,sortField);
             //否则 new 升序  排序对象Sort
-            if(!sortNews.equals("descend")) {
+            if(!"descend".equals(sortNews)) {
                 pageSort = new Sort(Direction.ASC,sortField);
             }
 

@@ -40,12 +40,12 @@ public class NewsReport extends BaseEntity {
      * 举报时间
      */
     @JsonFormat(pattern="yyyy/MM/dd HH:mm:ss",timezone="GMT+8")
-    @Column(columnDefinition = "TIMESTAMP")
+    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp reportTime;
     /**
      * 审核状态 0等待审核 1审核完成
      */
-    private Integer reviewState;
+    private Integer reviewState = 0;
     /**
      * 是否违规 0没有违规 1违规
      */

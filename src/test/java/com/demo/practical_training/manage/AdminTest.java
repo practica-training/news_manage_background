@@ -1,6 +1,7 @@
 package com.demo.practical_training.manage;
 
 import com.demo.practical_training.common.response.ResponseResult;
+import com.demo.practical_training.dao.AdminRepository;
 import com.demo.practical_training.entity.Admin;
 import com.demo.practical_training.manage.service.AdminService;
 import com.demo.practical_training.manage.service.NewsReportService;
@@ -11,14 +12,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+import java.util.Random;
+
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class AdminTest {
     @Autowired
     AdminService adminService;
     @Autowired
+    AdminRepository adminRepository;
+    @Autowired
     NewsReportService newsReportService;
-
+    @Test
+    public void updataPower(){
+        List<Admin> adminList = this.adminRepository.findAll();
+        for (int i = 0; i < adminList.size(); i++) {
+            int power = new Random().nextInt(5);
+            adminList.get(i).setPower(power);
+        }
+        this.adminRepository.saveAll(adminList);
+    }
     /**
      * 测试新增管理员
      */

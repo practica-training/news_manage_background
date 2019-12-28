@@ -17,8 +17,9 @@ import java.util.Set;
 @Entity
 @Data
 public class News extends BaseEntity {
-
-
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
     /**
      * 新闻封面路径
      */
@@ -58,7 +59,7 @@ public class News extends BaseEntity {
     /**
      *新闻权重 0普通新闻 1轮播图新闻
      */
-    private Integer newsWeights;
+    private Integer newsWeights = 0;
     /**
      * 失败原因（如果审核失败则会有）
      */
@@ -67,7 +68,7 @@ public class News extends BaseEntity {
      * 新闻的类型，双向多对多
      */
     @JsonIgnore
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "newsAndType"
             ,joinColumns = @JoinColumn(name = "newsid",referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "news_typeid",referencedColumnName = "id")
@@ -78,7 +79,7 @@ public class News extends BaseEntity {
      * 为将来通过标签查找新闻所用
      */
     @JsonIgnore
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "newsAndLabel"
             ,joinColumns = @JoinColumn(name = "newsid",referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "news_labelid",referencedColumnName = "id")

@@ -104,7 +104,7 @@ public class UserServiceImpl implements UserService {
 
         for (User user : all) {
             UserManageDTO userManageDTO = new UserManageDTO();
-            if(user.getNormalDate()!=null&&user.getRegistrationTime()!=null){
+            if(user.getNormalDate()!=null){
                 userManageDTO.setNormalDate(user.getNormalDate().toString());
             }
             if(user.getRegistrationTime()!=null){

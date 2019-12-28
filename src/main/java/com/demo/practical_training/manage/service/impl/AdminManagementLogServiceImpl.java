@@ -10,6 +10,7 @@ import com.demo.practical_training.entity.AdminManagementLog;
 import com.demo.practical_training.manage.service.AdminManagementLogService;
 import com.demo.practical_training.model.request.QueryAdminManagementLogRequest;
 import com.demo.practical_training.model.response.AdminManagementLogResult;
+import com.demo.practical_training.model.response.LogResult;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -18,6 +19,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -40,27 +45,35 @@ public class AdminManagementLogServiceImpl implements AdminManagementLogService 
 //        //模糊匹配别名
 //        exampleMatcher = exampleMatcher.withMatcher("AdminManagementLogTitle", ExampleMatcher.GenericPropertyMatchers.contains());
 //        //创建条件值对象
-        AdminManagementLog AdminManagementLog = new AdminManagementLog();
+        AdminManagementLog adminManagementLog = new AdminManagementLog();
 //        //判断超级管理员管理普通管理员的日志标题是否为空
 //        if (StringUtils.isNotEmpty(queryAdminManagementLogRequest.getAdminManagementLogName())) {
 //            AdminManagementLog.setAdminManagementLogName(queryAdminManagementLogRequest.getAdminManagementLogName());
 //        }
         //判断超级管理员管理普通管理员的日志id是否为空
         if (StringUtils.isNotEmpty(queryAdminManagementLogRequest.getId())) {
-            AdminManagementLog.setId(queryAdminManagementLogRequest.getId());
+            adminManagementLog.setId(queryAdminManagementLogRequest.getId());
         }
         //创建条件实例对象
-        Example<AdminManagementLog> example = Example.of(AdminManagementLog, exampleMatcher);
+        Example<AdminManagementLog> example = Example.of(adminManagementLog, exampleMatcher);
 
         //根据分页对象和条件实例对象查询数据
         Page<AdminManagementLog> all = AdminManagementLogRepository.findAll(example, pageRequest.getPageable());
+        List<LogResult> logResultList = new ArrayList<>();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy年 MM月 dd日 HH时 mm分 ss秒");
+        all.getContent().forEach(adminManagementLog1 -> {
+            String operationalContent = adminManagementLog1.getOperationalContent();
+            String time = dateFormat.format(new Date(adminManagementLog1.getProcessingTime().getTime()));
+            LogResult logResult = new LogResult(operationalContent,time);
+            logResultList.add(logResult);
+        });
         //新建QueryResult<T> 对象
-        QueryResult<AdminManagementLog> AdminManagementLogQueryResult = new QueryResult<>();
+        QueryResult<LogResult> adminManagementLogQueryResult = new QueryResult<>();
         //分别给QueryResult<T> 对象中的list集合total赋值
-        AdminManagementLogQueryResult.setList(all.getContent());
-        AdminManagementLogQueryResult.setTotal(all.getTotalElements());
+        adminManagementLogQueryResult.setList(logResultList);
+        adminManagementLogQueryResult.setTotal(all.getTotalElements());
         //返回结果
-        return new QueryResponseResult(CommonCode.SUCCESS, AdminManagementLogQueryResult);
+        return new QueryResponseResult(CommonCode.SUCCESS, adminManagementLogQueryResult);
     }
 
     /**

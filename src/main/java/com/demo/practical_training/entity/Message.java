@@ -30,10 +30,10 @@ public class Message extends BaseEntity {
     /**
      * 是否已读 0未读/1已读
      */
-    private Integer isRead;
+    private Integer isRead = 0;
     /**
      * 创建时间
      */
-    @Column(columnDefinition = "TIMESTAMP")
+    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp createTime;
 }

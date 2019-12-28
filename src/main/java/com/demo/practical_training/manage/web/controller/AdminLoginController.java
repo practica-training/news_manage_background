@@ -7,13 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-@Controller
+@RestController
 public class AdminLoginController{
     @Autowired
     private HttpServletRequest request;
@@ -25,10 +27,11 @@ public class AdminLoginController{
     @RequestMapping(value = "/adminLogin", method = RequestMethod.POST)
     public LoginResult login(HttpServletRequest request) {
         HttpSession sessoin = request.getSession();
-        String adminname = request.getParameter("adminname");
+        String adminName = request.getParameter("adminName");
         String adminPassword = request.getParameter("adminPassword");
+        System.out.println(adminName + " " + adminPassword);
         boolean check;
-        List<Admin> list = adminService.findByName(adminname);
+        List<Admin> list = adminService.findByName(adminName);
         if (list!=null&&list.size()!=0) {
             if (list.get(0).getAdminPassword().equals(adminPassword))
                 check = true;
@@ -38,7 +41,7 @@ public class AdminLoginController{
             return new LoginResult(null,10000,"用户名不存在!","false");
         }
         if (check) {
-            sessoin.setAttribute("adminname", adminname);
+            sessoin.setAttribute("adminname", adminName);
             sessoin.setAttribute("adminPassword", adminPassword);
             return new LoginResult(list.get(0).getId(),10001,"登陆成功","true");
         } else {
