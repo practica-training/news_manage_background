@@ -23,7 +23,7 @@ public interface NewsService {
     //删除新闻
     public ResponseResult deleteById(String id);
     //根据id查询新闻
-    public News findById(String id);
+    public NewsResult findById(String id);
 
     QueryResponseResult getNewsKinds();
 

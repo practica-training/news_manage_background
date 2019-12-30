@@ -27,7 +27,9 @@ public class NewsDTO {
     private String content;
     private Set<NewsType> newsTypeSet;
     private String newsAvatar;
-    private String createTime;
+    private String publishTime;
+    private String likeNumber;
+    private String readNumber;
 
     //提供返回结果的业务层
 

@@ -129,7 +129,7 @@ public class NewsController {
      * @return
      */
     @GetMapping("/id/{id}")
-    public News findOne(@PathVariable("id") String id){
+    public NewsResult findOne(@PathVariable("id") String id){
         return newsService.findById(id);
     }
 }

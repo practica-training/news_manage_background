@@ -258,8 +258,9 @@ public class AdminController {
      * @param power
      * @return
      */
-    @PutMapping("/ManagementAdmin/{id}/{power}")
-    public ResponseResult ManagementAdmin(@PathVariable("id") String id,@PathVariable("power") Integer power){
+    @PutMapping("/managementAdmin/{id}/{power}")
+    public ResponseResult managementAdmin(@PathVariable("id") String id,@PathVariable("power") Integer power){
+        System.out.println(id + " " + power);
         return adminService.ManagementAdmin(id,power);
     }
 }
