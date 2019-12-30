@@ -112,14 +112,8 @@ public class NewsServiceImpl implements NewsService {
         //新建QueryResult<T> 对象
         List<NewsDTO> list = new ArrayList<>();
         for (News news1 : all) {
-            NewsDTO newsDTO = new NewsDTO();
-            newsDTO.setNewsId(news1.getId());
-            newsDTO.setContent(news1.getContent());
-            newsDTO.setCreateTime(news1.getCreateTime().toString());
-            newsDTO.setNewsAvatar(news1.getNewsAvatar());
-            newsDTO.setNewsTitle(news1.getNewsTitle());
+            NewsDTO newsDTO = MapUtil.newsToNewsDTO(news1);
             news1.getNewsTypeSet().size();
-            newsDTO.setNewsTypeSet(news1.getNewsTypeSet());
             list.add(newsDTO);
         }
         QueryResult<NewsDTO> newsDTOQueryResult = new QueryResult<>();
@@ -139,7 +133,7 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public NewsResult add(News news) {
         News news1 = newsRepository.save(news);
-        return new NewsResult(CommonCode.SUCCESS, news1);
+        return new NewsResult(CommonCode.SUCCESS, MapUtil.newsToNewsDTO(news1));
     }
 
     /**
@@ -152,7 +146,7 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public NewsResult updateById(String id, News news) {
         //根据Id查询新闻
-        News news1 = this.findById(id);
+        News news1 = this.newsRepository.getOne(id);
         //若存在，则调用set方法更新数据，并保存
         if (news1 != null) {
             //设置阅读数
@@ -177,7 +171,7 @@ public class NewsServiceImpl implements NewsService {
             news1.setNewsWeights(news.getNewsWeights());
             News news2 = newsRepository.save(news1);
             if (news2 != null) {
-                return new NewsResult(CommonCode.SUCCESS, news2);
+                return new NewsResult(CommonCode.SUCCESS, MapUtil.newsToNewsDTO(news2));
             }
 
         }
@@ -194,8 +188,9 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public ResponseResult deleteById(String id) {
         //根据Id查询新闻
-        News news1 = this.findById(id);
+        News news1 = this.newsRepository.getOne(id);
         if (news1 != null) {
+            news1.getNewsTypeSet().size();
             //若存在，删除新闻
             newsRepository.deleteById(id);
             return new ResponseResult(CommonCode.SUCCESS);
@@ -211,12 +206,13 @@ public class NewsServiceImpl implements NewsService {
      * @return
      */
     @Override
-    public News findById(String id) {
-        Optional<News> optional = newsRepository.findById(id);
-        if (optional.isPresent()) {
-            return optional.get();
+    public NewsResult findById(String id) {
+        News news = newsRepository.getOne(id);
+        if (news != null) {
+            news.getNewsTypeSet().size();
+            return new NewsResult(CommonCode.SUCCESS, MapUtil.newsToNewsDTO(news) );
         }
-        return null;
+     return null;
     }
 
     @Override
@@ -236,7 +232,7 @@ public class NewsServiceImpl implements NewsService {
             NewsDTO newsDTO = MapUtil.newsToNewsDTO(news);
             newsDTOList.add(newsDTO);
         });
-        QueryResult<NewsDTO> queryResult = new QueryResult(newsDTOList,newsByNewsType.getSize());
+        QueryResult<NewsDTO> queryResult = new QueryResult(newsDTOList,newsByNewsType.getTotalElements());
         QueryResponseResult queryResponseResult = new QueryResponseResult(CommonCode.SUCCESS,queryResult);
         return queryResponseResult;
     }
@@ -250,7 +246,7 @@ public class NewsServiceImpl implements NewsService {
             NewsDTO newsDTO = MapUtil.newsToNewsDTO(news);
             newsDTOList.add(newsDTO);
         });
-        QueryResult<NewsDTO> queryResult = new QueryResult(newsDTOList,newsByNewsType.getSize());
+        QueryResult<NewsDTO> queryResult = new QueryResult(newsDTOList,newsByNewsType.getTotalElements());
         QueryResponseResult queryResponseResult = new QueryResponseResult(CommonCode.SUCCESS,queryResult);
         return queryResponseResult;
     }

@@ -17,12 +17,15 @@ public class MapUtil {
         String publishDateStr = dateFormat.format(publishDate);
         String content = news.getContent();
         Long readNumber = news.getReadNumber();
+        Long likeNumber = news.getLikeNumber();
         Set<NewsType> newsTypeSet = news.getNewsTypeSet();
         String newsAvatar = news.getNewsAvatar();
         NewsDTO newsDTO = new NewsDTO();
         newsDTO.setNewsTypeSet(newsTypeSet);
         newsDTO.setContent(content);
-        newsDTO.setCreateTime(publishDateStr);
+        newsDTO.setPublishTime(publishDateStr);
+        newsDTO.setLikeNumber(likeNumber+"");
+        newsDTO.setReadNumber(readNumber+"");
         newsDTO.setNewsId(id);
         newsDTO.setNewsAvatar(newsAvatar);
         newsDTO.setNewsTitle(newsTitle);

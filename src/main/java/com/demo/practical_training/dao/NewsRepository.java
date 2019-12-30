@@ -23,14 +23,14 @@ public interface NewsRepository extends
             nativeQuery = true)
     Page<News> findAllPage(Pageable pageable);
     //可以在SQL中增加更多的条件查询
-    @Query(value = "SELECT * FROM news WHERE news.id in (select newsid from news_and_type where news_typeid = :newsTypeId)",
-            countQuery = "SELECT count(*) FROM news WHERE news.id in (select id from news_and_type where id = :newsTypeId)",
+    @Query(value = "SELECT * FROM news WHERE news_state = 3 and id in (select newsid from news_and_type where news_typeid = :newsTypeId)",
+            countQuery = "SELECT count(*) FROM news WHERE news_state = 3 and news.id in (select newsid from news_and_type where news_typeid = :newsTypeId)",
             nativeQuery = true)
     Page<News> findNewsByNewsType(Pageable pageable,String newsTypeId);
 
     //可以在SQL中增加更多的条件查询
-    @Query(value = "SELECT * FROM news WHERE news.news_title like :name",
-            countQuery = "SELECT count(*) FROM news WHERE news.news_title like :name",
+    @Query(value = "SELECT * FROM news WHERE news_state = 3 and news.news_title like :name",
+            countQuery = "SELECT count(*) FROM news WHERE news_state = 3 and news.news_title like :name",
             nativeQuery = true)
     Page<News> findNewsByTitle(Pageable pageable,String name);
 
