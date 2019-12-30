@@ -1,7 +1,9 @@
 package com.demo.practical_training.manage.web.controller;
 
+import com.demo.practical_training.common.response.CommonCode;
 import com.demo.practical_training.common.response.QueryResponseResult;
 import com.demo.practical_training.common.response.ResponseResult;
+import com.demo.practical_training.common.response.UserVerifiedResponseResult;
 import com.demo.practical_training.common.web.STablePageRequest;
 import com.demo.practical_training.entity.UserVerified;
 import com.demo.practical_training.manage.service.UserVerifiedService;
@@ -9,6 +11,8 @@ import com.demo.practical_training.model.request.QueryUserVerifiedRequest;
 import com.demo.practical_training.model.response.UserVerifiedResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 用户实名认证控制层
@@ -32,12 +36,12 @@ public class UserVerifiedController {
 
     /**
      * 新增用户实名认证
-     * @param UserVerified
+     * @param userVerified
      * @return
      */
     @PostMapping
-    public UserVerifiedResult add(@RequestBody UserVerified UserVerified){
-            return UserVerifiedService.add(UserVerified);
+    public UserVerifiedResult add(@RequestBody UserVerified userVerified){
+            return UserVerifiedService.add(userVerified);
     }
 
     /**
@@ -69,5 +73,16 @@ public class UserVerifiedController {
     @GetMapping("/id/{id}")
     public UserVerified findOne(@PathVariable("id") String id){
         return UserVerifiedService.findById(id);
+    }
+
+    /**
+     * 根据用户id查询用户实名认证
+     * @param id
+     * @return
+     */
+    @GetMapping("/userid/{id}")
+    public UserVerifiedResponseResult findByUserid(@PathVariable("id") String id){
+        List<UserVerified> list = UserVerifiedService.findByUserid(id);
+        return new UserVerifiedResponseResult(CommonCode.SUCCESS,list);
     }
 }

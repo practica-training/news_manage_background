@@ -4,6 +4,7 @@ import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.entity.User;
 import com.demo.practical_training.manage.service.UserService;
 import com.demo.practical_training.model.response.AdminCode;
+import com.demo.practical_training.utils.GenerateUtil;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,6 +45,7 @@ public class UserRegistController {
         if (list!=null&&list.size()!=0&&userNickNames!=null&&userNickNames.size()!=0) {
             return new ResponseResult(AdminCode.REGIT_FAIL);
         } else {
+            user.setUserNickname(GenerateUtil.getRandomNumber(12));
             //调用service完成注册
             userService.add(user);
             return new ResponseResult(AdminCode.REGIT_SUCCESS);

@@ -125,4 +125,18 @@ public class UserController {
         }
         return new ResponseResult(AdminCode.USEANICKNAME_NOT_ALLOW);
     }
+
+    /**
+     * 根据用户名查询用户
+     * @param userName
+     * @return
+     */
+    @GetMapping("/userNameAlong")
+    public ResponseResult userNameAlong(@RequestParam("userName") String userName){
+        List<User> list = userService.findByUserName(userName);
+        if(null == list || list.size() ==0 ){
+            return new ResponseResult(AdminCode.USEANICKNAME_ALLOW);
+        }
+        return new ResponseResult(AdminCode.USEANICKNAME_NOT_ALLOW);
+    }
 }
