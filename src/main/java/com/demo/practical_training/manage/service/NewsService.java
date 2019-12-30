@@ -12,9 +12,9 @@ import com.demo.practical_training.model.response.NewsResult;
  * 新闻业务层
  */
 public interface NewsService {
-    //页面分页与查询 管理新闻
+    //分页和排序加动态查询管理新闻页面
     public QueryResponseResult findNewsManageList(NewsPageRequest pageRequest);
-    //页面分页与查询
+    //通过新闻状态返回新闻列表
     public QueryResponseResult findList(STablePageRequest pageRequest, QueryNewsRequest queryNewsRequest);
     //增加新闻
     public NewsResult add(News news);

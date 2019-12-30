@@ -75,7 +75,7 @@ public class NewsServiceImpl implements NewsService {
     }
 
     /**
-     * 分页和排序加动态查询新闻页面
+     * 通过新闻状态返回新闻列表
      *
      * @param pageRequest
      * @param queryNewsRequest
@@ -89,7 +89,12 @@ public class NewsServiceImpl implements NewsService {
         exampleMatcher = exampleMatcher.withMatcher("newsTitle", ExampleMatcher.GenericPropertyMatchers.contains());
         //创建条件值对象
         News news = new News();
-        news.setNewsState(1);
+        Integer newsState = queryNewsRequest.getNewsState();
+        if(newsState!=null){
+            news.setNewsState(newsState);
+        }else {
+            news.setNewsState(1);
+        }
         //判断新闻标题是否为空
         if (StringUtils.isNotEmpty(queryNewsRequest.getNewsTitle())) {
             news.setNewsTitle(queryNewsRequest.getNewsTitle());
