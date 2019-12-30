@@ -1,5 +1,6 @@
 package com.demo.practical_training.common.web;
 
+import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.Sort.Direction;
 /*自定义的分页条件接收对象：
 **提供根据前端的分页条件封装spring data jpa的分页对象Pageable。
 **/
+@Data
 public class UserPageRequest {
 
     //分页条件
@@ -19,22 +21,6 @@ public class UserPageRequest {
     private String  sortUser	= "asc";
 
     //接收前段的分页条件的 setter函数
-
-    public void setPageNo(int pageNo) {
-        this.pageNo = pageNo;
-    }
-
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    public void setSortField(String sortField) {
-        this.sortField = sortField;
-    }
-
-    public void setSortUser(String sortUser) {
-        this.sortUser = sortUser;
-    }
 
     //3.
     public Pageable getPageable()

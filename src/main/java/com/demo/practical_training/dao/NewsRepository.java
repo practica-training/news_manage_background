@@ -19,7 +19,7 @@ public interface NewsRepository extends
 {
     //可以在SQL中增加更多的条件查询
     @Query(value = "SELECT * FROM news WHERE news.news_state= -1 OR news.news_state= -3",
-            countQuery = "SELECT count(*) FROM news  WHERE news.news_state= ?1 OR news.news_state= -3",
+            countQuery = "SELECT count(*) FROM news  WHERE news.news_state= -1 OR news.news_state= -3",
             nativeQuery = true)
     Page<News> findAllPage(Pageable pageable);
     //可以在SQL中增加更多的条件查询

@@ -17,8 +17,8 @@ public interface CommentRepository extends
         JpaRepository<Comment, String>//分页和排序
 {
     //可以在SQL中增加更多的条件查询
-    @Query(value = "select * from news where ",
-            countQuery = "SELECT count(*) FROM news WHERE news.news_title like :name",
+    @Query(value = "select * from comment where newsid = :newsId",
+            countQuery = "SELECT count(*) from comment where newsid = :newsId",
             nativeQuery = true)
-    Page<Comment> findNewsByTitle(Pageable pageable, String name);
+    Page<Comment> findCommentListByNewsId(Pageable pageable, String newsId);
 }

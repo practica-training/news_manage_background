@@ -85,7 +85,6 @@ public class User extends BaseEntity {
      * 新闻发布者所写过的新闻，单向
      */
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userid")
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
     private List<News> newsList;
 }

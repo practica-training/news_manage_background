@@ -52,6 +52,7 @@ public class UserController {
      */
     @GetMapping("/findUserManageList")
     public QueryResponseResult findUserManageList(UserPageRequest pageRequest){
+        System.out.println(pageRequest);
         return userService.findUserManageList(pageRequest);
     }
 

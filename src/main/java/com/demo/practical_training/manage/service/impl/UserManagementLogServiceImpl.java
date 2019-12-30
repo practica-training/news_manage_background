@@ -9,6 +9,7 @@ import com.demo.practical_training.dao.UserManagementLogRepository;
 import com.demo.practical_training.entity.UserManagementLog;
 import com.demo.practical_training.manage.service.UserManagementLogService;
 import com.demo.practical_training.model.request.QueryUserManagementLogRequest;
+import com.demo.practical_training.model.response.LogResult;
 import com.demo.practical_training.model.response.UserManagementLogResult;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -54,13 +59,20 @@ public class UserManagementLogServiceImpl implements UserManagementLogService {
 
         //根据分页对象和条件实例对象查询数据
         Page<UserManagementLog> all = UserManagementLogRepository.findAll(example, pageRequest.getPageable());
+        List<LogResult> logResultList = new ArrayList<>();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy年 MM月 dd日 HH时 mm分 ss秒");
+        all.getContent().forEach(adminManagementLog1 -> {
+            String operationalContent = adminManagementLog1.getOperationalContent();
+            String time = dateFormat.format(new Date(adminManagementLog1.getProcessingTime().getTime()));
+            LogResult logResult = new LogResult(operationalContent,time);
+            logResultList.add(logResult);
+        });
         //新建QueryResult<T> 对象
-        QueryResult<UserManagementLog> UserManagementLogQueryResult = new QueryResult<>();
-        //分别给QueryResult<T> 对象中的list集合total赋值
-        UserManagementLogQueryResult.setList(all.getContent());
-        UserManagementLogQueryResult.setTotal(all.getTotalElements());
+        QueryResult<LogResult> userManagementLogQueryResult = new QueryResult<>();
+        userManagementLogQueryResult.setList(logResultList);
+        userManagementLogQueryResult.setTotal(all.getTotalElements());
         //返回结果
-        return new QueryResponseResult(CommonCode.SUCCESS, UserManagementLogQueryResult);
+        return new QueryResponseResult(CommonCode.SUCCESS, userManagementLogQueryResult);
     }
 
     /**

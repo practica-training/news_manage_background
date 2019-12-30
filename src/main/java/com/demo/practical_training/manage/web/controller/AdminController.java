@@ -31,6 +31,8 @@ public class AdminController {
      */
     @GetMapping("/findManageList")
     public QueryResponseResult findManageList(STablePageRequest pageRequest, QueryAdminRequest queryAdminRequest){
+        pageRequest.setSortField("power");
+        pageRequest.setSortNews("descend");
         return adminService.findManageList(pageRequest,queryAdminRequest);
     }
 

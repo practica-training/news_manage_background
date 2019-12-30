@@ -17,6 +17,7 @@ import com.demo.practical_training.entity.dto.NewsManageDTO;
 import com.demo.practical_training.manage.service.NewsService;
 import com.demo.practical_training.model.request.QueryNewsRequest;
 import com.demo.practical_training.model.response.NewsResult;
+import com.demo.practical_training.utils.MapUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
@@ -81,7 +82,6 @@ public class NewsServiceImpl implements NewsService {
      * @return
      */
     @Override
-    @Transactional(readOnly = true)
     public QueryResponseResult findList(STablePageRequest pageRequest, QueryNewsRequest queryNewsRequest) {
         //条件匹配器         
         ExampleMatcher exampleMatcher = ExampleMatcher.matching();
@@ -108,11 +108,12 @@ public class NewsServiceImpl implements NewsService {
         List<NewsDTO> list = new ArrayList<>();
         for (News news1 : all) {
             NewsDTO newsDTO = new NewsDTO();
-            newsDTO.setId(newsDTO.getNewsId());
+            newsDTO.setNewsId(news1.getId());
             newsDTO.setContent(news1.getContent());
             newsDTO.setCreateTime(news1.getCreateTime().toString());
             newsDTO.setNewsAvatar(news1.getNewsAvatar());
             newsDTO.setNewsTitle(news1.getNewsTitle());
+            news1.getNewsTypeSet().size();
             newsDTO.setNewsTypeSet(news1.getNewsTypeSet());
             list.add(newsDTO);
         }
@@ -224,7 +225,13 @@ public class NewsServiceImpl implements NewsService {
     public QueryResponseResult getNewsByKindId(String id, Integer page) {
         Pageable pageable = PageRequest.of(page-1,10);
         Page<News> newsByNewsType = this.newsRepository.findNewsByNewsType(pageable, id);
-        QueryResult<News> queryResult = new QueryResult(newsByNewsType.getContent(),newsByNewsType.getSize());
+        List<NewsDTO> newsDTOList = new ArrayList<>();
+        newsByNewsType.getContent().forEach(news -> {
+            news.getNewsTypeSet().size();
+            NewsDTO newsDTO = MapUtil.newsToNewsDTO(news);
+            newsDTOList.add(newsDTO);
+        });
+        QueryResult<NewsDTO> queryResult = new QueryResult(newsDTOList,newsByNewsType.getSize());
         QueryResponseResult queryResponseResult = new QueryResponseResult(CommonCode.SUCCESS,queryResult);
         return queryResponseResult;
     }
@@ -233,16 +240,22 @@ public class NewsServiceImpl implements NewsService {
     public QueryResponseResult getNewsByName(String name, Integer page) {
         Pageable pageable = PageRequest.of(page-1,10);
         Page<News> newsByNewsType = this.newsRepository.findNewsByTitle(pageable, "%"+name+"%");
-        QueryResult<News> queryResult = new QueryResult(newsByNewsType.getContent(),newsByNewsType.getTotalElements());
+        List<NewsDTO> newsDTOList = new ArrayList<>();
+        newsByNewsType.getContent().forEach(news -> {
+            NewsDTO newsDTO = MapUtil.newsToNewsDTO(news);
+            newsDTOList.add(newsDTO);
+        });
+        QueryResult<NewsDTO> queryResult = new QueryResult(newsDTOList,newsByNewsType.getSize());
         QueryResponseResult queryResponseResult = new QueryResponseResult(CommonCode.SUCCESS,queryResult);
         return queryResponseResult;
     }
 
     @Override
     public QueryResponseResult getNewsCommentList(String newsId,Integer page) {
-//        this.commentRepository.
         Pageable pageable = PageRequest.of(page-1,10);
-//        Page<Comment> newsByNewsType = this.newsRepository.findNewsByTitle(pageable, "%"+name+"%");
-        return null;
+        Page<Comment> commentListByNewsId = this.commentRepository.findCommentListByNewsId(pageable, newsId);
+        QueryResult<News> queryResult = new QueryResult(commentListByNewsId.getContent(),commentListByNewsId.getTotalElements());
+        QueryResponseResult queryResponseResult = new QueryResponseResult(CommonCode.SUCCESS,queryResult);
+        return queryResponseResult;
     }
 }

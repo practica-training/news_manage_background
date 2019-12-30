@@ -12,6 +12,7 @@ import com.demo.practical_training.entity.NewsType;
 import com.demo.practical_training.entity.User;
 import com.demo.practical_training.manage.service.NewsService;
 import com.demo.practical_training.model.request.QueryNewsRequest;
+import com.demo.practical_training.utils.GenerateUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -132,6 +133,28 @@ public class NewsTest {
             }
         });
         this.userRepository.saveAll(userPage);
+    }
+    @Test
+    public void updateNews(){
+        List<News> newsList = this.newsRepository.findAll();
+//        List<User> userList = this.userRepository.findAll();
+        for (int i = 0; i < newsList.size(); i++) {
+            News news = newsList.get(i);
+//            news.setUser(userList.get(new Random().nextInt(userList.size())));
+//            0草稿 1审核中 2审核失败 3已发布  -1已删除 -2违规 -3下架
+            int randomState = new Random().nextInt(7)-3;
+            news.setNewsWeights(0);
+//            news.setNewsState(randomState);
+//            news.setNewsWeights(0);
+//            if(randomState==-2){
+//                news.setFailureReason(GenerateUtil.getName()+GenerateUtil.getName());
+//            }
+        }
+        for (int i = 0; i < 4; i++) {
+            News news = newsList.get(new Random().nextInt(newsList.size()));
+            news.setNewsWeights(1);
+        }
+        this.newsRepository.saveAll(newsList);
     }
     @Test
 //    @Transactionanal

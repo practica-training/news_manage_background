@@ -19,11 +19,22 @@ import org.springframework.web.bind.annotation.*;
 public class NewsController {
     @Autowired
     NewsService newsService;
-    @GetMapping("/comment/{newsid}/{page}")
+
+    /**
+     * 接口：/manage/news/comment/{newsid}/{page}
+     * newsId:新闻id，page:第几页（从1开始）
+     * 获得新闻评论内容
+     * @param newsId
+     * @param page
+     * @return
+     */
+    @GetMapping("/comment/{newsId}/{page}")
     public QueryResponseResult getNewsCommentList(@PathVariable("newsId")String newsId,@PathVariable("page") Integer page){
         return this.newsService.getNewsCommentList(newsId,page);
     }
     /**
+     * 接口：/manage/news/kind
+     * 返回：{id:xx,name:xx}
      * 获得所有新闻类型
      * @return
      */
@@ -33,6 +44,9 @@ public class NewsController {
     }
 
     /**
+     * 接口：/manage/news/kind/{id}/{page}
+     * 参数：id(类别id)，page(第几页)，每页默认10个
+     * 返回：{id:xx,newsTitle:xx......}
      * 根据新闻类别id分页查询新闻
      * @return
      */
@@ -43,6 +57,7 @@ public class NewsController {
     }
 
     /**
+     * 接口
      * 根据姓名模糊查询
      * @return
      */
@@ -108,6 +123,7 @@ public class NewsController {
     }
 
     /**
+     * 接口：/manage/news/id/{id}
      * 根据id查询新闻
      * @param id
      * @return

@@ -30,24 +30,25 @@ public class NewsTypeTest {
     NewsService newsService;
     @Test
     public void insert(){
-        for (int i = 0; i < 10; i++) {
+        String[]  newsTypeNameList = {"汽车", "财经", "科技", "健康", "体育", "教育","文化","军事","娱乐","时尚"};
+        for (String newsTypeName : newsTypeNameList) {
             NewsType newsType = new NewsType();
-            String name = GenerateUtil.getName();
-            newsType.setName(name);
+            newsType.setName(newsTypeName);
             this.newsTypeRepository.save(newsType);
         }
+
     }
     @Test
     public void newsAndTypeInsert(){
         List<NewsType> newsTypeList = this.newsTypeRepository.findAll();
         Pageable pageable = PageRequest.of(0, 10);
         Page<News> newsPage =  newsRepository.findAll(pageable);
-        List<News> newsList = newsPage.getContent();
+        List<News> newsList = newsRepository.findAll();
         for (int i = 0; i < newsList.size(); i++) {
             News news = newsList.get(i);
             Set<NewsType> newsTypeSet = new HashSet<>();
-            int size = newsTypeList.size();
-            for (int j = 0; j < new Random().nextInt(size); j++) {
+//            int size = newsTypeList.size();
+            for (int j = 0; j < new Random().nextInt(4); j++) {
                 int index = new Random().nextInt(newsTypeList.size());
                 NewsType newsType = newsTypeList.get(index);
                 newsTypeSet.add(newsType);

@@ -4,8 +4,10 @@ import com.demo.practical_training.common.response.LoginResult;
 import com.demo.practical_training.entity.Admin;
 import com.demo.practical_training.manage.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +16,6 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
-@RequestMapping("/manage/admin")
 public class AdminLoginController{
     @Autowired
     private HttpServletRequest request;
@@ -28,6 +29,7 @@ public class AdminLoginController{
         HttpSession sessoin = request.getSession();
         String adminName = request.getParameter("adminName");
         String adminPassword = request.getParameter("adminPassword");
+        System.out.println(adminName + " " + adminPassword);
         boolean check;
         List<Admin> list = adminService.findByName(adminName);
         if (list!=null&&list.size()!=0) {

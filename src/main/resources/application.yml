@@ -2,31 +2,36 @@ server:
   #端口号
   port: 8888
 spring:
-#  mvc:
-#    ### 设置mvc访问静态资源的映射规则
-#    static-path-pattern: /static/**
-#  resources:
-#    ### 静态资源访问路径
-#    static-locations: classpath:/static/
+  #  mvc:
+  #    ### 设置mvc访问静态资源的映射规则
+  #    static-path-pattern: /static/**
+  #  resources:
+  #    ### 静态资源访问路径
+  #    static-locations: classpath:/static/
   jackson:
     serialization:
       FAIL_ON_EMPTY_BEANS: false
     date-format: yyyy-MM-dd
   datasource:
-    max-idle: 10
-    max-wait: 10000
-    min-idle: 5
-    #    url: jdbc:mysql://cdb-q5u06yqp.gz.tencentcdb.com:10080/practical_training?serverTimezone=UTC
-    #    username: newsmanage
-    #    password: newsmanage123456
-    url: jdbc:mysql://zzhong.wang:3306/newsmanagetest?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=false
+    url: jdbc:mysql://zzhong.wang:3306/newsmanagetest?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=false&autoReconnect=true
     username: root
     password: qQ123456
-    http:
-      multipart:
-        enabled: true
-        max-file-size: 30MB
-        max-request-size: 30MB
+    max-idle: 50
+    max-wait: 10000
+    min-idle: 20
+    HikariPool:
+      validation-query: SELECT 1
+      time-between-eviction-runs-millis: 18800
+
+  #    url: jdbc:mysql://cdb-q5u06yqp.gz.tencentcdb.com:10080/practical_training?serverTimezone=UTC
+  #    username: newsmanage
+  #    password: newsmanage123456
+
+  http:
+    multipart:
+      enabled: true
+      max-file-size: 30MB
+      max-request-size: 30MB
 
 
 
@@ -40,7 +45,7 @@ spring:
     open-in-view: true
 logging:
   #    path: ./logs
-#  file: "src//main//resources//logger//myLog.log"
+  #  file: "src//main//resources//logger//myLog.log"
   level:
     root: info
     com.demo.practical_training.exception: debug
