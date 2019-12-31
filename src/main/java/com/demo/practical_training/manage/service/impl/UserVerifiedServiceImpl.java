@@ -5,7 +5,9 @@ import com.demo.practical_training.common.response.QueryResponseResult;
 import com.demo.practical_training.common.response.QueryResult;
 import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.common.web.STablePageRequest;
+import com.demo.practical_training.dao.UserRepository;
 import com.demo.practical_training.dao.UserVerifiedRepository;
+import com.demo.practical_training.entity.User;
 import com.demo.practical_training.entity.UserVerified;
 import com.demo.practical_training.entity.dto.UserVerifiedDTO;
 import com.demo.practical_training.manage.service.NewsService;
@@ -34,6 +36,8 @@ public class UserVerifiedServiceImpl implements UserVerifiedService {
     UserVerifiedRepository UserVerifiedRepository;
     @Autowired
     NewsService newsService;
+    @Autowired
+    UserRepository userRepository;
     /**
      * 分页和排序加动态查询实名认证页面
      *
@@ -109,13 +113,33 @@ public class UserVerifiedServiceImpl implements UserVerifiedService {
         UserVerified UserVerified1 = this.findById(id);
         //若存在，则调用set方法更新数据，并保存
         if(UserVerified1!=null){
-
             UserVerifiedRepository.save(UserVerified1);
             UserVerified UserVerified2 = UserVerifiedRepository.save(UserVerified1);
             if(UserVerified2!=null){
                 return new UserVerifiedResult(CommonCode.SUCCESS,UserVerified2);
             }
+        }
+        //若不存在，则返回失败
+        return new UserVerifiedResult(CommonCode.FAIL,null);
+    }
 
+    /**
+     * 根据用户id修改实名认证
+     * @param userId
+     * @param UserVerified
+     * @return
+     */
+    @Override
+    public UserVerifiedResult updateByUserId(String userId, UserVerified UserVerified) {
+        //根据Id查询实名认证
+        List<UserVerified> list = this.findByUserid(userId);
+        System.out.println(list);
+        //若存在，则调用set方法更新数据，并保存
+        if(list!=null&&list.size()!=0){
+            UserVerified UserVerified2 = UserVerifiedRepository.save(list.get(0));
+            if(UserVerified2!=null){
+                return new UserVerifiedResult(CommonCode.SUCCESS,UserVerified2);
+            }
         }
         //若不存在，则返回失败
         return new UserVerifiedResult(CommonCode.FAIL,null);
@@ -149,6 +173,19 @@ public class UserVerifiedServiceImpl implements UserVerifiedService {
         Optional<UserVerified> optional = UserVerifiedRepository.findById(id);
         if(optional.isPresent()){
             return optional.get();
+        }
+        return null;
+    }
+
+    @Override
+    public List<UserVerified> findByUserid(String userid) {
+        Optional<User> optional = userRepository.findById(userid);
+        if (optional.isPresent()){
+            User user = optional.get();
+            List<UserVerified> list = UserVerifiedRepository.findByUser(user);
+            if(list!=null&&list.size()!=0){
+                return list;
+            }
         }
         return null;
     }

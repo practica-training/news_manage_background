@@ -27,12 +27,11 @@ spring:
   #    username: newsmanage
   #    password: newsmanage123456
 
-  http:
-    multipart:
-      enabled: true
-      max-file-size: 30MB
-      max-request-size: 30MB
-
+#  http:
+#    multipart:
+#      enabled: true
+#      max-file-size: 30MB
+#      max-request-size: 30MB
 
 
   jpa:

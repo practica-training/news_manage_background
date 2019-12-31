@@ -7,6 +7,8 @@ import com.demo.practical_training.entity.UserVerified;
 import com.demo.practical_training.model.request.QueryUserVerifiedRequest;
 import com.demo.practical_training.model.response.UserVerifiedResult;
 
+import java.util.List;
+
 /**
  * 实名认证表业务层
  */
@@ -17,8 +19,12 @@ public interface UserVerifiedService {
     public UserVerifiedResult add(UserVerified UserVerified);
     //修改实名认证
     public UserVerifiedResult updateById(String id, UserVerified UserVerified);
+    //修改用户ID实名认证
+    public UserVerifiedResult updateByUserId(String UserId, UserVerified UserVerified);
     //删除实名认证
     public ResponseResult deleteById(String id);
     //根据id查询实名认证
     public UserVerified findById(String id);
+    //根据用户id查询实名认证
+    public List<UserVerified> findByUserid(String userid);
 }

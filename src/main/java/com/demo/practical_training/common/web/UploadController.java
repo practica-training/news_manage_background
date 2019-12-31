@@ -1,5 +1,6 @@
 package com.demo.practical_training.common.web;
 
+import com.demo.practical_training.common.Const;
 import com.demo.practical_training.common.response.UploadResult;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -36,12 +37,12 @@ public class UploadController {
             }
             //3.把浏览器上传的文件复制到希望的位置
             // 构建真实的文件路径
-            File newFile = new File("D:\\ideaProject\\image\\"+ fileName);
+            File newFile = new File(Const.UploadURL+ fileName);
 //            System.out.println(newFile.getAbsolutePath());
             file.transferTo(newFile);
             //4.把文件名放在model里，以便后续显示用
             m.addAttribute("fileName", fileName);
-            System.out.println("D:\\ideaProject\\image\\"+ fileName);
+            System.out.println(Const.UploadURL+ fileName);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
            return new UploadResult(null,10000,"上传失败","flase");
@@ -57,7 +58,7 @@ public class UploadController {
     public void getImage(HttpServletResponse response, @RequestParam("fileName") String fileName) throws Exception {
         //通过将给定的路径名字符串转换为抽象路径名来创建新的 File实例
         String path = null;
-        path = "D:\\ideaProject\\image\\"+ fileName;
+        path = Const.UploadURL+ fileName;
         File file = new File(path);
         //通过打开与实际文件的连接来创建一个文件输入流
         FileInputStream fis;

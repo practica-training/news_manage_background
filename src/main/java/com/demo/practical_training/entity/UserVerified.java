@@ -1,6 +1,7 @@
 package com.demo.practical_training.entity;
 
 import com.demo.practical_training.common.entity.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -18,6 +19,7 @@ public class UserVerified extends BaseEntity {
      * 懒加载，级联刷新操作
      *
      */
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.REFRESH)
     @JoinColumn(name = "userID")
     private User user;
@@ -36,7 +38,7 @@ public class UserVerified extends BaseEntity {
     /**
      * 审核状态 0等待审核 1通过审核 -1审核失败
      */
-    private Integer reviewState;
+    private Integer reviewState = 0;
     /**
      * 失败原因（当审核失败时有）
      */

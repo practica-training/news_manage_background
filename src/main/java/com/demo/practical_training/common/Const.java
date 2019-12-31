@@ -4,6 +4,7 @@ package com.demo.practical_training.common;
  * 存放常量的地方
  */
 public class Const {
+    public static final String UploadURL= "D:\\ideaProject\\image\\";
     public static final int MANAGENEWSLEVEL = 2;
     public static final String USERINSESSION = "USERINSESSION";
     //新闻状态 0草稿 1审核中 2审核失败 3已发布  -1已删除 -2违规 -3下架
