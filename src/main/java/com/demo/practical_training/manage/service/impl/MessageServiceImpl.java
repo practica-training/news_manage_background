@@ -152,7 +152,7 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public List<Message> findByUserId(String id) {
         List<Message> list = messageRepository.findByToid(id);
-        if(list!=null){
+        if(list!=null&&list.size()!=0){
             return list;
         }
         return null;

@@ -1,11 +1,13 @@
 package com.demo.practical_training.manage.web.controller;
 
+import com.demo.practical_training.common.response.CommonCode;
 import com.demo.practical_training.common.response.QueryResponseResult;
 import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.common.web.STablePageRequest;
 import com.demo.practical_training.entity.Message;
 import com.demo.practical_training.manage.service.MessageService;
 import com.demo.practical_training.model.request.QueryMessageRequest;
+import com.demo.practical_training.model.response.MessageListResult;
 import com.demo.practical_training.model.response.MessageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -79,7 +81,11 @@ public class MessageController {
      * @return
      */
     @GetMapping("/getUserMessage/{id}")
-    public List<Message> findList(@PathVariable("id") String id){
-        return MessageService.findByUserId(id);
+    public MessageListResult findList(@PathVariable("id") String id){
+        List<Message> list = MessageService.findByUserId(id);
+        if(list!=null&&list.size()!=0){
+            return new MessageListResult(CommonCode.SUCCESS,list);
+        }
+        return new MessageListResult(CommonCode.FAIL,null);
     }
 }

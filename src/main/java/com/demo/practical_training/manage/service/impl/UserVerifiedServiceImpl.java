@@ -124,6 +124,28 @@ public class UserVerifiedServiceImpl implements UserVerifiedService {
     }
 
     /**
+     * 根据用户id修改实名认证
+     * @param userId
+     * @param UserVerified
+     * @return
+     */
+    @Override
+    public UserVerifiedResult updateByUserId(String userId, UserVerified UserVerified) {
+        //根据Id查询实名认证
+        List<UserVerified> list = this.findByUserid(userId);
+        System.out.println(list);
+        //若存在，则调用set方法更新数据，并保存
+        if(list!=null&&list.size()!=0){
+            UserVerified UserVerified2 = UserVerifiedRepository.save(list.get(0));
+            if(UserVerified2!=null){
+                return new UserVerifiedResult(CommonCode.SUCCESS,UserVerified2);
+            }
+        }
+        //若不存在，则返回失败
+        return new UserVerifiedResult(CommonCode.FAIL,null);
+    }
+
+    /**
      * 根据id删除实名认证
      * @param id
      * @return

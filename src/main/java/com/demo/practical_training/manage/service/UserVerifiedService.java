@@ -19,6 +19,8 @@ public interface UserVerifiedService {
     public UserVerifiedResult add(UserVerified UserVerified);
     //修改实名认证
     public UserVerifiedResult updateById(String id, UserVerified UserVerified);
+    //修改用户ID实名认证
+    public UserVerifiedResult updateByUserId(String UserId, UserVerified UserVerified);
     //删除实名认证
     public ResponseResult deleteById(String id);
     //根据id查询实名认证

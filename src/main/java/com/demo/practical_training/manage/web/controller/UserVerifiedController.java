@@ -56,6 +56,17 @@ public class UserVerifiedController {
     }
 
     /**
+     * 根据用户id更新用户实名认证
+     * @param userid
+     * @param UserVerified
+     * @return
+     */
+    @PutMapping("/userid/{userid}")
+    public UserVerifiedResult updateByUserId(@PathVariable("userid") String userid, @RequestBody UserVerified UserVerified){
+        return UserVerifiedService.updateByUserId(userid,UserVerified);
+    }
+
+    /**
      * 删除用户实名认证
      * @param id
      * @return
@@ -83,6 +94,9 @@ public class UserVerifiedController {
     @GetMapping("/userid/{id}")
     public UserVerifiedResponseResult findByUserid(@PathVariable("id") String id){
         List<UserVerified> list = UserVerifiedService.findByUserid(id);
-        return new UserVerifiedResponseResult(CommonCode.SUCCESS,list);
+        if (list!=null&&list.size()!=0){
+            return new UserVerifiedResponseResult(CommonCode.SUCCESS,list);
+        }
+        return new UserVerifiedResponseResult(CommonCode.FAIL,null);
     }
 }

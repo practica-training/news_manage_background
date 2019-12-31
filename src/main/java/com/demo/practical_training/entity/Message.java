@@ -1,6 +1,7 @@
 package com.demo.practical_training.entity;
 
 import com.demo.practical_training.common.entity.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -20,6 +21,7 @@ public class Message extends BaseEntity {
     /**
      * 去处ID（某个用户）
      */
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.REFRESH)
     @JoinColumn(name = "toID")
     private User user;
