@@ -13,7 +13,6 @@ import java.sql.Timestamp;
 @Entity
 @Data
 public class Comment extends BaseEntity {
-
     /**
      * 新闻ID
      */

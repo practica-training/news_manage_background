@@ -7,18 +7,20 @@ import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.common.web.STablePageRequest;
 import com.demo.practical_training.dao. CommentRepository;
 import com.demo.practical_training.entity. Comment;
+import com.demo.practical_training.entity.dto.CommentDTO;
 import com.demo.practical_training.manage.service.UserService;
 import com.demo.practical_training.manage.service. CommentService;
 import com.demo.practical_training.model.request.QueryCommentRequest;
 import com.demo.practical_training.model.response. CommentResult;
+import com.demo.practical_training.utils.MapUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.data.domain.Page;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -131,5 +133,33 @@ public class CommentServiceImpl implements  CommentService {
             return optional.get();
         }
         return null;
+    }
+
+    @Override
+    public QueryResponseResult findListByUserId(String userId, Integer page) {
+        Pageable pageable = PageRequest.of(page-1,10);
+        Page<Comment> commentListByUserId = this.CommentRepository.findCommentListByUserId(pageable,userId);
+        List<CommentDTO> commentDTOList = new ArrayList<>();
+        commentListByUserId.getContent().forEach(comment -> {
+            CommentDTO commentDTO = MapUtil.commentToCommentDTO(comment);
+            commentDTOList.add(commentDTO);
+        });
+        QueryResult<CommentDTO> queryResult = new QueryResult(commentDTOList,commentListByUserId.getTotalElements());
+        QueryResponseResult queryResponseResult = new QueryResponseResult(CommonCode.SUCCESS,queryResult);
+        return queryResponseResult;
+    }
+
+    @Override
+    public QueryResponseResult findListByReplyUserId(String userId, Integer page) {
+        Pageable pageable = PageRequest.of(page-1,10);
+        Page<Comment> commentListByUserId = this.CommentRepository.findCommentListByReplyUserId(pageable,userId);
+        List<CommentDTO> commentDTOList = new ArrayList<>();
+        commentListByUserId.getContent().forEach(comment -> {
+            CommentDTO commentDTO = MapUtil.commentToCommentDTO(comment);
+            commentDTOList.add(commentDTO);
+        });
+        QueryResult<CommentDTO> queryResult = new QueryResult(commentDTOList,commentListByUserId.getTotalElements());
+        QueryResponseResult queryResponseResult = new QueryResponseResult(CommonCode.SUCCESS,queryResult);
+        return queryResponseResult;
     }
 }
