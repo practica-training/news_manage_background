@@ -12,9 +12,18 @@ public class MapUtil {
     static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy年 MM月 dd日 HH时 mm分 ss秒");
     public static NewsDTO newsToNewsDTO(News news){
         String id = news.getId();
+        String publishDateStr = null;
         String newsTitle = news.getNewsTitle();
-        Date publishDate = new Date(news.getPublishTime().getTime());
-        String publishDateStr = dateFormat.format(publishDate);
+        Date createDate = new Date();
+        if (news.getCreateTime() != null) {
+            createDate = new Date(news.getCreateTime().getTime());
+        }
+        String createDateStr = dateFormat.format(createDate);
+        if(news.getPublishTime()!=null){
+            Date publishDate = new Date(news.getPublishTime().getTime());
+            publishDateStr = dateFormat.format(publishDate);
+        }
+
         String content = news.getContent();
         Long readNumber = news.getReadNumber();
         Long likeNumber = news.getLikeNumber();
@@ -27,6 +36,7 @@ public class MapUtil {
         newsDTO.setLikeNumber(likeNumber+"");
         newsDTO.setReadNumber(readNumber+"");
         newsDTO.setNewsId(id);
+        newsDTO.setCreateTime(createDateStr);
         newsDTO.setNewsAvatar(newsAvatar);
         newsDTO.setNewsTitle(newsTitle);
         return newsDTO;

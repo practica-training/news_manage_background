@@ -2,9 +2,11 @@ package com.demo.practical_training.entity;
 
 import com.demo.practical_training.common.entity.BaseEntity;
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import java.sql.Timestamp;
 
 /**
@@ -33,7 +35,7 @@ public class Comment extends BaseEntity {
     /**
      * 评论时间
      */
-    @Column(columnDefinition="TIMESTAMP")
+    @Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp commentTime;
     /**
      * 回复用户
@@ -45,7 +47,7 @@ public class Comment extends BaseEntity {
      * 回复用户是否已读,0未读,1已读
      */
     @Column(columnDefinition = "tinyint default 0")
-    private Integer replyUserHasRead;
+    private Integer replyUserHasRead = 0;
     /**
      * 点赞数
      */

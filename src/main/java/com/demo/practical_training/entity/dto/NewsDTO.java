@@ -3,9 +3,7 @@ package com.demo.practical_training.entity.dto;
 import com.demo.practical_training.entity.NewsType;
 import lombok.Data;
 
-import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 
 /**
  * 封装新闻返回对象
@@ -21,24 +19,15 @@ public class NewsDTO {
 // *           newsAvatar: "新闻封面",
 // *           createTime:"创建时间"
 //            *         }
-    private String id;
     private String newsId;
     private String newsTitle;
     private String content;
     private Set<NewsType> newsTypeSet;
     private String newsAvatar;
     private String publishTime;
-    private String likeNumber;
-    private String readNumber;
-
+    private String likeNumber = "0";
+    private String readNumber = "0";
+    private String createTime;
     //提供返回结果的业务层
 
-    public String getId() {
-        UUID uuid = UUID.randomUUID();
-        return uuid.toString().replace("-", "");
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 }

@@ -140,6 +140,11 @@ public class UserVerifiedServiceImpl implements UserVerifiedService {
             if(UserVerified2!=null){
                 return new UserVerifiedResult(CommonCode.SUCCESS,UserVerified2);
             }
+        }else {
+           UserVerified userVerified3 = UserVerifiedRepository.save(UserVerified);
+            if(userVerified3!=null) {
+                return new UserVerifiedResult(CommonCode.SUCCESS, userVerified3);
+            }
         }
         //若不存在，则返回失败
         return new UserVerifiedResult(CommonCode.FAIL,null);
@@ -177,11 +182,17 @@ public class UserVerifiedServiceImpl implements UserVerifiedService {
         return null;
     }
 
+    /**
+     * //根据用户id查询实名认证
+     * @param userid
+     * @return
+     */
     @Override
     public List<UserVerified> findByUserid(String userid) {
         Optional<User> optional = userRepository.findById(userid);
         if (optional.isPresent()){
             User user = optional.get();
+            System.out.println(user.getUserName());
             List<UserVerified> list = UserVerifiedRepository.findByUser(user);
             if(list!=null&&list.size()!=0){
                 return list;

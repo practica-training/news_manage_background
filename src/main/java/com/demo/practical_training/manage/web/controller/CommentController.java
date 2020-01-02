@@ -32,23 +32,24 @@ public class CommentController {
 
     /**
      * 新增评论
-     * @param Comment
+     * @param comment
      * @return
      */
     @PostMapping
-    public CommentResult add(@RequestBody Comment Comment){
-            return CommentService.add(Comment);
+    public CommentResult add(@RequestBody Comment comment){
+        System.out.println(comment);
+            return CommentService.add(comment);
     }
 
     /**
      * 更新评论
      * @param id
-     * @param Comment
+     * @param comment
      * @return
      */
     @PutMapping("/id/{id}")
-    public CommentResult update(@PathVariable("id") String id, @RequestBody Comment Comment){
-        return CommentService.updateById(id,Comment);
+    public CommentResult update(@PathVariable("id") String id, @RequestBody Comment comment){
+        return CommentService.updateById(id,comment);
     }
 
     /**

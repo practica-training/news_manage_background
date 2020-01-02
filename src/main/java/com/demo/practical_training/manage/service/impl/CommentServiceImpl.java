@@ -5,12 +5,12 @@ import com.demo.practical_training.common.response.QueryResponseResult;
 import com.demo.practical_training.common.response.QueryResult;
 import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.common.web.STablePageRequest;
-import com.demo.practical_training.dao. CommentRepository;
-import com.demo.practical_training.entity. Comment;
+import com.demo.practical_training.dao.CommentRepository;
+import com.demo.practical_training.entity.Comment;
+import com.demo.practical_training.manage.service.CommentService;
 import com.demo.practical_training.manage.service.UserService;
-import com.demo.practical_training.manage.service. CommentService;
 import com.demo.practical_training.model.request.QueryCommentRequest;
-import com.demo.practical_training.model.response. CommentResult;
+import com.demo.practical_training.model.response.CommentResult;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -19,6 +19,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
+import javax.persistence.EntityManager;
 import java.util.Optional;
 
 @Service
@@ -28,6 +30,8 @@ public class CommentServiceImpl implements  CommentService {
      CommentRepository  CommentRepository;
     @Autowired
     UserService UserService;
+    @Resource
+    private EntityManager entityManager;
     /**
      * 分页和排序加动态查询评论页面
      *
@@ -68,13 +72,16 @@ public class CommentServiceImpl implements  CommentService {
 
     /**
      * 新增评论
-     * @param  Comment
+     * @param  comment
      * @return
      */
     @Override
-    public  CommentResult add( Comment  Comment) {
-         Comment  Comment1 =  CommentRepository.save( Comment);
-        return new  CommentResult(CommonCode.SUCCESS, Comment1);
+    public  CommentResult add(Comment comment) {
+        Comment  comment1 =  CommentRepository.saveAndFlush(comment);
+        entityManager.clear();
+        Comment comment2 = CommentRepository.findById(comment1.getId()).get();
+        System.out.println(comment1);
+        return new  CommentResult(CommonCode.SUCCESS, comment2);
     }
 
     /**
