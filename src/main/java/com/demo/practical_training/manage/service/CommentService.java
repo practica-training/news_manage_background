@@ -21,4 +21,8 @@ public interface CommentService {
     public ResponseResult deleteById(String id);
     //根据id查询评论
     public  Comment findById(String id);
+
+    QueryResponseResult findListByUserId(String userId, Integer page);
+
+    QueryResponseResult findListByReplyUserId(String userId, Integer page);
 }

@@ -12,7 +12,9 @@ import java.sql.Timestamp;
 @Entity
 @Data
 public class UserApplyToNewsMaker extends BaseEntity {
-
+    /**
+     * 申请者
+     */
     @OneToOne
     @JoinColumn(name = "userID")
     private User user;

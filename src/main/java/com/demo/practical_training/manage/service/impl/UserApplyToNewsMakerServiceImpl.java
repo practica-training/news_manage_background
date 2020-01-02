@@ -6,6 +6,7 @@ import com.demo.practical_training.common.response.QueryResult;
 import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.common.web.STablePageRequest;
 import com.demo.practical_training.dao.UserApplyToNewsMakerRepository;
+import com.demo.practical_training.entity.User;
 import com.demo.practical_training.entity.UserApplyToNewsMaker;
 import com.demo.practical_training.entity.dto.UserApplyToNewsMakerDTO;
 import com.demo.practical_training.manage.service.NewsService;
@@ -86,7 +87,7 @@ public class UserApplyToNewsMakerServiceImpl implements UserApplyToNewsMakerServ
     }
 
     /**
-     * 新增实名认证
+     * 新增申请为新闻发布者
      * @param UserApplyToNewsMaker
      * @return
      */

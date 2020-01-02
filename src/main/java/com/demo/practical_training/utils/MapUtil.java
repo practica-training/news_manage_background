@@ -1,7 +1,10 @@
 package com.demo.practical_training.utils;
 
+import com.demo.practical_training.entity.Comment;
 import com.demo.practical_training.entity.News;
 import com.demo.practical_training.entity.NewsType;
+import com.demo.practical_training.entity.User;
+import com.demo.practical_training.entity.dto.CommentDTO;
 import com.demo.practical_training.entity.dto.NewsDTO;
 
 import java.text.SimpleDateFormat;
@@ -41,5 +44,38 @@ public class MapUtil {
         newsDTO.setNewsAvatar(newsAvatar);
         newsDTO.setNewsTitle(newsTitle);
         return newsDTO;
+    }
+    public static CommentDTO commentToCommentDTO(Comment comment){
+        CommentDTO commentDTO = new CommentDTO();
+        User user = comment.getUser();
+        String userId = user.getId();
+        String userNickname = user.getUserNickname();
+        String userAvatar = user.getUserAvatar();
+        User replyUser = comment.getReplyUser();
+        String newsId = comment.getNews().getId();
+        Date commentTime = new Date(comment.getCommentTime().getTime());
+        String commentTimeStr = dateFormat.format(commentTime);
+        Long likeNumber = comment.getLikeNumber();
+        String commentContent = comment.getCommentContent();
+        String id = comment.getId();
+        commentDTO.setNewsId(newsId);
+        commentDTO.setUserId(userId);
+        commentDTO.setUserNickname(userNickname);
+        commentDTO.setUserAvatar(userAvatar);
+        commentDTO.setCommentTime(commentTimeStr);
+        commentDTO.setId(id);
+        if (likeNumber != null) {
+            commentDTO.setLikeNumber(likeNumber+"");
+        }
+        commentDTO.setCommentContent(commentContent);
+        if (replyUser != null) {
+            String replyUserId = replyUser.getId();
+            String replyUserUserAvatar = replyUser.getUserAvatar();
+            String replyUserUserNickname = replyUser.getUserNickname();
+            commentDTO.setReplyUserAvatar(replyUserUserAvatar);
+            commentDTO.setReplyUserId(replyUserId);
+            commentDTO.setReplyUserNickname(replyUserUserNickname);
+        }
+        return commentDTO;
     }
 }

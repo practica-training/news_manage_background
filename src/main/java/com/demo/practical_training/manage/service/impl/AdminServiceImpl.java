@@ -705,7 +705,6 @@ public class AdminServiceImpl implements AdminService {
 
             userApplyToNewsMaker.setReviewState(Const.PUBLISH);
             userApplyToNewsMakerRepository.save(userApplyToNewsMaker);
-
 //            userApplyToNewsMaker.getUser()
 
             User user = userApplyToNewsMaker.getUser();
