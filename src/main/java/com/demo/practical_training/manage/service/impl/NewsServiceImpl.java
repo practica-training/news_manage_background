@@ -9,9 +9,11 @@ import com.demo.practical_training.common.web.STablePageRequest;
 import com.demo.practical_training.dao.CommentRepository;
 import com.demo.practical_training.dao.NewsRepository;
 import com.demo.practical_training.dao.NewsTypeRepository;
+import com.demo.practical_training.dao.UserRepository;
 import com.demo.practical_training.entity.Comment;
 import com.demo.practical_training.entity.News;
 import com.demo.practical_training.entity.NewsType;
+import com.demo.practical_training.entity.User;
 import com.demo.practical_training.entity.dto.NewsDTO;
 import com.demo.practical_training.entity.dto.NewsManageDTO;
 import com.demo.practical_training.manage.service.NewsService;
@@ -26,6 +28,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional()
@@ -36,6 +39,8 @@ public class NewsServiceImpl implements NewsService {
     NewsTypeRepository newsTypeRepository;
     @Autowired
     CommentRepository commentRepository;
+    @Autowired
+    UserRepository userRepository;
     /**
      * 分页和排序加动态查询管理新闻页面
      *
@@ -89,8 +94,12 @@ public class NewsServiceImpl implements NewsService {
         //创建条件值对象
         News news = new News();
         Integer newsState = queryNewsRequest.getNewsState();
-        if(queryNewsRequest.getUser()!=null){
-            news.setUser(queryNewsRequest.getUser());
+        String userid = queryNewsRequest.getUserid();
+        if(StringUtils.isNotEmpty(userid)){
+            Optional<User> optional = userRepository.findById(userid);
+            if(optional.isPresent()){
+                news.setUser(optional.get());
+            }
         }
         if(newsState!=null){
             news.setNewsState(newsState);

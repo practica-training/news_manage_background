@@ -47,12 +47,12 @@ public class MessageController {
     /**
      * 更新消息
      * @param id
-     * @param Message
+     * @param message
      * @return
      */
     @PutMapping("/id/{id}")
-    public MessageResult update(@PathVariable("id") String id, @RequestBody Message Message){
-        return MessageService.updateById(id,Message);
+    public MessageResult update(@PathVariable("id") String id, @RequestBody Message message){
+        return MessageService.updateById(id,message);
     }
 
     /**
