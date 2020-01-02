@@ -37,7 +37,6 @@ public class CommentController {
      */
     @PostMapping
     public CommentResult add(@RequestBody Comment comment){
-        System.out.println(comment);
             return CommentService.add(comment);
     }
 

@@ -133,7 +133,6 @@ public class UserVerifiedServiceImpl implements UserVerifiedService {
     public UserVerifiedResult updateByUserId(String userId, UserVerified UserVerified) {
         //根据Id查询实名认证
         List<UserVerified> list = this.findByUserid(userId);
-        System.out.println(list);
         //若存在，则调用set方法更新数据，并保存
         if(list!=null&&list.size()!=0){
             UserVerified UserVerified2 = UserVerifiedRepository.save(list.get(0));
@@ -197,6 +196,7 @@ public class UserVerifiedServiceImpl implements UserVerifiedService {
             if(list!=null&&list.size()!=0){
                 return list;
             }
+            return null;
         }
         return null;
     }

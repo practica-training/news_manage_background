@@ -81,7 +81,7 @@ public class NewsController {
 
 
     /**
-     * 分页排序条件查询新闻列表
+     * 通过新闻状态返回新闻列表
      * @param pageRequest
      * @param queryNewsRequest
      * @return
