@@ -27,7 +27,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional()
@@ -91,6 +90,9 @@ public class NewsServiceImpl implements NewsService {
         //创建条件值对象
         News news = new News();
         Integer newsState = queryNewsRequest.getNewsState();
+        if(queryNewsRequest.getUser()!=null){
+            news.setUser(queryNewsRequest.getUser());
+        }
         if(newsState!=null){
             news.setNewsState(newsState);
         }else {

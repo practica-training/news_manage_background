@@ -30,7 +30,9 @@ public interface UserRepository extends
 
     //相对于名字相等查询，参数为name
     List<User> findByUserPhone(String userPhone);
+
     @Query(value = "SELECT `user`.* FROM `user` JOIN news ON `user`.id = news.userid and news.id = :newsId",nativeQuery = true)
     User findUserByNewsId(String newsId);
+
 
 }

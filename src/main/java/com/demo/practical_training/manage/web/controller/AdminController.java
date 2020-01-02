@@ -1,5 +1,6 @@
 package com.demo.practical_training.manage.web.controller;
 
+import com.demo.practical_training.common.response.CommonCode;
 import com.demo.practical_training.common.response.QueryResponseResult;
 import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.common.web.STablePageRequest;
@@ -260,7 +261,9 @@ public class AdminController {
      */
     @PutMapping("/managementAdmin/{id}/{power}")
     public ResponseResult managementAdmin(@PathVariable("id") String id,@PathVariable("power") Integer power){
-        System.out.println(id + " " + power);
+        if ("1".equals(id)) {
+            return new ResponseResult(CommonCode.FAIL);
+        }
         return adminService.ManagementAdmin(id,power);
     }
 }

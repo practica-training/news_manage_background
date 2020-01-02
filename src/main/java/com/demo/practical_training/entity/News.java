@@ -37,12 +37,13 @@ public class News extends BaseEntity {
      * 新闻创建时间
      */
 
-    @Column(columnDefinition = "DATE")
-        private Timestamp createTime;
+    //默认创建时间
+    @Column(columnDefinition = "DATE DEFAULT CURRENT_DATE")
+    private Timestamp createTime;
     /**
      * 新闻发布时间
      */
-    @Column(columnDefinition = "TIMESTAMP")
+    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp publishTime;
     /**
      * 阅读数
@@ -55,7 +56,7 @@ public class News extends BaseEntity {
     /**
      * 新闻状态 0草稿 1审核中 2审核失败 3已发布  -1已删除 -2违规 -3下架
      */
-    private Integer newsState;
+    private Integer newsState = 0;
     /**
      *新闻权重 0普通新闻 1轮播图新闻
      */

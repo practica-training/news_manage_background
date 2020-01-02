@@ -17,33 +17,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/manage/comment")
 public class CommentController {
     @Autowired
-    CommentService commentService;
+    CommentService CommentService;
 
-    /**
-     * 获得用户评论的内容
-     * 接口：/manage/comment/userId/{userId}/{page}
-     * @param userId 评论者id
-     * @param page 页数 从1开始
-     * @return
-     */
-    @GetMapping("/userId/{userId}/{page}")
-    public QueryResponseResult findByUser(@PathVariable("userId")String userId,@PathVariable("page") Integer page){
-//        System.out.println(userId + " " + page);
-        return this.commentService.findListByUserId(userId,page);
-    }
-
-    /**
-     * 获得别人回复的评论内容
-     * 接口：/manage/comment/replyUserId/{replyUserId}/{page}
-     * @param replyUserId 被回复者id
-     * @param page 页数 从1开始
-     * @return
-     */
-    @GetMapping("/replyUserId/{replyUserId}/{page}")
-    public QueryResponseResult findByReplyUser(@PathVariable("replyUserId")String replyUserId,@PathVariable("page") Integer page){
-//        System.out.println(replyUserId + " " + page);
-        return this.commentService.findListByReplyUserId(replyUserId,page);
-    }
     /**
      * 分页排序条件查询评论列表
      * @param pageRequest
@@ -52,7 +27,7 @@ public class CommentController {
      */
     @GetMapping
     public QueryResponseResult findList(STablePageRequest pageRequest, QueryCommentRequest queryCommentRequest){
-        return commentService.findList(pageRequest,queryCommentRequest);
+        return CommentService.findList(pageRequest,queryCommentRequest);
     }
 
     /**
@@ -62,7 +37,7 @@ public class CommentController {
      */
     @PostMapping
     public CommentResult add(@RequestBody Comment Comment){
-            return commentService.add(Comment);
+            return CommentService.add(Comment);
     }
 
     /**
@@ -73,18 +48,17 @@ public class CommentController {
      */
     @PutMapping("/id/{id}")
     public CommentResult update(@PathVariable("id") String id, @RequestBody Comment Comment){
-        return commentService.updateById(id,Comment);
+        return CommentService.updateById(id,Comment);
     }
 
     /**
-     * 接口：/manage/comment/id/{id}
      * 删除评论
-     * @param id 评论的id
+     * @param id
      * @return
      */
     @DeleteMapping("/id/{id}")
     public ResponseResult delete(@PathVariable("id") String id){
-        return commentService.deleteById(id);
+        return CommentService.deleteById(id);
     }
 
     /**
@@ -94,6 +68,6 @@ public class CommentController {
      */
     @GetMapping("/id/{id}")
     public Comment findOne(@PathVariable("id") String id){
-        return commentService.findById(id);
+        return CommentService.findById(id);
     }
 }

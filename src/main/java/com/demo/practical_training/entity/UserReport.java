@@ -51,7 +51,7 @@ public class UserReport extends BaseEntity {
      * 默认是0
      */
     @Column(columnDefinition = "tinyint default 0")
-    private Integer reviewState;
+    private Integer reviewState = 0;
     /**
      * 是否违规 0没有违规 1违规
      */
