@@ -69,7 +69,7 @@ public class News extends BaseEntity {
      * 新闻的类型，双向多对多
      */
     @JsonIgnore
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(name = "newsAndType"
             ,joinColumns = @JoinColumn(name = "newsid",referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "news_typeid",referencedColumnName = "id")

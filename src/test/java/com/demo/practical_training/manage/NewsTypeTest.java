@@ -28,26 +28,31 @@ public class NewsTypeTest {
     NewsRepository newsRepository;
     @Autowired
     NewsService newsService;
+
     @Test
-    public void insert(){
-        String[]  newsTypeNameList = {"汽车", "财经", "科技", "健康", "体育", "教育","文化","军事","娱乐","时尚"};
-        for (String newsTypeName : newsTypeNameList) {
-            NewsType newsType = new NewsType();
-            newsType.setName(newsTypeName);
-            this.newsTypeRepository.save(newsType);
-        }
+    public void insert() {
 
     }
+
     @Test
-    public void newsAndTypeInsert(){
+    public void newsAndTypeInsert() {
+//        List<NewsType> newsTypeList = new ArrayList<>();
+//        String[] newsTypeNameList = {"财经", "科技", "健康", "体育", "教育", "文化", "军事", "娱乐", "时尚"};
+//        for (int i = 0; i < newsTypeNameList.length; i++) {
+//            NewsType newsType = new NewsType();
+//            newsType.setName(newsTypeNameList[i]);
+//            newsTypeList.add(this.newsTypeRepository.save(newsType)) ;
+//        }
         List<NewsType> newsTypeList = this.newsTypeRepository.findAll();
-        Pageable pageable = PageRequest.of(0, 10);
+        Pageable pageable = PageRequest.of(0, 200);
         Page<News> newsPage =  newsRepository.findAll(pageable);
-        List<News> newsList = newsRepository.findAll();
+        List<News> newsList = newsPage.getContent();
+//        List<News> newsList = newsRepository.findAll();
         for (int i = 0; i < newsList.size(); i++) {
             News news = newsList.get(i);
+//            news.setNewsTitle(GenerateUtil.getName()+GenerateUtil.getName());
+//            news.setContent(GenerateUtil.getName()+GenerateUtil.getName()+GenerateUtil.getName());
             Set<NewsType> newsTypeSet = new HashSet<>();
-//            int size = newsTypeList.size();
             for (int j = 0; j < new Random().nextInt(4); j++) {
                 int index = new Random().nextInt(newsTypeList.size());
                 NewsType newsType = newsTypeList.get(index);
@@ -55,10 +60,17 @@ public class NewsTypeTest {
             }
             news.setNewsTypeSet(newsTypeSet);
         }
+
         this.newsRepository.saveAll(newsList);
     }
+
     @Test
-    public void testFindNewsByKind(){
+    public void deleteAll() {
+        this.newsTypeRepository.deleteAll();
+    }
+
+    @Test
+    public void testFindNewsByKind() {
         String id = "8abef8d06f356f9a016f356fcabe0008";
         QueryResponseResult newsByKindId = this.newsService.getNewsByKindId(id, 1);
         List<News> list = newsByKindId.getQueryResult().getList();
