@@ -14,6 +14,7 @@ import com.demo.practical_training.entity.Comment;
 import com.demo.practical_training.entity.News;
 import com.demo.practical_training.entity.NewsType;
 import com.demo.practical_training.entity.User;
+import com.demo.practical_training.entity.dto.CommentDTO;
 import com.demo.practical_training.entity.dto.NewsDTO;
 import com.demo.practical_training.entity.dto.NewsManageDTO;
 import com.demo.practical_training.manage.service.NewsService;
@@ -313,7 +314,12 @@ public class NewsServiceImpl implements NewsService {
     public QueryResponseResult getNewsCommentList(String newsId,Integer page) {
         Pageable pageable = PageRequest.of(page-1,10);
         Page<Comment> commentListByNewsId = this.commentRepository.findCommentListByNewsId(pageable, newsId);
-        QueryResult<News> queryResult = new QueryResult(commentListByNewsId.getContent(),commentListByNewsId.getTotalElements());
+        List<CommentDTO> commentDTOList = new ArrayList<>();
+        commentListByNewsId.getContent().forEach(comment -> {
+            CommentDTO commentDTO = MapUtil.commentToCommentDTO(comment);
+            commentDTOList.add(commentDTO);
+        });
+        QueryResult<News> queryResult = new QueryResult(commentDTOList,commentListByNewsId.getTotalElements());
         QueryResponseResult queryResponseResult = new QueryResponseResult(CommonCode.SUCCESS,queryResult);
         return queryResponseResult;
     }

@@ -32,13 +32,24 @@ public class NewsReportController {
     }
 
     /**
+     * 接口：/manage/newsReport
+     * post
      * 新增新闻举报
-     * @param NewsReport
+     * @param newsReport:{
+     *                  user:{
+     *                  id:''
+     *                  },
+     *                  news:{
+     *                  id:
+     *                  }
+     *                  reportReason:''
+     * }
      * @return
      */
     @PostMapping
-    public NewsReportResult add(@RequestBody NewsReport NewsReport){
-                return NewsReportService.add(NewsReport);
+    public NewsReportResult add(@RequestBody NewsReport newsReport){
+        newsReport.setReviewState(0);
+        return NewsReportService.add(newsReport);
     }
 
     /**

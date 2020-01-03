@@ -30,6 +30,7 @@ public class MapUtil {
         String content = news.getContent();
         Long readNumber = news.getReadNumber();
         Long likeNumber = news.getLikeNumber();
+        news.getNewsTypeSet().size();
         Set<NewsType> newsTypeSet = news.getNewsTypeSet();
         String newsAvatar = news.getNewsAvatar();
         NewsDTO newsDTO = new NewsDTO();
