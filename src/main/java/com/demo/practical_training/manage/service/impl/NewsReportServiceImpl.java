@@ -103,8 +103,7 @@ public class NewsReportServiceImpl implements NewsReportService {
         NewsReport newsReport1 = this.findById(id);
         //若存在，则调用set方法更新数据，并保存
         if(newsReport1!=null){
-            newsReport1.setReviewState(newsReport.getReviewState());
-            NewsReport newsReport2 = newsReportRepository.save(newsReport1);
+            NewsReport newsReport2 = newsReportRepository.save(newsReport);
             if(newsReport2!=null){
                 return new NewsReportResult(CommonCode.SUCCESS,newsReport2);
             }
