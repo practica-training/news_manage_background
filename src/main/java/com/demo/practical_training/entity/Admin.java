@@ -24,7 +24,7 @@ public class Admin extends BaseEntity {
      */
     private String adminPassword;
     /**
-     * 管理员权限等级,默认是0 有六个权限 0 1 2 3 4 -1
+     * 管理员权限等级,默认是0 有六个权限 0 1 2 3 4
      */
     @Column(columnDefinition = "tinyint default 0")
     private Integer power;
