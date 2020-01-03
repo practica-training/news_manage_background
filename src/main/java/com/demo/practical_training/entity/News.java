@@ -48,11 +48,11 @@ public class News extends BaseEntity {
     /**
      * 阅读数
      */
-    private Long readNumber;
+    private Long readNumber = 0L;
     /**
      * 点赞数
      */
-    private Long likeNumber;
+    private Long likeNumber = 0L;
     /**
      * 新闻状态 0草稿 1审核中 2审核失败 3已发布  -1已删除 -2违规 -3下架
      */

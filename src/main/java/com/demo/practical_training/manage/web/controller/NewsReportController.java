@@ -38,7 +38,7 @@ public class NewsReportController {
      */
     @PostMapping
     public NewsReportResult add(@RequestBody NewsReport NewsReport){
-            return NewsReportService.add(NewsReport);
+                return NewsReportService.add(NewsReport);
     }
 
     /**

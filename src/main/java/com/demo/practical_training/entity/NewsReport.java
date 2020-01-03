@@ -20,7 +20,7 @@ public class NewsReport extends BaseEntity {
      * 懒加载，级联刷新操作
      * 不可为空，不可更新，插入
      */
-    @JsonIgnore
+//    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.REFRESH)
     @JoinColumn(name = "userid")
     private User user;
@@ -28,7 +28,7 @@ public class NewsReport extends BaseEntity {
      * 被举报的新闻ID
      *      懒加载，级联刷新操作
      */
-    @JsonIgnore
+//    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY,cascade = {CascadeType.MERGE})
     @JoinColumn(name = "newsid")
     private News news;
