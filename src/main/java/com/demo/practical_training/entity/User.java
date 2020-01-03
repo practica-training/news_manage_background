@@ -41,7 +41,8 @@ public class User extends BaseEntity {
     /**
      * 性别 0女 1男
      */
-    private Integer userSex = 1;
+    @Column(columnDefinition = "int default 1")
+    private Integer userSex;
     /**
      * 手机号码(唯一,一个用户绑定一个手机号码)
      */

@@ -46,10 +46,10 @@ public class Comment extends BaseEntity {
      * 回复用户是否已读,0未读,1已读
      */
     @Column(columnDefinition = "tinyint default 0")
-    private Integer replyUserHasRead = 0;
+    private Integer replyUserHasRead;
     /**
      * 点赞数
      */
     @Column(columnDefinition = "int default 0")
-    private Long likeNumber = 0L;
+    private Long likeNumber ;
 }

@@ -38,7 +38,8 @@ public class UserVerified extends BaseEntity {
     /**
      * 审核状态 0等待审核 1通过审核 -1审核失败
      */
-    private Integer reviewState = 0;
+    @Column(columnDefinition = "int default 0")
+    private Integer reviewState;
     /**
      * 失败原因（当审核失败时有）
      */

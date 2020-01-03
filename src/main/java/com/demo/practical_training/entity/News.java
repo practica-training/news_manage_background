@@ -48,19 +48,23 @@ public class News extends BaseEntity {
     /**
      * 阅读数
      */
-    private Long readNumber = 0L;
+    @Column(columnDefinition = "int default 0")
+    private Long readNumber ;
     /**
      * 点赞数
      */
-    private Long likeNumber = 0L;
+    @Column(columnDefinition = "int default 0")
+    private Long likeNumber ;
     /**
      * 新闻状态 0草稿 1审核中 2审核失败 3已发布  -1已删除 -2违规 -3下架
      */
-    private Integer newsState = 0;
+    @Column(columnDefinition = "int default 0")
+    private Integer newsState;
     /**
      *新闻权重 0普通新闻 1轮播图新闻
      */
-    private Integer newsWeights = 0;
+    @Column(columnDefinition = "int default 0")
+    private Integer newsWeights;
     /**
      * 失败原因（如果审核失败则会有）
      */

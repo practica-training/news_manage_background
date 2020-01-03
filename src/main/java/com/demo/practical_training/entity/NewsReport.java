@@ -45,7 +45,8 @@ public class NewsReport extends BaseEntity {
     /**
      * 审核状态 0等待审核 1审核完成
      */
-    private Integer reviewState = 0;
+    @Column(columnDefinition = "int default 0")
+    private Integer reviewState;
     /**
      * 是否违规 0没有违规 1违规
      */

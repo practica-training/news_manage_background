@@ -33,6 +33,6 @@ public class UserManagementLog extends BaseEntity {
     /**
      * 处理时间
      */
-    @Column(columnDefinition="TIMESTAMP")
+    @Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp processingTime;
 }
