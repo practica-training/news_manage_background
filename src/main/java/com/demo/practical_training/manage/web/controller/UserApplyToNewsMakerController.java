@@ -37,7 +37,7 @@ public class UserApplyToNewsMakerController {
      */
     @PostMapping
     public UserApplyToNewsMakerResult add(@RequestBody UserApplyToNewsMaker UserApplyToNewsMaker){
-            return UserApplyToNewsMakerService.add(UserApplyToNewsMaker);
+        return UserApplyToNewsMakerService.add(UserApplyToNewsMaker);
     }
 
     /**

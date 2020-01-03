@@ -41,6 +41,7 @@ public class UserVerifiedController {
      */
     @PostMapping
     public UserVerifiedResult add(@RequestBody UserVerified userVerified){
+        userVerified.setReviewState(0);
             return UserVerifiedService.add(userVerified);
     }
 

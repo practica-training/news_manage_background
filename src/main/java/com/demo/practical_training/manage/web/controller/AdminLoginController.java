@@ -4,10 +4,8 @@ import com.demo.practical_training.common.response.LoginResult;
 import com.demo.practical_training.entity.Admin;
 import com.demo.practical_training.manage.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,14 +36,14 @@ public class AdminLoginController{
             else
                 check = false;
         } else {
-            return new LoginResult(null,10000,"用户名不存在!","false");
+            return new LoginResult(null,10000,"用户名不存在!",false);
         }
         if (check) {
             sessoin.setAttribute("adminname", adminName);
             sessoin.setAttribute("adminPassword", adminPassword);
-            return new LoginResult(list.get(0).getId(),10001,"登陆成功","true");
+            return new LoginResult(list.get(0).getId(),10001,"登陆成功",true);
         } else {
-            return new LoginResult(null,10002,"密码错误！","false");
+            return new LoginResult(null,10002,"密码错误！",false);
         }
     }
 }

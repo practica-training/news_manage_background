@@ -87,6 +87,7 @@ public class NewsReportServiceImpl implements NewsReportService {
      */
     @Override
     public NewsReportResult add(NewsReport NewsReport) {
+        NewsReport.setReviewState(0);
         NewsReport NewsReport1 = newsReportRepository.saveAndFlush(NewsReport);
         return new NewsReportResult(CommonCode.SUCCESS,NewsReport1);
     }

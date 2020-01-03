@@ -36,14 +36,14 @@ public class UserLoginController {
             else
                 check = false;
         } else {
-            return new LoginResult(null,10000,"用户名不存在!","false");
+            return new LoginResult(null,10000,"用户名不存在!",false);
         }
         if (check) {
             sessoin.setAttribute("userName", userName);
             sessoin.setAttribute("userPassword", userPassword);
-            return new LoginResult(list.get(0).getId(),10001,"登陆成功","true");
+            return new LoginResult(list.get(0).getId(),10001,"登陆成功",true);
         } else {
-            return new LoginResult(null,10002,"密码错误！","false");
+            return new LoginResult(null,10002,"密码错误！",false);
         }
     }
 }

@@ -159,6 +159,7 @@ public class AdminServiceImpl implements AdminService {
      */
     @Override
     public AdminResult add(Admin Admin) {
+        Admin.setPower(0);
         Admin Admin1 = adminRepository.save(Admin);
         return new AdminResult(CommonCode.SUCCESS, Admin1);
     }
