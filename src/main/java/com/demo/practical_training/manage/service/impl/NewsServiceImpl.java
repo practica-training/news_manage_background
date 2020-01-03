@@ -189,6 +189,10 @@ public class NewsServiceImpl implements NewsService {
      */
     @Override
     public NewsResult add(News news) {
+        news.setNewsState(0);
+        news.setNewsWeights(0);
+        news.setLikeNumber(0L);
+        news.setReadNumber(0L);
         News news1 = newsRepository.save(news);
         return new NewsResult(CommonCode.SUCCESS, MapUtil.newsToNewsDTO(news1));
     }

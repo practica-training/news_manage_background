@@ -43,7 +43,7 @@ public class News extends BaseEntity {
     /**
      * 新闻发布时间
      */
-    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Column(columnDefinition = "TIMESTAMP")
     private Timestamp publishTime;
     /**
      * 阅读数
@@ -53,7 +53,7 @@ public class News extends BaseEntity {
     /**
      * 点赞数
      */
-    @Column(columnDefinition = "int default 0")
+    @Column(columnDefinition = "int default 1")
     private Long likeNumber ;
     /**
      * 新闻状态 0草稿 1审核中 2审核失败 3已发布  -1已删除 -2违规 -3下架
