@@ -15,7 +15,7 @@ public class Const {
     public static final int NEWS_OFF = -3;
     public static final int NEWS_DISABLE = -2;
     public static final int NEWS_DELETED = -1;
-    public static final int NEWS_PUBLISH = 3;
+    public static final int NEWS_PUBLISH = 2;
     public static final int NEWS_AUDIT_FAILURE = 2;
     public static final int NEWS_UNDER_REVIEW = 1;
     public static final int NEWS_DRAFT = 0;
