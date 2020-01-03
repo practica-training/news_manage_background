@@ -197,6 +197,7 @@ public class AdminController {
      */
     @PutMapping("/reviewUserOn/{id}")
     public ResponseResult reviewUserOn(@PathVariable("id") String id){
+        System.out.println(id);
         return adminService.reviewUserOn(id);
     }
 
@@ -227,7 +228,7 @@ public class AdminController {
      * @param reasonDTO
      * @return
      */
-    @PutMapping("/reviewUserBecomePublishOn")
+    @PutMapping("/reviewUserBecomePublishOff")
     public ResponseResult reviewUserBecomePublishOff(@RequestBody ReasonDTO reasonDTO){
         return adminService.reviewUserBecomePublishOff(reasonDTO.getId(),reasonDTO.getFailureReason());
     }
@@ -240,6 +241,7 @@ public class AdminController {
      */
     @PutMapping("/reviewUserBecomePublishOn/{id}")
     public ResponseResult reviewUserBecomePublishOn(@PathVariable("id") String id){
+        System.out.println(id);
         return adminService.reviewUserBecomePublishOn(id);
     }
 

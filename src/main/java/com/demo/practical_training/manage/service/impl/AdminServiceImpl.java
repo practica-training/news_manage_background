@@ -568,7 +568,7 @@ public class AdminServiceImpl implements AdminService {
 
 
             user.setUserState(Const.USER_BANNED);
-            String str = "yyyy-MM-dd HH:mm:ss";
+            String str = "yyyy-MM-dd";
             SimpleDateFormat sdf = new SimpleDateFormat(str);
             try {
                 Date date = sdf.parse(normalDate);
@@ -708,6 +708,8 @@ public class AdminServiceImpl implements AdminService {
 //            userApplyToNewsMaker.getUser()
 
             User user = userApplyToNewsMaker.getUser();
+            user.setUserState(Const.NEWS_PUBLISH);
+            this.userRepository.save(user);
             messageService.passPublisherMessage(null, user, "你已成功成为新闻发布者");
             return new ResponseResult(AdminCode.ADMIN_ALLOW_USERPUBLISH);
         }
