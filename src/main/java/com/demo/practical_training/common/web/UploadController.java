@@ -27,13 +27,13 @@ public class UploadController {
 //        File fileDir = UploadUtils.getImgDirFile();
         String contentType = file.getContentType();
         if(!CONTENT_TYPES.contains(contentType)){
-            return new UploadResult(null,10000,"文件格式不对","flase");
+            return new UploadResult(null,10000,"文件格式不对",false);
         }
         try {
             //检验文件的内容
             BufferedImage read = ImageIO.read(file.getInputStream());
             if(read == null){
-                return new UploadResult(null,10000,"文件内容不对","flase");
+                return new UploadResult(null,10000,"文件内容不对",false);
             }
             //3.把浏览器上传的文件复制到希望的位置
             // 构建真实的文件路径
@@ -45,12 +45,12 @@ public class UploadController {
             System.out.println(Const.UploadURL+ fileName);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-           return new UploadResult(null,10000,"上传失败","flase");
+           return new UploadResult(null,10000,"上传失败",false);
         } catch (IOException e) {
             e.printStackTrace();
-            return new UploadResult(null,10000,"上传失败","flase");
+            return new UploadResult(null,10000,"上传失败",false);
         }
-        return new UploadResult(fileName,10000,"上传成功","true");
+        return new UploadResult(fileName,10000,"上传成功",true);
     }
 
     @GetMapping("/getImage")
