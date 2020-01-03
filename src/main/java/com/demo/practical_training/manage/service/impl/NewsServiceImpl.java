@@ -41,6 +41,51 @@ public class NewsServiceImpl implements NewsService {
     CommentRepository commentRepository;
     @Autowired
     UserRepository userRepository;
+
+
+    /**
+     * //返回新闻轮播图列表
+     *
+     * @return
+     */
+    @Transactional(readOnly=true)
+    public QueryResponseResult findNewsCarouselList() {
+        //条件匹配器         
+        ExampleMatcher exampleMatcher = ExampleMatcher.matching();
+        News news = new News();
+        news.setNewsState(3);
+        news.setNewsWeights(1);
+        //创建条件实例对象
+        Example<News> example = Example.of(news, exampleMatcher);
+
+        //根据条件实例对象查询数据
+        List<News> all = newsRepository.findAll(example);
+        //新建QueryResult<T> 对象
+        List<NewsManageDTO> list = new ArrayList<>();
+        for (News news1 : all) {
+            NewsManageDTO newsManageDTO = new NewsManageDTO();
+            newsManageDTO.setContent(news1.getContent());
+            newsManageDTO.setLikeNumber(news1.getLikeNumber());
+            newsManageDTO.setNewsAvatar(news1.getNewsAvatar());
+            newsManageDTO.setNewsState(news1.getNewsState());
+            newsManageDTO.setNewsTitle(news1.getNewsTitle());
+            newsManageDTO.setReadNumber(news1.getReadNumber());
+            newsManageDTO.setNewsId(news1.getId());
+            newsManageDTO.setNewsWeights(news.getNewsWeights());
+            if(news1.getPublishTime()!=null){
+                newsManageDTO.setPublishTime(news1.getPublishTime().toString());
+            }
+            list.add(newsManageDTO);
+        }
+        QueryResult<NewsManageDTO> newsManageDTOQueryResult = new QueryResult<>();
+        //分别给QueryResult<T> 对象中的list集合total赋值
+        newsManageDTOQueryResult.setList(list);
+        newsManageDTOQueryResult.setTotal(all.size());
+        //返回结果
+        return new QueryResponseResult(CommonCode.SUCCESS, newsManageDTOQueryResult);
+    }
+
+
     /**
      * 分页和排序加动态查询管理新闻页面
      *

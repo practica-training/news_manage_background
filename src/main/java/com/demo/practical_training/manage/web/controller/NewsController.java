@@ -68,6 +68,17 @@ public class NewsController {
         System.out.println(newsTitle +" "+ page);
         return newsService.getNewsByName(newsTitle, page);
     }
+
+
+    /**
+     * //返回新闻轮播图列表
+     * @return
+     */
+    @GetMapping("/findNewsCarouselList")
+    public QueryResponseResult findNewsCarouselList(){
+        return newsService.findNewsCarouselList();
+    }
+
     /**
      * 分页和排序加动态查询管理新闻页面
      * @param pageRequest

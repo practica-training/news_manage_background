@@ -28,6 +28,7 @@ public class NewsManageDTO {
     private String violationReason;
     private String content;
     private String publishTime;
+    private Integer newsWeights;
 
 
     //提供返回结果的业务层
