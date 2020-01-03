@@ -57,7 +57,9 @@ public class NewsController {
     }
 
     /**
-     * 接口
+     * 接口get /manage/news/name
+     * 参数newsTitle：查询标题
+     * page:第几页（从1开始）
      * 根据姓名模糊查询
      * @return
      */

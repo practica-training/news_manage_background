@@ -83,6 +83,9 @@ public class MessageController {
     @GetMapping("/getUserMessage/{id}")
     public MessageListResult findList(@PathVariable("id") String id){
         List<Message> list = MessageService.findByUserId(id);
+        for (Message message : list) {
+            message.setUser(null);
+        }
         if(list!=null&&list.size()!=0){
             return new MessageListResult(CommonCode.SUCCESS,list);
         }
