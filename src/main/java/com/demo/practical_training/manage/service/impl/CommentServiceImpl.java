@@ -75,6 +75,8 @@ public class CommentServiceImpl implements  CommentService {
      */
     @Override
     public  CommentResult add( Comment  Comment) {
+        Comment.setLikeNumber(0L);
+        Comment.setReplyUserHasRead(0);
          Comment  Comment1 =  CommentRepository.save( Comment);
         return new  CommentResult(CommonCode.SUCCESS, Comment1);
     }

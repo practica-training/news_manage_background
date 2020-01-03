@@ -89,6 +89,7 @@ public class UserReportServiceImpl implements UserReportService {
      */
     @Override
     public UserReportResult add(UserReport UserReport) {
+        UserReport.setReviewState(0);
         UserReport UserReport1 = UserReportRepository.save(UserReport);
         return new UserReportResult(CommonCode.SUCCESS,UserReport1);
     }
