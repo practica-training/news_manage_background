@@ -138,6 +138,7 @@ public class NewsServiceImpl implements NewsService {
         exampleMatcher = exampleMatcher.withMatcher("newsTitle", ExampleMatcher.GenericPropertyMatchers.contains());
         //创建条件值对象
         News news = new News();
+        news.setNewsWeights(null);
         Integer newsState = queryNewsRequest.getNewsState();
         String userid = queryNewsRequest.getUserid();
         if(StringUtils.isNotEmpty(userid)){
@@ -205,27 +206,28 @@ public class NewsServiceImpl implements NewsService {
         News news1 = this.newsRepository.getOne(id);
         //若存在，则调用set方法更新数据，并保存
         if (news1 != null) {
-            //设置阅读数
-            news1.setReadNumber(news.getReadNumber());
-            //设置新闻状态 0草稿 1审核中 2审核失败 3等待发布 4已发布 -1已删除 -2违规删除
-            news1.setNewsState(news.getNewsState());
-            //设置点赞数
-            news1.setLikeNumber(news.getLikeNumber());
-            //设置新闻创建时间
-            news1.setCreateTime(news.getCreateTime());
-            //设置新闻内容
-            news1.setContent(news.getContent());
-            //设置新闻标题
-            news1.setNewsTitle(news.getNewsTitle());
-            //设置新闻发布时间
-            news1.setPublishTime(news.getPublishTime());
-            //设置失败原因（如果审核失败则会有）
-            news1.setFailureReason(news.getFailureReason());
-            //设置新闻封面路径
-            news1.setNewsAvatar(news.getNewsAvatar());
-            //设置新闻权重 0普通新闻 1轮播图新闻
-            news1.setNewsWeights(news.getNewsWeights());
-            News news2 = newsRepository.save(news1);
+//            //设置阅读数
+//            news1.setReadNumber(news.getReadNumber());
+//            //设置新闻状态 0草稿 1审核中 2审核失败 3等待发布 4已发布 -1已删除 -2违规删除
+//            news1.setNewsState(news.getNewsState());
+//            //设置点赞数
+//            news1.setLikeNumber(news.getLikeNumber());
+//            //设置新闻创建时间
+//            news1.setCreateTime(news.getCreateTime());
+//            //设置新闻内容
+//            news1.setContent(news.getContent());
+//            //设置新闻标题
+//            news1.setNewsTitle(news.getNewsTitle());
+//            //设置新闻发布时间
+//            news1.setPublishTime(news.getPublishTime());
+//            //设置失败原因（如果审核失败则会有）
+//            news1.setFailureReason(news.getFailureReason());
+//            //设置新闻封面路径
+//            news1.setNewsAvatar(news.getNewsAvatar());
+//            //设置新闻权重 0普通新闻 1轮播图新闻
+//            news1.setNewsWeights(news.getNewsWeights());
+//            news1.setNewsTypeSet(news.getNewsTypeSet());
+            News news2 = newsRepository.save(news);
             if (news2 != null) {
                 return new NewsResult(CommonCode.SUCCESS, MapUtil.newsToNewsDTO(news2));
             }

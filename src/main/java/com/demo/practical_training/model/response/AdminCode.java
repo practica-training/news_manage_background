@@ -71,6 +71,10 @@ public enum AdminCode implements ResultCode {
     USEANICKNAME_NOT_ALLOW(false,24014,"昵称已存在！"),
     USEANICKNAME_ALLOW(true,24014,"昵称可用！"),
 
+    USEANAME_NOT_ALLOW(false,24014,"用户名已存在！"),
+    USEANAME_ALLOW(true,24014,"用户名可用！"),
+
+
     ADMIN_BECOMEUSER(true,24015,"修改管理员等级成功！"),
     ADMIN_NOT_BECOMEUSER(false,24015,"修改管理员等级失败！");
 

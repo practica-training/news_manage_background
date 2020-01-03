@@ -136,8 +136,8 @@ public class UserController {
     public ResponseResult userNameAlong(@RequestParam("userName") String userName){
         List<User> list = userService.findByUserName(userName);
         if(null == list || list.size() ==0 ){
-            return new ResponseResult(AdminCode.USEANICKNAME_ALLOW);
+            return new ResponseResult(AdminCode.USEANAME_ALLOW);
         }
-        return new ResponseResult(AdminCode.USEANICKNAME_NOT_ALLOW);
+        return new ResponseResult(AdminCode.USEANAME_NOT_ALLOW);
     }
 }
