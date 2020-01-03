@@ -13,9 +13,9 @@ public class UploadResult {
     //提示信息
     private String message;
     //提示成功与否
-    private String success;
+    private Boolean success;
 
-    public UploadResult(String url, int code, String message , String success) {
+    public UploadResult(String url, int code, String message , Boolean success) {
         this.url = url;
         this.code = code;
         this.message = message;

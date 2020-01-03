@@ -13,9 +13,9 @@ public class LoginResult{
     //提示信息
     private String message;
     //提示成功与否
-    private String success;
+    private Boolean success;
 
-    public LoginResult(String id, int code, String message ,String success) {
+    public LoginResult(String id, int code, String message ,Boolean success) {
         this.id = id;
         this.code = code;
         this.message = message;
