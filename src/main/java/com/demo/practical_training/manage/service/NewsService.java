@@ -14,6 +14,8 @@ import com.demo.practical_training.model.response.NewsResult;
 public interface NewsService {
     //分页和排序加动态查询管理新闻页面
     public QueryResponseResult findNewsManageList(NewsPageRequest pageRequest);
+    //返回新闻轮播图列表
+    public QueryResponseResult findNewsCarouselList();
     //通过新闻状态返回新闻列表
     public QueryResponseResult findList(STablePageRequest pageRequest, QueryNewsRequest queryNewsRequest);
     //增加新闻
