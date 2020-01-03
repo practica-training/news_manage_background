@@ -1,6 +1,7 @@
 package com.demo.practical_training.entity;
 
 import com.demo.practical_training.common.entity.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -48,4 +49,8 @@ public class UserVerified extends BaseEntity {
     @Column(columnDefinition = "TIMESTAMP")
     private Timestamp verifiedTime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    public Timestamp getVerifiedTime() {
+        return verifiedTime;
+    }
 }

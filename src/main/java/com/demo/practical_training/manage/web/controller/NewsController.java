@@ -87,7 +87,7 @@ public class NewsController {
      * @return
      */
     @GetMapping
-    public QueryResponseResult findList(STablePageRequest pageRequest, QueryNewsRequest queryNewsRequest){
+    public QueryResponseResult findList(STablePageRequest pageRequest,QueryNewsRequest queryNewsRequest){
         return newsService.findList(pageRequest,queryNewsRequest);
     }
 

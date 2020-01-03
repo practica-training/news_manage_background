@@ -33,6 +33,7 @@ public class MapUtil {
         Set<NewsType> newsTypeSet = news.getNewsTypeSet();
         String newsAvatar = news.getNewsAvatar();
         NewsDTO newsDTO = new NewsDTO();
+        newsDTO.setState(news.getNewsState());
         newsDTO.setNewsTypeSet(newsTypeSet);
         newsDTO.setContent(content);
         newsDTO.setPublishTime(publishDateStr);

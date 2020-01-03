@@ -91,20 +91,18 @@ public class MessageServiceImpl implements MessageService {
     /**
      * 根据id修改消息
      * @param id
-     * @param Message
+     * @param message
      * @return
      */
     @Override
-    public MessageResult updateById(String id, Message Message) {
+    public MessageResult updateById(String id, Message message) {
         //根据Id查询消息
-        Message Message1 = this.findById(id);
+        Message message1 = this.findById(id);
         //若存在，则调用set方法更新数据，并保存
-        if(Message1!=null){
-
-            messageRepository.save(Message1);
-            Message Message2 = messageRepository.save(Message1);
-            if(Message2!=null){
-                return new MessageResult(CommonCode.SUCCESS,Message2);
+        if(message1!=null){
+            Message message2 = messageRepository.saveAndFlush(message);
+            if(message2!=null){
+                return new MessageResult(CommonCode.SUCCESS,message2);
             }
 
         }

@@ -28,6 +28,7 @@ public class NewsDTO {
     private String likeNumber = "0";
     private String readNumber = "0";
     private String createTime;
+    private Integer  state = 0;
     //提供返回结果的业务层
 
 }
