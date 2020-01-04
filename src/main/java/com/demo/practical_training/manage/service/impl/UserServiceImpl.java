@@ -169,6 +169,9 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public UserResult add(User user) {
+        user.setViolationNumber(0);
+        user.setIsCertified(0);
+        user.setUserState(1);
         User user1 = UserRepository.save(user);
         return new UserResult(CommonCode.SUCCESS,user1);
     }
@@ -201,7 +204,7 @@ public class UserServiceImpl implements UserService {
             if(user1.getUserAvatar()!=user.getUserAvatar()){
                 //设置头像
                 user1.setUserAvatar(user.getUserAvatar());
-                path = "D:\\ideaProject\\image\\"+ user.getUserAvatar();
+                path = Const.UploadURL+ user.getUserAvatar();
                 File file = new File(path);
                 file.delete();
             }

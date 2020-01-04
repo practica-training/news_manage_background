@@ -321,7 +321,7 @@ public class AdminServiceImpl implements AdminService {
 //            String userId = this.newsRepository.findUserIdByNewsId(id);
 //            messageService.downNewsMesssage(null,userId,"你的新闻已下架");
 
-            User user = userRepository.findUserByNewsId(id);
+            User user = news.getUser();
             messageService.downNewsMessage(null,user,"你的新闻已下架");
             return new ResponseResult(AdminCode.ADMIN_ALLOW_NEWS);
         }
@@ -355,7 +355,7 @@ public class AdminServiceImpl implements AdminService {
             news.setPublishTime(new Timestamp(date.getTime()));
             newsRepository.save(news);
 
-            User user = userRepository.findUserByNewsId(id);
+            User user = news.getUser();
             messageService.passNewsMessage(null, user, "你的新闻已发布成功");
             return new ResponseResult(AdminCode.ADMIN_ALLOW_NEWSPUBLISH);
         }
@@ -388,7 +388,7 @@ public class AdminServiceImpl implements AdminService {
             news.setFailureReason(offReason);
             newsRepository.save(news);
 
-            User user = userRepository.findUserByNewsId(id);
+            User user = news.getUser();
             messageService.refuseNewsMessage(null, user, "你的新闻审核不成功", offReason);
             return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_NEWSPUBLISH);
         }
@@ -423,7 +423,7 @@ public class AdminServiceImpl implements AdminService {
             news.setFailureReason(offReason);
             newsRepository.save(news);
 
-            User user = userRepository.findUserByNewsId(id);
+            User user = news.getUser();
             messageService.downSuccessMessage(null, user, "新闻下架成功", offReason);
             return new ResponseResult(AdminCode.ADMIN_ALLOW_NEWSEXISTENCE);
         }
@@ -453,7 +453,7 @@ public class AdminServiceImpl implements AdminService {
             news.setNewsState(Const.NEWS_PUBLISH);
             newsRepository.save(news);
 
-            User user = userRepository.findUserByNewsId(id);
+            User user = news.getUser();
             messageService.downRemoveMessage(null, user, "新闻解除下架成功");
             return new ResponseResult(AdminCode.ADMIN_NOT_ALLOW_NEWEXISTENCE);
         }

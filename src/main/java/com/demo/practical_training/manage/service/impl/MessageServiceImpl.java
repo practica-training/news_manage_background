@@ -73,6 +73,7 @@ public class MessageServiceImpl implements MessageService {
      */
     public void addMessage(String fromId, User user, String context){
         Message message = new Message();
+        message.setFormID(fromId);
         message.setContent(context);
         message.setUser(user);
         messageRepository.save(message);

@@ -27,7 +27,9 @@ import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -194,6 +196,7 @@ public class NewsServiceImpl implements NewsService {
         news.setNewsWeights(0);
         news.setLikeNumber(0L);
         news.setReadNumber(0L);
+        news.setCreateTime(new Timestamp(new Date().getTime()));
         News news1 = newsRepository.save(news);
         return new NewsResult(CommonCode.SUCCESS, MapUtil.newsToNewsDTO(news1));
     }
@@ -232,6 +235,10 @@ public class NewsServiceImpl implements NewsService {
 //            //设置新闻权重 0普通新闻 1轮播图新闻
 //            news1.setNewsWeights(news.getNewsWeights());
 //            news1.setNewsTypeSet(news.getNewsTypeSet());
+            news.setNewsWeights(0);
+            news.setLikeNumber(0L);
+            news.setReadNumber(0L);
+            news.setCreateTime(new Timestamp(new Date().getTime()));
             News news2 = newsRepository.save(news);
             if (news2 != null) {
                 return new NewsResult(CommonCode.SUCCESS, MapUtil.newsToNewsDTO(news2));

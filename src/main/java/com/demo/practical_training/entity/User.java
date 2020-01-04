@@ -56,7 +56,7 @@ public class User extends BaseEntity {
     /**
      * 用户状态 1正常用户 2新闻发布者 0已注销 -1违规禁言
      */
-    private Integer userState = 1;
+    private Integer userState;
     /**
      * 恢复正常能够说话的日子
      */
@@ -66,11 +66,11 @@ public class User extends BaseEntity {
     /**
      * 是否实名认证 1是 0否
      */
-    private Integer isCertified = 0;
+    private Integer isCertified;
     /**
      * 违规次数
      */
-    private Integer violationNumber = 0;
+    private Integer violationNumber;
     /**
      * 用户和新闻标签，双向多对多
      * 为将来做个人推荐使用

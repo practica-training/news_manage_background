@@ -38,6 +38,8 @@ public interface MessageService {
     //向用户发送新闻解除下架消息
     public void downRemoveMessage(String fromId, User user ,String context);
     //发送用户禁言消息
+    public void addMessage(String fromId, User user, String context);
+
     public void addMessage(String fromId, User user, String context, String offReason);
     //发送用户解除禁言消息
     public void deleteMessage(String fromId, User user, String context);

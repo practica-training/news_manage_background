@@ -97,6 +97,7 @@ public class UserVerifiedServiceImpl implements UserVerifiedService {
      */
     @Override
     public UserVerifiedResult add(UserVerified UserVerified) {
+        UserVerified.setReviewState(0);
         UserVerified UserVerified1 = UserVerifiedRepository.save(UserVerified);
         return new UserVerifiedResult(CommonCode.SUCCESS,UserVerified1);
     }

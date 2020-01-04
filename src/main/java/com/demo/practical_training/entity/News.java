@@ -38,7 +38,7 @@ public class News extends BaseEntity {
      */
 
     //默认创建时间
-    @Column(columnDefinition = "DATE DEFAULT CURRENT_DATE")
+    @Column(columnDefinition = "DATE")
     private Timestamp createTime;
     /**
      * 新闻发布时间

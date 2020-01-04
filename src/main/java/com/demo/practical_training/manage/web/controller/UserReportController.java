@@ -3,10 +3,14 @@ package com.demo.practical_training.manage.web.controller;
 import com.demo.practical_training.common.response.QueryResponseResult;
 import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.common.web.STablePageRequest;
+import com.demo.practical_training.entity.User;
 import com.demo.practical_training.entity.UserReport;
+import com.demo.practical_training.entity.dto.ReportDTO;
+import com.demo.practical_training.entity.dto.UserReportDTO;
 import com.demo.practical_training.manage.service.UserReportService;
 import com.demo.practical_training.model.request.QueryUserReportRequest;
 import com.demo.practical_training.model.response.UserReportResult;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,12 +36,12 @@ public class UserReportController {
 
     /**
      * 新增用户举报
-     * @param UserReport
+     * @param reportDTO
      * @return
      */
     @PostMapping
-    public UserReportResult add(@RequestBody UserReport UserReport){
-            return UserReportService.add(UserReport);
+    public UserReportResult add(@RequestBody ReportDTO reportDTO){
+            return UserReportService.add(reportDTO);
     }
 
     /**

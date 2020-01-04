@@ -48,23 +48,26 @@ public class UserVerifiedController {
     /**
      * 更新用户实名认证
      * @param id
-     * @param UserVerified
+     * @param userVerified
      * @return
      */
     @PutMapping("/id/{id}")
-    public UserVerifiedResult update(@PathVariable("id") String id, @RequestBody UserVerified UserVerified){
-
-        return UserVerifiedService.updateById(id,UserVerified);
+    public UserVerifiedResult update(@PathVariable("id") String id, @RequestBody UserVerified userVerified){
+        if (userVerified.getReviewState() == null) {
+            userVerified.setReviewState(0);
+        }
+        return UserVerifiedService.updateById(id,userVerified);
     }
 
     /**
-     * 根据用户id更新用户实名认证
+     * 根据用户id新增用户实名认证
      * @param userid
      * @param userVerified
      * @return
      */
     @PostMapping("/userid/{userid}")
     public UserVerifiedResult updateByUserId(@PathVariable("userid") String userid, @RequestBody UserVerified userVerified){
+        userVerified.setReviewState(0);
         return UserVerifiedService.updateByUserId(userid,userVerified);
     }
 

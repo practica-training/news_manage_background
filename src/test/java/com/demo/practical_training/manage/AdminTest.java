@@ -44,10 +44,10 @@ public class AdminTest {
             admin.setAdminName(GenerateUtil.getName());
             //设置管理员登陆密码
             admin.setAdminPassword(GenerateUtil.getRandomNumber(6));
+            admin.setPower(new Random().nextInt(4));
             //设置管理员头像路径
-            admin.setAdminAvatar("F:\\javaee");
+            admin.setAdminAvatar("15780520444500.jpg");
             //设置管理员权限等级
-            admin.setPower(4);
             adminService.add(admin);
         }
     }

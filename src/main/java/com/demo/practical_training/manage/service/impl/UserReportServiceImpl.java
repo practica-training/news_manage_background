@@ -6,7 +6,10 @@ import com.demo.practical_training.common.response.QueryResult;
 import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.common.web.STablePageRequest;
 import com.demo.practical_training.dao.UserReportRepository;
+import com.demo.practical_training.dao.UserRepository;
+import com.demo.practical_training.entity.User;
 import com.demo.practical_training.entity.UserReport;
+import com.demo.practical_training.entity.dto.ReportDTO;
 import com.demo.practical_training.entity.dto.UserReportDTO;
 import com.demo.practical_training.manage.service.UserReportService;
 import com.demo.practical_training.model.request.QueryUserReportRequest;
@@ -28,6 +31,8 @@ import java.util.Optional;
 public class UserReportServiceImpl implements UserReportService {
     @Autowired
     UserReportRepository UserReportRepository;
+    @Autowired
+    UserRepository userRepository;
     /**
      * 分页和排序加动态查询用户举报页面
      *
@@ -65,7 +70,9 @@ public class UserReportServiceImpl implements UserReportService {
         for (UserReport userReport : all) {
             UserReportDTO userReportDTO = new UserReportDTO();
             userReportDTO.setId(userReport.getId());
-            userReportDTO.setComment(userReport.getComment().getCommentContent());
+            if (userReport.getComment() != null) {
+                userReportDTO.setComment(userReport.getComment().getCommentContent());
+            }
             userReportDTO.setReason(userReport.getReportReason());
             userReportDTO.setReportedUserId(userReport.getReported().getId());
             userReportDTO.setReportedUserName(userReport.getReported().getUserName());
@@ -84,13 +91,20 @@ public class UserReportServiceImpl implements UserReportService {
 
     /**
      * 新增用户举报
-     * @param UserReport
+     * @param reportDTO
      * @return
      */
     @Override
-    public UserReportResult add(UserReport UserReport) {
-        UserReport.setReviewState(0);
-        UserReport UserReport1 = UserReportRepository.save(UserReport);
+    public UserReportResult add( ReportDTO reportDTO) {
+        String userId = reportDTO.getUserId();
+        String reportedId = reportDTO.getReportedId();
+        User user = this.userRepository.getOne(userId);
+        User reported = this.userRepository.getOne(reportedId);
+        UserReport userReport = new UserReport();
+        userReport.setUser(user);
+        userReport.setReported(reported);
+        userReport.setReportReason(reportDTO.getReportReason());
+        UserReport UserReport1 = UserReportRepository.save(userReport);
         return new UserReportResult(CommonCode.SUCCESS,UserReport1);
     }
 

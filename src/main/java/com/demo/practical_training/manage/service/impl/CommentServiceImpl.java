@@ -1,5 +1,6 @@
 package com.demo.practical_training.manage.service.impl;
 
+import com.demo.practical_training.common.Const;
 import com.demo.practical_training.common.response.CommonCode;
 import com.demo.practical_training.common.response.QueryResponseResult;
 import com.demo.practical_training.common.response.QueryResult;
@@ -7,7 +8,9 @@ import com.demo.practical_training.common.response.ResponseResult;
 import com.demo.practical_training.common.web.STablePageRequest;
 import com.demo.practical_training.dao. CommentRepository;
 import com.demo.practical_training.entity. Comment;
+import com.demo.practical_training.entity.User;
 import com.demo.practical_training.entity.dto.CommentDTO;
+import com.demo.practical_training.manage.service.MessageService;
 import com.demo.practical_training.manage.service.UserService;
 import com.demo.practical_training.manage.service. CommentService;
 import com.demo.practical_training.model.request.QueryCommentRequest;
@@ -30,6 +33,8 @@ public class CommentServiceImpl implements  CommentService {
      CommentRepository  CommentRepository;
     @Autowired
     UserService UserService;
+    @Autowired
+    MessageService messageService;
     /**
      * 分页和排序加动态查询评论页面
      *
@@ -77,7 +82,16 @@ public class CommentServiceImpl implements  CommentService {
     public  CommentResult add( Comment  Comment) {
         Comment.setLikeNumber(0L);
         Comment.setReplyUserHasRead(0);
-         Comment  Comment1 =  CommentRepository.save( Comment);
+        User byId = this.UserService.findById(Comment.getUser().getId());
+        if (byId.getUserState()== Const.USER_BANNED){
+            return new  CommentResult(CommonCode.FAIL, Comment);
+        }
+        Comment  Comment1 =  CommentRepository.save( Comment);
+        if (Comment.getReplyUser() != null) {
+            if (Comment.getReplyUser().getId() != null) {
+                this.messageService.addMessage(Comment.getUser().getId(),Comment.getReplyUser(),Comment.getCommentContent());
+            }
+        }
         return new  CommentResult(CommonCode.SUCCESS, Comment1);
     }
 
